@@ -1,4 +1,6 @@
-#!/usr/bin/env bash
+// AUTO-GENERATED from /install.sh — do not edit by hand.
+// Regenerate with: npm run sync (in workers/install-worker).
+export const INSTALL_SCRIPT = `#!/usr/bin/env bash
 # ─────────────────────────────────────────────────────────────
 #  openclawd one-shot installer
 #  Hosted at: https://solanaclawd.com/install.sh
@@ -7,7 +9,7 @@
 #
 #  What it does:
 #   1. Verifies node >= 18, git, npm.
-#   2. Installs the public `solana-clawd` CLI globally from npm.
+#   2. Installs the public \`solana-clawd\` CLI globally from npm.
 #   3. Writes a scaffolded ~/.openclawd/.env with sensible defaults.
 #   4. Prints the pair/mint/status next steps.
 #
@@ -19,20 +21,20 @@
 # ─────────────────────────────────────────────────────────────
 set -euo pipefail
 
-TARGET_DIR="${OPENCLAWD_DIR:-$HOME/.openclawd}"
-SOLANA_CLAWD_BASE_URL="${SOLANA_CLAWD_BASE_URL:-https://solanaclawd.com}"
+TARGET_DIR="\${OPENCLAWD_DIR:-$HOME/.openclawd}"
+SOLANA_CLAWD_BASE_URL="\${SOLANA_CLAWD_BASE_URL:-https://solanaclawd.com}"
 
-c_reset=$'\033[0m'; c_bold=$'\033[1m'; c_green=$'\033[32m'; c_cyan=$'\033[36m'; c_yellow=$'\033[33m'; c_red=$'\033[31m'
-log()  { printf "%s▸%s %s\n" "$c_cyan"   "$c_reset" "$*"; }
-ok()   { printf "%s✓%s %s\n" "$c_green"  "$c_reset" "$*"; }
-warn() { printf "%s!%s %s\n" "$c_yellow" "$c_reset" "$*"; }
-die()  { printf "%s✗%s %s\n" "$c_red"    "$c_reset" "$*" >&2; exit 1; }
+c_reset=$'\\033[0m'; c_bold=$'\\033[1m'; c_green=$'\\033[32m'; c_cyan=$'\\033[36m'; c_yellow=$'\\033[33m'; c_red=$'\\033[31m'
+log()  { printf "%s▸%s %s\\n" "$c_cyan"   "$c_reset" "$*"; }
+ok()   { printf "%s✓%s %s\\n" "$c_green"  "$c_reset" "$*"; }
+warn() { printf "%s!%s %s\\n" "$c_yellow" "$c_reset" "$*"; }
+die()  { printf "%s✗%s %s\\n" "$c_red"    "$c_reset" "$*" >&2; exit 1; }
 
 cat <<'BANNER'
    ____                   ___  _                _
-  / __ \ ___  ___  ___   / _ \/ /__ ____    ____/ /
- / /_/ // _ \/ -_)/ _ \ / ___/ / _ `/\ \/\ / /_  _/
- \____// .__/\__// //_//_/  /_/\_,_//_/\_\/  /_/
+  / __ \\ ___  ___  ___   / _ \\/ /__ ____    ____/ /
+ / /_/ // _ \\/ -_)/ _ \\ / ___/ / _ \`/\\ \\/\\ / /_  _/
+ \\____// .__/\\__// //_//_/  /_/\\_,_//_/\\_\\/  /_/
       /_/                openclawd · solana-clawd stack
 BANNER
 
@@ -98,15 +100,16 @@ fi
 # 3. print next steps
 cat <<EOF
 
-${c_bold}Next steps${c_reset}
-  1. Edit your env:      ${c_cyan}\$EDITOR $ENV_FILE${c_reset}
-  2. Pair this device:   ${c_cyan}solana-clawd pair <CODE>${c_reset}
-  3. Mint your agent:    ${c_cyan}solana-clawd mint${c_reset}
-  4. Check status:       ${c_cyan}solana-clawd status${c_reset}
+\${c_bold}Next steps\${c_reset}
+  1. Edit your env:      \${c_cyan}\\$EDITOR $ENV_FILE\${c_reset}
+  2. Pair this device:   \${c_cyan}solana-clawd pair <CODE>\${c_reset}
+  3. Mint your agent:    \${c_cyan}solana-clawd mint\${c_reset}
+  4. Check status:       \${c_cyan}solana-clawd status\${c_reset}
 
 Optional — clone the full monorepo (requires repo access):
-  ${c_cyan}gh repo clone x402agent/openclawd $TARGET_DIR/repo${c_reset}
+  \${c_cyan}gh repo clone x402agent/openclawd $TARGET_DIR/repo\${c_reset}
 
 Docs & website: $SOLANA_CLAWD_BASE_URL
 EOF
 ok "openclawd installed."
+`;
