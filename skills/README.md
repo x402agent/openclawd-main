@@ -8,9 +8,9 @@ The OpenClawd Skills Hub is your central destination for discovering, publishing
 
 | Resource | URL |
 |----------|-----|
-| **Skills Hub** | [solanaos.net/skills](https://solanaos.net/skills) |
-| **Marketplace** | [solanaclawd.com/marketplace](https://solanaclawd.com/marketplace) |
+| **Skills Hub** | [solanaclawd.com/marketplace](https://solanaclawd.com/marketplace) |
 | **Registry** | [clawdhub](https://github.com/x402agent/openclawd/tree/main/clawdhub) |
+| **API** | [solanaclawd.com/api](https://solanaclawd.com/api) |
 
 ### ClawdHub
 
@@ -19,14 +19,6 @@ ClawdHub is the registry and web hub for SKILL.md and SOUL.md bundles:
 - **Publish** versioned updates
 - **Search** with vector embeddings
 - **Install** via CLI or UI
-
-```bash
-# Install a skill
-npx nanohub install pumpfun-trading
-
-# Publish a skill
-npx nanohub publish ./my-skill --slug my-skill
-```
 
 ---
 
@@ -74,7 +66,7 @@ npx nanohub publish ./my-skill --slug my-skill
 | `pump-website` | Website templates |
 | `pump-solana-architecture` | Architecture guide |
 
-### ⛓️ Solana / Blockchain (6 skills)
+### ⛓️ Solana / Blockchain (8 skills)
 
 | Skill | Description |
 |-------|-------------|
@@ -87,7 +79,7 @@ npx nanohub publish ./my-skill --slug my-skill
 | `metaplex` | NFT standard integration |
 | `honcho-integration` | Memory and persistence |
 
-### 🎯 AI / Agents (10 skills)
+### 🎯 AI / Agents (8 skills)
 
 | Skill | Description |
 |-------|-------------|
@@ -188,19 +180,49 @@ npx nanohub publish ./my-skill --slug my-skill
 ### CLI Installation
 
 ```bash
-# Install a skill
-npx nanohub install pumpfun-trading
-npx nanohub install solana-clawd
-npx nanohub install swarm-orchestrator
+# Install a skill via npm
+npx clawdhub install pumpfun-trading
+npx clawdhub install solana-clawd
+npx clawdhub install swarm-orchestrator
 
 # List installed skills
-npx nanohub list
+npx clawdhub list
 
 # Update a skill
-npx nanohub update pumpfun-trading
+npx clawdhub update pumpfun-trading
 
 # Search skills
-npx nanohub search trading
+npx clawdhub search solana
+
+# Publish a skill
+npx clawdhub publish ./my-skill --slug my-skill
+```
+
+### Curl Commands
+
+```bash
+# Browse skills marketplace
+curl https://solanaclawd.com/marketplace/skills | jq '.'
+
+# Get skill details
+curl https://solanaclawd.com/api/skills/pumpfun-trading
+
+# List all skills
+curl https://solanaclawd.com/api/skills | jq '.'
+
+# Search skills
+curl "https://solanaclawd.com/api/skills/search?q=solana"
+
+# Install skill (download SKILL.md)
+curl -s "https://solanaclawd.com/api/skills/pumpfun-trading/download" -o SKILL.md
+
+# Publish skill
+curl -X POST https://solanaclawd.com/api/skills/publish \
+  -H "Content-Type: application/json" \
+  -d '{"slug":"my-skill","content":"..."}'
+
+# Get featured skills
+curl https://solanaclawd.com/api/skills/featured
 ```
 
 ### MCP Integration
@@ -210,7 +232,7 @@ npx nanohub search trading
   "mcpServers": {
     "clawd-skills": {
       "type": "http",
-      "url": "https://modelcontextprotocol.name/mcp/skills"
+      "url": "https://solanaclawd.com/mcp/skills"
     }
   }
 }
@@ -223,16 +245,32 @@ npx nanohub search trading
 Skills can be published to the marketplace for discovery and monetization:
 
 1. **Create** — Write a SKILL.md file
-2. **Publish** — `npx nanohub publish`
-3. **Discover** — Browse at solanaclawd.com/marketplace
+2. **Publish** — `npx clawdhub publish` or curl to solanaclawd.com
+3. **Discover** — Browse at [solanaclawd.com/marketplace](https://solanaclawd.com/marketplace)
 4. **Install** — One-click install from any client
+
+### Marketplace API
+
+```bash
+# Get marketplace categories
+curl https://solanaclawd.com/api/marketplace/categories
+
+# Get skills by category
+curl https://solanaclawd.com/api/marketplace/category/solana
+
+# Get trending skills
+curl https://solanaclawd.com/api/marketplace/trending
+
+# Get new skills
+curl https://solanaclawd.com/api/marketplace/new
+```
 
 ### Monetization
 
 Skills can be integrated with the ClawdRouter payment system for:
 - Per-call payments
 - Subscription models
-- $CLAWD holder discounts
+- $CLAWD holder discounts (10-50% off)
 
 ---
 
