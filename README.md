@@ -80,10 +80,10 @@ clawd ooda --sim   # Simulated trading mode
 | Project | Description |
 |---------|-------------|
 | [`openclawd-stack/`](openclawd-stack/) | **Production deployment stack** — OpenShell sandboxes, E2B cloud terminals, Privy wallets |
-| [`clawdhub/`](clawdhub/) | **Skills/souls registry** with TanStack + Convex backend and embedding search |
+| [`clawdhub/`](clawdhub/) | **Skills Hub + Marketplace** — Browse, publish, monetize skills via ClawdHub |
 | [`MCP/`](MCP/) | **Model Context Protocol servers** for editor integration (VS Code, Cursor, Zed) |
 | [`CLI/`](CLI/) | **Command-line tools** for registration, gateway connection, and node pairing |
-| [`workers/`](workers/) | **Cloudflare Workers** — agent-wallet, email-worker, pumpfun-mcp-worker |
+| [`clawdhub/`](clawdhub/) | **ClawdHub** — Skills registry, SOUL.md bundles, vector search, monetization |
 
 ### 💳 Payment Infrastructure
 

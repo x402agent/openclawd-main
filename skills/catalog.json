@@ -6,22 +6,190 @@
     "category": "AI / Agents"
   },
   {
-    "slug": "openclaw-claude-code-skill-main",
-    "name": "claude-code-skill",
-    "description": "Control Claude Code via MCP protocol. Trigger with \"plan\" to write a precise execution plan then feed it to Claude Code. Also supports direct commands, persistent sessions, agent teams, and advanced tool control.",
+    "slug": "clawdhub",
+    "name": "ClawdHub",
+    "description": "Browse, publish, and install SKILL.md and SOUL.md bundles from the ClawdHub registry",
     "category": "Clawd Ecosystem"
   },
   {
+    "slug": "openclawd-codeskill",
+    "name": "OpenClawd Code Skill",
+    "description": "OpenClawd agent integration for code generation and execution",
+    "category": "Clawd Ecosystem"
+  },
+  {
+    "slug": "claude-code-skill",
+    "name": "Claude Code Skill",
+    "description": "Control Claude Code via MCP protocol with execution plans and agent teams",
+    "category": "Clawd Ecosystem"
+  },
+  {
+    "slug": "coding-agent",
+    "name": "Coding Agent",
+    "description": "AI-powered coding assistant for code generation, debugging, and refactoring",
+    "category": "AI / Agents"
+  },
+  {
+    "slug": "cua",
+    "name": "CUA Agent",
+    "description": "Computer use agent for autonomous web browsing and task automation",
+    "category": "AI / Agents"
+  },
+  {
+    "slug": "gemini",
+    "name": "Gemini Integration",
+    "description": "Google Gemini AI integration for enhanced reasoning and generation",
+    "category": "AI / Agents"
+  },
+  {
+    "slug": "solana-clawd",
+    "name": "Solana Clawd",
+    "description": "Solana AI agent framework with OODA loop trading and 31 MCP tools",
+    "category": "Solana / Blockchain"
+  },
+  {
+    "slug": "solana-dev",
+    "name": "Solana Dev",
+    "description": "Solana development toolkit for smart contracts, dApps, and on-chain operations",
+    "category": "Solana / Blockchain"
+  },
+  {
+    "slug": "solana-dev-skill-main",
+    "name": "Solana Dev Skill",
+    "description": "Comprehensive Solana development guide and best practices",
+    "category": "Solana / Blockchain"
+  },
+  {
     "slug": "gateway-node-ops",
-    "name": "SolanaOS Gateway + Node Workflow",
-    "description": "How to spawn a SolanaOS Gateway and connect headless nodes",
+    "name": "Gateway Node Ops",
+    "description": "Spawn SolanaOS Gateway and connect headless nodes",
     "category": "DevOps / Infrastructure"
   },
   {
-    "slug": "canvas",
-    "name": "Canvas Skill",
-    "description": "Display HTML content on connected SolanaOS nodes (Mac app, iOS, Android).",
-    "category": "Media"
+    "slug": "seeker-daemon-ops",
+    "name": "Seeker Daemon Ops",
+    "description": "SolanaOS Seeker daemon operations and management",
+    "category": "DevOps / Infrastructure"
+  },
+  {
+    "slug": "pump-admin-ops",
+    "name": "Pump Admin Ops",
+    "description": "Pump.fun administrative operations and monitoring",
+    "category": "Pump.fun / Token Launch"
+  },
+  {
+    "slug": "pump-ai-agents",
+    "name": "Pump AI Agents",
+    "description": "AI agent frameworks for Pump.fun token launches",
+    "category": "Pump.fun / Token Launch"
+  },
+  {
+    "slug": "pump-bonding-curve",
+    "name": "Pump Bonding Curve",
+    "description": "Bonding curve mathematics and monitoring for Pump.fun",
+    "category": "Pump.fun / Token Launch"
+  },
+  {
+    "slug": "pump-build-release",
+    "name": "Pump Build Release",
+    "description": "Build and release pipelines for Pump.fun projects",
+    "category": "Pump.fun / Token Launch"
+  },
+  {
+    "slug": "pump-claims-readonly",
+    "name": "Pump Claims Readonly",
+    "description": "Read-only access to Pump.fun claims and distributions",
+    "category": "Pump.fun / Token Launch"
+  },
+  {
+    "slug": "pump-fee-sharing",
+    "name": "Pump Fee Sharing",
+    "description": "Configure and manage Pump.fun creator fee sharing",
+    "category": "Pump.fun / Token Launch"
+  },
+  {
+    "slug": "pump-fee-system",
+    "name": "Pump Fee System",
+    "description": "Pump.fun fee collection and distribution system",
+    "category": "Pump.fun / Token Launch"
+  },
+  {
+    "slug": "pump-mcp-server",
+    "name": "Pump MCP Server",
+    "description": "Model Context Protocol server for Pump.fun integration",
+    "category": "Pump.fun / Token Launch"
+  },
+  {
+    "slug": "pump-rust-vanity",
+    "name": "Pump Rust Vanity",
+    "description": "Rust-based vanity address generation for Pump.fun",
+    "category": "Pump.fun / Token Launch"
+  },
+  {
+    "slug": "pump-sdk-core",
+    "name": "Pump SDK Core",
+    "description": "Core SDK for Pump.fun token launches and trading",
+    "category": "Pump.fun / Token Launch"
+  },
+  {
+    "slug": "pump-security",
+    "name": "Pump Security",
+    "description": "Security auditing and best practices for Pump.fun",
+    "category": "Pump.fun / Token Launch"
+  },
+  {
+    "slug": "pump-shell-scripts",
+    "name": "Pump Shell Scripts",
+    "description": "Shell script utilities for Pump.fun operations",
+    "category": "Pump.fun / Token Launch"
+  },
+  {
+    "slug": "pump-solana-architecture",
+    "name": "Pump Solana Architecture",
+    "description": "Solana architecture for Pump.fun integration",
+    "category": "Pump.fun / Token Launch"
+  },
+  {
+    "slug": "pump-solana-dev",
+    "name": "Pump Solana Dev",
+    "description": "Solana development guide for Pump.fun",
+    "category": "Pump.fun / Token Launch"
+  },
+  {
+    "slug": "pump-solana-wallet",
+    "name": "Pump Solana Wallet",
+    "description": "Solana wallet management for Pump.fun",
+    "category": "Pump.fun / Token Launch"
+  },
+  {
+    "slug": "pump-testing",
+    "name": "Pump Testing",
+    "description": "Testing strategies for Pump.fun projects",
+    "category": "Pump.fun / Token Launch"
+  },
+  {
+    "slug": "pump-token-incentives",
+    "name": "Pump Token Incentives",
+    "description": "Token incentive structures for Pump.fun",
+    "category": "Pump.fun / Token Launch"
+  },
+  {
+    "slug": "pump-token-lifecycle",
+    "name": "Pump Token Lifecycle",
+    "description": "Complete token lifecycle management on Pump.fun",
+    "category": "Pump.fun / Token Launch"
+  },
+  {
+    "slug": "pump-ts-vanity",
+    "name": "Pump TS Vanity",
+    "description": "TypeScript vanity address generation for Pump.fun",
+    "category": "Pump.fun / Token Launch"
+  },
+  {
+    "slug": "pump-website",
+    "name": "Pump Website",
+    "description": "Website templates and deployment for Pump.fun",
+    "category": "Pump.fun / Token Launch"
   },
   {
     "slug": "pumpfun-analytics",
@@ -42,6 +210,12 @@
     "category": "Pump.fun / Token Launch"
   },
   {
+    "slug": "pumpfun-token-scanner",
+    "name": "PumpFun Token Scanner",
+    "description": "Scan and analyze Pump.fun tokens for trading opportunities",
+    "category": "Pump.fun / Token Launch"
+  },
+  {
     "slug": "pumpfun-trading",
     "name": "PumpFun Trading",
     "description": "Buy and sell tokens on Pump.fun bonding curves and AMM pools",
@@ -49,8 +223,350 @@
   },
   {
     "slug": "solana-formal-verification",
-    "name": "qedgen",
-    "description": "Formally verify programs by writing Lean 4 proofs. Trigger this skill whenever the user wants to formally verify code, generate Lean 4 proofs, prove properties about algorithms or smart contracts, verify invariants, convert program logic into formal specifications, or anything involving Lean 4 and formal verification. Also trigger when the user mentions \"qedgen\", \"lean proof\", \"formal proof\", \"verify my code\", \"prove correctness\", \"formal verification\", or wants mathematical guarantees about their implementation.",
+    "name": "Solana Formal Verification",
+    "description": "Formally verify Solana programs with Lean 4 proofs",
     "category": "Solana / Blockchain"
+  },
+  {
+    "slug": "solana-research-brief",
+    "name": "Solana Research Brief",
+    "description": "Research and analysis for Solana ecosystem",
+    "category": "Solana / Blockchain"
+  },
+  {
+    "slug": "solanaos",
+    "name": "SolanaOS",
+    "description": "SolanaOS operator runtime and node management",
+    "category": "Solana / Blockchain"
+  },
+  {
+    "slug": "metaplex",
+    "name": "Metaplex",
+    "description": "Metaplex NFT standard integration for Solana",
+    "category": "Solana / Blockchain"
+  },
+  {
+    "slug": "honcho-integration",
+    "name": "Honcho Integration",
+    "description": "Honcho memory and persistence integration",
+    "category": "Solana / Blockchain"
+  },
+  {
+    "slug": "qeqgen",
+    "name": "QEDGen",
+    "description": "Formal verification and mathematical proof generation",
+    "category": "Dev Tools"
+  },
+  {
+    "slug": "browse",
+    "name": "Browse",
+    "description": "Web browsing and content extraction",
+    "category": "Productivity"
+  },
+  {
+    "slug": "canvas",
+    "name": "Canvas",
+    "description": "Display HTML content on connected SolanaOS nodes",
+    "category": "Media"
+  },
+  {
+    "slug": "camsnap",
+    "name": "CamSnap",
+    "description": "Camera capture and image processing",
+    "category": "Media"
+  },
+  {
+    "slug": "summarize",
+    "name": "Summarize",
+    "description": "Text summarization and key point extraction",
+    "category": "Productivity"
+  },
+  {
+    "slug": "weather",
+    "name": "Weather",
+    "description": "Weather information and forecasts",
+    "category": "Productivity"
+  },
+  {
+    "slug": "video-frames",
+    "name": "Video Frames",
+    "description": "Extract frames from video content",
+    "category": "Media"
+  },
+  {
+    "slug": "voice-call",
+    "name": "Voice Call",
+    "description": "Voice call integration and transcription",
+    "category": "Communication"
+  },
+  {
+    "slug": "discord",
+    "name": "Discord",
+    "description": "Discord bot integration and automation",
+    "category": "Communication"
+  },
+  {
+    "slug": "slack",
+    "name": "Slack",
+    "description": "Slack workspace integration and automation",
+    "category": "Communication"
+  },
+  {
+    "slug": "trello",
+    "name": "Trello",
+    "description": "Trello board and task management",
+    "category": "Productivity"
+  },
+  {
+    "slug": "notion",
+    "name": "Notion",
+    "description": "Notion workspace integration",
+    "category": "Productivity"
+  },
+  {
+    "slug": "obsidian",
+    "name": "Obsidian",
+    "description": "Obsidian vault and knowledge management",
+    "category": "Productivity"
+  },
+  {
+    "slug": "apple-notes",
+    "name": "Apple Notes",
+    "description": "Apple Notes integration on macOS/iOS",
+    "category": "Productivity"
+  },
+  {
+    "slug": "apple-reminders",
+    "name": "Apple Reminders",
+    "description": "Apple Reminders integration on macOS/iOS",
+    "category": "Productivity"
+  },
+  {
+    "slug": "bear-notes",
+    "name": "Bear Notes",
+    "description": "Bear notes app integration",
+    "category": "Productivity"
+  },
+  {
+    "slug": "things-mac",
+    "name": "Things",
+    "description": "Things task management integration",
+    "category": "Productivity"
+  },
+  {
+    "slug": "1password",
+    "name": "1Password",
+    "description": "1Password credential management",
+    "category": "Security"
+  },
+  {
+    "slug": "github",
+    "name": "GitHub",
+    "description": "GitHub repository and issue management",
+    "category": "Developer Tools"
+  },
+  {
+    "slug": "gh-issues",
+    "name": "GitHub Issues",
+    "description": "GitHub issues and PR management",
+    "category": "Developer Tools"
+  },
+  {
+    "slug": "e2b",
+    "name": "E2B",
+    "description": "E2B sandbox integration for secure code execution",
+    "category": "DevOps / Infrastructure"
+  },
+  {
+    "slug": "tmux",
+    "name": "Tmux",
+    "description": "Terminal multiplexer management",
+    "category": "Developer Tools"
+  },
+  {
+    "slug": "eightctl",
+    "name": "Eightctl",
+    "description": "Eight sleep device control",
+    "category": "IoT"
+  },
+  {
+    "slug": "openhue",
+    "name": "OpenHue",
+    "description": "Philips Hue smart home control",
+    "category": "IoT"
+  },
+  {
+    "slug": "spotify-player",
+    "name": "Spotify Player",
+    "description": "Spotify playback control and information",
+    "category": "Media"
+  },
+  {
+    "slug": "songsee",
+    "name": "SongSee",
+    "description": "Music recognition and identification",
+    "category": "Media"
+  },
+  {
+    "slug": "sonoscli",
+    "name": "Sonos CLI",
+    "description": "Sonos speaker control",
+    "category": "IoT"
+  },
+  {
+    "slug": "blucli",
+    "name": "BluCLI",
+    "description": "Bluetooth device management",
+    "category": "System"
+  },
+  {
+    "slug": "bluebubbles",
+    "name": "BlueBubbles",
+    "description": "iMessage via BlueBubbles integration",
+    "category": "Communication"
+  },
+  {
+    "slug": "imsg",
+    "name": "iMessage",
+    "description": "iMessage direct integration",
+    "category": "Communication"
+  },
+  {
+    "slug": "wacli",
+    "name": "WhatsApp CLI",
+    "description": "WhatsApp messaging integration",
+    "category": "Communication"
+  },
+  {
+    "slug": "xurl",
+    "name": "XURL",
+    "description": "URL expansion and metadata extraction",
+    "category": "Productivity"
+  },
+  {
+    "slug": "gifgrep",
+    "name": "GIFgrep",
+    "description": "GIF search and discovery",
+    "category": "Media"
+  },
+  {
+    "slug": "blogwatcher",
+    "name": "Blog Watcher",
+    "description": "Monitor and track blog posts",
+    "category": "Productivity"
+  },
+  {
+    "slug": "openai-image-gen",
+    "name": "OpenAI Image Gen",
+    "description": "DALL-E image generation",
+    "category": "AI / Agents"
+  },
+  {
+    "slug": "openai-whisper",
+    "name": "OpenAI Whisper",
+    "description": "Speech-to-text via OpenAI Whisper",
+    "category": "AI / Agents"
+  },
+  {
+    "slug": "openai-whisper-api",
+    "name": "OpenAI Whisper API",
+    "description": "Whisper API integration for transcription",
+    "category": "AI / Agents"
+  },
+  {
+    "slug": "pdf-to-markdown",
+    "name": "PDF to Markdown",
+    "description": "Convert PDF documents to Markdown",
+    "category": "Developer Tools"
+  },
+  {
+    "slug": "nano-pdf",
+    "name": "NanoPDF",
+    "description": "Lightweight PDF processing",
+    "category": "Developer Tools"
+  },
+  {
+    "slug": "nano-banana-pro",
+    "name": "Nano Banana Pro",
+    "description": "Advanced nano processing tools",
+    "category": "Developer Tools"
+  },
+  {
+    "slug": "mcporter",
+    "name": "MCPorter",
+    "description": "Package management and migration",
+    "category": "Developer Tools"
+  },
+  {
+    "slug": "oracle",
+    "name": "Oracle",
+    "description": "Oracle database integration",
+    "category": "Developer Tools"
+  },
+  {
+    "slug": "ordercli",
+    "name": "OrderCLI",
+    "description": "Order management CLI tools",
+    "category": "Developer Tools"
+  },
+  {
+    "slug": "sag",
+    "name": "SAG",
+    "description": "System administration guide",
+    "category": "System"
+  },
+  {
+    "slug": "healthcheck",
+    "name": "Health Check",
+    "description": "System health monitoring",
+    "category": "System"
+  },
+  {
+    "slug": "himalaya",
+    "name": "Himalaya",
+    "description": "Email management",
+    "category": "Communication"
+  },
+  {
+    "slug": "session-logs",
+    "name": "Session Logs",
+    "description": "Session logging and management",
+    "category": "Developer Tools"
+  },
+  {
+    "slug": "gog",
+    "name": "GoG",
+    "description": "Game of Games integration",
+    "category": "Entertainment"
+  },
+  {
+    "slug": "goplaces",
+    "name": "GoPlaces",
+    "description": "Location and travel planning",
+    "category": "Productivity"
+  },
+  {
+    "slug": "peekaboo",
+    "name": "Peekaboo",
+    "description": "Screen monitoring and observation",
+    "category": "System"
+  },
+  {
+    "slug": "skill-creator",
+    "name": "Skill Creator",
+    "description": "Create new SKILL.md files for Clawd agents",
+    "category": "Clawd Ecosystem"
+  },
+  {
+    "slug": "sherpa-onnx-tts",
+    "name": "Sherpa ONNX TTS",
+    "description": "On-device text-to-speech with Sherpa ONNX",
+    "category": "Media"
+  },
+  {
+    "slug": "model-usage",
+    "name": "Model Usage",
+    "description": "Track and optimize AI model usage",
+    "category": "AI / Agents"
   }
 ]
