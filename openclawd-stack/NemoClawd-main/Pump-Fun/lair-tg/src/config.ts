@@ -27,7 +27,7 @@ export function loadConfig(): LairConfig {
       ai: process.env.MODULE_AI !== 'false',
     },
     openrouterApiKey: process.env.OPENROUTER_API_KEY ?? null,
-    openrouterModel: process.env.OPENROUTER_MODEL ?? 'x-ai/grok-4-0820',
+    openrouterModel: process.env.OPENROUTER_MODEL ?? 'x-ai/grok-4.20-beta',
     defiAgentsUrl: process.env.DEFI_AGENTS_URL ?? 'https://sperax.click/index.json',
   };
 }
