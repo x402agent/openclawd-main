@@ -11,7 +11,12 @@ workers_dev = true
 # AND (b) be proxied through Cloudflare (orange-cloud). If the zone is DNS-only
 # (because solanaclawd.com is currently hosted on Vercel), the workers.dev URL
 # above is the canonical installer URL until DNS moves behind Cloudflare.
+# Workers Custom Domain — bypasses zone-level WAF / Bot Fight Mode / Managed
+# Challenge so `curl -fsSL https://install.solanaclawd.com | bash` works
+# without a browser challenge. CF auto-creates + proxies the DNS record.
 routes = [
+  { pattern = "install.solanaclawd.com", custom_domain = true },
+  # Apex paths — only fire if solanaclawd.com itself is proxied (orange-cloud)
   { pattern = "solanaclawd.com/install.sh", zone_name = "solanaclawd.com" },
   { pattern = "solanaclawd.com/install",    zone_name = "solanaclawd.com" },
 ]
