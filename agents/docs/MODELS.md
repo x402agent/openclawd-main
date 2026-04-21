@@ -184,6 +184,8 @@ Warm, varied phrasing without sacrificing accuracy.
 | Fast memecoin screeners, low-latency chats   | `anthropic/claude-haiku-4-5-20251001`    |
 | Open-source / cost-sensitive                 | `meta-llama/llama-3.3-70b-instruct`      |
 | xAI-native agents (built on SolanaOS runtime)| `x-ai/grok-4-fast`                       |
+| Solana-aware reasoning + 256K context        | `xai/grok-4.20-beta`                     |
+| Agentic tool-use + long-context workflows    | `moonshot/kimi-k2.6`                     |
 
 You can also set `"fallback_models"` to let OpenRouter retry on provider outages — handy for mainnet congestion spikes.
 

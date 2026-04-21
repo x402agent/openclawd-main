@@ -187,6 +187,7 @@ export function toOpenRouterModelId(clawdModelId: string): string {
     'xai/grok-4-fast-reasoning': 'x-ai/grok-4-fast',
     'xai/grok-4-1-fast': 'x-ai/grok-4.1-fast',
     'xai/grok-4-1-fast-reasoning': 'x-ai/grok-4.1-fast',
+    'xai/grok-4.20-beta': 'x-ai/grok-4.20-beta',
     'xai/grok-4-0709': 'x-ai/grok-4-0709',
     'xai/grok-3-mini': 'x-ai/grok-3-mini',
     'xai/grok-3': 'x-ai/grok-3',
@@ -208,6 +209,7 @@ export function toOpenRouterModelId(clawdModelId: string): string {
   // Moonshot models
   const MOONSHOT_MAP: Record<string, string> = {
     'moonshot/kimi-k2.5': 'moonshotai/kimi-k2.5-instruct',
+    'moonshot/kimi-k2.6': 'moonshotai/kimi-k2.6-instruct',
   };
 
   return (

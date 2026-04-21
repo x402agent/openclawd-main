@@ -17,12 +17,15 @@ out/
 *.swo
 .DS_Store
 
-# Environment
+# Environment (NEVER commit these with real keys!)
 .env
 .env.local
 .env.development
 .env.production
 .env.*.local
+# Explicit env files in subdirectories
+openclawd-stack/bridge/.env
+openclawd-stack/template/.env
 
 # Logs
 *.log

@@ -153,6 +153,13 @@ const BUDGET_MODELS: ModelEntry[] = [
     qualityScore: 72, speedMs: 480, enabled: true, free: false,
   },
   {
+    id: 'xai/grok-4.20-beta',
+    provider: 'xai', name: 'Grok 4.20 Beta',
+    inputPricePerM: 0.25, outputPricePerM: 1.25,
+    contextWindow: 256_000, features: ['reasoning', 'vision', 'agentic', 'tools', 'solana'], tier: 'budget',
+    qualityScore: 82, speedMs: 420, enabled: true, free: false,
+  },
+  {
     id: 'xai/grok-4-0709',
     provider: 'xai', name: 'Grok 4 0709',
     inputPricePerM: 0.20, outputPricePerM: 1.50,
@@ -235,6 +242,13 @@ const BUDGET_MODELS: ModelEntry[] = [
     inputPricePerM: 0.60, outputPricePerM: 3.00,
     contextWindow: 262_000, features: ['reasoning', 'vision', 'agentic', 'tools'], tier: 'budget',
     qualityScore: 75, speedMs: 500, enabled: true, free: false,
+  },
+  {
+    id: 'moonshot/kimi-k2.6',
+    provider: 'moonshot', name: 'Kimi K2.6',
+    inputPricePerM: 0.60, outputPricePerM: 3.00,
+    contextWindow: 320_000, features: ['reasoning', 'vision', 'agentic', 'tools', 'code'], tier: 'budget',
+    qualityScore: 80, speedMs: 470, enabled: true, free: false,
   },
 ];
 
@@ -437,7 +451,7 @@ export const TIER_MAPPING: Record<RequestTier, TierMapping> = {
   },
   REASONING: {
     eco: 'xai/grok-4-1-fast',
-    auto: 'xai/grok-4-1-fast-reasoning',
+    auto: 'xai/grok-4.20-beta',
     premium: 'anthropic/claude-sonnet-4.6',
   },
 };
@@ -480,7 +494,9 @@ export function resolveModelAlias(alias: string): string | null {
     'deepseek-free': 'nvidia/deepseek-v3.2',
     'devstral': 'nvidia/devstral-2-123b',
     'grok-4': 'xai/grok-4-1-fast',
-    'grok': 'xai/grok-4-1-fast-reasoning',
+    'grok-4.20': 'xai/grok-4.20-beta',
+    'grok-beta': 'xai/grok-4.20-beta',
+    'grok': 'xai/grok-4.20-beta',
     'claude': 'anthropic/claude-sonnet-4.6',
     'opus': 'anthropic/claude-opus-4.6',
     'sonnet': 'anthropic/claude-sonnet-4.6',
@@ -491,7 +507,10 @@ export function resolveModelAlias(alias: string): string | null {
     'o4': 'openai/o4-mini',
     'gemini': 'google/gemini-2.5-pro',
     'flash': 'google/gemini-2.5-flash',
-    'kimi': 'moonshot/kimi-k2.5',
+    'kimi': 'moonshot/kimi-k2.6',
+    'kimi-k2': 'moonshot/kimi-k2.6',
+    'kimi-k2.5': 'moonshot/kimi-k2.5',
+    'kimi-k2.6': 'moonshot/kimi-k2.6',
     'br-sonnet': 'anthropic/claude-sonnet-4.6',
     'br-opus': 'anthropic/claude-opus-4.6',
   };

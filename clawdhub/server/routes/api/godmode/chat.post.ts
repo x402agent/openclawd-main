@@ -11,8 +11,8 @@ type ModelConfig = { id: string; label: string; accent: string }
 const ULTRAPLINIAN_FAST: ModelConfig[] = [
   { id: 'google/gemini-2.5-flash', label: 'Gemini Flash', accent: '#4285f4' },
   { id: 'deepseek/deepseek-chat', label: 'DeepSeek', accent: '#00d4ff' },
-  { id: 'moonshotai/kimi-k2.5', label: 'Kimi K2.5', accent: '#ff8f3d' },
-  { id: 'x-ai/grok-code-fast-1', label: 'Grok Fast', accent: '#fff' },
+  { id: 'moonshotai/kimi-k2.6', label: 'Kimi K2.6', accent: '#ff8f3d' },
+  { id: 'x-ai/grok-4.20-beta', label: 'Grok 4.20 Beta', accent: '#fff' },
   { id: 'meta-llama/llama-3.1-8b-instruct', label: 'Llama 8B', accent: '#8f6aff' },
 ]
 
