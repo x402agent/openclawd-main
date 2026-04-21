@@ -2,81 +2,68 @@
 
 > Open-source registry for the OpenClawd Solana AI agent ecosystem
 
-## Overview
+## 🌐 Links
 
-OpenClawd is a comprehensive monorepo for building, deploying, and operating AI agents on Solana. It combines trading engines, MCP servers, Telegram bots, Chrome extensions, and cloud infrastructure into a unified agentic runtime.
+| Resource | URL |
+|----------|-----|
+| **Website** | [solanaclawd.com](https://solanaclawd.com) |
+| **GitHub** | [github.com/x402agent/openclawd](https://github.com/x402agent/openclawd) |
+| **Twitter/X** | [x.com/clawddevs](https://x.com/clawddevs) |
+| **Telegram** | [t.me/clawdtoken](https://t.me/clawdtoken) |
 
-## Quick Start
+## 💰 $CLAWD Token
+
+**Address:** `8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump`
+
+The $CLAWD token powers the OpenClawd ecosystem with:
+- Agent call payments (70% to agent owners)
+- $CLAWD holder discounts (10-50% off)
+- Revenue buyback and burn
+
+## 📦 Projects (30 Total)
+
+| Category | Projects |
+|----------|----------|
+| **Framework** | solana-clawd, src, solana-go-main |
+| **AI Agents** | agents (50), skills (97), moltbook-agent |
+| **Payments** | clawdrouter, x402-openrouter-main, plugin.delivery |
+| **Infrastructure** | openclawd-stack, tailclawd, MCP, CLI, workers, clawdhub |
+| **Interfaces** | chrome-extension, beepboop, WatchApp, tailclawd-backup |
+| **Bots** | telegram, x-bot, bots |
+| **Data** | llm-wiki-tang, chess, API |
+| **Tools** | services, packages, npm, examples, websocket-server |
+| **Docs** | articles (42 docs) |
+
+See [`registry.json`](registry.json) for full machine-readable metadata.
+
+## 🔐 x402 Payment Protocol
+
+Multi-protocol agentic payment gateway supporting:
+- **x402** — HTTP 402 on Solana (Ed25519 + SPL Token)
+- **MPP** — Machine Payments Protocol
+- **AP2** — Google Agent Payments Protocol
+- **A2A** — Google Agent-to-Agent
+
+**Gateway:** `solanaclawd.com/x402`
+
+## ☁️ Cloud Clawd
+
+Browser-based Solana trading terminal via E2B sandboxes.
+
+Components:
+- solana-clawd (OODA loop trading)
+- nemoClawd (xAI Grok + 31 MCP tools)
+- agentwallet (Privy wallets)
+- Full CLI access
+
+## 📜 License
+
+MIT — See [`../LICENSE.md`](../LICENSE.md)
+
+## 🔗 Quick Start
 
 ```bash
-# Clone the monorepo
 git clone https://github.com/x402agent/openclawd.git
 cd openclawd
-
-# Install dependencies
 cd agents && npm install
-cd ../solana-clawd && npm install
-
-# Start the OODA trading engine
 cd ../solana-clawd && make install && clawd daemon
-```
-
-## Project Structure
-
-```
-openclawd/
-├── agents/              # 50 production AI agents (DeFi, trading, NFTs, security)
-├── solana-clawd/        # Go + TypeScript agent framework
-├── tailclawd/           # Web-based Claude Code interface (Tailscale-aware)
-├── clawdhub/            # Skills/souls registry hub (TanStack + Convex)
-├── skills/              # 97 bundled SKILL.md files
-├── MCP/                 # Model Context Protocol servers
-├── CLI/                 # Command-line tools
-├── src/                 # Core TypeScript engine
-├── telegram/            # Telegram bot integrations
-├── workers/             # Cloudflare/edge workers
-├── chrome-extension/     # Browser extension
-├── openclawd-stack/     # Production deployment stack
-├── bots/                # Trading bots (Pump.fun sniper, etc.)
-├── x-bot/               # Twitter/X bot
-└── acp_registry/        # This registry
-```
-
-## Key Components
-
-### AI Agents (50 agents)
-
-| Category | Count | Examples |
-|----------|-------|----------|
-| DeFi | 12 | Yield aggregator, liquidity strategist, protocol comparator |
-| Trading | 6 | Jupiter router, pump screener, DEX optimizer |
-| Analytics | 11 | Portfolio tracker, whale watcher, risk monitor |
-| Security | 8 | Rug screener, MEV advisor, wallet security |
-| Education | 6 | Staking calculator, onboarding guide, L2 comparison |
-| Dev Tools | 3 | Priority fee expert, SDK documentation |
-| Governance | 2 | Proposal analyst, governance guide |
-| NFT | 2 | MPL Core launcher, liquidity advisor |
-
-### Core Framework (solana-clawd)
-
-- **Go Runtime**: Native gagliardetto/solana-go SDK for on-chain operations
-- **OODA Loop Trading**: MawdBot for Pump.fun and Solana spot
-- **31+ MCP Tools**: Market data, trading, wallet operations
-- **Memory Tiers**: KNOWN/LEARNED/INFERRED epistemology
-
-### Infrastructure
-
-- **TailClawd**: Web interface for Claude Code from any browser
-- **ClawdHub**: Skills/souls registry with Convex backend
-- **OpenShell**: Secure isolated execution environments
-- **Privy Integration**: Agentic wallet management
-
-## License
-
-MIT — See individual project directories for specific licenses
-
-## Links
-
-- **Website**: [openclawd.io](https://openclawd.io)
-- **GitHub**: [github.com/x402agent/openclawd](https://github.com/x402agent/openclawd)
-- **Twitter**: [@clawddevs](https://x.com/clawddevs)

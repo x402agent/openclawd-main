@@ -10,9 +10,56 @@
     "github": "x402agent",
     "twitter": "@clawddevs"
   },
-  "website": "https://openclawd.io",
-  "github": "https://github.com/x402agent/openclawd",
+  "website": "https://solanaclawd.com",
+  "github": "https://github.com/x402agent/solana-clawd",
+  "token": {
+    "symbol": "$CLAWD",
+    "address": "8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump",
+    "standard": "SPL Token",
+    "chain": "Solana"
+  },
+  "social": {
+    "twitter": "https://x.com/clawddevs",
+    "telegram": "https://t.me/clawdtoken",
+    "x402_gateway": "https://solanaclawd.com/x402",
+    "ipfs_gateway": "https://ipfs.solanaclawd.com"
+  },
   "projects": [
+    {
+      "id": "solana-clawd",
+      "name": "solana-clawd",
+      "description": "Open-source Solana AI agent framework powered by xAI Grok — Go + TypeScript with OODA trading engine and 31 MCP tools",
+      "category": "framework",
+      "language": "go-typescript",
+      "license": "MIT",
+      "status": "active",
+      "url": "solana-clawd/README.md",
+      "keywords": ["solana", "go", "mcp", "trading", "xai", "grok"],
+      "features": ["OODA loop", "31 MCP tools", "Go runtime", "Privy wallets"]
+    },
+    {
+      "id": "clawdrouter",
+      "name": "ClawdRouter",
+      "description": "Multi-protocol payment gateway for Solana — x402, MPP, AP2, A2A with Solana settlement and $CLAWD holder discounts",
+      "category": "payments",
+      "language": "typescript",
+      "license": "MIT",
+      "status": "active",
+      "url": "clawdrouter/README.md",
+      "keywords": ["x402", "payments", "solana", "mpp", "ap2", "a2a"],
+      "gateway": "solanaclawd.com/x402"
+    },
+    {
+      "id": "x402-openrouter",
+      "name": "solana-clawd-x402",
+      "description": "x402 protocol native implementation for Solana — Ed25519 signatures, SPL Token support, IPFS integration",
+      "category": "payments",
+      "language": "typescript",
+      "license": "MIT",
+      "status": "active",
+      "url": "x402-openrouter-main/README.md",
+      "keywords": ["x402", "solana", "payments"]
+    },
     {
       "id": "agents",
       "name": "Solana Clawd Agents",
@@ -31,16 +78,16 @@
       }
     },
     {
-      "id": "solana-clawd",
-      "name": "solana-clawd",
-      "description": "Open-source Solana AI agent framework powered by xAI Grok — Go + TypeScript with OODA trading engine and 31 MCP tools",
-      "category": "framework",
-      "language": "go-typescript",
+      "id": "openclawd-stack",
+      "name": "OpenClawd Stack",
+      "description": "Integrated Solana AI agent runtime — OpenShell sandboxes, E2B cloud terminals, nemoClawd, agentic wallets",
+      "category": "infrastructure",
+      "language": "typescript",
       "license": "MIT",
       "status": "active",
-      "url": "solana-clawd/README.md",
-      "keywords": ["solana", "go", "mcp", "trading", "xai"],
-      "features": ["OODA loop", "31 MCP tools", "Go runtime", "Privy wallets"]
+      "url": "openclawd-stack/README.md",
+      "keywords": ["stack", "deployment", "e2b", "openshell", "cloud"],
+      "components": ["OpenShell", "nemoClawd", "Privy", "E2B"]
     },
     {
       "id": "tailclawd",
@@ -126,18 +173,6 @@
       "keywords": ["chrome", "extension", "browser", "ai"]
     },
     {
-      "id": "openclawd-stack",
-      "name": "OpenClawd Stack",
-      "description": "Integrated Solana AI agent runtime — OpenShell sandboxes, nemoClawd, agentic wallets, and E2B deployment",
-      "category": "infrastructure",
-      "language": "typescript",
-      "license": "MIT",
-      "status": "active",
-      "url": "openclawd-stack/README.md",
-      "keywords": ["stack", "deployment", "e2b", "openshell"],
-      "components": ["OpenShell", "nemoClawd", "Privy", "E2B"]
-    },
-    {
       "id": "beepboop",
       "name": "Beep Boop",
       "description": "Solana blockchain clawd pointer — lobster claw companion living in macOS menu bar with voice, vision, and claw pointing",
@@ -148,6 +183,17 @@
       "url": "beepboop/README.md",
       "keywords": ["macos", "menu-bar", "voice", "vision"],
       "features": ["Push-to-talk", "Screen capture", "ElevenLabs TTS", "Lobster claw overlay"]
+    },
+    {
+      "id": "WatchApp",
+      "name": "SolanaOS Watch",
+      "description": "watchOS app for SolanaOS — wallet state monitoring and companion app",
+      "category": "application",
+      "language": "swift",
+      "license": "MIT",
+      "status": "active",
+      "url": "WatchApp/README.md",
+      "keywords": ["watchos", "apple-watch", "solana", "wallet"]
     },
     {
       "id": "bots",
@@ -172,6 +218,17 @@
       "keywords": ["telegram", "bot", "messaging"]
     },
     {
+      "id": "x-bot",
+      "name": "Twitter/X Bot",
+      "description": "Twitter/X bot for AI agent integration",
+      "category": "infrastructure",
+      "language": "typescript",
+      "license": "MIT",
+      "status": "active",
+      "url": "x-bot/README.md",
+      "keywords": ["twitter", "x", "bot", "social"]
+    },
+    {
       "id": "workers",
       "name": "Cloudflare Workers",
       "description": "Edge worker implementations — agent-wallet, email-worker, pumpfun-mcp-worker",
@@ -184,96 +241,180 @@
       "components": ["agent-wallet", "email-worker", "pumpfun-mcp-worker"]
     },
     {
-      "id": "x-bot",
-      "name": "Twitter/X Bot",
-      "description": "Twitter/X bot for AI agent integration",
+      "id": "chess",
+      "name": "SolanaOS Chess",
+      "description": "Chess hub for SolanaOS — live play, wallet-signed matches",
+      "category": "application",
+      "language": "typescript",
+      "license": "MIT",
+      "status": "active",
+      "url": "chess/README.md",
+      "keywords": ["chess", "solana", "wallet", "games"]
+    },
+    {
+      "id": "services",
+      "name": "Services",
+      "description": "Backend services — gateway, bridge, monitoring",
       "category": "infrastructure",
       "language": "typescript",
       "license": "MIT",
       "status": "active",
-      "url": "x-bot/README.md",
-      "keywords": ["twitter", "x", "bot", "social"]
+      "url": "services/README.md",
+      "keywords": ["services", "gateway", "bridge", "monitoring"]
     },
     {
-      "id": "WatchApp",
-      "name": "SolanaOS Watch",
-      "description": "watchOS app for SolanaOS — wallet state monitoring and companion app",
-      "category": "application",
-      "language": "swift",
+      "id": "packages",
+      "name": "Packages",
+      "description": "Shared npm packages for the OpenClawd ecosystem",
+      "category": "tooling",
+      "language": "typescript",
       "license": "MIT",
       "status": "active",
-      "url": "WatchApp/README.md",
-      "keywords": ["watchos", "apple-watch", "solana", "wallet"]
+      "url": "packages/README.md",
+      "keywords": ["packages", "npm", "shared"]
+    },
+    {
+      "id": "llm-wiki-tang",
+      "name": "LLM Wiki Tang",
+      "description": "LLM knowledge base with vector embeddings for AI agent documentation",
+      "category": "data",
+      "language": "python",
+      "license": "MIT",
+      "status": "active",
+      "url": "llm-wiki-tang/README.md",
+      "keywords": ["llm", "wiki", "embeddings", "knowledge-base"]
+    },
+    {
+      "id": "clawd-cloud-os",
+      "name": "Clawd Cloud OS",
+      "description": "Cloud OS integration for OpenClawd",
+      "category": "infrastructure",
+      "language": "typescript",
+      "license": "MIT",
+      "status": "active",
+      "url": "clawd-cloud-os/README.md",
+      "keywords": ["cloud", "os", "integration"]
+    },
+    {
+      "id": "moltbook-agent",
+      "name": "Moltbook Agent",
+      "description": "AI agent for the Moltbook educational platform",
+      "category": "ai-agents",
+      "language": "typescript",
+      "license": "MIT",
+      "status": "active",
+      "url": "moltbook-agent/README.md",
+      "keywords": ["moltbook", "education", "agent"]
+    },
+    {
+      "id": "websocket-server",
+      "name": "WebSocket Server",
+      "description": "WebSocket server for real-time agent communication",
+      "category": "infrastructure",
+      "language": "typescript",
+      "license": "MIT",
+      "status": "active",
+      "url": "websocket-server/README.md",
+      "keywords": ["websocket", "realtime", "communication"]
+    },
+    {
+      "id": "npm",
+      "name": "npm Packages",
+      "description": "npm installers — ClawdBot, SolanaOS CLI",
+      "category": "tooling",
+      "language": "bash",
+      "license": "MIT",
+      "status": "active",
+      "url": "npm/README.md",
+      "keywords": ["npm", "cli", "installer"]
+    },
+    {
+      "id": "examples",
+      "name": "Examples",
+      "description": "Example code — blockchain demos, OODA loop, x402",
+      "category": "tooling",
+      "language": "typescript",
+      "license": "MIT",
+      "status": "active",
+      "url": "examples/README.md",
+      "keywords": ["examples", "demos", "code"]
+    },
+    {
+      "id": "API",
+      "name": "API",
+      "description": "API definitions — BDS public, Pump.fun docs",
+      "category": "tooling",
+      "language": "typescript",
+      "license": "MIT",
+      "status": "active",
+      "url": "API/README.md",
+      "keywords": ["api", "definitions", "specs"]
+    },
+    {
+      "id": "solana-go-main",
+      "name": "Solana Go",
+      "description": "Go SDK and utilities for Solana blockchain operations",
+      "category": "framework",
+      "language": "go",
+      "license": "MIT",
+      "status": "active",
+      "url": "solana-go-main/README.md",
+      "keywords": ["solana", "go", "sdk", "blockchain"]
     },
     {
       "id": "acp_registry",
       "name": "OpenClawd ACP Registry",
-      "description": "This registry — registry file for all OpenClawd projects",
+      "description": "Project registry — JSON registry of all OpenClawd projects",
       "category": "registry",
       "language": "json",
       "license": "MIT",
       "status": "active",
       "url": "acp_registry/README.md",
       "keywords": ["registry", "open-source", "solana"]
+    },
+    {
+      "id": "articles",
+      "name": "Articles",
+      "description": "42 documentation articles covering architecture, payments, deployment, AI, SEO",
+      "category": "documentation",
+      "language": "markdown",
+      "license": "MIT",
+      "status": "active",
+      "url": "articles/README.md",
+      "keywords": ["docs", "articles", "guides", "tutorials"]
     }
   ],
   "categories": [
-    {
-      "id": "ai-agents",
-      "name": "AI Agents",
-      "description": "Production-ready AI agents for various tasks"
-    },
-    {
-      "id": "framework",
-      "name": "Framework",
-      "description": "Core frameworks and runtimes"
-    },
-    {
-      "id": "infrastructure",
-      "name": "Infrastructure",
-      "description": "Infrastructure and deployment components"
-    },
-    {
-      "id": "registry",
-      "name": "Registry",
-      "description": "Registry and catalog services"
-    },
-    {
-      "id": "tooling",
-      "name": "Tooling",
-      "description": "CLI tools and utilities"
-    },
-    {
-      "id": "application",
-      "name": "Applications",
-      "description": "End-user applications"
-    },
-    {
-      "id": "trading",
-      "name": "Trading",
-      "description": "Trading bots and engines"
-    }
+    { "id": "framework", "name": "Framework", "description": "Core frameworks and runtimes" },
+    { "id": "ai-agents", "name": "AI Agents", "description": "Production-ready AI agents" },
+    { "id": "payments", "name": "Payments", "description": "Payment infrastructure and x402" },
+    { "id": "infrastructure", "name": "Infrastructure", "description": "Infrastructure and deployment" },
+    { "id": "registry", "name": "Registry", "description": "Registry and catalog services" },
+    { "id": "tooling", "name": "Tooling", "description": "CLI tools and utilities" },
+    { "id": "application", "name": "Applications", "description": "End-user applications" },
+    { "id": "trading", "name": "Trading", "description": "Trading bots and engines" },
+    { "id": "data", "name": "Data", "description": "Data and knowledge bases" },
+    { "id": "documentation", "name": "Documentation", "description": "Documentation and guides" }
   ],
   "technologies": [
-    "Solana",
-    "TypeScript",
-    "Go",
-    "Swift",
-    "Node.js",
-    "MCP",
-    "Convex",
-    "TanStack",
-    "Tailscale",
-    "xAI Grok",
-    "Helius",
-    "Privy",
-    "Metaplex"
+    "Solana", "TypeScript", "Go", "Swift", "Node.js", "Python",
+    "MCP", "Convex", "TanStack", "Tailscale", "xAI Grok",
+    "Helius", "Privy", "Metaplex", "E2B", "Cloudflare Workers"
   ],
-  "links": {
-    "website": "https://openclawd.io",
-    "github": "https://github.com/x402agent/openclawd",
-    "twitter": "https://x.com/clawddevs",
-    "discord": null
+  "revenue": {
+    "token_symbol": "$CLAWD",
+    "token_address": "8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump",
+    "splits": {
+      "agent_owner": "70%",
+      "clawd_buyback": "15%",
+      "treasury": "10%",
+      "operator": "5%"
+    },
+    "holder_discounts": [
+      { "balance": "100k", "discount": "10%" },
+      { "balance": "1M", "discount": "25%" },
+      { "balance": "10M", "discount": "50%" }
+    ]
   },
-  "generated_at": "2026-04-21T11:11:00Z"
+  "generated_at": "2026-04-21T11:22:00Z"
 }
