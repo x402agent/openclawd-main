@@ -22,14 +22,20 @@ One router · one settlement layer · one environment contract · 33 projects, 5
 ## ⚡ Install in one line
 
 ```bash
+curl -fsSL https://solanaclawd-install.x402.workers.dev | bash
+```
+
+This is live right now on Cloudflare Workers — fully self-contained, no repo access required. Once `solanaclawd.com` DNS is moved behind Cloudflare (it currently resolves to Vercel), the same worker will serve it at the short URL:
+
+```bash
 curl -fsSL https://solanaclawd.com/install.sh | bash
 ```
 
-> If the apex route isn't deployed yet, use the GitHub raw fallback — **same script, same result**:
-> ```bash
-> curl -fsSL https://raw.githubusercontent.com/x402agent/openclawd/main/install.sh | bash
-> ```
-> To publish the apex route yourself, deploy [`workers/install-worker`](./workers/install-worker) — it serves `install.sh` from GitHub via Cloudflare Workers with a 5-minute edge cache.
+The installer worker lives at [`workers/install-worker/`](./workers/install-worker) — a single Cloudflare Worker that embeds [`install.sh`](./install.sh) at deploy-time via [`sync.mjs`](./workers/install-worker/sync.mjs) so it works even while this repo is private. Deploy your own fork with:
+
+```bash
+cd workers/install-worker && npm install && npm run deploy
+```
 
 The installer:
 

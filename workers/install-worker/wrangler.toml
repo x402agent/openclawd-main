@@ -2,8 +2,15 @@ name = "solanaclawd-install"
 main = "src/index.ts"
 compatibility_date = "2025-11-01"
 
+# Always expose the worker on <name>.<subdomain>.workers.dev so users can curl
+# it even before the apex domain route is wired up.
+workers_dev = true
+
 # Bind this worker to the install.sh route on solanaclawd.com.
-# Requires the zone "solanaclawd.com" to be in the same Cloudflare account.
+# Requires the zone "solanaclawd.com" to (a) be in the same Cloudflare account
+# AND (b) be proxied through Cloudflare (orange-cloud). If the zone is DNS-only
+# (because solanaclawd.com is currently hosted on Vercel), the workers.dev URL
+# above is the canonical installer URL until DNS moves behind Cloudflare.
 routes = [
   { pattern = "solanaclawd.com/install.sh", zone_name = "solanaclawd.com" },
   { pattern = "solanaclawd.com/install",    zone_name = "solanaclawd.com" },
