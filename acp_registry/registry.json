@@ -401,6 +401,35 @@
     "MCP", "Convex", "TanStack", "Tailscale", "xAI Grok",
     "Helius", "Privy", "Metaplex", "E2B", "Cloudflare Workers"
   ],
+  "stack": {
+    "doc": "STACK.md",
+    "entry_point": "clawdrouter",
+    "layers": ["surfaces", "gateway", "runtime", "skills", "chain"],
+    "default_models": {
+      "reasoning_auto": "xai/grok-4.20-beta",
+      "reasoning_premium": "anthropic/claude-sonnet-4.6",
+      "agentic_longctx": "moonshot/kimi-k2.6",
+      "complex_premium": "anthropic/claude-opus-4.6"
+    },
+    "featured_models": [
+      {
+        "id": "xai/grok-4.20-beta",
+        "name": "Grok 4.20 Beta",
+        "provider": "xai",
+        "context": 256000,
+        "features": ["reasoning", "vision", "agentic", "tools", "solana"],
+        "role": "Default REASONING tier — Solana-aware flagship"
+      },
+      {
+        "id": "moonshot/kimi-k2.6",
+        "name": "Kimi K2.6",
+        "provider": "moonshot",
+        "context": 320000,
+        "features": ["reasoning", "vision", "agentic", "tools", "code"],
+        "role": "Long-context agentic tool-use + code/audit"
+      }
+    ]
+  },
   "revenue": {
     "token_symbol": "$CLAWD",
     "token_address": "8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump",

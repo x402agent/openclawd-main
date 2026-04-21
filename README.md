@@ -37,6 +37,17 @@
 
 OpenClawd is a comprehensive open-source monorepo for building, deploying, and operating AI agents on Solana. It combines trading engines, MCP servers, Telegram bots, Chrome extensions, payment infrastructure, ClawdHub skills marketplace, and cloud deployment into a unified agentic runtime.
 
+> 👉 **See [`STACK.md`](STACK.md) for the unified stack map** — how all 33 projects connect through one router, one settlement layer, one environment contract.
+
+### 🆕 Latest Additions
+
+| Model | ID | Context | Role |
+|-------|-----|---------|------|
+| **Grok 4.20 Beta** | `xai/grok-4.20-beta` | 256K | New default for `REASONING` tier — Solana-aware, agentic, vision |
+| **Kimi K2.6** | `moonshot/kimi-k2.6` | 320K | Long-context agentic tool-use + code/audit workflows |
+
+Both are live in [`clawdrouter`](clawdrouter/src/models/registry.ts), wired through the OpenRouter upstream, included in ClawdHub Godmode, and set as the default model for NemoClawd.
+
 ### Key Components
 
 | Component | Description |
