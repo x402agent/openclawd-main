@@ -1,6 +1,6 @@
 # OpenClawd
 
-> **The Solana AI Agent Ecosystem** — Open-source monorepo for building, deploying, and operating AI agents on Solana with 50 production agents, 100 skills, trading engines, MCP servers, payment infrastructure, and a ClawdHub marketplace.
+> **The Complete Solana AI Agent Ecosystem** — Open-source monorepo for building, deploying, and operating AI agents on Solana with 50 production agents, 100 skills, trading engines, MCP servers, x402 payment infrastructure, and ClawdHub marketplace.
 
 <p align="center">
   <img src="https://img.shields.io/badge/Solana-Ethereum-brightgreen?style=for-the-badge" alt="Solana">
@@ -9,12 +9,14 @@
   <img src="https://img.shields.io/badge/MCP-Protocol-9B59B6?style=for-the-badge" alt="MCP">
   <img src="https://img.shields.io/badge/x402-Payments-F39C12?style=for-the-badge" alt="x402">
   <img src="https://img.shields.io/badge/Skills-100-brightgreen?style=for-the-badge" alt="Skills">
-  <img src="https://img.shields.io/badge/ClawdHub-Marketplace-E11D24?style=for-the-badge" alt="ClawdHub">
+  <img src="https://img.shields.io/badge/Agents-50-4CAF50?style=for-the-badge" alt="Agents">
 </p>
 
 <p align="center">
   <strong>$CLAWD Token:</strong> <a href="https://pump.fun/8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump">8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump</a>
 </p>
+
+---
 
 ## 🌐 Quick Links
 
@@ -25,17 +27,53 @@
 | **Skills Marketplace** | [solanaclawd.com/marketplace](https://solanaclawd.com/marketplace) |
 | **API** | [solanaclawd.com/api](https://solanaclawd.com/api) |
 | **x402 Gateway** | [solanaclawd.com/x402](https://solanaclawd.com/x402) |
+| **IPFS Gateway** | [ipfs.solanaclawd.com](https://ipfs.solanaclawd.com) |
 | **Twitter/X** | [x.com/clawddevs](https://x.com/clawddevs) |
 | **Telegram** | [t.me/clawdtoken](https://t.me/clawdtoken) |
-| **IPFS Gateway** | [ipfs.solanaclawd.com](https://ipfs.solanaclawd.com) |
 
 ---
 
-## ✨ What's Inside
+## 📚 What is OpenClawd?
 
-OpenClawd is a comprehensive monorepo for building, deploying, and operating AI agents on Solana. It combines trading engines, MCP servers, Telegram bots, Chrome extensions, payment infrastructure, ClawdHub skills marketplace, and cloud deployment into a unified agentic runtime.
+OpenClawd is a comprehensive open-source monorepo for building, deploying, and operating AI agents on Solana. It combines trading engines, MCP servers, Telegram bots, Chrome extensions, payment infrastructure, ClawdHub skills marketplace, and cloud deployment into a unified agentic runtime.
 
-### 🧠 50 Production AI Agents
+### Key Components
+
+| Component | Description |
+|-----------|-------------|
+| **50 AI Agents** | Production-ready agents for trading, DeFi, NFTs, security, and more |
+| **100 Skills** | ClawdHub marketplace with SKILL.md bundles |
+| **OODA Trading Engine** | Observe-Orient-Decide-Act loop with xAI Grok |
+| **x402 Payments** | Multi-protocol payment gateway (x402, MPP, AP2, A2A) |
+| **MCP Servers** | Model Context Protocol for editor integration |
+| **Cloud Clawd** | Browser-based Solana trading terminal |
+
+### Architecture Overview
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                      OpenClawd Ecosystem                     │
+├─────────────────────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐ │
+│  │   Agents    │  │   Skills    │  │      Payments       │ │
+│  │   (50)      │  │   (100)     │  │   (x402, MPP, AP2)  │ │
+│  └─────────────┘  └─────────────┘  └─────────────────────┘ │
+│                                                              │
+│  ┌─────────────────────────────────────────────────────────┐│
+│  │              ClawdHub Marketplace                       ││
+│  │         solanaclawd.com/marketplace                     ││
+│  └─────────────────────────────────────────────────────────┘│
+│                                                              │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐ │
+│  │   MCP       │  │  Cloud      │  │    Solana          │ │
+│  │   Servers   │  │   Clawd     │  │    (OODA Loop)     │ │
+│  └─────────────┘  └─────────────┘  └─────────────────────┘ │
+└─────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 🧠 50 Production AI Agents
 
 | Category | Count | Examples |
 |----------|-------|----------|
@@ -48,7 +86,21 @@ OpenClawd is a comprehensive monorepo for building, deploying, and operating AI 
 | **Governance** | 2 | Proposal analyst, governance guide |
 | **NFT** | 2 | MPL Core launcher, liquidity advisor |
 
-### 🏪 100 Skills in the ClawdHub Marketplace
+### Agent Capabilities
+
+- **OODA Loop** — Observe-Orient-Decide-Act trading framework
+- **31 MCP Tools** — Comprehensive Solana ecosystem integration
+- **xAI Grok** — Powered by xAI for advanced reasoning
+- **On-chain Execution** — Direct Solana blockchain interaction
+- **Privy Wallets** — Secure agentic wallet management
+
+---
+
+## 🏪 ClawdHub — Skills Marketplace
+
+**The central hub for AI agent capabilities** — Browse, publish, and install `SKILL.md` bundles.
+
+### 100 Skills Catalog
 
 | Category | Count | Examples |
 |----------|-------|----------|
@@ -61,39 +113,6 @@ OpenClawd is a comprehensive monorepo for building, deploying, and operating AI 
 | **DevOps** | 5 | gateway-node-ops, e2b, tmux |
 | **Communication** | 8 | discord, slack, himalaya, wacli, imsg |
 | **System/IoT** | 7 | eightctl, openhue, sonoscli, healthcheck |
-
----
-
-## 🚀 Quick Start
-
-```bash
-# Clone the monorepo
-git clone https://github.com/x402agent/openclawd.git
-cd openclawd
-
-# Install agents
-cd agents && npm install
-
-# Start the OODA trading engine
-cd ../solana-clawd
-make install
-clawd daemon
-clawd ooda --sim   # Simulated trading mode
-
-# Install skills via ClawdHub
-npx clawdhub install pumpfun-trading
-npx clawdhub install solana-clawd
-npx clawdhub list
-
-# Or use curl commands
-curl https://solanaclawd.com/api/skills | jq '.'
-```
-
----
-
-## 🏪 ClawdHub — Skills Marketplace
-
-**The central hub for AI agent capabilities** — Browse, publish, and install `SKILL.md` bundles.
 
 ### CLI Commands (npx clawdhub)
 
@@ -166,103 +185,6 @@ curl https://solanaclawd.com/api/marketplace/new | jq '.'
 | **pumpfun-trading** | Buy/sell on bonding curves |
 | **skill-creator** | Create new SKILL.md files |
 
-### Monetization
-
-Skills can be integrated with the ClawdRouter payment system:
-- **Per-call payments** — Pay per skill invocation
-- **Subscriptions** — Monthly/annual access
-- **$CLAWD discounts** — Token holders get 10-50% off
-
----
-
-## 📁 Project Structure (31 Projects)
-
-### 🤖 Core Agent Framework
-
-| Project | Description |
-|---------|-------------|
-| [`solana-clawd/`](solana-clawd/) | **Go + TypeScript** agent framework with OODA trading engine, 31 MCP tools, gagliardetto/solana-go SDK, and xAI Grok integration |
-| [`agents/`](agents/) | **50 production AI agents** with Metaplex integration, REST API, and MCP endpoints |
-| [`clawdrouter/`](clawdrouter/) | **Multi-protocol payment gateway** — x402, MPP, AP2, A2A with Solana settlement and $CLAWD holder discounts |
-
-### 🏪 Skills Hub & Marketplace
-
-| Project | Description |
-|---------|-------------|
-| [`clawdhub/`](clawdhub/) | **ClawdHub** — Skills registry, SOUL.md bundles, vector search, marketplace |
-| [`skills/`](skills/) | **100 bundled SKILL.md** files for AI agent capabilities |
-| [`plugin.delivery/`](plugin.delivery/) | **Plugin delivery system** for skill and agent monetization |
-
-### 🌐 Infrastructure & Deployment
-
-| Project | Description |
-|---------|-------------|
-| [`openclawd-stack/`](openclawd-stack/) | **Production deployment stack** — OpenShell sandboxes, E2B cloud terminals, Privy wallets |
-| [`MCP/`](MCP/) | **Model Context Protocol servers** for editor integration (VS Code, Cursor, Zed) |
-| [`CLI/`](CLI/) | **Command-line tools** — ClawdHub CLI, curl commands, registration, gateway connection |
-| [`workers/`](workers/) | **Cloudflare Workers** — agent-wallet, email-worker, pumpfun-mcp-worker |
-
-### 💳 Payment Infrastructure
-
-| Project | Description |
-|---------|-------------|
-| [`x402-openrouter-main/`](x402-openrouter-main/) | **x402 protocol** native implementation for Solana |
-
-### 🖥️ User Interfaces
-
-| Project | Description |
-|---------|-------------|
-| [`tailclawd/`](tailclawd/) | **Web Claude Code** — browser-based terminal via Tailscale with SSE streaming |
-| [`chrome-extension/`](chrome-extension/) | **Browser extension** — clawd-agent, page-agent, page-controller |
-| [`beepboop/`](beepboop/) | **macOS menu bar** — lobster claw companion with voice, vision, claw pointing |
-| [`WatchApp/`](WatchApp/) | **watchOS app** — wallet state monitoring |
-
-### 📱 Communication & Bots
-
-| Project | Description |
-|---------|-------------|
-| [`telegram/`](telegram/) | **Telegram bots** — agent integrations |
-| [`x-bot/`](x-bot/) | **Twitter/X bot** — agent automation |
-| [`bots/`](bots/) | **Trading bots** — Pump.fun sniper, mayhem trading AI |
-
-### 🎮 Applications
-
-| Project | Description |
-|---------|-------------|
-| [`chess/`](chess/) | **SolanaOS Chess hub** — live play, wallet-signed matches |
-
-### 🛠️ Developer Tools
-
-| Project | Description |
-|---------|-------------|
-| [`src/`](src/) | **Core engine** — TypeScript engine, commands, tools, memory, bridge, gateway |
-| [`packages/`](packages/) | **Shared npm packages** |
-| [`API/`](API/) | **API definitions** — BDS public, Pump.fun docs |
-| [`websocket-server/`](websocket-server/) | **WebSocket server** for real-time communication |
-
-### 🗄️ Data & Services
-
-| Project | Description |
-|---------|-------------|
-| [`services/`](services/) | **Backend services** — gateway, bridge, monitoring |
-| [`llm-wiki-tang/`](llm-wiki-tang/) | **LLM knowledge base** with vector embeddings |
-| [`clawd-cloud-os/`](clawd-cloud-os/) | **Cloud OS** integration |
-
-### 📦 Installers & Examples
-
-| Project | Description |
-|---------|-------------|
-| [`npm/`](npm/) | **npm installers** — ClawdBot CLI, SolanaOS CLI |
-| [`examples/`](examples/) | **Example code** — blockchain demos, OODA loop, x402 |
-| [`moltbook-agent/`](moltbook-agent/) | **Moltbook agent** — educational platform integration |
-
-### 🗂️ Registry & Docs
-
-| Project | Description |
-|---------|-------------|
-| [`acp_registry/`](acp_registry/) | **Project registry** — JSON registry of all projects |
-| [`articles/`](articles/) | **Documentation** — 42 articles on architecture, payments, deployment, AI, SEO |
-
 ---
 
 ## 💰 $CLAWD Token & Revenue Model
@@ -280,7 +202,7 @@ The $CLAWD token powers the OpenClawd ecosystem:
 
 ### Holder Discounts
 
-Every agent call checks the caller's $CLAWD balance. Holders get tiered discounts:
+Every agent call checks the caller's $CLAWD balance:
 
 | Balance | Discount |
 |---------|----------|
@@ -289,8 +211,6 @@ Every agent call checks the caller's $CLAWD balance. Holders get tiered discount
 | ≥ 10M $CLAWD | 50% |
 
 ### Revenue Split
-
-When agents earn from calls:
 
 | Recipient | Share | Mechanism |
 |-----------|-------|-----------|
@@ -371,6 +291,13 @@ User clicks "Launch Terminal"
    User gets full terminal in browser
 ```
 
+### Use Cases
+
+- **SaaS Trading Platforms** — White-label to your users
+- **Education** — Safe learning environments
+- **API Key Management** — Secure key handling
+- **Automated Trading** — Run bots 24/7
+
 ### Components
 
 - **solana-clawd** — OODA loop trading engine
@@ -387,7 +314,128 @@ User clicks "Launch Terminal"
 
 ---
 
-## 📖 Documentation
+## 🚀 Quick Start
+
+```bash
+# Clone the monorepo
+git clone https://github.com/x402agent/openclawd.git
+cd openclawd
+
+# Install agents
+cd agents && npm install
+
+# Start the OODA trading engine
+cd ../solana-clawd
+make install
+clawd daemon
+clawd ooda --sim   # Simulated trading mode
+
+# Install skills via ClawdHub
+npx clawdhub install pumpfun-trading
+npx clawdhub install solana-clawd
+npx clawdhub list
+```
+
+---
+
+## 📁 Project Structure (33 Projects)
+
+### 🤖 Core Agent Framework
+
+| Project | Description |
+|---------|-------------|
+| [`solana-clawd/`](solana-clawd/) | **Go + TypeScript** agent framework with OODA trading engine, 31 MCP tools, and xAI Grok integration |
+| [`agents/`](agents/) | **50 production AI agents** with Metaplex, REST API, and MCP endpoints |
+| [`clawdrouter/`](clawdrouter/) | **Multi-protocol payment gateway** — x402, MPP, AP2, A2A with Solana settlement |
+
+### 🏪 Skills Hub & Marketplace
+
+| Project | Description |
+|---------|-------------|
+| [`clawdhub/`](clawdhub/) | **ClawdHub** — Skills registry, SOUL.md bundles, vector search, marketplace |
+| [`skills/`](skills/) | **100 bundled SKILL.md** files for AI agent capabilities |
+| [`plugin.delivery/`](plugin.delivery/) | **Plugin delivery system** for skill and agent monetization |
+
+### 💳 Payment Infrastructure
+
+| Project | Description |
+|---------|-------------|
+| [`x402-openrouter-main/`](x402-openrouter-main/) | **x402 protocol** native implementation for Solana |
+| [`clawdrouter/`](clawdrouter/) | **ClawdRouter** — Multi-protocol payment gateway |
+
+### 🌐 Infrastructure & Deployment
+
+| Project | Description |
+|---------|-------------|
+| [`openclawd-stack/`](openclawd-stack/) | **Production deployment stack** — OpenShell, E2B, Privy wallets |
+| [`MCP/`](MCP/) | **Model Context Protocol servers** for editor integration |
+| [`CLI/`](CLI/) | **Command-line tools** — ClawdHub CLI, curl commands, registration |
+| [`workers/`](workers/) | **Cloudflare Workers** — agent-wallet, email-worker, pumpfun-mcp-worker |
+| [`websocket-server/`](websocket-server/) | **WebSocket server** for real-time communication |
+
+### 🖥️ User Interfaces
+
+| Project | Description |
+|---------|-------------|
+| [`tailclawd/`](tailclawd/) | **Web Claude Code** — browser-based terminal via Tailscale |
+| [`chrome-extension/`](chrome-extension/) | **Browser extension** — clawd-agent, page-agent, page-controller |
+| [`beepboop/`](beepboop/) | **macOS menu bar** — lobster claw companion with voice, vision |
+| [`WatchApp/`](WatchApp/) | **watchOS app** — wallet state monitoring |
+
+### 📱 Communication & Bots
+
+| Project | Description |
+|---------|-------------|
+| [`telegram/`](telegram/) | **Telegram bots** — agent integrations |
+| [`x-bot/`](x-bot/) | **Twitter/X bot** — agent automation |
+| [`bots/`](bots/) | **Trading bots** — Pump.fun sniper, mayhem trading AI |
+
+### 🎮 Applications
+
+| Project | Description |
+|---------|-------------|
+| [`chess/`](chess/) | **SolanaOS Chess hub** — live play, wallet-signed matches |
+
+### 🛠️ Developer Tools
+
+| Project | Description |
+|---------|-------------|
+| [`src/`](src/) | **Core engine** — TypeScript engine, commands, tools, memory, bridge |
+| [`packages/`](packages/) | **Shared npm packages** |
+| [`API/`](API/) | **API definitions** — BDS public, Pump.fun docs |
+| [`services/`](services/) | **Backend services** — gateway, bridge, monitoring |
+
+### 🗄️ Data & AI
+
+| Project | Description |
+|---------|-------------|
+| [`llm-wiki-tang/`](llm-wiki-tang/) | **LLM knowledge base** with vector embeddings |
+| [`clawd-cloud-os/`](clawd-cloud-os/) | **Cloud OS** integration |
+
+### 📦 Installers & Examples
+
+| Project | Description |
+|---------|-------------|
+| [`npm/`](npm/) | **npm installers** — ClawdBot CLI, SolanaOS CLI |
+| [`examples/`](examples/) | **Example code** — blockchain demos, OODA loop, x402 |
+| [`moltbook-agent/`](moltbook-agent/) | **Moltbook agent** — educational platform |
+
+### 🗂️ Registry & Docs
+
+| Project | Description |
+|---------|-------------|
+| [`acp_registry/`](acp_registry/) | **Project registry** — JSON registry of all projects |
+| [`articles/`](articles/) | **Documentation** — 42 articles on architecture, payments, AI, SEO |
+
+### Blockchain SDKs
+
+| Project | Description |
+|---------|-------------|
+| [`solana-go-main/`](solana-go-main/) | **Go SDK** for Solana blockchain operations |
+
+---
+
+## 📖 Documentation (42 Articles)
 
 ### Core Documentation
 
@@ -398,22 +446,83 @@ User clicks "Launch Terminal"
 | [`clawdrouter/README.md`](clawdrouter/README.md) | Payment gateway with x402, MPP, AP2, A2A |
 | [`tailclawd/README.md`](tailclawd/README.md) | Web-based Claude Code interface |
 | [`clawdhub/README.md`](clawdhub/README.md) | ClawdHub skills marketplace |
-| [`skills/README.md`](skills/README.md) | 100 skills catalog and usage guide |
+| [`skills/README.md`](skills/README.md) | 100 skills catalog and usage |
 | [`CLI/README.md`](CLI/README.md) | CLI commands and curl API |
 
-### Articles (42 Documents)
+### Architecture Articles
 
-Located in [`articles/`](articles/):
+| Document | Description |
+|----------|-------------|
+| `articles/CLAWD_ROUTER.md` | ClawdRouter architecture and protocol overview |
+| `articles/SOLANA_CLAWD_SHELL.md` | Full stack integration guide |
+| `articles/architecture.md` | System architecture documentation |
+| `articles/agent-bus.md` | Agent communication bus |
 
-| Category | Articles |
-|----------|----------|
-| **Architecture** | CLAWD_ROUTER, SOLANA_CLAWD_SHELL, architecture |
-| **Deployment** | CLAWD_ROUTER_BUILD, CLAWD_ROUTER_TUNNEL, migrate-from-openclaw |
-| **Payments** | ARTICLE_PAYMENTS, monetize, x402-proxy-worker, mpp-compatibility |
-| **AI/Agents** | ARTICLE, ARTICLE_LOCAL_AI, grok-prompting, pi-chat-streaming |
-| **Development** | WORKFLOW, AGENT_GUIDE, CLI_PAIR_FLOW, TROUBLESHOOTING |
-| **Marketing** | ARTICLE_MARKET, SEO_STRATEGY, KEYWORDS |
-| **Monetization** | monetize-agents-openclawd, monetization |
+### Deployment Articles
+
+| Document | Description |
+|----------|-------------|
+| `articles/CLAWD_ROUTER_BUILD.md` | Building and deploying ClawdRouter |
+| `articles/CLAWD_ROUTER_TUNNEL.md` | Tunnel configuration guide |
+| `articles/migrate-from-openclaw.md` | Migration guide from OpenClaw |
+| `articles/clawdrouter-cloud.md` | Cloud deployment guide |
+
+### Payment & Revenue Articles
+
+| Document | Description |
+|----------|-------------|
+| `articles/ARTICLE_PAYMENTS.md` | Payment infrastructure overview |
+| `articles/monetize.md` | Monetization strategies |
+| `articles/monetize-agents-openclawd.md` | Agent monetization guide |
+| `articles/x402-proxy-worker.md` | x402 proxy implementation |
+| `articles/mpp-compatibility.md` | MPP protocol compatibility |
+| `articles/r2-vault.md` | R2 vault integration |
+
+### AI & Agents Articles
+
+| Document | Description |
+|----------|-------------|
+| `articles/ARTICLE.md` | Core AI agent documentation |
+| `articles/ARTICLE_LOCAL_AI.md` | Local AI integration |
+| `articles/grok-prompting.md` | xAI Grok prompting techniques |
+| `articles/pi-chat-streaming.md` | Chat streaming implementation |
+| `articles/OPENCLAWDarticle.md` | Cloud Clawd browser terminal |
+
+### Development Articles
+
+| Document | Description |
+|----------|-------------|
+| `articles/WORKFLOW.md` | Development workflow |
+| `articles/AGENT_GUIDE.md` | Agent creation guide |
+| `articles/CLI_PAIR_FLOW.md` | CLI pairing flow |
+| `articles/TROUBLESHOOTING.md` | Common issues and solutions |
+| `articles/configuration.md` | Configuration guide |
+
+### Models & Prompts Articles
+
+| Document | Description |
+|----------|-------------|
+| `articles/MODELS.md` | AI model selection guide |
+| `articles/PROMPTS.md` | Prompt engineering guide |
+| `articles/openrouter-attribution.md` | OpenRouter attribution |
+
+### SEO & Marketing Articles
+
+| Document | Description |
+|----------|-------------|
+| `articles/ARTICLE_MARKET.md` | Marketing strategy |
+| `articles/SEO_STRATEGY.md` | SEO optimization guide |
+| `articles/KEYWORDS.md` | Keyword targeting |
+
+### Advanced Topics
+
+| Document | Description |
+|----------|-------------|
+| `articles/I18N_WORKFLOW.md` | Internationalization workflow |
+| `articles/permissions-sandboxing.md` | Security and permissions |
+| `articles/ipfs-setup.md` | IPFS setup guide |
+| `articles/firecrawl.md` | Firecrawl integration |
+| `articles/market.md` | Market analysis |
 
 ---
 
@@ -424,6 +533,43 @@ Located in [`articles/`](articles/):
 - **Deny-first signing** — every agent instructs deny-first behaviour on irreversible actions
 - **Payment-gated agents** are transparent — wallet connect → on-chain verify → deliver
 - **E2B sandbox isolation** — user secrets never touch your servers
+- **Permissions & Sandboxing** — granular access controls
+
+---
+
+## 🔧 Configuration
+
+### Environment Variables
+
+```bash
+# Core
+CLAWD_API="https://solanaclawd.com/api"
+MARKETPLACE="https://solanaclawd.com/marketplace"
+GATEWAY="https://solanaclawd.com/x402"
+
+# Solana
+HELIUS_API_KEY=your_key
+HELIUS_RPC_URL=https://mainnet.helius-rpc.com
+SOLANA_PRIVATE_KEY=your_key
+
+# AI
+XAI_API_KEY=your_key
+OPENROUTER_API_KEY=your_key
+
+# Optional
+TAILSCALE_AUTH_KEY=your_key
+E2B_API_KEY=your_key
+```
+
+---
+
+## 🤝 Contributing
+
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for:
+- Development setup
+- Code standards
+- Pull request process
+- Skill creation guidelines
 
 ---
 
