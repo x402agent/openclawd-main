@@ -19,33 +19,68 @@ One router · one settlement layer · one environment contract · 33 projects, 5
 
 ---
 
-## ⚡ Install in one line
+## ⚡ Install in one line — 🦞 cyberpunk lobster edition
 
 ```bash
 curl -fsSL https://solanaclawd-install.x402.workers.dev | bash
 ```
 
-This is live right now on Cloudflare Workers — fully self-contained, no repo access required. The same worker is also wired to `install.solanaclawd.com` and `solanaclawd.com/install.sh` as a Workers Custom Domain + Routes; those short URLs activate the moment Cloudflare Bot Fight Mode is disabled for the zone (Dashboard → Security → Bots → Off) and the Vercel apex DNS is flipped to orange-cloud:
+```
+          ╔═══════════════════════════════════════════╗
+          ║     ▄▄▄▄          OPEN       ▄▄▄▄         ║
+          ║    ▐█▄█▌         CLAWD      ▐█▄█▌         ║
+          ║     ╲██╱  ┏━━━━━━━━━━━━━┓   ╲██╱          ║
+          ║      ██   ┃ 🦞 lobster.os┃    ██          ║
+          ║     ▕██▏  ┃ chain: solana┃   ▕██▏         ║
+          ║      ▀▀   ┗━━━━━━━━━━━━━┛    ▀▀           ║
+          ║    ▄▄██████▄▄              ▄▄██████▄▄     ║
+          ║   ▜█████████▛  ┌─┐┌─┐┌┐┌   ▜█████████▛    ║
+          ║    ▀▀▀██▀▀▀   │  ├─┘││││    ▀▀▀██▀▀▀      ║
+          ║                └─┘└─┘┘└┘                  ║
+          ║  [ one router · one chain · zero fluff ]  ║
+          ╚═══════════════════════════════════════════╝
+```
+
+The installer is live on Cloudflare Workers — self-contained, no repo access required, rendered in full 256-color ANSI with custom 🦞 unicode animations. The same worker is wired to `install.solanaclawd.com` and `solanaclawd.com/install.sh` (Workers Custom Domain + Routes); those short URLs activate the moment Cloudflare Bot Fight Mode is disabled for the zone (Dashboard → Security → Bots → **Off**) and the Vercel apex DNS flips to orange-cloud:
 
 ```bash
 curl -fsSL https://install.solanaclawd.com | bash       # vanity URL (after BFM off)
 curl -fsSL https://solanaclawd.com/install.sh | bash    # apex route (after apex proxied)
 ```
 
-The installer worker lives at [`workers/install-worker/`](./workers/install-worker) — a single Cloudflare Worker that embeds [`install.sh`](./install.sh) at deploy-time via [`sync.mjs`](./workers/install-worker/sync.mjs) so it works even while this repo is private. Deploy your own fork with:
+### 🎬 What you'll see
+
+The installer ships with **4 zero-dependency unicode spinner animations** baked into pure bash (3.2-compatible). Each install step runs with a themed spinner that resolves to `◉ ok` or `✖ fail`:
+
+| Spinner | Preview | When it fires | Color |
+|---|---|---|---|
+| **`claw`** | `(￣^￣)━╋━╋━` → `(￣▽￣)━╋━╋` | `npm i -g solana-clawd` | lobster red-orange |
+| **`scuttle`** | `🦞▁▁▁▁▁▁▁▁` → `▁▁▁▁▁🦞▁▁▁` → `▁▁▁▁▁▁▁▁🦞` | scaffolding `~/.openclawd/` | lobster red-orange |
+| **`matrix`** | `░▒▓█▓▒░` → `▒▓█▓▒░▒` → `▓█▓▒░▒▓` | writing `.env` | matrix green |
+| **`heartbeat`** | `◦·◦·◦` → `●●●●●` → `··●●●` | preflight checks | neon magenta |
+
+Non-TTY contexts (CI, piped stdout) automatically downgrade to plain log lines — no broken output in logs.
+
+### What the installer does
+
+1. **Preflight (`heartbeat`)** — verifies `curl`, `node ≥ 18`, `npm`, `git`.
+2. **CLI install (`claw`)** — installs the public **`solana-clawd`** CLI from npm globally (retries with `sudo` on permission error).
+3. **Scaffold (`scuttle`)** — creates `~/.openclawd/`.
+4. **Env write (`matrix`)** — generates `~/.openclawd/.env` with `SOLANA_CLAWD_BASE_URL`, `CLAWD_MINT`, and placeholders for `OPENROUTER_API_KEY`, `XAI_API_KEY`, `MOONSHOT_API_KEY`, `HELIUS_API_KEY`, `E2B_API_KEY`, `PRIVY_APP_*`, `TELEGRAM_BOT_TOKEN`, etc. — never overwrites an existing file.
+5. Prints the pair / mint / status next steps inside a violet `▒▓█ openclawd online █▓▒` header.
+
+### Under the hood
+
+- Installer source: [`install.sh`](./install.sh)
+- Worker that serves it: [`workers/install-worker/`](./workers/install-worker) — a single Cloudflare Worker that embeds `install.sh` at deploy-time via [`sync.mjs`](./workers/install-worker/sync.mjs) so it keeps working even while this repo is private.
+
+Deploy your own fork:
 
 ```bash
 cd workers/install-worker && npm install && npm run deploy
 ```
 
-The installer:
-
-1. Verifies `node ≥ 18`, `git`, `npm`.
-2. Installs the **`solana-clawd`** CLI globally from npm.
-3. Clones this monorepo to `~/.openclawd`.
-4. Scaffolds `.env` from [`.env.example`](./.env.example) with `SOLANA_CLAWD_BASE_URL` pre-filled.
-
-Prefer to manage it yourself? Install just the CLI:
+### Prefer the CLI only?
 
 ```bash
 npm i -g solana-clawd
@@ -54,7 +89,7 @@ solana-clawd mint            # mint your agent NFT (Metaplex Core)
 solana-clawd status          # show current pairing + wallet
 ```
 
-See [`install.sh`](./install.sh) for the exact steps the curl script runs.
+> 🦞 **welcome to the claw** 🦞
 
 ---
 
