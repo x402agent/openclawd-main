@@ -8,7 +8,3 @@ routes = [
   { pattern = "solanaclawd.com/install.sh", zone_name = "solanaclawd.com" },
   { pattern = "solanaclawd.com/install",    zone_name = "solanaclawd.com" },
 ]
-
-[vars]
-# Raw-GitHub URL the worker proxies to. Override per env if you fork.
-INSTALL_RAW_URL = "https://raw.githubusercontent.com/x402agent/openclawd/main/install.sh"

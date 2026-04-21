@@ -1,9 +1,12 @@
 {
   "name": "solanaclawd-install-worker",
   "private": true,
-  "version": "1.0.0",
-  "description": "Cloudflare Worker that serves https://solanaclawd.com/install.sh from the openclawd repo.",
+  "version": "1.1.0",
+  "description": "Cloudflare Worker that serves https://solanaclawd.com/install.sh — the openclawd one-shot installer.",
   "scripts": {
+    "sync": "node sync.mjs",
+    "predev": "npm run sync",
+    "predeploy": "npm run sync",
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
     "tail": "wrangler tail"
