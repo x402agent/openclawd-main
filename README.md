@@ -25,10 +25,11 @@ One router · one settlement layer · one environment contract · 33 projects, 5
 curl -fsSL https://solanaclawd-install.x402.workers.dev | bash
 ```
 
-This is live right now on Cloudflare Workers — fully self-contained, no repo access required. Once `solanaclawd.com` DNS is moved behind Cloudflare (it currently resolves to Vercel), the same worker will serve it at the short URL:
+This is live right now on Cloudflare Workers — fully self-contained, no repo access required. The same worker is also wired to `install.solanaclawd.com` and `solanaclawd.com/install.sh` as a Workers Custom Domain + Routes; those short URLs activate the moment Cloudflare Bot Fight Mode is disabled for the zone (Dashboard → Security → Bots → Off) and the Vercel apex DNS is flipped to orange-cloud:
 
 ```bash
-curl -fsSL https://solanaclawd.com/install.sh | bash
+curl -fsSL https://install.solanaclawd.com | bash       # vanity URL (after BFM off)
+curl -fsSL https://solanaclawd.com/install.sh | bash    # apex route (after apex proxied)
 ```
 
 The installer worker lives at [`workers/install-worker/`](./workers/install-worker) — a single Cloudflare Worker that embeds [`install.sh`](./install.sh) at deploy-time via [`sync.mjs`](./workers/install-worker/sync.mjs) so it works even while this repo is private. Deploy your own fork with:
