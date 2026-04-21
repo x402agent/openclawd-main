@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ES2022",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2022"],
+    "types": ["@cloudflare/workers-types"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": false,
+    "noEmit": true,
+    "isolatedModules": true
+  },
+  "include": [
+    "src/worker.ts",
+    "src/analytics/**/*.ts",
+    "src/auth/**/*.ts",
+    "src/stats/**/*.ts",
+    "src/router/**/*.ts",
+    "src/models/**/*.ts",
+    "src/types.ts"
+  ],
+  "exclude": ["node_modules", "dist", "tests"]
+}

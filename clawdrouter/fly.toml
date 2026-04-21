@@ -1,0 +1,34 @@
+# fly.toml app configuration file generated for clawdrouter-winter-violet-4538 on 2026-04-20T22:53:01-04:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'clawdrouter-winter-violet-4538'
+primary_region = 'ewr'
+
+[build]
+
+[env]
+  CLAWDROUTER_HOSTED = 'true'
+  CLAWDROUTER_NETWORK = 'solana-mainnet'
+  CLAWDROUTER_PORT = '8402'
+  CLAWDROUTER_PROFILE = 'auto'
+  NODE_ENV = 'production'
+
+[http_service]
+  internal_port = 8402
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ['app']
+
+  [http_service.concurrency]
+    type = 'requests'
+    hard_limit = 500
+    soft_limit = 400
+
+[[vm]]
+  memory = '512mb'
+  cpus = 1
+  memory_mb = 512
