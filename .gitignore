@@ -19,13 +19,26 @@ out/
 
 # Environment (NEVER commit these with real keys!)
 .env
-.env.local
-.env.development
-.env.production
-.env.*.local
-# Explicit env files in subdirectories
+.env.*
+!.env.example
+!.env.*.example
+!.env.sample
+# Explicit env files in subdirectories (defense in depth)
+**/.env
+**/.env.local
+**/.env.production
+**/.env.development
 openclawd-stack/bridge/.env
 openclawd-stack/template/.env
+openclawd-stack/orchestrator/.env
+websocket-server/.env
+x-bot/.env
+llm-wiki-tang/.env
+llm-wiki-tang/web/.env.local
+
+# NPM tokens / auth
+.npmrc
+!scripts/.npmrc.example
 
 # Logs
 *.log
