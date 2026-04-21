@@ -1,0 +1,279 @@
+{
+  "$schema": "https://openclawd.io/schemas/registry/v1.json",
+  "name": "OpenClawd",
+  "display_name": "OpenClawd Solana AI Agent Ecosystem",
+  "description": "Open-source monorepo for building, deploying, and operating AI agents on Solana",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": {
+    "name": "8BIT Labs",
+    "github": "x402agent",
+    "twitter": "@clawddevs"
+  },
+  "website": "https://openclawd.io",
+  "github": "https://github.com/x402agent/openclawd",
+  "projects": [
+    {
+      "id": "agents",
+      "name": "Solana Clawd Agents",
+      "description": "50 production-ready AI agents for the Solana ecosystem — trading, DeFi, NFTs, security, launches, governance, dev-tools, education",
+      "category": "ai-agents",
+      "language": "typescript",
+      "license": "MIT",
+      "status": "active",
+      "url": "agents/README.md",
+      "keywords": ["solana", "ai-agents", "trading", "defi", "nft", "mcp"],
+      "stats": {
+        "total_agents": 50,
+        "one_shots": 39,
+        "featured": 19,
+        "categories": 8
+      }
+    },
+    {
+      "id": "solana-clawd",
+      "name": "solana-clawd",
+      "description": "Open-source Solana AI agent framework powered by xAI Grok — Go + TypeScript with OODA trading engine and 31 MCP tools",
+      "category": "framework",
+      "language": "go-typescript",
+      "license": "MIT",
+      "status": "active",
+      "url": "solana-clawd/README.md",
+      "keywords": ["solana", "go", "mcp", "trading", "xai"],
+      "features": ["OODA loop", "31 MCP tools", "Go runtime", "Privy wallets"]
+    },
+    {
+      "id": "tailclawd",
+      "name": "TailClawd",
+      "description": "Clawd Code from any browser — Tailscale-aware web interface with streaming, sessions, and cost tracking",
+      "category": "infrastructure",
+      "language": "typescript",
+      "license": "MIT",
+      "status": "active",
+      "url": "tailclawd/README.md",
+      "keywords": ["web", "tailscale", "claude-code", "browser"],
+      "features": ["Web UI", "SSE streaming", "Tailscale", "QR code access"]
+    },
+    {
+      "id": "clawdhub",
+      "name": "NanoHub / ClawdHub",
+      "description": "Registry and web hub for skills + soul packs — browse, publish, version, search, and install SKILL.md and SOUL.md bundles",
+      "category": "registry",
+      "language": "typescript",
+      "license": "MIT",
+      "status": "active",
+      "url": "clawdhub/README.md",
+      "keywords": ["skills", "registry", "convex", "tanstack"],
+      "stack": ["TanStack Start", "Convex", "Together AI embeddings"]
+    },
+    {
+      "id": "skills",
+      "name": "SolanaOS Skills",
+      "description": "97 bundled SKILL.md files for AI agent capabilities — trading, browsing, canvas, pump.fun, and more",
+      "category": "ai-agents",
+      "language": "markdown",
+      "license": "MIT",
+      "status": "active",
+      "url": "skills/README.md",
+      "keywords": ["skills", "solana", "trading", "browsing"],
+      "stats": {
+        "total_skills": 97,
+        "categories": ["trading", "ai", "devops", "media", "solana"]
+      }
+    },
+    {
+      "id": "MCP",
+      "name": "Model Context Protocol Servers",
+      "description": "MCP server implementations for editor integration and agent communication",
+      "category": "infrastructure",
+      "language": "typescript",
+      "license": "MIT",
+      "status": "active",
+      "url": "MCP/README.md",
+      "keywords": ["mcp", "protocol", "editor-integration"]
+    },
+    {
+      "id": "CLI",
+      "name": "OpenClawd CLI",
+      "description": "Command-line tools for the OpenClawd ecosystem",
+      "category": "tooling",
+      "language": "typescript",
+      "license": "MIT",
+      "status": "active",
+      "url": "CLI/README.md",
+      "keywords": ["cli", "terminal", "tools"]
+    },
+    {
+      "id": "src",
+      "name": "OpenClawd Engine",
+      "description": "Core TypeScript engine for AI agent orchestration — commands, tools, memory, bridge, gateway, and more",
+      "category": "framework",
+      "language": "typescript",
+      "license": "MIT",
+      "status": "active",
+      "url": "src/README.md",
+      "keywords": ["engine", "orchestration", "core"]
+    },
+    {
+      "id": "chrome-extension",
+      "name": "OpenClawd Chrome Extension",
+      "description": "Browser extension for AI agent integration — clawd-agent, page-agent, page-controller, and llms",
+      "category": "infrastructure",
+      "language": "typescript",
+      "license": "MIT",
+      "status": "active",
+      "url": "chrome-extension/README.md",
+      "keywords": ["chrome", "extension", "browser", "ai"]
+    },
+    {
+      "id": "openclawd-stack",
+      "name": "OpenClawd Stack",
+      "description": "Integrated Solana AI agent runtime — OpenShell sandboxes, nemoClawd, agentic wallets, and E2B deployment",
+      "category": "infrastructure",
+      "language": "typescript",
+      "license": "MIT",
+      "status": "active",
+      "url": "openclawd-stack/README.md",
+      "keywords": ["stack", "deployment", "e2b", "openshell"],
+      "components": ["OpenShell", "nemoClawd", "Privy", "E2B"]
+    },
+    {
+      "id": "beepboop",
+      "name": "Beep Boop",
+      "description": "Solana blockchain clawd pointer — lobster claw companion living in macOS menu bar with voice, vision, and claw pointing",
+      "category": "application",
+      "language": "swift",
+      "license": "MIT",
+      "status": "active",
+      "url": "beepboop/README.md",
+      "keywords": ["macos", "menu-bar", "voice", "vision"],
+      "features": ["Push-to-talk", "Screen capture", "ElevenLabs TTS", "Lobster claw overlay"]
+    },
+    {
+      "id": "bots",
+      "name": "Trading Bots",
+      "description": "Automated trading bots — Pump.fun sniper, mayhem trading AI",
+      "category": "trading",
+      "language": "typescript",
+      "license": "MIT",
+      "status": "active",
+      "url": "bots/README.md",
+      "keywords": ["trading", "pump.fun", "sniper", "bot"]
+    },
+    {
+      "id": "telegram",
+      "name": "Telegram Bots",
+      "description": "Telegram bot integrations for AI agents",
+      "category": "infrastructure",
+      "language": "typescript",
+      "license": "MIT",
+      "status": "active",
+      "url": "telegram/README.md",
+      "keywords": ["telegram", "bot", "messaging"]
+    },
+    {
+      "id": "workers",
+      "name": "Cloudflare Workers",
+      "description": "Edge worker implementations — agent-wallet, email-worker, pumpfun-mcp-worker",
+      "category": "infrastructure",
+      "language": "typescript",
+      "license": "MIT",
+      "status": "active",
+      "url": "workers/README.md",
+      "keywords": ["cloudflare", "edge", "workers", "serverless"],
+      "components": ["agent-wallet", "email-worker", "pumpfun-mcp-worker"]
+    },
+    {
+      "id": "x-bot",
+      "name": "Twitter/X Bot",
+      "description": "Twitter/X bot for AI agent integration",
+      "category": "infrastructure",
+      "language": "typescript",
+      "license": "MIT",
+      "status": "active",
+      "url": "x-bot/README.md",
+      "keywords": ["twitter", "x", "bot", "social"]
+    },
+    {
+      "id": "WatchApp",
+      "name": "SolanaOS Watch",
+      "description": "watchOS app for SolanaOS — wallet state monitoring and companion app",
+      "category": "application",
+      "language": "swift",
+      "license": "MIT",
+      "status": "active",
+      "url": "WatchApp/README.md",
+      "keywords": ["watchos", "apple-watch", "solana", "wallet"]
+    },
+    {
+      "id": "acp_registry",
+      "name": "OpenClawd ACP Registry",
+      "description": "This registry — registry file for all OpenClawd projects",
+      "category": "registry",
+      "language": "json",
+      "license": "MIT",
+      "status": "active",
+      "url": "acp_registry/README.md",
+      "keywords": ["registry", "open-source", "solana"]
+    }
+  ],
+  "categories": [
+    {
+      "id": "ai-agents",
+      "name": "AI Agents",
+      "description": "Production-ready AI agents for various tasks"
+    },
+    {
+      "id": "framework",
+      "name": "Framework",
+      "description": "Core frameworks and runtimes"
+    },
+    {
+      "id": "infrastructure",
+      "name": "Infrastructure",
+      "description": "Infrastructure and deployment components"
+    },
+    {
+      "id": "registry",
+      "name": "Registry",
+      "description": "Registry and catalog services"
+    },
+    {
+      "id": "tooling",
+      "name": "Tooling",
+      "description": "CLI tools and utilities"
+    },
+    {
+      "id": "application",
+      "name": "Applications",
+      "description": "End-user applications"
+    },
+    {
+      "id": "trading",
+      "name": "Trading",
+      "description": "Trading bots and engines"
+    }
+  ],
+  "technologies": [
+    "Solana",
+    "TypeScript",
+    "Go",
+    "Swift",
+    "Node.js",
+    "MCP",
+    "Convex",
+    "TanStack",
+    "Tailscale",
+    "xAI Grok",
+    "Helius",
+    "Privy",
+    "Metaplex"
+  ],
+  "links": {
+    "website": "https://openclawd.io",
+    "github": "https://github.com/x402agent/openclawd",
+    "twitter": "https://x.com/clawddevs",
+    "discord": null
+  },
+  "generated_at": "2026-04-21T11:11:00Z"
+}
