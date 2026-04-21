@@ -186,6 +186,23 @@ E2B_API_KEY=
 
 ## 6. Single Quick Start (whole stack)
 
+**One-line install** (clones the repo to `~/.openclawd`, installs the `solana-clawd` CLI, scaffolds `.env`):
+
+```bash
+curl -fsSL https://solanaclawd.com/install.sh | bash
+```
+
+After install, pair + mint:
+
+```bash
+solana-clawd pair <CODE>
+solana-clawd mint
+solana-clawd status
+```
+
+<details>
+<summary>Manual install</summary>
+
 ```bash
 git clone https://github.com/x402agent/openclawd.git
 cd openclawd
@@ -208,7 +225,20 @@ pnpm --filter clawdrouter dev # model router on :8787
 pnpm --filter clawdhub dev    # marketplace on :3000
 ```
 
+</details>
+
 Any surface (Chrome, Telegram, Watch, etc.) points at `http://localhost:8787` (or `https://solanaclawd.com/x402`) and the whole stack is live.
+
+### Publishing the CLI
+
+To cut a new `solana-clawd` release to npm:
+
+```bash
+export NPM_TOKEN=npm_xxxxxxxxxxxxxxxxxxxxxxxx   # never commit
+./scripts/publish.sh
+```
+
+See [`scripts/publish.sh`](scripts/publish.sh) and [`scripts/.npmrc.example`](scripts/.npmrc.example) — the token is expanded at read-time by npm, never written to disk.
 
 ---
 

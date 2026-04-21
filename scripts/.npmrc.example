@@ -1,0 +1,4 @@
+; copy to scripts/.npmrc (gitignored) or export NPM_TOKEN in your shell before publish.
+; npm expands ${NPM_TOKEN} at read time.
+//registry.npmjs.org/:_authToken=${NPM_TOKEN}
+access=public
