@@ -1,0 +1,12 @@
+services:
+  websocket-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - PORT=3099
+      - SOLANA_RPC_URL=${SOLANA_RPC_URL:-https://api.mainnet-beta.solana.com}
+      - SOLANA_WS_URL=${SOLANA_WS_URL:-wss://api.mainnet-beta.solana.com}
+    ports:
+      - "3099:3099"
+    restart: unless-stopped

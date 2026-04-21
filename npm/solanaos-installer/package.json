@@ -1,0 +1,54 @@
+{
+  "name": "@clawd/installer",
+  "version": "3.0.0",
+  "description": "solana-clawd Installer - One command to install the Solana AI agent runtime with ClawdRouter zero-config deployment",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "clawd-cli": "bin/clawd.mjs",
+    "clawd": "bin/clawd.mjs",
+    "solanaos-cli": "bin/clawd.mjs",
+    "solanaos": "bin/clawd.mjs",
+    "nanosolana": "bin/clawd.mjs"
+  },
+  "files": [
+    "bin",
+    "README.md"
+  ],
+  "scripts": {
+    "pack:dry": "sh -c 'mkdir -p \"${NPM_VERIFY_HOME:-/tmp/clawd-npm-home}\" \"${NPM_CONFIG_CACHE:-/tmp/clawd-npm-cache}\" && HOME=\"${NPM_VERIFY_HOME:-/tmp/clawd-npm-home}\" NPM_CONFIG_CACHE=\"${NPM_CONFIG_CACHE:-/tmp/clawd-npm-cache}\" npm pack --dry-run'",
+    "verify": "sh -c 'mkdir -p \"${NPM_VERIFY_HOME:-/tmp/clawd-npm-home}\" \"${NPM_CONFIG_CACHE:-/tmp/clawd-npm-cache}\" && HOME=\"${NPM_VERIFY_HOME:-/tmp/clawd-npm-home}\" NPM_CONFIG_CACHE=\"${NPM_CONFIG_CACHE:-/tmp/clawd-npm-cache}\" npm pack --dry-run'",
+    "publish:public": "npm publish --access public"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "solana",
+    "clawd",
+    "solana-clawd",
+    "solanaos",
+    "nanosolana",
+    "trading",
+    "agent",
+    "mawdbot",
+    "ooda",
+    "privy",
+    "helius",
+    "jupiter",
+    "openclawd",
+    "clawdrouter"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/x402agent/Solana-Os-Go.git",
+    "directory": "npm/solanaos-installer"
+  },
+  "homepage": "https://solanaclawd.com",
+  "bugs": {
+    "url": "https://github.com/x402agent/Solana-Os-Go/issues"
+  }
+}

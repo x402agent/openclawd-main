@@ -1,0 +1,5 @@
+
+# Sensitive .env files
+bridge/.env
+template/.env
+orchestrator/.env

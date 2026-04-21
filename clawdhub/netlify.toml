@@ -1,0 +1,45 @@
+[build]
+  publish = "dist"
+  command = "bun run build:netlify"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+[functions]
+  directory = ".netlify/functions"
+  included_files = [".netlify/functions-internal/**"]
+  node_bundler = "none"
+
+[functions."server"]
+  node_bundler = "none"
+
+# Honcho webhook endpoints — must come before the SSR catch-all
+[[redirects]]
+  from = "/webhook"
+  to = "/.netlify/functions/webhook"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/webhook/*"
+  to = "/.netlify/functions/webhook"
+  status = 200
+  force = true
+
+# Hashed assets are immutable — cache forever
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# HTML / SSR responses must always revalidate so chunk references stay fresh
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Edge functions handle /st/* — must come before the SSR catch-all in _redirects
+[[redirects]]
+  from = "/st/*"
+  to = "/st/:splat"
+  status = 200

@@ -1,0 +1,44 @@
+{
+  "name": "@clawd/cli",
+  "version": "3.0.0",
+  "description": "solana-clawd CLI bootstrapper - The Solana AI Agent Runtime with ClawdRouter API support",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "clawd": "bin/clawd.mjs",
+    "nanosolana": "bin/clawd.mjs",
+    "solanaos": "bin/clawd.mjs"
+  },
+  "files": [
+    "bin",
+    "README.md"
+  ],
+  "scripts": {
+    "pack:dry": "npm pack --dry-run",
+    "publish:public": "npm publish --access public"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "solana",
+    "clawd",
+    "solana-clawd",
+    "trading",
+    "agent",
+    "mawdbot",
+    "ooda",
+    "privy",
+    "jupiter",
+    "helius"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/x402agent/Solana-Os-Go.git",
+    "directory": "npm/clawdbot-installer"
+  },
+  "homepage": "https://solanaclawd.com"
+}

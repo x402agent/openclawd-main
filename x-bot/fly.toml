@@ -1,0 +1,58 @@
+# fly.toml app configuration file generated for clawd-x-bot on 2026-04-20T17:15:55-04:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'clawd-x-bot'
+primary_region = 'ord'
+
+[build]
+  dockerfile = 'Dockerfile'
+
+[env]
+  ART_ENABLED = 'true'
+  AUTO_POST_ENABLED = 'true'
+  AUTO_POST_INTERVAL_MS = '7200000'
+  CLAWD_TICKER = '$CLAWD'
+  FAL_ART_MODEL = 'fal-ai/flux/schnell'
+  FAL_VIDEO_MODEL = 'fal-ai/kling-video/v3/pro/image-to-video'
+  IMAGE_QUALITY = 'medium'
+  IMAGE_SIZE = '1024x1024'
+  IMAGINE_ENABLED = 'true'
+  MAX_REPLIES_PER_POLL = '5'
+  NODE_ENV = 'production'
+  OPENAI_CHAT_MODEL = 'gpt-5'
+  OPENAI_IMAGE_MODEL = 'gpt-image-1.5'
+  POLL_INTERVAL_MS = '900000'
+  PORT = '8080'
+  REPLY_ENABLED = 'true'
+  STATE_FILE = '/app/data/state.json'
+  VIDEO_ENABLED = 'true'
+  XAI_BASE_URL = 'https://api.x.ai/v1'
+  XAI_MODEL = 'grok-4.20-reasoning'
+  X_COMMAND_ENABLED = 'true'
+  X_HANDLE = 'clawddevs'
+
+[[mounts]]
+  source = 'clawd_x_data'
+  destination = '/app/data'
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = 'off'
+  auto_start_machines = true
+  min_machines_running = 1
+
+  [[http_service.checks]]
+    interval = '30s'
+    timeout = '5s'
+    grace_period = '30s'
+    method = 'GET'
+    path = '/health'
+
+[[vm]]
+  memory = '512mb'
+  cpu_kind = 'shared'
+  cpus = 1
+  memory_mb = 512

@@ -1,0 +1,53 @@
+{
+  "name": "@clawd/computer",
+  "version": "2.0.0",
+  "description": "solana-clawd Computer - The Solana-native AI agent runtime. Built with Go, TypeScript, and ClawdRouter API for zero-config deployment.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "clawd": "bin/clawd.mjs",
+    "clawd-computer": "bin/clawd.mjs",
+    "solanaos": "bin/clawd.mjs",
+    "solanaos-cli": "bin/clawd.mjs",
+    "nanosolana": "bin/clawd.mjs"
+  },
+  "files": [
+    "bin",
+    "README.md"
+  ],
+  "scripts": {
+    "pack:dry": "sh -c 'mkdir -p \"${NPM_VERIFY_HOME:-/tmp/clawd-npm-home}\" \"${NPM_CONFIG_CACHE:-/tmp/clawd-npm-cache}\" && HOME=\"${NPM_VERIFY_HOME:-/tmp/clawd-npm-home}\" NPM_CONFIG_CACHE=\"${NPM_CONFIG_CACHE:-/tmp/clawd-npm-cache}\" npm pack --dry-run'",
+    "verify": "sh -c 'mkdir -p \"${NPM_VERIFY_HOME:-/tmp/clawd-npm-home}\" \"${NPM_CONFIG_CACHE:-/tmp/clawd-npm-cache}\" && HOME=\"${NPM_VERIFY_HOME:-/tmp/clawd-npm-home}\" NPM_CONFIG_CACHE=\"${NPM_CONFIG_CACHE:-/tmp/clawd-npm-cache}\" npm pack --dry-run'",
+    "publish:public": "npm publish --access public"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "solana",
+    "clawd",
+    "solana-clawd",
+    "solanaos",
+    "nanosolana",
+    "trading",
+    "agent",
+    "mawdbot",
+    "ooda",
+    "privy",
+    "helius",
+    "jupiter",
+    "openclawd"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/x402agent/Solana-Os-Go.git",
+    "directory": "npm/solanaos"
+  },
+  "homepage": "https://solanaclawd.com",
+  "bugs": {
+    "url": "https://github.com/x402agent/Solana-Os-Go/issues"
+  }
+}

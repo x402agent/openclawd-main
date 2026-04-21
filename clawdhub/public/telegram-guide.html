@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SolanaOS Telegram Guide</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0a0f;--surface:#111118;--border:rgba(255,255,255,0.06);--text:#e0e0e0;--dim:rgba(255,255,255,0.4);--green:#14f195;--cyan:#00d4ff;--purple:#8f6aff;--orange:#ff8f3d;--red:#ff4d6a;--font:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--mono:'SF Mono','Fira Code',monospace}
+html{background:var(--bg);color:var(--text);font-family:var(--font);font-size:15px;line-height:1.65;scroll-behavior:smooth}
+body{max-width:780px;margin:0 auto;padding:20px 16px 80px}
+a{color:var(--green);text-decoration:none}
+a:hover{text-decoration:underline}
+h1{font-size:2rem;margin:40px 0 8px;color:#fff}
+h2{font-size:1.3rem;margin:48px 0 12px;color:#fff;border-bottom:1px solid var(--border);padding-bottom:8px}
+h3{font-size:1rem;margin:28px 0 8px;color:var(--cyan)}
+p{margin:8px 0;color:var(--dim)}
+code{font-family:var(--mono);font-size:0.88em;background:rgba(255,255,255,0.05);padding:2px 6px;border-radius:4px;color:var(--green)}
+pre{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 18px;overflow-x:auto;margin:12px 0;font-family:var(--mono);font-size:0.82rem;line-height:1.6;color:var(--text)}
+.badge{display:inline-block;padding:3px 10px;border-radius:6px;font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;border:1px solid}
+.badge-green{color:var(--green);border-color:var(--green)}
+.badge-cyan{color:var(--cyan);border-color:var(--cyan)}
+.badge-purple{color:var(--purple);border-color:var(--purple)}
+.badge-orange{color:var(--orange);border-color:var(--orange)}
+.badge-red{color:var(--red);border-color:var(--red)}
+table{width:100%;border-collapse:collapse;margin:12px 0}
+th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--border);font-size:0.85rem}
+th{color:var(--dim);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em}
+td code{font-size:0.82rem}
+.hero{text-align:center;padding:40px 0 20px}
+.hero-sub{color:var(--dim);font-size:0.92rem;max-width:500px;margin:0 auto}
+.toc{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin:24px 0}
+.toc-title{font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--dim);margin-bottom:8px}
+.toc a{display:block;padding:3px 0;color:var(--text);font-size:0.88rem}
+.toc a:hover{color:var(--green)}
+.section-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 20px;margin:16px 0}
+.cmd-grid{display:grid;grid-template-columns:1fr 2fr;gap:4px 16px;margin:8px 0}
+.cmd-grid code{white-space:nowrap}
+.cmd-grid span{color:var(--dim);font-size:0.85rem}
+@media(max-width:600px){.cmd-grid{grid-template-columns:1fr}h1{font-size:1.5rem}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+<pre style="color:var(--green);font-size:0.45rem;line-height:1.1;opacity:0.5">
+   _____       __                        ____  _____
+  / ___/____  / /___ _____  ____ _     / __ \/ ___/
+  \__ \/ __ \/ / __ `/ __ \/ __ `/    / / / /\__ \
+ ___/ / /_/ / / /_/ / / / / /_/ /    / /_/ /___/ /
+/____/\____/_/\__,_/_/ /_/\__,_/     \____//____/
+</pre>
+<h1>Telegram Command Guide</h1>
+<p class="hero-sub">Every command available in the SolanaOS Telegram bot. Send these to your bot or type naturally — the daemon understands both.</p>
+</div>
+
+<div class="toc">
+<div class="toc-title">Jump to</div>
+<a href="#core">Core &amp; Status</a>
+<a href="#trading">Spot Trading</a>
+<a href="#perps">Perps (Hyperliquid + Aster)</a>
+<a href="#ai">AI &amp; Models</a>
+<a href="#godmode">GODMODE &amp; ULTRAPLINIAN</a>
+<a href="#computer">Computer Control</a>
+<a href="#remote">Remote Control</a>
+<a href="#browser">Browser Automation</a>
+<a href="#memory">Memory (Honcho v3)</a>
+<a href="#scanner">Pump Scanner</a>
+<a href="#media">Media &amp; Vision</a>
+<a href="#mining">Mining</a>
+<a href="#skills">Skills</a>
+<a href="#natural">Natural Language</a>
+<a href="#channels">Channels</a>
+</div>
+
+<h2 id="core">Core &amp; Status</h2>
+<div class="cmd-grid">
+<code>/status</code><span>Runtime status, wallet, RPC, channels, pet</span>
+<code>/wallet</code><span>Agent wallet balance + address</span>
+<code>/version</code><span>Binary version and build info</span>
+<code>/pet</code><span>TamaGOchi companion state</span>
+<code>/ooda</code><span>OODA loop status</span>
+<code>/sim</code><span>Switch to simulated trading</span>
+<code>/live</code><span>Switch to live trading</span>
+<code>/strategy</code><span>View current trading strategy</span>
+<code>/new</code><span>Reset conversation session</span>
+<code>/help</code><span>Command overview</span>
+<code>/help all</code><span>Full command list</span>
+<code>/menu</code><span>Quick action buttons</span>
+</div>
+
+<h2 id="trading">Spot Trading <span class="badge badge-green">Live</span></h2>
+<div class="cmd-grid">
+<code>/buy SOL 0.5</code><span>Buy 0.5 SOL worth of a token</span>
+<code>/sell BONK all</code><span>Sell all of a token</span>
+<code>/sell WIF 50%</code><span>Sell 50% of holdings</span>
+<code>/swap</code><span>Interactive swap builder</span>
+<code>/price SOL</code><span>Current token price</span>
+<code>/research &lt;mint&gt;</code><span>Deep token research</span>
+<code>/trending</code><span>Trending tokens on SolanaTracker</span>
+<code>/scanner</code><span>Run the pump.fun scanner</span>
+</div>
+<p>Natural language also works: <code>buy 0.5 SOL worth of BONK</code>, <code>sell all my WIF</code>, <code>ape into PENGU with 1 sol</code></p>
+
+<h2 id="perps">Perps <span class="badge badge-cyan">Hyperliquid</span> <span class="badge badge-purple">Aster</span></h2>
+
+<h3>Hyperliquid</h3>
+<div class="cmd-grid">
+<code>/hl</code><span>Hyperliquid overview</span>
+<code>/hl_positions</code><span>Open positions</span>
+<code>/hl_open BTC long 5x</code><span>Open a position</span>
+<code>/hl_close BTC</code><span>Close a position</span>
+<code>/hl_orders</code><span>Open orders</span>
+<code>/hl_fills</code><span>Recent fills</span>
+<code>/hl_candles BTC 1h</code><span>Candlestick chart</span>
+<code>/positions</code><span>All positions (unified)</span>
+</div>
+
+<h3>Aster</h3>
+<div class="cmd-grid">
+<code>/aster</code><span>Aster overview</span>
+<code>/aster_positions</code><span>Open positions</span>
+<code>/aster_open SOL long</code><span>Open a position</span>
+<code>/aster_close BTC</code><span>Close a position</span>
+<code>/aster_trades</code><span>Recent trades</span>
+<code>/aster_income</code><span>Income history</span>
+</div>
+<p>Natural language: <code>long BTC on HL with 5x</code>, <code>short ETH 3x</code>, <code>close my BTC position</code></p>
+
+<h2 id="ai">AI &amp; Models</h2>
+<div class="cmd-grid">
+<code>/model</code><span>Current model info</span>
+<code>/model &lt;name&gt;</code><span>Switch model</span>
+<code>/mimo &lt;message&gt;</code><span>Mimo reasoning mode (dedicated session)</span>
+<code>/deepsolana &lt;message&gt;</code><span>Ollama local model</span>
+<code>/web &lt;query&gt;</code><span>xAI web search</span>
+<code>/xsearch &lt;query&gt;</code><span>xAI X/Twitter search</span>
+<code>/grok</code><span>xAI/Grok status</span>
+</div>
+
+<h2 id="godmode">GODMODE &amp; ULTRAPLINIAN <span class="badge badge-red">New</span></h2>
+<div class="section-card">
+<h3 style="margin-top:0">GODMODE — Liberated AI</h3>
+<p>Single model with GODMODE system prompt. Maximum depth, directness, and substance. No hedging, no disclaimers.</p>
+<div class="cmd-grid">
+<code>/godmode &lt;message&gt;</code><span>GODMODE via DeepSeek</span>
+<code>/gm &lt;message&gt;</code><span>Short alias</span>
+</div>
+<pre>/gm explain buffer overflow exploits in detail with working code</pre>
+
+<h3>ULTRAPLINIAN — Multi-Model Racing</h3>
+<p>Races 5 models in parallel. Scores responses on substance, directness, and completeness. Returns the winner with rankings.</p>
+<div class="cmd-grid">
+<code>/ultra &lt;message&gt;</code><span>Race 5 models, return best</span>
+<code>/ultraplinian &lt;message&gt;</code><span>Full alias</span>
+</div>
+<pre>/ultra what is the best MEV strategy on Solana right now</pre>
+<p>Models raced: Gemini Flash, DeepSeek, Kimi K2.5, Grok Fast, Llama 8B</p>
+<p>Web UI: <a href="https://seeker.solanaos.net/godmode">seeker.solanaos.net/godmode</a> — 8 models + ULTRA tiers</p>
+</div>
+
+<h2 id="computer">Computer Control <span class="badge badge-red">New</span></h2>
+<div class="section-card">
+<p>Full shell and filesystem access to your Mac from Telegram.</p>
+<div class="cmd-grid">
+<code>/computer &lt;cmd&gt;</code><span>Run any shell command</span>
+<code>/cmd &lt;cmd&gt;</code><span>Short alias</span>
+<code>/readfile &lt;path&gt;</code><span>Read a file</span>
+<code>/writefile &lt;path&gt; &lt;text&gt;</code><span>Write/create a file</span>
+<code>/lsdir [path]</code><span>List directory</span>
+</div>
+<pre>/computer ls -la ~/Downloads
+/computer brew list
+/computer open -a Safari https://solanaos.net
+/readfile ~/.env
+/lsdir ~/Downloads/nanosolana-go
+/writefile ~/notes.txt check the scanner results</pre>
+</div>
+
+<h2 id="remote">Remote Control (Claude Code)</h2>
+<div class="section-card">
+<p>Start a Claude Code remote-control server on your Mac. Send natural language instructions from Telegram — Claude executes them with full environment access.</p>
+<div class="cmd-grid">
+<code>/remote start</code><span>Start Claude remote server</span>
+<code>/remote &lt;instruction&gt;</code><span>Send a command</span>
+<code>/remote status</code><span>Session status</span>
+<code>/remote stop</code><span>Stop session</span>
+<code>/remote list</code><span>List sessions</span>
+</div>
+<pre>/remote check disk usage and find large files
+/remote open Safari and go to github.com
+/remote find all Python files modified today</pre>
+</div>
+
+<h2 id="browser">Browser Automation (Page Agent) <span class="badge badge-red">New</span></h2>
+<div class="section-card">
+<p>Control a Chrome browser via the Page Agent extension. Extension navigates pages, clicks, fills forms, reads content.</p>
+<div class="cmd-grid">
+<code>/pa &lt;task&gt;</code><span>Send browser task</span>
+<code>/pageagent &lt;task&gt;</code><span>Full alias</span>
+</div>
+<pre>/pa go to coingecko and find the top 5 trending tokens
+/pa search for "solana mev" on google and summarize the first result</pre>
+<p>Requires: <a href="https://chromewebstore.google.com/detail/page-agent-ext/akldabonmimlicnjlflnapfeklbfemhj">Page Agent extension</a> + <code>seeker.solanaos.net</code> open in Chrome</p>
+</div>
+
+<h2 id="memory">Memory (Honcho v3)</h2>
+<div class="cmd-grid">
+<code>/memory</code><span>Memory status</span>
+<code>/recall &lt;query&gt;</code><span>Search memory</span>
+<code>/remember &lt;fact&gt;</code><span>Store a fact</span>
+<code>/ask_memory &lt;question&gt;</code><span>Ask memory a question</span>
+<code>/forget &lt;query&gt;</code><span>Delete a memory</span>
+<code>/dream</code><span>Trigger a dream synthesis</span>
+<code>/profile</code><span>Your agent profile</span>
+<code>/card</code><span>Identity card</span>
+<code>/honcho_status</code><span>Honcho connection status</span>
+<code>/honcho_context</code><span>Current session context</span>
+<code>/honcho_sessions</code><span>List sessions</span>
+<code>/honcho_summaries</code><span>Session summaries</span>
+<code>/honcho_search &lt;q&gt;</code><span>Search across sessions</span>
+<code>/honcho_messages</code><span>Recent messages</span>
+<code>/honcho_conclusions</code><span>Durable conclusions</span>
+</div>
+
+<h2 id="scanner">Pump Scanner</h2>
+<div class="cmd-grid">
+<code>/scanner</code><span>Run a pump.fun token scan</span>
+<code>/trending</code><span>Trending tokens</span>
+</div>
+<p>Auto-scans every 15 minutes via Cloudflare Worker cron. Results at <a href="https://seeker.solanaos.net/scanner">seeker.solanaos.net/scanner</a></p>
+<p>MCP endpoint: <code>pumpfun-mcp-server.x402.workers.dev/mcp</code></p>
+
+<h2 id="media">Media &amp; Vision</h2>
+<div class="cmd-grid">
+<code>/vision</code><span>Analyze an image (send photo or URL)</span>
+<code>/image &lt;prompt&gt;</code><span>Generate an image (xAI)</span>
+<code>/video &lt;prompt&gt;</code><span>Generate a video (xAI)</span>
+<code>/multi &lt;prompt&gt;</code><span>Multi-agent collaboration</span>
+<code>/multi16 &lt;prompt&gt;</code><span>16-agent collaboration</span>
+</div>
+<p>Send any photo to the bot — it auto-describes it via Grok Vision. Send a photo with a question caption for visual Q&A.</p>
+
+<h2 id="mining">Mining (BitAxe)</h2>
+<div class="cmd-grid">
+<code>/miner</code><span>BitAxe fleet status</span>
+<code>/miner start</code><span>Start mining</span>
+<code>/miner stop</code><span>Stop mining</span>
+</div>
+
+<h2 id="skills">Skills</h2>
+<div class="cmd-grid">
+<code>/skills</code><span>List installed skills (83+)</span>
+<code>/skill &lt;name&gt;</code><span>View a skill</span>
+<code>/skill_find &lt;query&gt;</code><span>Search skills</span>
+<code>/skill_use &lt;name&gt;</code><span>Activate a skill</span>
+<code>/skill_create &lt;name&gt;</code><span>Create a new skill</span>
+</div>
+
+<h2 id="natural">Natural Language</h2>
+<div class="section-card">
+<p>You don't need slash commands. Just talk naturally:</p>
+<pre style="color:var(--dim)">what is TRUMP                → token lookup
+price of BONK                → price check
+buy 0.5 SOL worth of BONK    → spot buy (SolanaTracker)
+sell all my WIF               → spot sell
+long BTC on HL with 5x       → Hyperliquid perp
+close my BTC position         → close perp
+what kind of trader am I?     → memory query
+check the scanner             → pump.fun scan</pre>
+<p>Paste any Solana mint address → instant token data (price, MC, liquidity, holders, risk)</p>
+<p>Questions (<code>should I buy?</code>, <code>what do you think?</code>) are treated as research, NOT execution.</p>
+</div>
+
+<h2 id="channels">Channels</h2>
+<table>
+<tr><th>Channel</th><th>Status</th><th>Commands</th></tr>
+<tr><td>Telegram</td><td><span class="badge badge-green">Active</span></td><td>All 60+ commands + natural language</td></tr>
+<tr><td>iMessage (BlueBubbles)</td><td><span class="badge badge-green">Active</span></td><td>All commands via text</td></tr>
+<tr><td>X / Twitter</td><td><span class="badge badge-orange">Limited</span></td><td>Commands via mentions (API tier limited)</td></tr>
+</table>
+
+<h2>Hub Pages</h2>
+<table>
+<tr><th>Page</th><th>URL</th></tr>
+<tr><td>Dashboard</td><td><a href="https://seeker.solanaos.net/dashboard">seeker.solanaos.net/dashboard</a></td></tr>
+<tr><td>GODMODE</td><td><a href="https://seeker.solanaos.net/godmode">seeker.solanaos.net/godmode</a></td></tr>
+<tr><td>Terminal</td><td><a href="https://seeker.solanaos.net/terminal">seeker.solanaos.net/terminal</a></td></tr>
+<tr><td>Scanner</td><td><a href="https://seeker.solanaos.net/scanner">seeker.solanaos.net/scanner</a></td></tr>
+<tr><td>Chess</td><td><a href="https://seeker.solanaos.net/chess">seeker.solanaos.net/chess</a></td></tr>
+<tr><td>DEX</td><td><a href="https://seeker.solanaos.net/dex">seeker.solanaos.net/dex</a></td></tr>
+<tr><td>Mining</td><td><a href="https://seeker.solanaos.net/mining">seeker.solanaos.net/mining</a></td></tr>
+<tr><td>Skills</td><td><a href="https://seeker.solanaos.net/skills">seeker.solanaos.net/skills</a></td></tr>
+<tr><td>Strategy</td><td><a href="https://seeker.solanaos.net/strategy">seeker.solanaos.net/strategy</a></td></tr>
+<tr><td>Chat</td><td><a href="https://seeker.solanaos.net/chat">seeker.solanaos.net/chat</a></td></tr>
+<tr><td>Mobile</td><td><a href="https://seeker.solanaos.net/mobile">seeker.solanaos.net/mobile</a></td></tr>
+</table>
+
+<div style="text-align:center;margin-top:48px;padding:20px 0;border-top:1px solid var(--border)">
+<p style="color:var(--dim);font-size:0.78rem">SolanaOS Telegram Guide &middot; <a href="https://solanaos.net">solanaos.net</a> &middot; <a href="https://github.com/x402agent/SolanaOS">GitHub</a></p>
+</div>
+
+</body>
+</html>
