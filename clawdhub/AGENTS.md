@@ -1,66 +1,170 @@
-# Repository Guidelines
+# OpenClawd Agent Guidelines
 
-## Project Structure & Module Organization
-- `src/` — TanStack Start app code (routes, components, styles).
-- `convex/` — Convex backend (schema, queries/mutations/actions, HTTP routes).
-- `convex/_generated/` — generated Convex API/types; committed for builds.
-- `docs/` — product/spec docs (see `docs/spec.md`).
-- `public/` — static assets.
+> "The Hermes of Web3" — inspired by [Nous Research](https://nousresearch.com)'s Hermes agent philosophy.
 
-## Build, Test, and Development Commands
-- `bun run dev` — local app server at `http://localhost:3000`.
-- `bun run build` — production build (Vite + Nitro).
-- `bun run preview` — preview built app.
-- `bunx convex dev` — Convex dev deployment + function watcher.
-- `bunx convex codegen` — regenerate `convex/_generated`.
-- `bun run lint` — Biome + oxlint (type-aware).
-- `bun run test` — Vitest (unit tests).
-- `bun run coverage` — coverage run; keep global >= 80%.
+## OpenClawd Agent System
 
-## Coding Style & Naming Conventions
-- TypeScript strict; ESM.
-- Indentation: 2 spaces, single quotes (Biome).
-- Lint/format: Biome + oxlint (type-aware).
-- Convex function names: verb-first (`getBySlug`, `publishVersion`).
+OpenClawd agents are autonomous AI assistants that run on Solana. Each agent has:
 
-## Testing Guidelines
-- Framework: Vitest 4 + jsdom.
-- Tests live in `src/**` and `convex/lib/**`.
-- Coverage threshold: 80% global (lines/functions/branches/statements).
-- Example: `convex/lib/skills.test.ts`.
+- **Brain** — Honcho peer.chat + session context for memory
+- **Sandbox** — E2B isolated execution environment
+- **Wallet** — Privy embedded Solana wallet (auto-created on login)
+- **MCP tools** — 31 tools for Solana market data, Helius onchain, Pump.fun, memory, agent fleet, Metaplex
+- **Payment** — x402/AP2 integration for skill monetization
 
-## Commit & Pull Request Guidelines
-- Commit messages: Conventional Commits (`feat:`, `fix:`, `chore:`, `docs:`…).
-- Keep changes scoped; avoid repo-wide search/replace.
-- PRs: include summary + test commands run. Add screenshots for UI changes.
-- GitHub comments: for multiline `gh` comments/close messages, use `--body-file`, `--input`, or stdin/heredoc with real newlines; never pass literal `\\n` in shell strings.
-- Reject PRs that add skills into source code/repo content directly (for example under `skills/` or seed-only additions intended as published skills). Skills must be uploaded/published via CLI.
+---
 
-## Git Notes
-- If `git branch -d/-D <branch>` is policy-blocked, delete the local ref directly: `git update-ref -d refs/heads/<branch>`.
+## Agent Architecture
 
-## URL Quick Reference
-- Canonical site: `https://solanaclawd.com` (prefer this over legacy domains).
-- Skill page URL format: `https://solanaclawd.com/<owner>/<slug>` (owner handle preferred; falls back to owner id).
-- Skill API detail URL: `https://solanaclawd.com/api/v1/skills/<slug>`.
-- Skill file URL: `https://solanaclawd.com/api/v1/skills/<slug>/file?path=SKILL.md`.
-- For “full URL?” requests, return the canonical page URL first, then API URL if useful.
+```
+Privy JWT (user auth)
+         ↓
+OpenClawd Orchestrator (:8787)
+         │
+         ├─ HonchoClient.brainAsk() → peer.chat + session context
+         ├─ SandboxManager.launch() → E2B sandbox
+         ├─ WalletBridge.createWallet() → Privy embedded wallet
+         ├─ McpBridge.callTool() → 31 MCP tools
+         ├─ PaymentsClient.registerUserAgent() → ClawdVault registry
+         └─ WurkBridge.createQuickJob() → Wurk.fun x402 (17+ job types)
 
-## Configuration & Security
-- Local env: `.env.local` (never commit secrets).
-- Convex env holds JWT keys; Vercel only needs `VITE_CONVEX_URL` + `VITE_CONVEX_SITE_URL`.
-- OAuth: GitHub OAuth App credentials required for login.
+OpenClawd Orchestrator
+         ↓
+ClawdRouter (57-model routing, payment-aware)
+         ↓
+Solana — Helius RPC · Jupiter · SPL USDC · $CLAWD
+```
 
-## Convex Ops (Gotchas)
-- New Convex functions must be pushed before `convex run`: use `bunx convex dev --once` (dev) or `bunx convex deploy` (prod).
-- For non-interactive prod deploys, use `bunx convex deploy -y` to skip confirmation.
-- If `bunx convex run --env-file .env.local ...` returns `401 MissingAccessToken` despite `bunx convex login`, workaround: omit `--env-file` and use `--deployment-name <name>` / `--prod`.
+---
 
-## Convex Query & Bandwidth Rules
-- **Always use `.withIndex()` instead of `.filter()` for fields that can be indexed.** `.filter()` causes full table scans — every doc is read and billed. Even a single `.filter()` on a 16K-row table reads ~16 MB per call.
-- **Convex reads entire documents** — no field projections. If you only need a few fields from large docs (~6 KB+), denormalize a lightweight summary onto the parent doc or use a lookup table (see `embeddingSkillMap`, `skill.latestVersionSummary`, `skill.badges` for examples).
-- **Denormalization pattern**: persist computed fields so they can be indexed. Every mutation that updates source fields must also update the denormalized field. Always write a cursor-based backfill for new fields (see `backfillIsSuspiciousInternal`, `backfillLatestVersionSummaryInternal`, `backfillDenormalizedBadgesInternal` for examples).
-- **Cron jobs must never scan entire tables.** Use indexed queries with equality filters. Use cursor-based pagination for large datasets. Prefer incremental/delta tracking over full recounts.
-- **32K document limit per query.** Split `.collect()` calls by a partition field (e.g., one day at a time instead of a 7-day range). See `buildTrendingLeaderboard` for an example.
-- **Common mistakes**: `.filter().collect()` without an index; `ctx.db.get()` on large docs in a loop for list views; while loops that paginate the whole table to find filtered results.
-- **Before writing or reviewing Convex queries, check deployment health.** Run `bunx convex insights` to check for OCC conflicts, `bytesReadLimit`, and `documentsReadLimit` errors. Run `bunx convex logs --failure` to see individual error messages and stack traces. This helps identify which functions are causing bandwidth issues so you can prioritize fixes.
+## Available Agents
+
+| Agent | Description | Model | Tools |
+|-------|-------------|-------|-------|
+| **mawdbot** | Autonomous Solana trading agent — OODA loop + ClawdVault memory | xAI Grok | 31 MCP |
+| **defi-scanner** | Pump.fun + Raydium scanner with SNIPE/BUY/SCALP/AVOID classifier | Claude Sonnet | 31 MCP |
+| **clawd-trader** | Full $CLAWD ecosystem — perps via Hyperliquid/Aster | GPT-5.2 | 31 MCP |
+| **vibe-coder** | Project-aware coding assistant | Claude Opus 4 | 31 MCP |
+
+---
+
+## OODA Trading Loop
+
+```
+OBSERVE  → sol_price, trending, helius_priority_fee, memory KNOWN
+ORIENT   → score candidates (trend + momentum + liquidity)
+DECIDE   → confidence ≥ 60? → size band (0.5x / 1.0x / 1.25x / 1.5x)
+ACT      → trade_execute gated at ask permission (human approval required)
+LEARN    → write INFERRED signals → Dream agent promotes to LEARNED
+```
+
+---
+
+## Agent Lifecycle
+
+```bash
+# 1. User logs in via Privy → JWT issued
+# 2. Orchestrator middleware extracts privySub
+# 3. If no wallet, auto-create via WalletBridge
+# 4. POST /api/v1/launch → SandboxManager.launch()
+# 5. E2B sandbox starts → ClawdGateway connects
+# 6. Agent runs in sandbox → MCP tools via McpBridge
+# 7. Payments via PaymentsClient (AP2 mandates + x402)
+# 8. Memory via HonchoClient (peer.chat + session context)
+```
+
+---
+
+## Agent Registration
+
+Agents are registered on-chain via the Payments Client:
+
+```typescript
+const reg = await payments.registerUserAgent({
+  privySub,
+  wallet,
+  manifest: buildManifest(agent, privySub, wallet, pricing),
+  pricing: Object.entries(manifest.pricing).map(([method, p]) => ({
+    method,
+    amountUsdcBaseUnits: BigInt(p.amount),
+  })),
+});
+```
+
+Manifest includes: name, description, url, version, skills[], pricing, owner.
+
+---
+
+## Skill Pricing
+
+Default pricing (USDC base units):
+
+| Agent | Method | Amount | Description |
+|-------|--------|--------|-------------|
+| mawdbot | tasks/send | 100000 | $0.10 per task |
+| mawdbot | quote | 50000 | $0.05 per quote |
+| defi-scanner | scan | 20000 | $0.02 per scan |
+| defi-scanner | classify | 30000 | $0.03 per classify |
+| clawd-trader | tasks/send | 200000 | $0.20 per trade |
+| vibe-coder | tasks/send | 100000 | $0.10 per task |
+| vibe-coder | review | 50000 | $0.05 per review |
+
+Overrides via `pricing` in `/api/v1/launch`:
+
+```json
+{
+  "agent": "mawdbot",
+  "pricing": { "tasks/send": "200000", "quote": "100000" }
+}
+```
+
+---
+
+## $CLAWD Holder Discounts
+
+| Balance | Discount | Benefit |
+|:---:|:---:|:---|
+| `>= 100,000` $CLAWD | 10% | Paid model calls and paid skill installs |
+| `>= 1,000,000` $CLAWD | 25% | Priority routing and beta access |
+| `>= 10,000,000` $CLAWD | 50% | Full discount tier and governance |
+
+---
+
+## ClawdVault Security
+
+Every agent skill is scanned by ClawdVault before it can be installed:
+
+- Risk scanning for vulnerabilities
+- Hardening with security best practices
+- Policy enforcement against security policies
+- Vault certification (score-based approval)
+
+Agents must pass ClawdVault scan to be listed in ClawdHub marketplace.
+
+---
+
+## Wurk x402 Integration
+
+Agents can delegate to Wurk.fun for social campaigns and agent-to-human jobs:
+
+```typescript
+// Create quick social job
+POST /api/v1/wurk/quick
+{ "network": "solana", "jobType": "xlikes", "url": "https://x.com/..." }
+
+// Create agent-to-human microjob
+POST /api/v1/wurk/agent-to-human
+{ "network": "solana", "amount": "0.001", "description": "Check accessibility" }
+```
+
+Job types: xlikes, reposts, comments, xfollowers, xraid, bookmarks, dex, pfcomments, tgmembers, dcmembers, instalikes, instafollowers, ytlikes, ytsubs, basefollowers, baselikes, basereposts
+
+---
+
+## Repository Structure
+
+- [`AGENTS/`](https://github.com/x402agent/openclawd/tree/main/AGENTS) — Agent catalog and deploy assets
+- [`openclawd-stack/orchestrator/`](https://github.com/x402agent/openclawd/tree/main/openclawd-stack/orchestrator) — Orchestrator server
+- [`clawd-vault-master/`](https://github.com/x402agent/openclawd/tree/main/clawd-vault-master) — Security scanning
+- [`skills/`](https://github.com/x402agent/openclawd/tree/main/skills) — Bundled SKILL.md library
+- [`MCP/`](https://github.com/x402agent/openclawd/tree/main/MCP) — MCP servers including vault-mcp and wurk-mcp
