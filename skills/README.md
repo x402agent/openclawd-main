@@ -312,6 +312,37 @@ When the user asks about...
 
 ---
 
+## 🛡️ Security
+
+All skills must pass security review before publication. See:
+
+- [Security Framework](SECURITY.md) — Requirements and prohibited patterns
+- [Security Workflow](SECURITY_WORKFLOW.md) — Automated scanning and approval process
+- [ClawdVault](../clawd-vault/) — The security guardian skill for scanning
+
+### Quick Security Check
+
+```bash
+# Scan a skill before publishing
+clawd-vault scan ./skills/my-skill
+
+# Check for common issues
+grep -r "sk-[A-Za-z0-9]" ./skills/my-skill || echo "No API keys found"
+```
+
+### Vault Certification
+
+Skills can earn vault certification levels:
+
+| Level | Requirements | Badge |
+|-------|-------------|-------|
+| 🐾 Basic | Passes scan, score >= 80 | `basic` |
+| 🔒 Standard | + Manual review, minimal permissions | `standard` |
+| 🛡️ Premium | + Full audit, wallet verification | `premium` |
+| ⚡ Elite | + Performance review, ecosystem approved | `elite` |
+
+---
+
 ## 🤝 Contributing
 
 See [`../CONTRIBUTING.md`](../CONTRIBUTING.md) for:
