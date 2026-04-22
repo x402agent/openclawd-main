@@ -1,10 +1,11 @@
 #!/bin/bash
-# OpenClawd - Terminal Connection & Skills
-# solanaclawd.com
+# openclawd - Terminal Connection & Skills
+# solanaclawd.com  ·  github.com/x402agent/openclawd
 # Usage: ./clawd-connect.sh <command>
 
 MARKETPLACE="https://solanaclawd.com/marketplace"
 GATEWAY="https://solanaclawd.com/x402"
+CLAWD_API="https://solanaclawd.com/api"
 
 # Colors
 GREEN='\033[0;32m'
@@ -12,10 +13,9 @@ BLUE='\033[0;34m'
 YELLOW='\033[1;33m'
 NC='\033[0m'
 
-echo -e "${BLUE}╔══════════════════════════════════════════════════╗${NC}"
-echo -e "${BLUE}║         OpenClawd Terminal v1.0                  ║${NC}"
-echo -e "${BLUE}║    solanaclawd.com/skills                        ║${NC}"
-echo -e "${BLUE}╚══════════════════════════════════════════════════╝${NC}"
+echo -e "${BLUE}╔════════════════════════════════════════════════╗${NC}"
+echo -e "${BLUE}║  🦞 openclawd terminal   solanaclawd.com       ║${NC}"
+echo -e "${BLUE}╚════════════════════════════════════════════════╝${NC}"
 echo ""
 
 case "${1:-}" in

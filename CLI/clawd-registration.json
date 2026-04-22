@@ -1,26 +1,36 @@
 {
   "type": "https://eips.ethereum.org/EIPS/eip-8004#registration-v1",
-  "name": "solana-clawd",
-  "description": "The Solana-native AI agent framework for autonomous operators. Built for high-frequency memecoin trading environments with real-time market data, wallet tracking, and OODA-loop execution capabilities.",
-  "image": "https://solanaclawd.com/clawd-logo.png",
+  "name": "openclawd",
+  "description": "The complete open-source stack for building, deploying, and monetizing AI agents on Solana. One router · one settlement layer · 33 projects · 50 agents · 100 skills.",
+  "image": "https://solanaclawd.com/og-image.png",
   "services": [
     {
       "name": "dashboard",
       "endpoint": "https://solanaclawd.com",
-      "description": "Main operator dashboard with AI inference, trading tools, and agent management"
+      "description": "Main dashboard — agent discovery, skills marketplace, x402 payment gateway"
     },
     {
       "name": "api",
       "endpoint": "https://solanaclawd.com/api",
-      "description": "REST API for agent interactions and inference requests"
+      "description": "REST API for skills, agents, and registry operations"
+    },
+    {
+      "name": "marketplace",
+      "endpoint": "https://solanaclawd.com/marketplace",
+      "description": "ClawdHub skills marketplace — 100 bundled SKILL.md files"
+    },
+    {
+      "name": "x402",
+      "endpoint": "https://solanaclawd.com/x402",
+      "description": "x402 / MPP / AP2 / A2A payment gateway — SPL USDC + $CLAWD settlement"
     },
     {
       "name": "websocket",
       "endpoint": "wss://solanaclawd.com/ws",
-      "description": "Real-time WebSocket for on-chain events and agent streaming"
+      "description": "Real-time streaming for on-chain events and agent communication"
     }
   ],
-  "x402Support": false,
+  "x402Support": true,
   "active": true,
   "registrations": [],
   "supportedTrust": [
@@ -30,35 +40,48 @@
   ],
   "capabilities": {
     "blockchain": "solana",
-    "readonly": true,
+    "readonly": false,
     "trading": {
-      "enabled": false,
-      "requireApproval": true
+      "enabled": true,
+      "requireApproval": true,
+      " protocols": ["pump.fun", "jupiter", "raydium"]
     },
     "tools": [
       "helius-das",
       "helius-rpc",
       "jupiter-price",
       "jupiter-swap",
-      "birdeye-price",
+      "jupiter-limit-order",
+      "solana-pay",
+      "tensor",
       "metaplex-core",
-      "firecrawl-web"
-    ]
+      "firecrawl-web",
+      "birdeye-price"
+    ],
+    "models": {
+      "default": "xai/grok-4.20-beta",
+      "reasoning": "xai/grok-4.20-beta",
+      "longctx": "moonshot/kimi-k2.6",
+      "eco": "nvidia/gpt-oss-120b",
+      "premium": "anthropic/claude-opus-4.6"
+    }
   },
   "memory": {
     "tiers": ["KNOWN", "LEARNED", "INFERRED"],
-    "provider": "honcho-v3"
+    "provider": "honcho"
   },
   "principles": [
-    "KNOWN before INFERRED",
-    "Preserve capital first",
-    "Deny-first permissions",
-    "Transparency",
-    "Local-first"
+    "KNOWN before INFERRED — never present speculation as fact",
+    "Preserve capital first — drawdown cascades override all conviction",
+    "Deny-first permissions — ask before executing anything irreversible",
+    "Transparency — show reasoning, not just conclusions",
+    "Local-first — no mandatory cloud infrastructure"
   ],
   "lineage": {
-    "architecture": "clawd-code",
-    "runtime": "solana-os",
-    "rpc": "helius"
+    "architecture": "openclawd",
+    "runtime": "solana-clawd",
+    "router": "clawdrouter",
+    "payment": "x402",
+    "chain": "solana"
   }
 }

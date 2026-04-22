@@ -1,6 +1,6 @@
-# OpenClawd CLI
+# openclawd CLI
 
-Command-line tools for the OpenClawd ecosystem — solanaclawd.com
+Command-line tools for the openclawd ecosystem — solanaclawd.com · github.com/x402agent/openclawd
 
 ## Scripts
 
@@ -14,6 +14,7 @@ clawd-cli.sh skills
 clawd-cli.sh skills:list
 clawd-cli.sh skills:install pumpfun-trading
 clawd-cli.sh skills:search solana
+clawd-cli.sh skills:featured
 
 # Marketplace
 clawd-cli.sh marketplace
@@ -29,6 +30,7 @@ clawd-cli.sh connect
 clawd-cli.sh wallet
 clawd-cli.sh prices
 clawd-cli.sh trading
+clawd-cli.sh swap <from> <to> <amount>
 
 # x402 Payments
 clawd-cli.sh payment:supported
@@ -37,8 +39,12 @@ clawd-cli.sh payment:settle <tx>
 
 # Node Operations
 clawd-cli.sh node
-clawd-cli.sh node:register
+clawd-cli.sh node:register <name>
 clawd-cli.sh node:status
+clawd-cli.sh node:peers
+
+# Agent registration (Metaplex)
+clawd-cli.sh register
 ```
 
 ### clawd-connect.sh
@@ -49,8 +55,9 @@ Terminal connection and skills commands:
 # Skills
 clawd-connect.sh skills
 clawd-connect.sh skills:list
-clawd-connect.sh skills:search <query>
 clawd-connect.sh skills:featured
+clawd-connect.sh skills:search <query>
+clawd-connect.sh skills:install <slug>
 
 # Marketplace
 clawd-connect.sh marketplace
@@ -70,6 +77,19 @@ clawd-connect.sh prices
 clawd-connect.sh payment:supported
 clawd-connect.sh payment:verify <id>
 clawd-connect.sh payment:settle <tx>
+```
+
+### solana-clawd CLI (primary)
+
+The main agent CLI is `solana-clawd`, published to npm:
+
+```bash
+npm i -g solana-clawd
+
+solana-clawd pair <CODE>     # pair this device
+solana-clawd mint            # mint your agent NFT (Metaplex Core)
+solana-clawd status          # show pairing + wallet
+solana-clawd agent           # start OODA loop trading agent
 ```
 
 ## Curl Commands
