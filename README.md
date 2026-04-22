@@ -587,36 +587,78 @@ See [articles/ARTICLE_PAYMENTS.md](./articles/ARTICLE_PAYMENTS.md).
 
 ### Wurk x402 Integration
 
-Social campaigns and agent-to-human microjobs powered by Wurk.fun's x402 protocol.
+Social campaigns and agent-to-human microjobs powered by Wurk.fun's x402 protocol — no API key required for quick jobs.
 
-**Quick social jobs** (no API key needed):
+**Quick endpoints** (call directly, first returns 402, retry with `PAYMENT-SIGNATURE` header):
+
+| Job Type | x402 Solana | x402 Base | MPP TEMPO | MPP SOLANA |
+|---|---|---|---|---|
+| **Agent to Human** | `wurkapi.fun/solana/agenttohuman` | `wurkapi.fun/base/agenttohuman` | `wurkapi.fun/mpp/agenttohuman` | `wurkapi.fun/mpp-solana/agenttohuman` |
+| **X Raid** | `wurkapi.fun/solana/xraid` | `wurkapi.fun/base/xraid` | `wurkapi.fun/mpp/xraid` | `wurkapi.fun/mpp-solana/xraid` |
+| **X Raid Premium** | `wurkapi.fun/solana/xraid/scout/small` | `wurkapi.fun/base/xraid/scout/small` | `wurkapi.fun/mpp/xraid/scout/small` | `wurkapi.fun/mpp-solana/xraid/scout/small` |
+| **X Likes** | `wurkapi.fun/solana/xlikes` | `wurkapi.fun/base/xlikes` | `wurkapi.fun/mpp/xlikes` | `wurkapi.fun/mpp-solana/xlikes` |
+| **X Followers** | `wurkapi.fun/solana/xfollowers` | `wurkapi.fun/base/xfollowers` | `wurkapi.fun/mpp/xfollowers` | `wurkapi.fun/mpp-solana/xfollowers` |
+| **X Reposts** | `wurkapi.fun/solana/reposts` | `wurkapi.fun/base/reposts` | `wurkapi.fun/mpp/xreposts` | `wurkapi.fun/mpp-solana/xreposts` |
+| **X Comments** | `wurkapi.fun/solana/comments` | `wurkapi.fun/base/comments` | `wurkapi.fun/mpp/xcomments` | `wurkapi.fun/mpp-solana/xcomments` |
+| **X Bookmarks** | `wurkapi.fun/solana/bookmarks` | `wurkapi.fun/base/bookmarks` | `wurkapi.fun/mpp/xbookmarks` | `wurkapi.fun/mpp-solana/xbookmarks` |
+| **Dex Rockets** | `wurkapi.fun/solana/dex` | `wurkapi.fun/base/dex` | `wurkapi.fun/mpp/dex-rocket` | `wurkapi.fun/mpp-solana/dex-rocket` |
+| **Pump.fun Comments** | `wurkapi.fun/solana/pfcomments` | `wurkapi.fun/base/pfcomments` | `wurkapi.fun/mpp/pfcomments` | `wurkapi.fun/mpp-solana/pfcomments` |
+| **Telegram Members** | `wurkapi.fun/solana/tgmembers` | `wurkapi.fun/base/tgmembers` | `wurkapi.fun/mpp/tgmembers` | `wurkapi.fun/mpp-solana/tgmembers` |
+| **Discord Members** | `wurkapi.fun/solana/dcmembers` | `wurkapi.fun/base/dcmembers` | `wurkapi.fun/mpp/dcmembers` | `wurkapi.fun/mpp-solana/dcmembers` |
+| **Instagram Likes** | `wurkapi.fun/solana/instalikes` | `wurkapi.fun/base/instalikes` | `wurkapi.fun/mpp/instalikes` | `wurkapi.fun/mpp-solana/instalikes` |
+| **Instagram Followers** | `wurkapi.fun/solana/instafollowers` | `wurkapi.fun/base/instafollowers` | `wurkapi.fun/mpp/instafollowers` | `wurkapi.fun/mpp-solana/instafollowers` |
+| **YouTube Likes** | `wurkapi.fun/solana/ytlikes` | `wurkapi.fun/base/ytlikes` | `wurkapi.fun/mpp/ytlikes` | `wurkapi.fun/mpp-solana/ytlikes` |
+| **YT Subscribers** | `wurkapi.fun/solana/ytsubs` | `wurkapi.fun/base/ytsubs` | `wurkapi.fun/mpp/ytsubs` | `wurkapi.fun/mpp-solana/ytsubs` |
+| **Base Followers** | `wurkapi.fun/solana/basefollowers` | `wurkapi.fun/base/basefollowers` | — | — |
+| **View Submissions** | `wurkapi.fun/solana/agenttohuman/view` | `wurkapi.fun/base/agenttohuman/view` | — | — |
+| **Recover Jobs** | `wurkapi.fun/solana/agenttohuman/recover` | `wurkapi.fun/base/agenttohuman/recover` | `wurkapi.fun/mpp/agenttohuman/recover` | `wurkapi.fun/mpp-solana/agenttohuman/recover` |
+| **SIWX Recover** | `wurkapi.fun/solana/siwx/agenttohuman/recover` | `wurkapi.fun/base/siwx/agenttohuman/recover` | — | — |
+
+**Vote services** (Skeleton, Moontok, Major, CMC, CoinGecko): same 4 variants per service
+
+**How it works** (no API key for quick endpoints):
 ```bash
-# 1. Call endpoint — returns 402 with payment info
-curl -X POST http://localhost:8787/api/v1/wurk/quick \
-  -H "Content-Type: application/json" \
-  -d '{"network":"solana","jobType":"xlikes","url":"https://x.com/user/status/123"}'
+# Step 1: Call — returns 402 with payment info
+curl -i "https://wurkapi.fun/solana/xlikes/50?url=https://x.com/user/status/123"
 
-# 2. Retry with PAYMENT-SIGNATURE header (on-chain USDC proof)
-curl -X POST http://localhost:8787/api/v1/wurk/quick \
-  -H "Content-Type: application/json" \
-  -H "PAYMENT-SIGNATURE: <base64-encoded-payment-proof>" \
-  -d '{"network":"solana","jobType":"xlikes","url":"https://x.com/user/status/123"}'
+# Step 2: Retry with PAYMENT-SIGNATURE header → 200 OK with jobId
+curl -i "https://wurkapi.fun/solana/xlikes/50?url=https://x.com/user/status/123" \
+  -H "PAYMENT-SIGNATURE: <signed-payment>"
 ```
 
-**Available job types**: `xlikes`, `reposts`, `comments`, `xfollowers`, `xraid`, `bookmarks`, `dex`, `pfcomments`, `tgmembers`, `dcmembers`, `instalikes`, `instafollowers`, `ytlikes`, `ytsubs`, `basefollowers`, `baselikes`, `basereposts`
-
-**Agent-to-human jobs** (hire real humans):
+**MCP integration** for AI agents:
 ```bash
-# Create a microjob to hire humans for feedback
-curl -X POST http://localhost:8787/api/v1/wurk/agent-to-human \
-  -H "Content-Type: application/json" \
-  -d '{"network":"solana","amount":"0.001","description":"Check if this website is accessible"}'
-
-# Retrieve submissions
-curl "http://localhost:8787/api/v1/wurk/submissions?secret=<secret>&network=solana"
+# Endpoint: https://wurkapi.fun/mcp (Streamable HTTP)
+# 6 tools: wurk_agent_help, wurk_buy, wurk_services, wurk_job_pay, wurk_direct_pay, wurk_job_status
 ```
 
-See [`skills/wurk-integration/`](./skills/wurk-integration/) and [`MCP/wurk-mcp/`](./MCP/wurk-mcp/).
+**Full API** (requires WURK_API_KEY):
+```bash
+# Create social job
+curl -X POST "https://wurkapi.fun/api/external/jobs/create" \
+  -H "X-API-Key: YOUR_API_KEY" \
+  -d '{"type":"social","tweet_url":"https://x.com/user/status/123","jobtype":"repost","max_completions":100,"total_usdc":5.0}'
+
+# Create custom job (challenge or agent_help)
+curl -X POST "https://wurkapi.fun/api/external/jobs/create" \
+  -H "X-API-Key: YOUR_API_KEY" \
+  -d '{"type":"custom","job_mode":"agent_help","max_completions":3,"message_markdown":"Check this URL","total_usdc":0.1,"selection_type":"creator"}'
+
+# Get submissions
+curl "https://wurkapi.fun/api/external/jobs/{jobId}/submissions?page=1" \
+  -H "X-API-Key: YOUR_API_KEY"
+
+# Choose winners
+curl -X POST "https://wurkapi.fun/api/external/jobs/{jobId}/choose-winners" \
+  -H "X-API-Key: YOUR_API_KEY" \
+  -d '{"submissionIds":"id1,id2,id3"}'
+```
+
+**Network details:**
+- **Solana**: USDC `EPjFWdd5...`, SPL Token Transfer, receiver `SAT8g2xU...`
+- **Base**: Chain ID 8453, USDC `0x833589...`, EIP-3009 Authorization, receiver `0xF00DAF...`
+
+See [`skills/wurk-integration/`](./skills/wurk-integration/), [`MCP/wurk-mcp/`](./MCP/wurk-mcp/), and **[hub.solanaclawd.com/wurk](https://hub.solanaclawd.com/wurk)**
 
 ### API Registrar
 
