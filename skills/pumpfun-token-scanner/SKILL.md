@@ -733,7 +733,7 @@ The script performs four steps in order:
 ### Required env vars (in `.env` or `nanohub/.env.local`)
 
 ```
-CONVEX_SITE_URL=https://artful-frog-940.convex.site
+CONVEX_SITE_URL=https://YOUR-DEPLOYMENT.convex.site
 NETLIFY_BUILD_HOOK_URL=https://api.netlify.com/build_hooks/YOUR_HOOK_ID
 NETLIFY_AUTH_TOKEN=<personal access token from Netlify>
 NETLIFY_SITE_ID=65b49620-476e-448c-a497-f218b3cdeb35
@@ -787,7 +787,7 @@ at `.github/workflows/pump-scan-deploy.yml` automatically:
 Set these in the repo Settings → Secrets and variables → Actions:
 
 ```
-CONVEX_SITE_URL          — https://artful-frog-940.convex.site
+CONVEX_SITE_URL          — https://YOUR-DEPLOYMENT.convex.site
 CONVEX_DEPLOY_KEY        — from `npx convex deploy-key`
 NETLIFY_AUTH_TOKEN       — Netlify personal access token
 NETLIFY_BUILD_HOOK_URL   — Netlify build hook URL
