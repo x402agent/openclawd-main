@@ -116,6 +116,39 @@ app.use('/v1/*', async (c, next) => {
     }
 
     c.set('wallet', wallet);
+
+    // Auto-mint a Metaplex Core agent asset if user doesn't have one yet.
+    // Only fires once per session; subsequent requests skip the mint.
+    const agentCacheKey = `agent:${privySub}`;
+    if (wallet && !autoWalletCache.get(agentCacheKey)) {
+      autoWalletCache.set(agentCacheKey, 'pending');
+      // Fire-and-forget — don't block the request.
+      metaplexBridge.mintAgent({
+        wallet,
+        name: `OpenClawd Agent`,
+        uri: `https://hub.solanaclawd.com/agents/${privySub}/metadata.json`,
+        agentMetadata: {
+          type: 'agent',
+          name: `OpenClawd Agent (${privySub.slice(0, 8)})`,
+          description: 'OpenClawd autonomous AI agent on Solana — thinks, acts, settles on-chain.',
+          services: [
+            { name: 'MCP', endpoint: `https://solanaclawd.com/api/v1/mcp/call` },
+            { name: 'A2A', endpoint: `https://solanaclawd.com/x402/a2a/${wallet}` },
+          ],
+          registrations: [],
+          supportedTrust: ['reputation'],
+        },
+      })
+        .then((result) => {
+          autoWalletCache.set(agentCacheKey, result.assetAddress);
+          console.log(`[orchestrator] metaplex agent minted: ${result.assetAddress}`);
+        })
+        .catch((err) => {
+          autoWalletCache.delete(agentCacheKey);
+          console.warn(`[orchestrator] metaplex agent mint failed for ${privySub.slice(0, 8)}:`, String(err));
+        });
+    }
+
     await next();
   } catch {
     return c.json({ error: 'invalid_token' }, 401);
