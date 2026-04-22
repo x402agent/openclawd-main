@@ -92,6 +92,29 @@ solana-clawd status          # show pairing + wallet
 solana-clawd agent           # start OODA loop trading agent
 ```
 
+### @openclawd/wallet (Privy embedded wallet)
+
+```bash
+npm install @openclawd/wallet
+
+clawd-wallet tokens              # list Jupiter tokens
+clawd-wallet quote SOL USDC 0.1  # get swap quote
+clawd-wallet balance <addr>      # check SOL balance
+```
+
+Or in React:
+
+```tsx
+import { PrivyProvider, useClawdWallet } from "@openclawd/wallet/react";
+
+<PrivyProvider appId={process.env.PRIVY_APP_ID!} embeddedWallets>
+  <SwapButton />
+</PrivyProvider>
+
+// Inside component:
+const { wallet, connectWallet } = useClawdWallet();
+```
+
 ## Curl Commands
 
 ```bash
