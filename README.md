@@ -87,6 +87,8 @@ curl -fsSL https://solanaclawd.com/install.sh | bash
 
 This installs `solana-clawd` globally, sets up the local dev environment, and scaffolds your `~/.openclawd/` config with Tailscale serve support.
 
+**Or see it in action first:** → **[Interactive Terminal Demo](./docs/demo.html)** — full animated walkthrough of the install experience, E2B sandbox templates, and profiles system.
+
 **Manual setup:**
 
 ```bash
@@ -401,6 +403,34 @@ Edge workers that compose the OpenClawd runtime — all TypeScript, all deploy w
 | [`pumpfun-mcp-worker`](./workers/pumpfun-mcp-worker/) | Remote MCP server for pump.fun scanning (Cron + KV + Convex + Telegram digests) |
 
 See [`workers/README.md`](./workers/README.md) for deployment, secrets, and gateway integration notes.
+
+---
+
+## ☁️ E2B Cloud Sandboxes
+
+Instant, isolated cloud sandboxes for running OpenClawd agents. Fork from `theordlibrary` on E2B — pre-loaded with the tools, SDKs, and runtime your claw needs.
+
+| Template | Description | ID |
+|----------|-------------|-----|
+| **🦞 Clawd v2** | Latest OpenClawd runtime — monorepo, solana-clawd CLI, TailClawd, @openclawd/wallet, profiles system | `ibyiv77pobbc6mv8luif` |
+| **🦞 Clawd** | Legacy OpenClawd agent — solana-clawd CLI, TailClawd, x402 payments, honcho brain | `srsbqb24j095xwd4fiad` |
+| **⚡ Solana Dev Env** | Anchor, Rust, Node.js, all Solana SDKs — base for agent coding tasks and on-chain tooling | `stbd55taifr4ajbxzulu` |
+
+### Quick start
+
+```bash
+# Fork a template
+e2b template fork theordlibrary/clawd-v2
+e2b template fork theordlibrary/clawd
+e2b template fork theordlibrary/solana-dev-env
+
+# Or use with E2B CLI directly
+e2b template fork theordlibrary/clawd-v2     # ibyiv77pobbc6mv8luif
+e2b template fork theordlibrary/clawd       # srsbqb24j095xwd4fiad
+e2b template fork theordlibrary/solana-dev-env  # stbd55taifr4ajbxzulu
+```
+
+See the full interactive demo at **[docs/demo.html](./docs/demo.html)** — animated terminal walkthrough of the install experience, E2B templates, and profiles system.
 
 ---
 
