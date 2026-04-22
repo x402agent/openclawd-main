@@ -248,6 +248,54 @@ The settlement layer is Solana, with SPL USDC and `$CLAWD` as the core billing a
 
 See [articles/ARTICLE_PAYMENTS.md](./articles/ARTICLE_PAYMENTS.md).
 
+### API Registrar
+
+[`api-registrar/`](./api-registrar/) handles X (Twitter) wallet verification and API key generation.
+
+- **Wallet Verification** — Verify Solana wallet ownership via X (Twitter) tweet
+- **API Key Generation** — Issue `clawd_sk_` prefixed API keys
+- **ClawdRouter Integration** — Keys validated by ClawdRouter for AI agent calls
+- **Scope-based Permissions** — Fine-grained access control
+- **Secure Storage** — API keys hashed (SHA-256) before storage
+
+```bash
+# Start the API Registrar server
+cd api-registrar
+pnpm install
+pnpm db:push  # Run migrations
+pnpm server   # Start on port 3001
+```
+
+See [api-registrar/README.md](./api-registrar/README.md).
+
+### ClawdVault (Security)
+
+[`services/hermes-vault/`](./services/hermes-vault/) provides security scanning for skills and agents.
+
+- **Risk Scanning** — Detect vulnerabilities in SKILL.md bundles
+- **Hardening** — Apply security best practices
+- **Policy Enforcement** — Validate against security policies
+- **Vault Certification** — Score-based approval system
+
+```bash
+# Scan a skill for security issues
+cd services/hermes-vault
+python -m hermes_vault.cli scan ../../skills/my-skill
+```
+
+See [skills/clawd-vault/](./skills/clawd-vault/).
+
+### WURK Integration (Monetization)
+
+[`MCP/wurk-mcp/`](./MCP/wurk-mcp/) and [`skills/wurk-integration/`](./skills/wurk-integration/) enable x402 job monetization.
+
+- **Job Posting** — Post AI agent jobs with SOL/USDC payment
+- **Bidding System** — Agents bid on jobs
+- **x402 Payments** — Automatic payment on completion
+- **Solana/Base Support** — Multi-chain settlement
+
+See [WURK Integration Guide](./skills/wurk-integration/README.md).
+
 ### Cloud and browser surfaces
 
 [`openclawd-stack/`](./openclawd-stack/), [`clawd-cloud-os/`](./clawd-cloud-os/), and [`tailclawd/`](./tailclawd/) cover browser-hosted and remote-access flows. Frontend and user-facing surfaces also include [`chrome-extension/`](./chrome-extension/), [`telegram/`](./telegram/), [`WatchApp/`](./WatchApp/), [`beepboop/`](./beepboop/), [`chess/`](./chess/), and [`moltbook-agent/`](./moltbook-agent/).
@@ -331,15 +379,16 @@ For the full layer map, request flow, and directory breakdown, read [STACK.md](.
 
 | Area | Directories |
 |---|---|
-| Core runtime | [`solana-clawd/`](./solana-clawd/), [`agents/`](./agents/), [`src/`](./src/), [`MCP/`](./MCP/), [`packages/`](./packages/) |
-| Router and payments | [`clawdrouter/`](./clawdrouter/), [`x402-openrouter-main/`](./x402-openrouter-main/), [`workers/`](./workers/), [`services/`](./services/), [`plugin.delivery/`](./plugin.delivery/) |
-| Surfaces | [`chrome-extension/`](./chrome-extension/), [`telegram/`](./telegram/), [`tailclawd/`](./tailclawd/), [`WatchApp/`](./WatchApp/), [`beepboop/`](./beepboop/), [`chess/`](./chess/), [`moltbook-agent/`](./moltbook-agent/) |
-| Cloud and orchestration | [`openclawd-stack/`](./openclawd-stack/), [`clawd-cloud-os/`](./clawd-cloud-os/), [`CLI/`](./CLI/) |
-| Skills and knowledge | [`clawdhub/`](./clawdhub/), [`skills/`](./skills/), [`acp_registry/`](./acp_registry/), [`articles/`](./articles/), [`llm-wiki-tang/`](./llm-wiki-tang/) |
-| SDKs, examples, assets | [`solana-go-main/`](./solana-go-main/), [`API/`](./API/), [`examples/`](./examples/), [`gfx/`](./gfx/), [`npm/`](./npm/) |
-| Security (ClawdVault) | [`skills/clawd-vault/`](./skills/clawd-vault/), [`MCP/vault-mcp/`](./MCP/vault-mcp/), [`agents/vault-agent.json`](./agents/vault-agent.json), [`services/hermes-vault/`](./services/hermes-vault/) |
-| API Registrar | [`api-registrar/`](./api-registrar/) - X-verified API key registration with Solana wallet auth |
-| Monetization (WURK) | [`skills/wurk-integration/`](./skills/wurk-integration/), [`MCP/wurk-mcp/`](./MCP/wurk-mcp/) - x402 job monetization on Solana/Base |
+| **Core Runtime** | [`solana-clawd/`](./solana-clawd/), [`agents/`](./agents/), [`src/`](./src/), [`MCP/`](./MCP/), [`packages/`](./packages/) |
+| **Router & Payments** | [`clawdrouter/`](./clawdrouter/), [`x402-openrouter-main/`](./x402-openrouter-main/), [`workers/`](./workers/), [`services/`](./services/), [`plugin.delivery/`](./plugin.delivery/) |
+| **Surfaces** | [`chrome-extension/`](./chrome-extension/), [`telegram/`](./telegram/), [`tailclawd/`](./tailclawd/), [`WatchApp/`](./WatchApp/), [`beepboop/`](./beepboop/), [`chess/`](./chess/), [`moltbook-agent/`](./moltbook-agent/) |
+| **Cloud & Orchestration** | [`openclawd-stack/`](./openclawd-stack/), [`clawd-cloud-os/`](./clawd-cloud-os/), [`CLI/`](./CLI/) |
+| **Skills & Knowledge** | [`clawdhub/`](./clawdhub/), [`skills/`](./skills/), [`acp_registry/`](./acp_registry/), [`articles/`](./articles/), [`llm-wiki-tang/`](./llm-wiki-tang/) |
+| **SDKs, Examples & Assets** | [`solana-go-main/`](./solana-go-main/), [`API/`](./API/), [`examples/`](./examples/), [`gfx/`](./gfx/), [`npm/`](./npm/) |
+| **Security (ClawdVault)** | [`skills/clawd-vault/`](./skills/clawd-vault/), [`MCP/vault-mcp/`](./MCP/vault-mcp/), [`agents/vault-agent.json`](./agents/vault-agent.json), [`services/hermes-vault/`](./services/hermes-vault/) |
+| **API Registrar** | [`api-registrar/`](./api-registrar/) — X-verified API key registration with Solana wallet auth |
+| **Monetization (WURK)** | [`skills/wurk-integration/`](./skills/wurk-integration/), [`MCP/wurk-mcp/`](./MCP/wurk-mcp/) — x402 job monetization on Solana/Base |
+| **Protocols** | [`x402-openrouter-main/`](./x402-openrouter-main/) — x402 payment protocol implementation |
 
 `tailclawd-backup/` exists as a backup directory and is not part of the primary stack path.
 
