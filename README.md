@@ -309,6 +309,56 @@ See [`AGENTS/solana-lobster-agents.md`](./AGENTS/solana-lobster-agents.md) and [
 
 ---
 
+## 🤖 OpenAI Trading Bot
+
+**GPT-5.4 powered autonomous Solana trading Telegram bot** — [`workers/openai-trading-bot/`](./workers/openai-trading-bot/)
+
+A Cloudflare Worker that connects OpenAI's latest models to Solana trading via Telegram:
+
+| Model | Purpose |
+|-------|---------|
+| `gpt-5.4` | Trading decisions, complex reasoning |
+| `gpt-5.4-nano` | Chat, agent delegation, fast responses |
+| `gpt-image-1` | PnL cards, memes, visual content (GPT Image 2.0) |
+| `computer-use-preview` | Browser automation (CUA) |
+
+### Features
+
+- **Autonomous Trading** — Execute swaps via Jupiter, pump.fun
+- **Image Generation** — `/generate <prompt>` via GPT Image 2.0 with `gpt-image-1-mini` fallback
+- **Web Search** — Real-time market data via OpenAI Responses API
+- **CUA** — Browser automation for complex interactions
+- **Tier-Gated** — Owner (default: `1740095485`) has full access; can assign to other users
+- **Conversation Memory** — KV-backed history per user (last 20 messages)
+
+### Quick Start
+
+```bash
+cd workers/openai-trading-bot
+npm install
+npx wrangler secret put OPENAI_API_KEY
+npx wrangler secret put TELEGRAM_BOT_TOKEN
+npx wrangler deploy
+# Register webhook
+curl https://your-worker.workers.dev/setup
+```
+
+### Bot Commands
+
+| Command | Description |
+|---------|-------------|
+| `/start` | Welcome + tier info |
+| `/generate <prompt>` | Generate image with GPT Image 2.0 |
+| `/trade <token> <side> <amount>` | Execute trade via GPT-5.4 |
+| `/pnl` | Generate PnL card |
+| `/search <query>` | Web search |
+| `/assign @user` | Assign bot to user (owner only) |
+| `/revoke @user` | Revoke access (owner only) |
+
+See [`workers/openai-trading-bot/README.md`](./workers/openai-trading-bot/README.md) for full documentation.
+
+---
+
 ## 🧠 OpenClawd AutoResearch Wiki
 
 **Self-improving AI research engine for Solana — inspired by [Andrej Karpathy](https://karpathy.ai)'s approach to AI research.**
@@ -612,7 +662,8 @@ For the full layer map, request flow, and directory breakdown, read [STACK.md](.
 |---|---|
 | **Orchestrator** | [`openclawd-stack/orchestrator/`](./openclawd-stack/orchestrator/) — honcho, e2b, privy, mcp, payments, wurk x402, metaplex |
 | **Core Runtime** | [`solana-clawd/`](./solana-clawd/), [`AGENTS/`](./AGENTS/), [`src/`](./src/), [`MCP/`](./MCP/), [`packages/`](./packages/) |
-| **Router & Payments** | [`clawdrouter/`](./clawdrouter/), [`x402-openrouter-main/`](./x402-openrouter-main/), [`workers/`](./workers/), [`services/`](./services/), [`plugin.delivery/`](./plugin.delivery/) |
+ | **Router & Payments** | [`clawdrouter/`](./clawdrouter/), [`x402-openrouter-main/`](./x402-openrouter-main/), [`workers/`](./workers/), [`services/`](./services/), [`plugin.delivery/`](./plugin.delivery/) |
+ | **OpenAI Trading Bot** | [`workers/openai-trading-bot/`](./workers/openai-trading-bot/) — GPT-5.4 Solana trading Telegram bot with CUA, image gen, web search |
 | **Surfaces** | [`chrome-extension/`](./chrome-extension/) · [`tailclawd/`](./tailclawd/) · [`WatchApp/`](./WatchApp/) · [`beepboop/`](./beepboop/) · [`chess/`](./chess/) |
 | **Cloud & Orchestration** | [`openclawd-stack/`](./openclawd-stack/) · [`clawd-cloud-os/`](./clawd-cloud-os/) · [`CLI/`](./CLI/) |
 | **Cloud Bridge** | [`openclawd-stack/bridge/`](./openclawd-stack/bridge/) — WS terminal bridge |
