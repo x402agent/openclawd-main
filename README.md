@@ -48,6 +48,60 @@ If you want the product overview, start here. If you want the directory-by-direc
 
 This repo is published without real secrets, private keys, or required proprietary credentials.
 
+---
+
+## 🐾 New Contributor?
+
+Start here → **[ONBOARDING.md](./ONBOARDING.md)**
+
+This guide covers:
+- Quick start setup
+- Project structure overview
+- Development workflow
+- Working with Skills & Agents
+- Security requirements
+- Testing & building
+
+---
+
+## 🔧 Quick Start
+
+```bash
+# Clone the repo
+git clone https://github.com/x402agent/openclawd.git
+cd openclawd
+
+# Install dependencies
+npm install
+
+# Set up environment
+cp .env.example .env
+# Edit .env with your API keys
+
+# Build agents catalog
+cd agents && node build-catalog.cjs
+
+# Run ClawdRouter
+cd ../clawdrouter && npm run dev
+```
+
+For full installation details, see **[ONBOARDING.md](./ONBOARDING.md)**.
+
+---
+
+## 📚 Documentation
+
+| Guide | Description |
+|-------|-------------|
+| [ONBOARDING.md](./ONBOARDING.md) | **Start here!** Contributor setup & workflow |
+| [CONTRIBUTING.md](./CONTRIBUTING.md) | Contribution guidelines |
+| [STACK.md](./STACK.md) | Technical architecture |
+| [articles/](./articles/) | Deep-dive documentation |
+| [agents/README.md](./agents/README.md) | Agent development |
+| [skills/README.md](./skills/README.md) | Skill development |
+
+---
+
 Before you run anything:
 
 1. Copy [`.env.example`](./.env.example) to `.env`, plus any subproject `*.env.example` files you actually need.

@@ -68,7 +68,13 @@ openclawd/
 ├── src/                 # Core TypeScript engine
 ├── workers/             # Cloudflare Workers
 ├── chrome-extension/    # Browser extension
-└── acp_registry/        # Project registry
+├── acp_registry/       # Project registry
+├── api-registrar/       # API key registration (X verification)
+├── clawdrouter/         # Model routing & payments
+├── x402-openrouter-main/ # x402 protocol implementation
+├── services/            # Backend services
+├── packages/            # Shared npm packages
+└── docs/               # Documentation articles
 ```
 
 ## 🤖 Contributing Agents
