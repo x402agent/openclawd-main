@@ -31,6 +31,7 @@ from routes.api_keys import router as api_keys_router
 from routes.me import router as me_router
 from routes.usage import router as usage_router
 from routes.admin import router as admin_router
+from routes.research import router as research_router  # NEW: Auto-Research endpoints
 from infra.tus import router as tus_router, cleanup_stale_uploads
 
 
@@ -72,7 +73,7 @@ async def lifespan(app: FastAPI):
     await pool.close()
 
 
-app = FastAPI(title="Clawd Vault API", lifespan=lifespan)
+app = FastAPI(title="OpenClawd AutoResearch API", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
@@ -97,4 +98,5 @@ app.include_router(api_keys_router)
 app.include_router(me_router)
 app.include_router(usage_router)
 app.include_router(admin_router)
+app.include_router(research_router)  # NEW: Auto-Research routes
 app.include_router(tus_router)
