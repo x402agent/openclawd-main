@@ -291,5 +291,3 @@ export async function createAgenticWalletManager(
   await m.initialize();
   return m;
 }
-
-export type { AgenticWalletConfig, WalletAccount, TransactionRequest };

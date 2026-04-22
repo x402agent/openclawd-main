@@ -20,6 +20,14 @@
 
 import { Honcho, type Session, type Peer } from '@honcho-ai/sdk';
 
+/** Two webhook endpoints — each with its own secret for verification. */
+export interface HonchoWebhookConfig {
+  url1: string
+  secret1: string
+  url2?: string
+  secret2?: string
+}
+
 export interface SandboxPointer {
   sandboxId: string;
   template: string;
