@@ -498,6 +498,141 @@ app.get('/v1/wurk/submissions', async (c) => {
   }
 });
 
+/* ——— Metaplex Core + Agent Registry + Genesis ——— */
+
+const metaplexBridge = new MetaplexBridge();
+
+// POST /v1/metaplex/mint — Mint a new Metaplex Core agent asset + register Agent Identity PDA
+// Auto-triggered on first login if no agent exists (see auth middleware below)
+app.post('/v1/metaplex/mint', async (c) => {
+  const wallet = c.get('wallet');
+  if (!wallet) return c.json({ error: 'no_solana_wallet' }, 400);
+
+  const body = await c.req.json<{
+    name: string;
+    uri: string;
+    agentMetadata?: Record<string, unknown>;
+    network?: 'solana-mainnet' | 'solana-devnet';
+  }>();
+
+  if (!body.name || !body.uri) {
+    return c.json({ error: 'name_and_uri_required' }, 400);
+  }
+
+  try {
+    const result = await metaplexBridge.mintAgent({
+      wallet,
+      name: body.name,
+      uri: body.uri,
+      agentMetadata: body.agentMetadata as any,
+      network: body.network,
+    });
+    return c.json(result);
+  } catch (err) {
+    return c.json({ error: (err as Error).message }, 502);
+  }
+});
+
+// GET /v1/metaplex/read/:assetAddress — Fetch agent data from on-chain
+app.get('/v1/metaplex/read/:assetAddress', async (c) => {
+  const assetAddress = c.req.param('assetAddress');
+  if (!assetAddress) return c.json({ error: 'asset_address_required' }, 400);
+
+  try {
+    const data = await metaplexBridge.readAgentData(assetAddress);
+    return c.json(data);
+  } catch (err) {
+    return c.json({ error: (err as Error).message }, 502);
+  }
+});
+
+// POST /v1/metaplex/register — Register identity on an existing MPL Core asset
+app.post('/v1/metaplex/register', async (c) => {
+  const body = await c.req.json<{
+    asset: string;
+    collection?: string;
+    agentRegistrationUri: string;
+  }>();
+
+  if (!body.asset || !body.agentRegistrationUri) {
+    return c.json({ error: 'asset_and_agentRegistrationUri_required' }, 400);
+  }
+
+  try {
+    const result = await metaplexBridge.registerIdentity({
+      asset: body.asset,
+      collection: body.collection,
+      agentRegistrationUri: body.agentRegistrationUri,
+    });
+    return c.json(result);
+  } catch (err) {
+    return c.json({ error: (err as Error).message }, 502);
+  }
+});
+
+// POST /v1/metaplex/launch-token — Launch an agent token via Genesis bonding curve
+// setToken: true permanently links this token to the agent (irreversible!)
+app.post('/v1/metaplex/launch-token', async (c) => {
+  const wallet = c.get('wallet');
+  if (!wallet) return c.json({ error: 'no_solana_wallet' }, 400);
+
+  const body = await c.req.json<{
+    agentMint: string;
+    setToken: boolean;
+    tokenName: string;
+    tokenSymbol: string;
+    imageUrl: string;
+    firstBuyAmount?: number;
+    description?: string;
+    network?: 'solana-mainnet' | 'solana-devnet';
+  }>();
+
+  if (!body.agentMint || !body.tokenName || !body.tokenSymbol || !body.imageUrl) {
+    return c.json({ error: 'agentMint_tokenName_tokenSymbol_imageUrl_required' }, 400);
+  }
+
+  try {
+    const result = await metaplexBridge.launchAgentToken({
+      agentMint: body.agentMint,
+      setToken: body.setToken ?? false,
+      tokenName: body.tokenName,
+      tokenSymbol: body.tokenSymbol,
+      imageUrl: body.imageUrl,
+      firstBuyAmount: body.firstBuyAmount,
+      description: body.description,
+      network: body.network,
+    });
+    return c.json(result);
+  } catch (err) {
+    return c.json({ error: (err as Error).message }, 502);
+  }
+});
+
+// POST /v1/metaplex/delegate — Register executive profile + delegate agent execution
+app.post('/v1/metaplex/delegate', async (c) => {
+  const wallet = c.get('wallet');
+  if (!wallet) return c.json({ error: 'no_solana_wallet' }, 400);
+
+  const body = await c.req.json<{
+    agentAsset: string;
+    executiveAuthority?: string;
+  }>();
+
+  if (!body.agentAsset) {
+    return c.json({ error: 'agentAsset_required' }, 400);
+  }
+
+  try {
+    const result = await metaplexBridge.delegateExecution({
+      agentAsset: body.agentAsset,
+      executiveAuthority: body.executiveAuthority ?? wallet,
+    });
+    return c.json(result);
+  } catch (err) {
+    return c.json({ error: (err as Error).message }, 502);
+  }
+});
+
 /* ——— helpers ——— */
 
 function buildManifest(
