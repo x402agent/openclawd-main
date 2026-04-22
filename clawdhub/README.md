@@ -13,18 +13,18 @@
 
 **ClawdHub** is the skills marketplace and registry for the **OpenClawd** ecosystem — Browse, publish, and install `SKILL.md` bundles for AI agents on Solana. Inspired by [Nous Research](https://nousresearch.com)'s Hermes philosophy: agents that think, act, and settle autonomously on-chain.
 
-> ClawdHub powers the skills marketplace at [solanaclawd.com/marketplace](https://solanaclawd.com/marketplace)
+> ClawdHub powers the skills marketplace at [hub.solanaclawd.com/marketplace](https://hub.solanaclawd.com/marketplace)
 
 ## 🔗 Quick Links
 
 | Resource | URL |
 |----------|-----|
-| **Website** | [solanaclawd.com](https://solanaclawd.com) |
-| **Cloud OS** | [cloud.solanaclawd.com](https://cloud.solanaclawd.com) |
-| **Vault** | [vault.solanaclawd.com](https://vault.solanaclawd.com) |
+| **Website** | [hub.solanaclawd.com](https://hub.solanaclawd.com) |
+| **Cloud OS** | [cloud.hub.solanaclawd.com](https://cloud.hub.solanaclawd.com) |
+| **Vault** | [vault.hub.solanaclawd.com](https://vault.hub.solanaclawd.com) |
 | **SolanaOS** | [solanaos.net](https://solanaos.net) |
-| **Skills Marketplace** | [solanaclawd.com/marketplace](https://solanaclawd.com/marketplace) |
-| **Orchestrator** | [solanaclawd.com/api](https://solanaclawd.com/api) |
+| **Skills Marketplace** | [hub.solanaclawd.com/marketplace](https://hub.solanaclawd.com/marketplace) |
+| **Orchestrator** | [hub.solanaclawd.com/api](https://hub.solanaclawd.com/api) |
 
 ---
 
@@ -60,7 +60,7 @@ Solana — Helius RPC · Jupiter · SPL USDC · $CLAWD
 ## 🔧 One-Shot Install
 
 ```bash
-curl -fsSL https://solanaclawd.com/install.sh | bash
+curl -fsSL https://hub.solanaclawd.com/install.sh | bash
 ```
 
 ---
@@ -92,28 +92,28 @@ npx clawdhub scan ./my-skill
 
 ```bash
 # Browse skills marketplace
-curl https://solanaclawd.com/marketplace/skills | jq '.'
+curl https://hub.solanaclawd.com/marketplace/skills | jq '.'
 
 # List all skills
-curl https://solanaclawd.com/api/skills | jq '.'
+curl https://hub.solanaclawd.com/api/skills | jq '.'
 
 # Search skills
-curl "https://solanaclawd.com/api/skills/search?q=solana" | jq '.'
+curl "https://hub.solanaclawd.com/api/skills/search?q=solana" | jq '.'
 
 # Get featured skills
-curl https://solanaclawd.com/api/skills/featured | jq '.'
+curl https://hub.solanaclawd.com/api/skills/featured | jq '.'
 
 # Get skill details
-curl https://solanaclawd.com/api/skills/pumpfun-trading
+curl https://hub.solanaclawd.com/api/skills/pumpfun-trading
 
 # Install skill (download SKILL.md)
-curl -s "https://solanaclawd.com/api/skills/pumpfun-trading/download" -o SKILL.md
+curl -s "https://hub.solanaclawd.com/api/skills/pumpfun-trading/download" -o SKILL.md
 
 # Trending skills
-curl https://solanaclawd.com/api/marketplace/trending | jq '.'
+curl https://hub.solanaclawd.com/api/marketplace/trending | jq '.'
 
 # New skills
-curl https://solanaclawd.com/api/marketplace/new | jq '.'
+curl https://hub.solanaclawd.com/api/marketplace/new | jq '.'
 ```
 
 ---
@@ -155,22 +155,22 @@ Skills integrate with the OpenClawd payment system:
 
 ```bash
 # Verify payment
-curl -X POST https://solanaclawd.com/x402/facilitator/verify \
+curl -X POST https://hub.solanaclawd.com/x402/facilitator/verify \
   -H "Content-Type: application/json" \
   -d '{"payment":"<id>"}' | jq '.'
 
 # Settle payment
-curl -X POST https://solanaclawd.com/x402/facilitator/settle \
+curl -X POST https://hub.solanaclawd.com/x402/facilitator/settle \
   -H "Content-Type: application/json" \
   -d '{"tx":"<signature>"}' | jq '.'
 
 # Supported tokens
-curl https://solanaclawd.com/x402/facilitator/supported | jq '.'
+curl https://hub.solanaclawd.com/x402/facilitator/supported | jq '.'
 ```
 
 ### OpenClawd Orchestrator API
 
-The orchestrator at `solanaclawd.com/api` powers all payment and agent flows:
+The orchestrator at `hub.solanaclawd.com/api` powers all payment and agent flows:
 
 | Route | Description |
 |-------|-------------|

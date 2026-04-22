@@ -95,7 +95,7 @@ We prioritize secure defaults, but we also expose clear knobs for trusted high-p
 ## Skills & ClawdHub
 
 Skills are the atom of capability in OpenClawd.
-New skills should be published to **ClawdHub** ([solanaclawd.com/marketplace](https://solanaclawd.com/marketplace)) first, not added to core by default.
+New skills should be published to **ClawdHub** ([hub.solanaclawd.com/marketplace](https://hub.solanaclawd.com/marketplace)) first, not added to core by default.
 
 Core skill additions should be rare and require a strong product or security reason.
 

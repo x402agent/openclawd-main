@@ -136,7 +136,7 @@
 
 ### Changed
 - Brand: rebrand to ClawHub and publish CLI as `clawhub` (legacy `clawdhub` supported).
-- Domain: default site/registry now `https://solanaclawd.com`; `.well-known/clawhub.json` preferred.
+- Domain: default site/registry now `https://hub.solanaclawd.com`; `.well-known/clawhub.json` preferred.
 - Theme: persist theme under `clawhub-theme` (legacy key still read).
 
 ### Fixed

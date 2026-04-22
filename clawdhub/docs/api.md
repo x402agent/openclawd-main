@@ -7,7 +7,7 @@ read_when:
 
 # API v1
 
-Base: `https://solanaclawd.com`
+Base: `https://hub.solanaclawd.com`
 
 OpenAPI: `/api/v1/openapi.json`
 
