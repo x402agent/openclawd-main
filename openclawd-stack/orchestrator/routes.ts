@@ -10,6 +10,7 @@ import { HonchoClient } from './honcho.js';
 import { PaymentsClient, type AgentManifest } from './payments.js';
 import { WalletBridge } from './wallet-bridge.js';
 import { McpBridge } from './mcp-bridge.js';
+import { MetaplexBridge } from './metaplex-bridge.js';
 import {
   createQuickJob,
   createAgentToHumanJob,
