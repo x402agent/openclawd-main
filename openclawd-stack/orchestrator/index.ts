@@ -5,6 +5,14 @@ import { app as apiRoutes } from './routes.js';
 import { buildWebhookRouter } from './webhooks.js';
 import { HonchoClient } from './honcho.js';
 
+// Prevent tsx from crashing the dev server on Honcho SDK's internal unhandled
+// rejections (e.g. workspace not found 404). These rejections are handled
+// internally by the SDK — tsx just sees the orphan promise and kills the
+// process. Swallowing them here keeps the server alive.
+process.on('unhandledRejection', (err) => {
+  console.warn('[orchestrator] unhandled rejection — suppressed:', String(err));
+});
+
 const PORT = Number(process.env.ORCHESTRATOR_PORT ?? 8787);
 
 const honcho = new HonchoClient({
