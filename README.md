@@ -102,9 +102,14 @@ The installer is live on Cloudflare Workers — fully self-contained, no repo ac
 ### What the installer does
 
 1. **Preflight** — verifies `node ≥ 18`, `git`, `npm`
-2. **Installs** `solana-clawd` CLI globally from npm
-3. **Scaffolds** `~/.openclawd/.env` with Solana + model defaults (never overwrites)
-4. **Prints** pair / mint / status next steps
+2. **Installs Tailscale** — Homebrew cask on macOS, official script on Linux (skip with `SKIP_TAILSCALE=1`)
+3. **Installs** `solana-clawd` CLI globally from npm
+4. **Bootstraps [`tailclawd/`](./tailclawd/)** — shallow-clones the monorepo, symlinks `tailclawd/` into `~/.openclawd/tailclawd`, and runs its `npm install` so you can expose Clawd Code over your tailnet in one command
+5. **Scaffolds** `~/.openclawd/.env` with Solana + model + tailnet defaults (never overwrites)
+6. **Optionally serves** — with `AUTO_SERVE=1`, runs `tailscale serve --bg --https=443 http://127.0.0.1:3110`
+7. **Prints** pair / mint / status / tailnet next steps
+
+Env overrides: `OPENCLAWD_DIR`, `TAILCLAWD_DIR`, `OPENCLAWD_REPO`, `SKIP_TAILSCALE=1`, `SKIP_TAILCLAWD=1`, `AUTO_SERVE=1`, `TAILCLAWD_TOKEN`.
 
 ### CLI only?
 
@@ -115,6 +120,24 @@ solana-clawd mint          # mint your agent NFT (Metaplex Core)
 solana-clawd status        # show pairing + wallet
 solana-clawd agent         # start agentic OODA loop
 ```
+
+### 🐚 tailclawd — Clawd Code over Tailscale
+
+The installer also bootstraps **[`tailclawd/`](./tailclawd/)** — a Node + `iii-sdk` app
+that exposes Clawd Code on `localhost:3110`, ready to publish across your tailnet
+with either `tailscale serve` (private) or `tailscale funnel` (public HTTPS).
+
+```bash
+cd ~/.openclawd/tailclawd
+npm run dev                                             # launch tailclawd (port 3110)
+tailscale serve --bg --https=443 http://127.0.0.1:3110  # private tailnet URL
+# or:
+tailscale funnel --bg 3110                              # public https funnel
+```
+
+Set `TAILCLAWD_TOKEN=…` in `~/.openclawd/.env` to require a bearer header on every
+request. Pair it with your agent NFT to gate access by $CLAWD balance.
+
 
 ---
 
