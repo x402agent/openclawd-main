@@ -3,13 +3,14 @@ node_modules/
 .pnp
 .pnp.js
 .yarn/install-state.gz
-
+.env
+.env.local
 # Build outputs
 dist/
 build/
 out/
 *.tsbuildinfo
-
+openclawd-stack
 # IDE
 .idea/
 .vscode/

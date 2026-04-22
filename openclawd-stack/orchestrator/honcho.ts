@@ -148,15 +148,7 @@ export class HonchoClient {
 
   /* ——— 3. Chat persistence ——— */
 
-  /**
-   * Mirror a single (user message, assistant message) pair into a Honcho
-   * session. The session is scoped to the user + agent, so mawdbot and
-   * vibe-coder have independent histories.
-   *
-   * Honcho kicks off background reasoning: summaries every N messages,
-   * representation updates, peer card extraction. All transparent — we
-   * just need to keep writing messages.
-   */
+  /** Public — exposed so webhook handlers can mirror events from Honcho back. */
   async recordTurn(args: {
     privySub: string;
     agent: string;
