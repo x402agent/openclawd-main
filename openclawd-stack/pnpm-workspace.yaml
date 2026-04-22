@@ -2,3 +2,5 @@ packages:
   - template
   - gateway
   - orchestrator
+  - orchestrator/privy-agentic-wallet
+  - orchestrator/solana-clawd-mcp
