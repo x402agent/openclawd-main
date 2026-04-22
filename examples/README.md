@@ -17,6 +17,8 @@ Example code and demonstrations for the OpenClawd ecosystem.
 | `auto-research-client.ts` | Karpathy-style self-improving research Wiki API client | Research |
 | `lobster-trader.ts` | pump.fun bonding curve math, token analysis, and trade simulation | Trading |
 | `orchestrator-client.ts` | Orchestrator API integration (agents, MCP tools, wallet, Metaplex) | Infrastructure |
+| `clawd-wallet-demo.ts` | @openclawd/wallet SDK: Privy wallet, agentic trading, Grok 4.20 Beta | Wallet |
+| `x402-payment-demo.ts` | @solana-clawd/agents-x402: agent-to-agent USDC payments on Solana | Payments |
 
 ### Blockchain Buddies Demo
 
@@ -76,6 +78,22 @@ npx tsx examples/orchestrator-client.ts
 
 Full Orchestrator API integration demo. Shows how to connect to the OpenClawd Orchestrator for agent catalog browsing, MCP tool discovery, wallet management, and Metaplex Core asset operations (lobster agents, token launches, trades).
 
+### Clawd Wallet Demo *(new)*
+
+```bash
+npx tsx examples/clawd-wallet-demo.ts
+```
+
+Full `@openclawd/wallet` SDK walkthrough — Privy-embedded Solana wallet, agentic trading with Grok 4.20 Beta as the AI reasoning layer, Jupiter aggregator swaps, permission system (`deny` / `ask` / `allow`), React hooks, and CLI usage. Covers the complete architecture: `User → Grok 4.20 Beta → ClawdWallet (Privy) → Solana`.
+
+### x402 Payment Demo *(new)*
+
+```bash
+npx tsx examples/x402-payment-demo.ts
+```
+
+Full `@solana-clawd/agents-x402` payment protocol demo. Shows core client (automatic 402 → pay → retry), HTTP middleware for Hono/Express/Workers, MCP paid tool registration, slug configuration, and integration with `@openclawd/wallet` for agent-to-agent USDC settlement on Solana. Architecture: `Agent → 402 → Facilitator → Solana → Verify → Data`.
+
 ---
 
 ## Quick Reference
@@ -93,12 +111,16 @@ RESEARCH_API_URL=http://localhost:8000 npx tsx examples/auto-research-client.ts
 
 | Resource | Path |
 |----------|------|
+| Clawd Wallet (`@openclawd/wallet`) | `packages/clawd-wallet/` |
+| x402 Payments (`@solana-clawd/agents-x402`) | `packages/agents-x402-solana/` |
+| TailClawd (Tailscale Web UI) | `tailclawd/` |
 | Moltbook Agent Template | `moltbook-agent/` |
 | AutoResearch Wiki | `llm-wiki-tang/` |
 | Orchestrator Stack | `openclawd-stack/` |
 | Agent Catalog | `AGENTS/agents-catalog.json` |
 | MCP Server | `MCP/` |
 | Skills Library | `skills/` |
+| One-Shot Install | `curl -fsSL solanaclawd.com/install.sh \| bash` |
 
 ## License
 
