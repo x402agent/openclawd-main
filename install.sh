@@ -335,8 +335,45 @@ EOF"
   ok "created $ENV_FILE — fill in your provider keys"
 fi
 
+# ─── profiles ────────────────────────────────────────────────────
+hr
+PROFILE_CLI="$REPO_DIR/profiles/clawd-profile"
+if [ -f "$PROFILE_CLI" ] && [ -x "$PROFILE_CLI" ]; then
+  run_with_spinner claw "installing clawd-profile CLI" bash -c "
+    # copy the CLI to a persistent location so it survives repo updates
+    install -d \"\$HOME/.openclawd/bin\" 2>/dev/null || true
+    install -m 0755 \"$PROFILE_CLI\" \"\$HOME/.openclawd/bin/clawd-profile\"
+    # ensure ~/.local/bin is in PATH (add to shell rc if not)
+    if [[ :\$PATH: != *:\"\$HOME/.local/bin\":* ]]; then
+      mkdir -p \"\$HOME/.local/bin\"
+      if [ -f \"\$HOME/.zshrc\" ] && ! grep -q 'export PATH=.*\.local/bin' \"\$HOME/.zshrc\" 2>/dev/null; then
+        echo 'export PATH=\"\$HOME/.local/bin:\$PATH\"  # openclawd' >> \"\$HOME/.zshrc\"
+      fi
+      if [ -f \"\$HOME/.bashrc\" ] && ! grep -q 'export PATH=.*\.local/bin' \"\$HOME/.bashrc\" 2>/dev/null; then
+        echo 'export PATH=\"\$HOME/.local/bin:\$PATH\"  # openclawd' >> \"\$HOME/.bashrc\"
+      fi
+    fi
+    mkdir -p \"\$HOME/.openclawd/profiles\"
+    mkdir -p \"\$HOME/.local/bin\"
+  "
+  ok "clawd-profile installed to ~/.openclawd/bin/"
+  info "try: clawd profile create default  (or: ~/.openclawd/bin/clawd-profile create default)"
+else
+  warn "clawd-profile not found at $PROFILE_CLI — profiles skipped"
+fi
+
 # ─── all done ─────────────────────────────────────────────────────
 hr
+
+# ── matrix rain success animation ─────────────────────────────────
+if [ -t 1 ]; then
+  printf "\n"
+  for i in 1 2 3 4; do
+    printf "  ${NEON}░▒▓█${CR}  ${MAGENTA}▓▒░${CR}  ${CYAN}█▓▒░${CR}  ${VIOLET}▒░▓█${CR}\n"
+    sleep 0.08
+  done
+fi
+
 printf "\n"
 printf "          ${MAGENTA}▒▓█${CR} ${BOLD}${LOBSTER}openclawd online${CR} ${MAGENTA}█▓▒${CR}\n\n"
 

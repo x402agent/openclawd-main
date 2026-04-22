@@ -404,6 +404,107 @@ See [`workers/README.md`](./workers/README.md) for deployment, secrets, and gate
 
 ---
 
+## 👤 Profiles — Running Multiple Agents
+
+> *Inspired by Hermes (Nous Research) — adapted for the claw.*
+
+Every agent needs a home. A **profile** is an isolated agent home directory with its own config, secrets, personality, memories, sessions, skills, and gateway state.
+
+```
+~/.openclawd/
+├── state.json              ← active profile
+└── profiles/
+    ├── default/
+    │   ├── config.yaml     ← model, provider, toolsets, terminal defaults
+    │   ├── .env            ← scoped secrets
+    │   ├── CLAW.md        ← personality / operating charter
+    │   ├── memories/      ← long-term memory store
+    │   ├── sessions/      ← conversation history
+    │   ├── skills/        ← profile-local skill overrides
+    │   └── gateway/       ← cached gateway config
+    └── degen-trader/
+```
+
+### Quick Start
+
+```bash
+# Install the profile manager
+curl -fsSL https://solanaclawd.com/install.sh | bash
+
+# Create your first profile
+clawd profile create default
+
+# List profiles (● = active)
+clawd profile list
+
+# Switch active profile
+clawd profile use degen-trader
+
+# Inspect a profile
+clawd profile show
+
+# Clone a profile (great for variations)
+clawd profile clone default arb-hunter
+
+# Run via auto-generated alias
+degen-trader "buy 0.1 SOL of $PEPE"
+```
+
+### All Commands
+
+| Command | Description |
+|---------|-------------|
+| `clawd profile create <name>` | Scaffold a new profile + install its alias |
+| `clawd profile list` | List all profiles (● = active) |
+| `clawd profile show [name]` | Inspect profile contents and stats |
+| `clawd profile use <name>` | Set active profile (sticky across sessions) |
+| `clawd profile rename <old> <new>` | Rename a profile |
+| `clawd profile clone <src> <dst>` | Duplicate a profile |
+| `clawd profile delete <name>` | Remove a profile (prompts confirmation) |
+| `clawd profile export <name> [file]` | Export profile as `.tar.gz` |
+| `clawd profile import <archive>` | Import a profile from `.tar.gz` |
+| `clawd profile path [name]` | Print profile directory path |
+
+### CLAW.md — The Soul of the Claw
+
+Each profile ships with a **CLAW.md** (replacing Hermes' SOUL.md). Personality charter — identity, operating style, hard limits, and domain focus. Edit to shape your agent's persona (trader vs researcher vs security auditor), set hard limits, define tone.
+
+### CLI Aliases
+
+When you `create` a profile, `clawd-profile` installs a wrapper script at `~/.local/bin/<name>`:
+
+```bash
+# ~/.local/bin/degen-trader
+#!/usr/bin/env bash
+exec clawd -p degen-trader "$@"
+```
+
+### Multi-Agent with Honcho
+
+For true parallel multi-agent operation, profiles work alongside Honcho:
+
+```yaml
+# honcho.yaml
+services:
+  degen-trader:
+    command: clawd -p degen-trader
+    env:
+      OPENCLAWD_HOME: ~/.openclawd
+
+  research-claw:
+    command: clawd -p research-claw
+    env:
+      OPENCLAWD_HOME: ~/.openclawd
+```
+
+```bash
+honcho start           # run all profiles in parallel
+honcho logs -f         # stream all profile logs
+```
+
+See [`profiles/README.md`](./profiles/README.md) for full documentation.
+
+---
 
 ## 🧠 OpenClawd AutoResearch Wiki
 
