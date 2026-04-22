@@ -1,10 +1,14 @@
+# 🦞 OpenClawd
+
+> **"The Hermes of Web3" — inspired by [Nous Research](https://nousresearch.com)'s Hermes agent philosophy.**
+
+OpenClawd is the open-source, autonomous AI agent system for Solana. Like Hermes — the fleet-footed messenger of the gods — it moves fast, connects everything, and delivers results. Built on the conviction that AI agents should be composable, monetizable, and chain-native from the ground up.
+
+---
+
 <div align="center">
 
 <img src="https://raw.githubusercontent.com/x402agent/openclawd/main/gfx/lobster.svg" alt="OpenClawd" width="140" onerror="this.style.display='none'">
-
-# 🦞 OpenClawd
-
-### The open-source Solana AI agent stack.
 
 **One router · one settlement layer · one environment contract**
 
@@ -30,7 +34,7 @@
 [![Twitter Follow](https://img.shields.io/twitter/follow/clawddevs?style=flat-square&color=1DA1F2)](https://x.com/clawddevs)
 [![Telegram](https://img.shields.io/badge/Telegram-clawdtoken-26A5E4?style=flat-square&logo=telegram)](https://t.me/clawdtoken)
 
-[**Install**](#install) · [**Architecture**](#architecture) · [**Router**](#clawdrouter) · [**Wallet**](#clawd-wallet) · [**Marketplace**](#clawdhub) · [**Stack Map**](./STACK.md) · [**Docs**](./articles) · [**Website**](https://solanaclawd.com)
+[**Install**](#install) · [**Architecture**](#architecture) · [**Orchestrator**](#openclawd-orchestrator) · [**Router**](#clawdrouter) · [**Wurk x402**](#wurk-x402-integration) · [**Stack Map**](./STACK.md) · [**Docs**](./articles) · [**Website**](https://solanaclawd.com)
 
 </div>
 
@@ -38,15 +42,9 @@
 
 ## OpenClawd in one paragraph
 
-OpenClawd is a monorepo for building, running, and monetizing Solana-native AI agents. It combines a model router, a wallet layer, payment rails, an MCP runtime, a skills marketplace, browser and chat surfaces, and deployment-oriented tooling under one repo and one shared environment contract.
+OpenClawd is a monorepo for building, running, and monetizing Solana-native AI agents. It combines an orchestrator (Honcho brain + E2B sandbox + Privy wallet), a model router, a wallet layer, x402 payment rails, an MCP runtime, a skills marketplace, browser and chat surfaces, and deployment-oriented tooling under one repo and one shared environment contract.
 
-If you want the product overview, start here. If you want the directory-by-directory technical map, read [STACK.md](./STACK.md).
-
----
-
-## Public release
-
-This repo is published without real secrets, private keys, or required proprietary credentials.
+Inspired by Nous Research's Hermes philosophy — agents that think, act, and settle autonomously on-chain — OpenClawd ships the full stack: from sandboxed agent execution to on-chain payment settlement, wrapped in a composable monorepo any team can fork, deploy, or extend.
 
 ---
 
@@ -79,10 +77,10 @@ cp .env.example .env
 # Edit .env with your API keys
 
 # Build agents catalog
-cd agents && node build-catalog.cjs
+cd AGENTS && node build-catalog.cjs
 
-# Run ClawdRouter
-cd ../clawdrouter && npm run dev
+# Run the Orchestrator (brain + wallet + MCP in one server)
+cd ../openclawd-stack && pnpm install && pnpm dev:orchestrator
 ```
 
 For full installation details, see **[ONBOARDING.md](./ONBOARDING.md)**.
@@ -97,24 +95,101 @@ For full installation details, see **[ONBOARDING.md](./ONBOARDING.md)**.
 | [CONTRIBUTING.md](./CONTRIBUTING.md) | Contribution guidelines |
 | [STACK.md](./STACK.md) | Technical architecture |
 | [articles/](./articles/) | Deep-dive documentation |
-| [agents/README.md](./agents/README.md) | Agent development |
+| [AGENTS/README.md](./AGENTS/README.md) | Agent development |
 | [skills/README.md](./skills/README.md) | Skill development |
 
 ---
 
-Before you run anything:
+## 🧠 OpenClawd Orchestrator
 
-1. Copy [`.env.example`](./.env.example) to `.env`, plus any subproject `*.env.example` files you actually need.
-2. Read [SECURITY.md](./SECURITY.md).
-3. Use [STACK.md](./STACK.md) and the docs in [articles/](./articles/) as the source of truth for setup details.
+The heart of the stack: **`openclawd-stack/orchestrator/`** — a single Hono server that ties everything together.
 
-Hosted URLs in the repo are defaults, not lock-in. Swap them for your own infrastructure if you self-host.
+### What it runs
+
+```text
+┌─────────────────────────────────────────────────────────────────┐
+│                    OpenClawd Orchestrator                       │
+│                     Port 8787 · Hono server                     │
+├─────────────────────────────────────────────────────────────────┤
+│  Honcho Brain        → memory, peer.chat, session context       │
+│  E2B Sandbox         → per-user isolated agent sandboxes        │
+│  Privy Wallet        → embedded wallet, balance, transfer        │
+│  Solana MCP           → child process per user, JSON-RPC stdio  │
+│  Payments Client      → ClawdVault registry, AP2 mandates        │
+│  Wurk x402 Bridge     → social campaigns, agent-to-human jobs     │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### API routes
+
+| Route | Description |
+|-------|-------------|
+| `GET /healthz` | Server liveness |
+| `GET /api/v1/me` | Auth info (Privy JWT) |
+| `GET /api/v1/agents` | Agent catalog |
+| `POST /api/v1/launch` | Launch agent (Honcho + E2B) |
+| `POST /api/v1/pause` | Stop agent sandbox |
+| `GET /api/v1/wallet` | List Privy wallets |
+| `POST /api/v1/wallet/create` | Create embedded wallet |
+| `POST /api/v1/wallet/transfer` | Transfer SOL/USDC |
+| `GET /api/v1/mcp/tools` | List MCP tools |
+| `POST /api/v1/mcp/call` | Call MCP tool |
+| `GET /api/v1/projects` | Honcho projects |
+| `POST /api/v1/brain/ask` | Ask the Honcho brain |
+| `GET /api/v1/brain/context/:agent` | Load agent context |
+| `POST /api/v1/mandates/mint` | Mint AP2 payment mandate |
+| `GET /api/v1/earnings` | Pending earnings (USDC) |
+| `GET /api/v1/wurk/services` | Wurk service catalog |
+| `POST /api/v1/wurk/quick` | Create quick x402 job |
+| `POST /api/v1/wurk/agent-to-human` | Hire humans for tasks |
+| `GET /api/v1/wurk/submissions` | Retrieve job submissions |
+| `POST /webhook/` | Honcho event webhook |
+| `POST /webhook/chat` | Honcho chat turn webhook |
+
+### Environment variables
+
+```bash
+# Orchestrator core
+ORCHESTRATOR_PORT=8787
+ORCHESTRATOR_CORS_ORIGINS=https://solanaclawd.com,https://www.solanaclawd.com,http://localhost:5173
+
+# Privy embedded wallet
+PRIVY_APP_ID=
+PRIVY_APP_SECRET=
+PRIVY_JWKS_ENDPOINT=https://auth.privy.io/api/v1/apps/{app_id}/jwks.json
+PRIVY_AUTH_PRIVATE_KEY=wallet-auth:...
+
+# Honcho brain + memory
+HONCHO_API_KEY=
+HONCHO_WORKSPACE_ID=pumpfun
+HONCHO_WEBHOOK_SECRET=
+HONCHO_WEBHOOKSECRET2=
+
+# E2B sandbox runtime
+E2B_API_KEY=
+
+# Solana Clawd MCP
+HELIUS_RPC=
+HELIUS_API_KEY=
+XAI_API_KEY=
+
+# Wurk.fun x402 (optional — quick jobs work without key)
+WURK_API_KEY=
+```
+
+### Dev mode
+
+```bash
+cd openclawd-stack
+pnpm dev:orchestrator
+# Server boots on :8787, hot-reloads on file changes
+```
 
 ---
 
-## Why this repo exists
+## Why OpenClawd exists
 
-Most Solana agent stacks are stitched together from separate services:
+Most AI agent stacks are stitched together from separate services:
 
 - an LLM gateway
 - wallet custody or signing glue
@@ -123,13 +198,16 @@ Most Solana agent stacks are stitched together from separate services:
 - a skills registry
 - sandboxed execution
 - a frontend or bot surface
+- a memory/brain system
 
-OpenClawd keeps those pieces in one place:
+OpenClawd keeps those pieces in one place, inspired by the Hermes philosophy — agents that move fast, connect everything, and settle autonomously:
 
+- **OpenClawd Orchestrator** for brain (Honcho), sandbox (E2B), wallet (Privy), and payment (AP2/x402) in one server
 - **ClawdRouter** for model selection and payment-aware routing
 - **`@openclawd/wallet`** for embedded Solana wallet flows with deny-first controls
 - **`solana-clawd`** for agent runtime, OODA loops, and Solana tooling
 - **ClawdHub** for searchable `SKILL.md` bundles
+- **Wurk.fun** for social campaigns and agent-to-human microjobs via x402
 - **x402 / MPP / AP2 / A2A** for payment-gated calls on Solana
 - **TailClawd and cloud surfaces** for browser and bot access
 
@@ -191,6 +269,19 @@ Set `TAILCLAWD_TOKEN` in `~/.openclawd/.env` if you want bearer-token protection
 
 ## Core layers
 
+### OpenClawd Orchestrator
+
+The unified server tying brain, sandbox, wallet, and payments together.
+
+- **`honcho.ts`** — Honcho SDK client for memory, peer.chat, and session context
+- **`sandbox-manager.ts`** — E2B sandbox lifecycle (launch/pause per user)
+- **`wallet-bridge.ts`** — Privy REST API for embedded wallet operations
+- **`mcp-bridge.ts`** — Solana Clawd MCP child processes per user (JSON-RPC over stdio)
+- **`payments.ts`** — ClawdVault registry + AP2 mandates + Pinata manifest pinning
+- **`wurk-bridge.ts`** — Wurk.fun x402 client (social jobs + agent-to-human)
+- **`webhooks.ts`** — Honcho webhook handlers (events + chat turns)
+- **`routes.ts`** — All HTTP routes under `/api/v1/*` (Privy JWT protected)
+
 ### ClawdRouter
 
 [`clawdrouter/`](./clawdrouter/) is the single model-routing layer for the stack.
@@ -248,6 +339,39 @@ The settlement layer is Solana, with SPL USDC and `$CLAWD` as the core billing a
 
 See [articles/ARTICLE_PAYMENTS.md](./articles/ARTICLE_PAYMENTS.md).
 
+### Wurk x402 Integration
+
+Social campaigns and agent-to-human microjobs powered by Wurk.fun's x402 protocol.
+
+**Quick social jobs** (no API key needed):
+```bash
+# 1. Call endpoint — returns 402 with payment info
+curl -X POST http://localhost:8787/api/v1/wurk/quick \
+  -H "Content-Type: application/json" \
+  -d '{"network":"solana","jobType":"xlikes","url":"https://x.com/user/status/123"}'
+
+# 2. Retry with PAYMENT-SIGNATURE header (on-chain USDC proof)
+curl -X POST http://localhost:8787/api/v1/wurk/quick \
+  -H "Content-Type: application/json" \
+  -H "PAYMENT-SIGNATURE: <base64-encoded-payment-proof>" \
+  -d '{"network":"solana","jobType":"xlikes","url":"https://x.com/user/status/123"}'
+```
+
+**Available job types**: `xlikes`, `reposts`, `comments`, `xfollowers`, `xraid`, `bookmarks`, `dex`, `pfcomments`, `tgmembers`, `dcmembers`, `instalikes`, `instafollowers`, `ytlikes`, `ytsubs`, `basefollowers`, `baselikes`, `basereposts`
+
+**Agent-to-human jobs** (hire real humans):
+```bash
+# Create a microjob to hire humans for feedback
+curl -X POST http://localhost:8787/api/v1/wurk/agent-to-human \
+  -H "Content-Type: application/json" \
+  -d '{"network":"solana","amount":"0.001","description":"Check if this website is accessible"}'
+
+# Retrieve submissions
+curl "http://localhost:8787/api/v1/wurk/submissions?secret=<secret>&network=solana"
+```
+
+See [`skills/wurk-integration/`](./skills/wurk-integration/) and [`MCP/wurk-mcp/`](./MCP/wurk-mcp/).
+
 ### API Registrar
 
 [`api-registrar/`](./api-registrar/) handles X (Twitter) wallet verification and API key generation.
@@ -270,31 +394,14 @@ See [api-registrar/README.md](./api-registrar/README.md).
 
 ### ClawdVault (Security)
 
-[`services/hermes-vault/`](./services/hermes-vault/) provides security scanning for skills and agents.
+[`clawd-vault-master/`](./clawd-vault-master/) provides security scanning for skills and agents, policy enforcement, and vault certification — the backbone of OpenClawd's deny-first security model.
 
 - **Risk Scanning** — Detect vulnerabilities in SKILL.md bundles
 - **Hardening** — Apply security best practices
 - **Policy Enforcement** — Validate against security policies
 - **Vault Certification** — Score-based approval system
 
-```bash
-# Scan a skill for security issues
-cd services/hermes-vault
-python -m hermes_vault.cli scan ../../skills/my-skill
-```
-
-See [skills/clawd-vault/](./skills/clawd-vault/).
-
-### WURK Integration (Monetization)
-
-[`MCP/wurk-mcp/`](./MCP/wurk-mcp/) and [`skills/wurk-integration/`](./skills/wurk-integration/) enable x402 job monetization.
-
-- **Job Posting** — Post AI agent jobs with SOL/USDC payment
-- **Bidding System** — Agents bid on jobs
-- **x402 Payments** — Automatic payment on completion
-- **Solana/Base Support** — Multi-chain settlement
-
-See [WURK Integration Guide](./skills/wurk-integration/README.md).
+See [`clawd-vault-master/`](./clawd-vault-master/).
 
 ### Cloud and browser surfaces
 
@@ -334,41 +441,46 @@ See [WURK Integration Guide](./skills/wurk-integration/README.md).
 ## Architecture
 
 ```text
-┌──────────────────────────────────────────────────────────────┐
-│ Surfaces                                                     │
-│ chrome-extension · telegram · tailclawd · WatchApp          │
-│ beepboop · chess · moltbook-agent · examples                │
-└────────────────────────────┬─────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────┐
+│ Surfaces                                                         │
+│ chrome-extension · telegram · tailclawd · WatchApp               │
+│ beepboop · chess · moltbook-agent                               │
+└────────────────────────────┬────────────────────────────────────┘
                              │ HTTP / SSE / WS
-┌────────────────────────────▼─────────────────────────────────┐
-│ Router and payments                                          │
-│ clawdrouter · x402-openrouter-main · workers · services      │
-│ plugin.delivery · api-registrar                              │
-└────────────────────────────┬─────────────────────────────────┘
+┌────────────────────────────▼────────────────────────────────────┐
+│ OpenClawd Orchestrator (port 8787)                               │
+│ honcho brain · e2b sandbox · privy wallet · solana mcp         │
+│ payments client · wurk x402 bridge                              │
+└────────────────────────────┬────────────────────────────────────┘
                              │ routed model calls + settlement
-┌────────────────────────────▼─────────────────────────────────┐
-│ Runtime                                                      │
-│ src · solana-clawd · agents · MCP · packages                 │
-│ openclawd-stack · clawd-cloud-os · CLI                       │
-└────────────────────────────┬─────────────────────────────────┘
-                             │ skills, registry, docs
-┌────────────────────────────▼─────────────────────────────────┐
-│ Skills and knowledge                                         │
-│ clawdhub · skills · acp_registry · articles · llm-wiki-tang  │
-│ clawd-vault · werk-integration                                │
-└────────────────────────────┬─────────────────────────────────┘
+┌────────────────────────────▼────────────────────────────────────┐
+│ Router and payments                                              │
+│ clawdrouter · x402-openrouter-main · workers · services        │
+│ plugin.delivery · api-registrar                                 │
+└────────────────────────────┬────────────────────────────────────┘
                              │ signed Solana actions
-┌────────────────────────────▼─────────────────────────────────┐
-│ Chain                                                        │
-│ Solana · Helius RPC · Jupiter · SPL USDC · $CLAWD            │
-└──────────────────────────────────────────────────────────────┘
-┌──────────────────────────────────────────────────────────────┐
-│ 🐾 Security: ClawdVault (hermes-vault)                        │
-│ vault-agent · vault-mcp · hermes-vault services               │
-│ ─────────────────────────────────────────────────────────────│
-│ 💰 Monetization: WURK.fun                                     │
-│ werk-mcp · werk-integration skill · x402 payments            │
-└──────────────────────────────────────────────────────────────┘
+┌────────────────────────────▼────────────────────────────────────┐
+│ Runtime                                                          │
+│ src · solana-clawd · AGENTS · MCP · packages                    │
+│ openclawd-stack · clawd-cloud-os · CLI                          │
+└────────────────────────────┬────────────────────────────────────┘
+                             │ skills, registry, docs
+┌────────────────────────────▼────────────────────────────────────┐
+│ Skills and knowledge                                             │
+│ clawdhub · skills · acp_registry · articles · llm-wiki-tang    │
+└────────────────────────────┬────────────────────────────────────┘
+                             │ signed Solana actions
+┌────────────────────────────▼────────────────────────────────────┐
+│ Chain                                                            │
+│ Solana · Helius RPC · Jupiter · SPL USDC · $CLAWD              │
+└─────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────┐
+│ 🛡️ Security: ClawdVault (clawd-vault-master)                    │
+│ policy engine · skill scanning · vault certification             │
+│ ─────────────────────────────────────────────────────────────── │
+│ 💰 Monetization: WURK.fun x402                                   │
+│ social campaigns · agent-to-human jobs · multi-chain settlement  │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
 For the full layer map, request flow, and directory breakdown, read [STACK.md](./STACK.md).
@@ -379,13 +491,13 @@ For the full layer map, request flow, and directory breakdown, read [STACK.md](.
 
 | Area | Directories |
 |---|---|
-| **Core Runtime** | [`solana-clawd/`](./solana-clawd/), [`agents/`](./agents/), [`src/`](./src/), [`MCP/`](./MCP/), [`packages/`](./packages/) |
+| **Orchestrator** | [`openclawd-stack/orchestrator/`](./openclawd-stack/orchestrator/) — honcho, e2b, privy, mcp, payments, wurk x402 |
+| **Core Runtime** | [`solana-clawd/`](./solana-clawd/), [`AGENTS/`](./AGENTS/), [`src/`](./src/), [`MCP/`](./MCP/), [`packages/`](./packages/) |
 | **Router & Payments** | [`clawdrouter/`](./clawdrouter/), [`x402-openrouter-main/`](./x402-openrouter-main/), [`workers/`](./workers/), [`services/`](./services/), [`plugin.delivery/`](./plugin.delivery/) |
 | **Surfaces** | [`chrome-extension/`](./chrome-extension/), [`telegram/`](./telegram/), [`tailclawd/`](./tailclawd/), [`WatchApp/`](./WatchApp/), [`beepboop/`](./beepboop/), [`chess/`](./chess/), [`moltbook-agent/`](./moltbook-agent/) |
 | **Cloud & Orchestration** | [`openclawd-stack/`](./openclawd-stack/), [`clawd-cloud-os/`](./clawd-cloud-os/), [`CLI/`](./CLI/) |
 | **Skills & Knowledge** | [`clawdhub/`](./clawdhub/), [`skills/`](./skills/), [`acp_registry/`](./acp_registry/), [`articles/`](./articles/), [`llm-wiki-tang/`](./llm-wiki-tang/) |
-| **SDKs, Examples & Assets** | [`solana-go-main/`](./solana-go-main/), [`API/`](./API/), [`examples/`](./examples/), [`gfx/`](./gfx/), [`npm/`](./npm/) |
-| **Security (ClawdVault)** | [`skills/clawd-vault/`](./skills/clawd-vault/), [`MCP/vault-mcp/`](./MCP/vault-mcp/), [`agents/vault-agent.json`](./agents/vault-agent.json), [`services/hermes-vault/`](./services/hermes-vault/) |
+| **Security (ClawdVault)** | [`clawd-vault-master/`](./clawd-vault-master/) — policy engine, skill scanning, vault certification |
 | **API Registrar** | [`api-registrar/`](./api-registrar/) — X-verified API key registration with Solana wallet auth |
 | **Monetization (WURK)** | [`skills/wurk-integration/`](./skills/wurk-integration/), [`MCP/wurk-mcp/`](./MCP/wurk-mcp/) — x402 job monetization on Solana/Base |
 | **Protocols** | [`x402-openrouter-main/`](./x402-openrouter-main/) — x402 payment protocol implementation |
@@ -404,11 +516,12 @@ Typical minimum variables:
 - `CLAWDROUTER_BASE_URL`
 - `XAI_API_KEY`, `ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, `MOONSHOT_API_KEY` as needed
 - `E2B_API_KEY`
-- `PRIVY_APP_ID`
+- `PRIVY_APP_ID`, `PRIVY_APP_SECRET`, `PRIVY_JWKS_ENDPOINT`, `PRIVY_AUTH_PRIVATE_KEY`
 - `HELIUS_API_KEY` or `HELIUS_RPC_URL`
 - `SOLANA_RPC_URL`
 - `TELEGRAM_BOT_TOKEN` or `TAILSCALE_AUTH_KEY` for specific surfaces
-- `WURK_API_KEY` for agent monetization via WURK.fun (see [`api-registrar/`](./api-registrar/))
+- `HONCHO_API_KEY`, `HONCHO_WORKSPACE_ID` for agent brain/memory
+- `WURK_API_KEY` for agent monetization via Wurk.fun x402 (optional — quick jobs work without key)
 
 Per-project example env files also exist in:
 
@@ -427,6 +540,7 @@ Per-project example env files also exist in:
 - Signing flows are deny-first by design.
 - Sandbox-oriented components isolate user-controlled execution.
 - Hosted endpoints are examples, not mandatory infrastructure.
+- ClawdVault enforces policy checks on all skills before they enter the registry.
 
 Read [SECURITY.md](./SECURITY.md) and [articles/permissions-sandboxing.md](./articles/permissions-sandboxing.md).
 
@@ -453,8 +567,9 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md).
 Common paths:
 
 - ship a skill: `npx clawdhub publish ./my-skill --slug my-skill`
-- add an agent: create a new directory under [`agents/`](./agents/) with its metadata and skill bundle
+- add an agent: create a new directory under [`AGENTS/`](./AGENTS/) with its metadata and skill bundle
 - publish npm packages: use [scripts/publish.sh](./scripts/publish.sh) with `NPM_TOKEN` exported in your shell
+- extend the orchestrator: add routes in [`openclawd-stack/orchestrator/routes.ts`](./openclawd-stack/orchestrator/routes.ts)
 
 ---
 
@@ -470,7 +585,7 @@ MIT. See [LICENSE.md](./LICENSE.md).
 
 **$CLAWD** · `8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump`
 
-Built by [8BIT Labs](https://8bit.io) · Powered by [xAI Grok](https://x.ai) · Settled on [Solana](https://solana.com)
+Built by [8BIT Labs](https://8bit.io) · Inspired by [Nous Research](https://nousresearch.com) · Powered by [xAI Grok](https://x.ai) · Settled on [Solana](https://solana.com)
 
 [![Twitter](https://img.shields.io/badge/𝕏-@clawddevs-000000?style=for-the-badge)](https://x.com/clawddevs)
 [![Telegram](https://img.shields.io/badge/Telegram-clawdtoken-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/clawdtoken)
