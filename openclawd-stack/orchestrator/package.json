@@ -7,11 +7,16 @@
   "scripts": {
     "dev": "tsx --watch index.ts",
     "start": "tsx index.ts",
-    "build": "tsc -p ."
+    "build": "tsc -p .",
+    "build:all": "pnpm --filter @solana-clawd/privy-agentic-wallet build && pnpm --filter @solana-clawd/solana-clawd-mcp build && pnpm build",
+    "smoke:integration": "tsx smoke-integration.ts"
   },
   "dependencies": {
     "@honcho-ai/sdk": "^1.6.0",
     "@hono/node-server": "^1.13.0",
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "@solana-clawd/privy-agentic-wallet": "workspace:*",
+    "@solana-clawd/solana-clawd-mcp": "workspace:*",
     "@solana/spl-token": "^0.4.9",
     "@solana/web3.js": "^1.95.4",
     "bs58": "^6.0.0",

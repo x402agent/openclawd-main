@@ -8,6 +8,8 @@ import { Connection } from '@solana/web3.js';
 import { SandboxManager, type UserSecrets } from './sandbox-manager.js';
 import { HonchoClient } from './honcho.js';
 import { PaymentsClient, type AgentManifest } from './payments.js';
+import { WalletBridge } from './wallet-bridge.js';
+import { McpBridge } from './mcp-bridge.js';
 
 const honcho = new HonchoClient({ apiKey: process.env.HONCHO_API_KEY ?? '' });
 
@@ -15,6 +17,21 @@ const connection = new Connection(
   process.env.HELIUS_RPC ?? 'https://api.mainnet-beta.solana.com',
   'confirmed',
 );
+
+const walletBridge = new WalletBridge({
+  connection,
+  privyAppId: process.env.PRIVY_APP_ID ?? '',
+  privyApiKey: process.env.PRIVY_APP_SECRET ?? '',
+  rpcUrl: process.env.HELIUS_RPC,
+});
+
+const mcpBridge = new McpBridge({
+  env: {
+    HELIUS_RPC_URL: process.env.HELIUS_RPC ?? '',
+    HELIUS_API_KEY: process.env.HELIUS_API_KEY ?? '',
+    XAI_API_KEY: process.env.XAI_API_KEY ?? '',
+  },
+});
 const payments = new PaymentsClient({
   connection,
   keeperSecretBase58: process.env.ORCHESTRATOR_KEEPER_KEY ?? '',
@@ -170,7 +187,82 @@ app.post('/v1/launch', async (c) => {
 app.post('/v1/pause', async (c) => {
   const privySub = c.get('privySub');
   await manager.pause(privySub);
+  await mcpBridge.kill(privySub).catch(() => undefined);
   return c.json({ ok: true });
+});
+
+/* ——— agentic wallet (Privy embedded wallets) ——— */
+
+app.get('/v1/wallet', async (c) => {
+  const privySub = c.get('privySub');
+  try {
+    const wallets = await walletBridge.listBalances(privySub);
+    return c.json({ wallets });
+  } catch (err) {
+    return c.json({ error: (err as Error).message }, 502);
+  }
+});
+
+app.post('/v1/wallet/create', async (c) => {
+  const privySub = c.get('privySub');
+  const body = await c.req.json<{ label?: string }>().catch(() => ({}) as { label?: string });
+  try {
+    const wallet = await walletBridge.createWallet({ privySub, label: body.label });
+    return c.json(wallet);
+  } catch (err) {
+    return c.json({ error: (err as Error).message }, 502);
+  }
+});
+
+app.post('/v1/wallet/transfer', async (c) => {
+  const privySub = c.get('privySub');
+  const body = await c.req.json<{
+    from: string;
+    to: string;
+    /** Amount in SOL. Converted to lamports server-side. */
+    amount: number;
+    /** Skip approval dance — only allowed on explicit user opt-in. */
+    autoSign?: boolean;
+  }>();
+  if (!body.from || !body.to || typeof body.amount !== 'number') {
+    return c.json({ error: 'bad_request' }, 400);
+  }
+  try {
+    const res = await walletBridge.transfer({
+      privySub,
+      from: body.from,
+      to: body.to,
+      lamports: Math.round(body.amount * 1e9),
+      autoSign: body.autoSign,
+    });
+    return c.json(res);
+  } catch (err) {
+    return c.json({ error: (err as Error).message }, 502);
+  }
+});
+
+/* ——— Solana Clawd MCP surface ——— */
+
+app.get('/v1/mcp/tools', async (c) => {
+  const privySub = c.get('privySub');
+  try {
+    const tools = await mcpBridge.listTools(privySub);
+    return c.json({ tools });
+  } catch (err) {
+    return c.json({ error: (err as Error).message }, 503);
+  }
+});
+
+app.post('/v1/mcp/call', async (c) => {
+  const privySub = c.get('privySub');
+  const body = await c.req.json<{ name: string; arguments?: Record<string, unknown> }>();
+  if (!body.name) return c.json({ error: 'name_required' }, 400);
+  try {
+    const result = await mcpBridge.callTool(privySub, body.name, body.arguments ?? {});
+    return c.json(result);
+  } catch (err) {
+    return c.json({ error: (err as Error).message }, 502);
+  }
 });
 
 app.get('/v1/projects', async (c) => {
