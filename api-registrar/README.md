@@ -1,6 +1,8 @@
-# 🐾 SolanaClawd API Registrar
+# 🐾 OpenClawd API Registrar
 
-API Key registration system that verifies Solana wallet ownership via X (Twitter) verification.
+API Key registration system for the OpenClawd ecosystem — verifies Solana wallet ownership via X (Twitter) verification and issues `clawd_sk_` API keys compatible with ClawdRouter.
+
+Part of the ACP (Agent Communication Protocol) registry system with protocol 8004 integration.
 
 ## Flow
 

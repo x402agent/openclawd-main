@@ -3,7 +3,14 @@
   "name": "clawd-vault",
   "displayName": "🐾 ClawdVault",
   "version": "1.0.0",
-  "description": "Security guardian agent that scans for vulnerabilities, hardens code, and manages secrets securely",
+  "description": "OpenClawd security guardian agent — scans for vulnerabilities, hardens code, manages secrets, and integrates with the ACP registry for trust verification",
+  "ecosystem": "OpenClawd",
+  "registry": {
+    "protocol": "8004",
+    "program_id": "Ag8004rWo8ao8AUKhLk78iv2nLQpZMyBPXiAh5QLbFiE",
+    "verified": true,
+    "mcp_endpoint": "MCP/vault-mcp"
+  },
   "persona": {
     "name": "ClawdVault",
     "role": "Security Guardian",
@@ -15,7 +22,8 @@
     {
       "name": "clawd-vault",
       "enabled": true,
-      "priority": "primary"
+      "priority": "primary",
+      "path": "skills/clawd-vault"
     }
   ],
   "capabilities": {
@@ -30,7 +38,9 @@
       "write": true,
       "execute": false
     },
-    "networkAccess": false
+    "networkAccess": false,
+    "registryIntegration": true,
+    "x402Payments": true
   },
   "permissions": {
     "level": "restricted",
@@ -40,7 +50,8 @@
       "./skills/",
       "./agents/",
       "./config/",
-      "./scripts/"
+      "./scripts/",
+      "./acp_registry/"
     ],
     "blockedPatterns": [
       "**/.env",
@@ -93,8 +104,9 @@
   "metadata": {
     "author": "Clawd Team",
     "created": "2024-01-01",
-    "updated": "2024-01-01",
-    "tags": ["security", "vault", "guardian", "scanner", "hardening"],
-    "category": "security"
+    "updated": "2026-04-22",
+    "tags": ["security", "vault", "guardian", "scanner", "hardening", "openclawd"],
+    "category": "security",
+    "license": "MIT"
   }
 }

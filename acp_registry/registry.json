@@ -140,6 +140,51 @@
       "keywords": ["mcp", "protocol", "editor-integration"]
     },
     {
+      "id": "clawd-vault-agent",
+      "name": "ClawdVault Agent",
+      "description": "OpenClawd security guardian agent — scans for vulnerabilities, hardens code, manages secrets, integrates with ACP registry via protocol 8004",
+      "category": "ai-agents",
+      "language": "json",
+      "license": "MIT",
+      "status": "active",
+      "url": "agents/vault-agent.json",
+      "keywords": ["security", "vault", "guardian", "scanner", "hardening", "openclawd"],
+      "capabilities": ["scan", "harden", "audit", "monitor"],
+      "registry": {
+        "protocol": "8004",
+        "program_id": "Ag8004rWo8ao8AUKhLk78iv2nLQpZMyBPXiAh5QLbFiE"
+      },
+      "stack": ["skills/clawd-vault", "MCP/vault-mcp", "services/hermes-vault"]
+    },
+    {
+      "id": "api-registrar",
+      "name": "OpenClawd API Registrar",
+      "description": "X-verified API key registration system — wallet auth via Solana, tweet verification, and API key issuance with ClawdRouter integration",
+      "category": "infrastructure",
+      "language": "typescript",
+      "license": "MIT",
+      "status": "active",
+      "url": "api-registrar/README.md",
+      "keywords": ["api", "registrar", "x-verification", "wallet", "solana", "openclawd"],
+      "flow": ["connect-wallet", "generate-code", "tweet-verification", "paste-url", "get-api-key"],
+      "stack": ["Hono", "Drizzle ORM", "PostgreSQL", "Solana wallets"],
+      "endpoints": ["/api/register/generate-code", "/api/register/verify-tweet", "/api/register/keys"]
+    },
+    {
+      "id": "wurk-integration",
+      "name": "WURK Integration",
+      "description": "OpenClawd agent monetization via WURK.fun — x402 payments on Solana/Base, social jobs, custom challenges, agent help requests",
+      "category": "payments",
+      "language": "typescript",
+      "license": "MIT",
+      "status": "active",
+      "url": "skills/wurk-integration/README.md",
+      "keywords": ["wurk", "monetization", "x402", "solana", "base", "payments"],
+      "capabilities": ["social-jobs", "custom-challenges", "agent-help", "x402-payments"],
+      "stack": ["skills/wurk-integration", "MCP/wurk-mcp"],
+      "chains": ["Solana", "Base"]
+    },
+    {
       "id": "CLI",
       "name": "OpenClawd CLI",
       "description": "Command-line tools for the OpenClawd ecosystem",
