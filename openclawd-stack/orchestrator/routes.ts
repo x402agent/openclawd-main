@@ -10,6 +10,13 @@ import { HonchoClient } from './honcho.js';
 import { PaymentsClient, type AgentManifest } from './payments.js';
 import { WalletBridge } from './wallet-bridge.js';
 import { McpBridge } from './mcp-bridge.js';
+import {
+  createQuickJob,
+  createAgentToHumanJob,
+  getAgentToHumanSubmissions,
+  WURK_SERVICES,
+  type QuickJobType,
+} from './wurk-bridge.js';
 
 const honcho = new HonchoClient({
   apiKey: process.env.HONCHO_API_KEY ?? '',
@@ -369,6 +376,101 @@ app.post('/v1/telegram/approve', async (c) => {
   const ptr = await honcho.getSandboxPointer(privySub);
   if (!ptr) return c.json({ error: 'no_sandbox' }, 404);
   return c.json({ ok: true, code, agent: agent ?? 'vibe-coder' });
+});
+
+/* ——— Wurk x402 routes ——— */
+
+// GET /api/v1/wurk/services — list all available Wurk services
+app.get('/v1/wurk/services', (c) => {
+  return c.json({ services: WURK_SERVICES });
+});
+
+// POST /api/v1/wurk/quick — create a quick job (no API key needed)
+// x402 flow: first call returns 402 with payment info, retry with PAYMENT-SIGNATURE
+app.post('/v1/wurk/quick', async (c) => {
+  const body = await c.req.json<{
+    network: 'solana' | 'base';
+    jobType: string;
+    url: string;
+    paymentSignature?: string;
+  }>();
+
+  try {
+    const result = await createQuickJob(
+      body.network,
+      body.jobType,
+      body.url,
+      body.paymentSignature,
+    );
+
+    if (result.status === 402) {
+      return c.json({
+        paymentRequired: true,
+        accepts: result.accepts,
+        retryUrl: result.retryUrl,
+        instructions: [
+          'First call returned 402 (expected — this is x402 protocol)',
+          'To complete payment, retry this endpoint with PAYMENT-SIGNATURE header',
+          'Use accepts[0].payTo as the destination address',
+          'Amount: accepts[0].maxAmountRequired in smallest units (lamports for SOL)',
+        ],
+      }, 402);
+    }
+
+    return c.json(result.result);
+  } catch (err) {
+    return c.json({ error: (err as Error).message }, 502);
+  }
+});
+
+// POST /api/v1/wurk/agent-to-human — create agent-to-human microjob
+app.post('/v1/wurk/agent-to-human', async (c) => {
+  const body = await c.req.json<{
+    network: 'solana' | 'base';
+    amount: string; // e.g. "0.001" SOL
+    description: string;
+    paymentSignature?: string;
+  }>();
+
+  try {
+    const result = await createAgentToHumanJob(
+      body.network,
+      body.amount,
+      body.description,
+      body.paymentSignature,
+    );
+
+    if (result.status === 402) {
+      return c.json({
+        paymentRequired: true,
+        accepts: result.accepts,
+        instructions: [
+          'First call returned 402 (expected — this is x402 protocol)',
+          'Retry with PAYMENT-SIGNATURE header containing on-chain payment proof',
+          'Use accepts[0].payTo and accepts[0].maxAmountRequired',
+        ],
+      }, 402);
+    }
+
+    return c.json(result.result);
+  } catch (err) {
+    return c.json({ error: (err as Error).message }, 502);
+  }
+});
+
+// GET /api/v1/wurk/submissions — retrieve agent-to-human job submissions
+app.get('/v1/wurk/submissions', async (c) => {
+  const network = (c.req.query('network') ?? 'solana') as 'solana' | 'base';
+  const secret = c.req.query('secret');
+
+  if (!secret) return c.json({ error: 'secret_required' }, 400);
+
+  try {
+    const result = await getAgentToHumanSubmissions(network, secret);
+    return c.json(result);
+  } catch (err) {
+    return c.json({ error: (err as Error).message }, 502);
+  }
 });
 
 /* ——— helpers ——— */
