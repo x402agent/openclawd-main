@@ -130,12 +130,12 @@ async function kvDelWallet(kv: KVNamespace, id: string) {
 // ── Solana RPC (raw fetch) ───────────────────────────────────────
 
 async function solanaRpc(rpcUrl: string, method: string, params: unknown[]): Promise<any> {
+  // Configure premium RPC endpoints (QuickNode/Helius/Triton/etc.) via wrangler
+  // secrets `RPC_URL_PRIMARY` / `RPC_URL_SECONDARY` and pass them in via `rpcUrl`.
   const urls = [
-    'https://proportionate-indulgent-panorama.solana-mainnet.quiknode.pro/b6c14422eed1274554043c319623200d332e9c1f',
-    'https://mainnet.helius-rpc.com/?api-key=2a3dc9c0-6946-4116-a9eb-8b19250df9a3',
     rpcUrl,
     'https://api.mainnet-beta.solana.com',
-  ]
+  ].filter(Boolean) as string[]
   for (const url of urls) {
     try {
       const controller = new AbortController()

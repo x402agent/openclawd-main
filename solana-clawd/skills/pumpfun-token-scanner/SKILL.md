@@ -440,8 +440,8 @@ Solana Tracker and Helius APIs. This runs locally on the user's Mac.
 ### Solana Tracker API (holder count, buy/sell pressure)
 
 ```bash
-# Credentials from ~/Downloads/nanosolana-go/solana-tracker/.env
-# SOLANA_TRACKER_API_KEY=fdb93571-dbde-4088-a82b-69ba957a7355
+
+# SOLANA_TRACKER_API_KEY=<your-solana-tracker-key>
 
 # Get trending tokens
 curl -s -H "x-api-key: ${SOLANA_TRACKER_API_KEY}" \
@@ -455,8 +455,8 @@ curl -s -H "x-api-key: ${SOLANA_TRACKER_API_KEY}" \
 ### Helius RPC (bonding curve state, on-chain validation)
 
 ```bash
-# Credentials from ~/Downloads/nanosolana-go/solana-tracker/server/.env
-# HELIUS_API_KEY=2a3dc9c0-6946-4116-a9eb-8b19250df9a3
+
+# HELIUS_API_KEY=<your-helius-api-key>
 
 # Verify bonding curve state on-chain
 curl -s -X POST "https://mainnet.helius-rpc.com/?api-key=${HELIUS_API_KEY}" \
@@ -655,9 +655,9 @@ under `scripts/node_modules`. Same exports: `OnlinePumpSdk`, `getGraduationProgr
 Set these in `~/Downloads/nanosolana-go/.env` or `solana-tracker/.env`:
 
 ```
-HELIUS_API_KEY=2a3dc9c0-...
+HELIUS_API_KEY=<your-helius-api-key>
 HELIUS_RPC_URL=https://mainnet.helius-rpc.com/?api-key=...
-SOLANA_TRACKER_API_KEY=fdb93571-...
+SOLANA_TRACKER_API_KEY=<your-solana-tracker-key>
 SOLANA_TRACKER_RPC_URL=https://rpc-mainnet.solanatracker.io/?api_key=...
 SOLANA_TRACKER_WS_URL=wss://datastream.solanatracker.io/:...
 TELEGRAM_BOT_TOKEN=8738647936:AAE...

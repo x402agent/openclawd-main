@@ -42,13 +42,13 @@ The following are already configured in `.env`:
 
 ```bash
 # NFT.Storage
-NFT_STORAGE_KEY=41bb1c08.90dfcf11835745a5be1204541c4b11d0
+NFT_STORAGE_KEY=<your-nft-storage-key>
 
 # Pinata
-PINATA_API_KEY=ca4054467ec25b7da179
-PINATA_API_SECRET=489976744c8189e32a553b3dbaae366250122584b12ee6fccf292930037a4e98
-PINATA_JWT=<your-jwt>
-PINATA_GATEWAY=https://ivory-brilliant-meadowlark-451.mypinata.cloud
+PINATA_API_KEY=<your-pinata-api-key>
+PINATA_API_SECRET=<your-pinata-api-secret>
+PINATA_JWT=<your-pinata-jwt>
+PINATA_GATEWAY=https://<your-subdomain>.mypinata.cloud
 PINATA_IPFS_GATEWAY=https://ipfs.io
 ```
 

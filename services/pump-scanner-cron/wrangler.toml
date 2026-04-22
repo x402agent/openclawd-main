@@ -1,7 +1,7 @@
 name = "pump-scanner-cron"
 main = "src/worker.ts"
 compatibility_date = "2024-12-01"
-account_id = "2f5db575118d15ec19000e13282201bc"
+# account_id = "<your-cloudflare-account-id>"
 
 [triggers]
 crons = ["*/30 * * * *"]
@@ -11,10 +11,12 @@ CONVEX_SITE_URL = "https://artful-frog-940.convex.site"
 GECKO_PAGES = "3"
 SOURCE_TAG = "cloudflare-cron"
 HONCHO_WORKSPACE = "pumpfun-trading"
-QUICKNODE_RPC_URL = "https://proportionate-indulgent-panorama.solana-mainnet.quiknode.pro/b6c14422eed1274554043c319623200d332e9c1f"
-QUICKNODE_WSS_URL = "wss://proportionate-indulgent-panorama.solana-mainnet.quiknode.pro/b6c14422eed1274554043c319623200d332e9c1f"
-SOLANA_RPC_URL = "https://proportionate-indulgent-panorama.solana-mainnet.quiknode.pro/b6c14422eed1274554043c319623200d332e9c1f"
-SOLANA_WSS_URL = "wss://proportionate-indulgent-panorama.solana-mainnet.quiknode.pro/b6c14422eed1274554043c319623200d332e9c1f"
+# Replace with your own RPC endpoint (QuickNode, Helius, Triton, Alchemy, etc.)
+# or keep the public mainnet-beta URLs.
+QUICKNODE_RPC_URL = "https://api.mainnet-beta.solana.com"
+QUICKNODE_WSS_URL = "wss://api.mainnet-beta.solana.com"
+SOLANA_RPC_URL = "https://api.mainnet-beta.solana.com"
+SOLANA_WSS_URL = "wss://api.mainnet-beta.solana.com"
 BIRDEYE_WSS_URL = "wss://public-api.birdeye.so/socket/solana"
 SOLANA_TRACKER_RPC_URL = "https://rpc-mainnet.solanatracker.io"
 SOLANA_TRACKER_WS_URL = "wss://datastream.solanatracker.io"
