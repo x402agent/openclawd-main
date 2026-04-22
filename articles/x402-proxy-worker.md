@@ -61,7 +61,7 @@ client signs a Solana USDC transfer → X-Payment header
 3. `npx wrangler deploy`
 
 The bundled `wrangler.jsonc` already pins `account_id` to the Clawd
-Cloudflare account (`2f5db575118d15ec19000e13282201bc`). Replace it (or
+Cloudflare account (`<your-cloudflare-account-id>`). Replace it (or
 delete the field and pass `--account-id`) to deploy to another account.
 
 ## Optional KV cache

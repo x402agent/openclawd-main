@@ -32,8 +32,8 @@ Browser ──► tRPC (storage.saveInline | presignUpload+PUT)
 Add these to `.env`:
 
 ```bash
-CLOUDFLARE_ACCOUNT_ID=2f5db575118d15ec19000e13282201bc
-CLOUDFLARE_S3_API=https://2f5db575118d15ec19000e13282201bc.r2.cloudflarestorage.com
+CLOUDFLARE_ACCOUNT_ID=<your-cloudflare-account-id>
+CLOUDFLARE_S3_API=https://<your-cloudflare-account-id>.r2.cloudflarestorage.com
 CLOUDFLARE_R2_BUCKET=clawd
 CLOUDFLARE_R2_ACCESS_KEY_ID=<create in CF dashboard → R2 → API tokens>
 CLOUDFLARE_R2_SECRET_ACCESS_KEY=<create in CF dashboard → R2 → API tokens>

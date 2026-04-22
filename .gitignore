@@ -64,3 +64,25 @@ credentials/
 
 # Backup directories (keep empty dirs structure)
 tailclawd-backup/
+
+# Build / cache artifacts that may contain bundled secrets from prior builds
+**/.next/
+**/.netlify/
+**/.vercel/
+**/.venv/
+**/.cache/
+**/dist-cache/
+*.pyc
+__pycache__/
+
+# Go module cache (contains thousands of test PEM files)
+solana-clawd/.cache/
+
+# Editor/shell history
+.zsh_history
+.bash_history
+
+# Backup files
+*.bak
+*.orig
+*~

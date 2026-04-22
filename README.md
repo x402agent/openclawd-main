@@ -36,6 +36,21 @@
 
 ---
 
+## 🔓 Public Release
+
+This repo is open for the community to build on. It ships with **no secrets,
+no private keys, and no proprietary endpoints** — every credential has been
+redacted to a placeholder. Before running anything:
+
+1. Copy `.env.example` → `.env` (and any `*/.env.example` you need) and fill in
+   your own keys.
+2. Read [`SECURITY.md`](./SECURITY.md) for the full contract and how to report
+   a vulnerability.
+3. See [`STACK.md`](./STACK.md) and [`articles/`](./articles) for per-layer
+   setup guides.
+
+---
+
 ## 💡 Why OpenClawd?
 
 Building AI agents on Solana today means stitching together 10+ services: an LLM router, a wallet layer, a payment facilitator, a sandbox, a skills registry, an MCP runtime, a pricing model, and a frontend. Every piece leaks secrets or charges rent.
