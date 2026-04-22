@@ -98,6 +98,21 @@ npx drizzle-kit push
 
 API keys generated here can be validated by ClawdRouter using the `clawd_sk_` prefix. See `clawdrouter/src/auth/api-keys.ts` for validation logic.
 
+## ACP Registry Integration
+
+This service is registered in the OpenClawd ACP registry (`acp_registry/registry.json`) as part of the infrastructure layer:
+
+```json
+{
+  "id": "api-registrar",
+  "name": "OpenClawd API Registrar",
+  "category": "infrastructure",
+  "keywords": ["api", "registrar", "x-verification", "wallet", "solana", "openclawd"]
+}
+```
+
+Agents and services can query the registry to discover and integrate with the API Registrar.
+
 ## License
 
 MIT

@@ -31,6 +31,7 @@ ClawdHub is the registry and web hub for SKILL.md and SOUL.md bundles:
 | Skill | Description |
 |-------|-------------|
 | `clawdhub` | Browse, publish, and install SKILL.md bundles |
+| `clawd-vault` | Security guardian — scan, harden, audit, and manage secrets |
 | `openclawd-codeskill` | OpenClawd agent integration |
 | `claude-code-skill` | Claude Code via MCP protocol |
 | `skill-creator` | Create new SKILL.md files |
@@ -161,6 +162,7 @@ ClawdHub is the registry and web hub for SKILL.md and SOUL.md bundles:
 
 | Skill | Description |
 |-------|-------------|
+| `clawd-vault` | Security guardian — scan, harden, audit, and manage secrets |
 | `1password` | Credential management |
 
 ### 💡 IoT / System
