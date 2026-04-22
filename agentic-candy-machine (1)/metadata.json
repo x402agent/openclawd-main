@@ -1,8 +1,0 @@
-{
-  "name": "Agentic Candy Machine",
-  "description": "A sovereign agent deployment platform on Solana. Create DNA, forge holographic art, launch SPL tokens, and configure recursive NFT candy machines in a TEE-attested environment.",
-  "requestFramePermissions": [
-    "camera",
-    "microphone"
-  ]
-}
