@@ -4,10 +4,11 @@
 
 **The complete open-source stack for building, deploying, and monetizing AI agents on Solana.**
 
-One router · one settlement layer · one environment contract · 33 projects · 50 agents · 100 skills · 1000+ MCP tools.
+One router · one settlement layer · one environment contract · 34 projects · 50 agents · 100 skills · 1000+ MCP tools.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](./LICENSE.md)
 [![npm](https://img.shields.io/npm/v/solana-clawd?style=flat-square&label=solana-clawd)](https://www.npmjs.com/package/solana-clawd)
+[![npm](https://img.shields.io/npm/v/@openclawd/wallet?style=flat-square&label=@openclawd/wallet)](https://www.npmjs.com/package/@openclawd/wallet)
 [![Solana](https://img.shields.io/badge/Solana-mainnet-14F195?style=flat-square)](https://solana.com)
 [![Model Context Protocol](https://img.shields.io/badge/MCP-compatible-9B59B6?style=flat-square)](https://modelcontextprotocol.io)
 [![x402](https://img.shields.io/badge/x402-native-F39C12?style=flat-square)](https://solanaclawd.com/x402)
@@ -263,7 +264,7 @@ const { signature, explorerUrl } = await agent.agentSwap({
 
 **Built-in tokens:** SOL · USDC · USDT · WBTC · WETH · BONK · WIF · POPCAT (+ any mint address)
 
-Source: [`packages/clawd-wallet/`](./packages/clawd-wallet/) · npm: [`@openclawd/wallet`](https://www.npmjs.com/package/@openclawd/wallet)
+Source: [`packages/clawd-wallet/`](./packages/clawd-wallet/) · npm: [`@openclawd/wallet`](https://www.npmjs.com/package/@openclawd/wallet) · [**Integration Guide**](./articles/CLAWD_WALLET_INTEGRATION.md)
 
 ---
 
@@ -357,7 +358,7 @@ Source: [`openclawd-stack/`](./openclawd-stack/) · Cloud OS: [`clawd-cloud-os/`
 | [`MCP/`](./MCP/) | Model Context Protocol servers |
 | [`src/`](./src/) | Core TypeScript engine |
 | [`CLI/`](./CLI/) | `clawd` command-line |
-| [`packages/`](./packages/) | Shared npm packages |
+| [`packages/`](./packages/) | Shared npm packages — `@openclawd/wallet` |
 
 ### Surfaces
 
@@ -378,7 +379,7 @@ Source: [`openclawd-stack/`](./openclawd-stack/) · Cloud OS: [`clawd-cloud-os/`
 | Project | Description |
 |---|---|
 | [`llm-wiki-tang/`](./llm-wiki-tang/) | Vector-indexed LLM knowledge base |
-| [`articles/`](./articles/) | 42 architecture / payments / model / SEO articles |
+| [`articles/`](./articles/) | 43 architecture / payments / model / SEO articles |
 | [`API/`](./API/) | BDS + Pump.fun API specs |
 | [`gfx/`](./gfx/) | Visualizations / branding |
 | [`examples/`](./examples/) | Reference clients (OODA, x402, blockchain) |
@@ -502,10 +503,11 @@ Under the hood, [`scripts/publish.sh`](./scripts/publish.sh) writes an ephemeral
 | [`SOLANA_CLAWD_SHELL.md`](./articles/SOLANA_CLAWD_SHELL.md) | Full-stack integration |
 | [`OPENCLAWDarticle.md`](./articles/OPENCLAWDarticle.md) | Cloud Clawd browser terminal |
 | [`permissions-sandboxing.md`](./articles/permissions-sandboxing.md) | Security & permissions |
+| [`CLAWD_WALLET_INTEGRATION.md`](./articles/CLAWD_WALLET_INTEGRATION.md) | Add embedded Solana wallets to your site |
 | [`x402-proxy-worker.md`](./articles/x402-proxy-worker.md) | x402 edge implementation |
 | [`SEO_STRATEGY.md`](./articles/SEO_STRATEGY.md) | SEO for agent ecosystems |
 
-Full index in [`articles/`](./articles/).
+Full index in [`articles/`](./articles/) — 43 articles total.
 
 ---
 
