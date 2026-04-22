@@ -1,0 +1,13 @@
+name = "openai-trading-bot"
+main = "src/index.ts"
+compatibility_date = "2024-05-29"
+
+[vars]
+TELEGRAM_USER_ID = "1740095485"
+
+[[kv_namespaces]]
+binding = "SESSIONS_KV"
+id = "placeholder-sessions-kv-id"
+
+[triggers]
+crons = ["*/5 * * * *"]
