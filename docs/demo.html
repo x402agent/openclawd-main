@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🦞 OpenClawd — Terminal Demo</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --panel: #111118;
+    --border: #1e1e2e;
+    --magenta: #c678dd;
+    --cyan: #56b6c2;
+    --lobster: #e06c75;
+    --neon: #98c379;
+    --amber: #e5c07b;
+    --dim: #5c6370;
+    --text: #abb2bf;
+    --white: #e5e5e5;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* scanlines */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  .hero {
+    text-align: center;
+    padding: 80px 20px 60px;
+    position: relative;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(200,120,221,0.15) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--white);
+    margin-bottom: 8px;
+    letter-spacing: -1px;
+  }
+
+  .hero h1 span { color: var(--lobster); }
+
+  .subtitle {
+    color: var(--dim);
+    font-size: 1.1rem;
+    margin-bottom: 32px;
+  }
+
+  .hero-badges {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    border: 1px solid var(--border);
+    background: var(--panel);
+  }
+
+  .badge-solana { color: #14f195; border-color: rgba(20,241,149,0.3); }
+  .badge-x402   { color: var(--amber); border-color: rgba(229,192,123,0.3); }
+  .badge-mcp    { color: var(--magenta); border-color: rgba(198,120,221,0.3); }
+  .badge-agents { color: var(--cyan); border-color: rgba(86,182,194,0.3); }
+
+  /* container */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  /* terminal block */
+  .terminal-block {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 48px;
+  }
+
+  .terminal-header {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.03);
+    border-bottom: 1px solid var(--border);
+    gap: 8px;
+  }
+
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot-red    { background: #ff5f56; }
+  .dot-yellow { background: #ffbd2e; }
+  .dot-green  { background: #27c93f; }
+
+  .terminal-title {
+    margin-left: 10px;
+    color: var(--dim);
+    font-size: 0.8rem;
+  }
+
+  .terminal-body {
+    padding: 20px 24px;
+    overflow-x: auto;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    white-space: pre;
+  }
+
+  .t-cmd     { color: var(--cyan); }
+  .t-path    { color: var(--neon); }
+  .t-success { color: var(--neon); }
+  .t-warn    { color: var(--amber); }
+  .t-lobster { color: var(--lobster); }
+  .t-dim     { color: var(--dim); }
+  .t-magenta { color: var(--magenta); }
+  .t-white   { color: var(--white); }
+  .t-bold    { font-weight: 700; }
+
+  /* step blocks */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .step-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    transition: border-color 0.2s;
+  }
+
+  .step-card:hover { border-color: var(--lobster); }
+
+  .step-num {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(224,108,117,0.15);
+    color: var(--lobster);
+    text-align: center;
+    line-height: 28px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .step-card h3 { color: var(--white); font-size: 0.95rem; margin-bottom: 8px; }
+  .step-card p  { color: var(--dim); font-size: 0.82rem; line-height: 1.6; }
+
+  /* e2b sandbox grid */
+  .sandbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .sandbox-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sandbox-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--cyan), var(--magenta));
+  }
+
+  .sandbox-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    background: rgba(86,182,194,0.15);
+    color: var(--cyan);
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+  }
+
+  .sandbox-card h3 { color: var(--white); font-size: 0.95rem; margin-bottom: 8px; }
+  .sandbox-card p  { color: var(--dim); font-size: 0.8rem; line-height: 1.6; margin-bottom: 14px; }
+
+  .sandbox-cmd {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 0.78rem;
+  }
+
+  .sandbox-cmd .prompt { color: var(--neon); }
+  .sandbox-cmd .cmd    { color: var(--cyan); }
+  .sandbox-cmd .copy-hint { color: var(--dim); margin-left: auto; font-size: 0.7rem; }
+
+  /* section headers */
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .section-head h2 { font-size: 1.3rem; color: var(--white); }
+  .section-head span { font-size: 1.4rem; }
+
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+    margin: 48px 0;
+  }
+
+  /* copy button */
+  .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    background: rgba(224,108,117,0.15);
+    color: var(--lobster);
+    border: 1px solid rgba(224,108,117,0.4);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin: 24px 0;
+  }
+
+  .copy-btn:hover {
+    background: rgba(224,108,117,0.25);
+    transform: translateY(-1px);
+  }
+
+  /* footer */
+  footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--dim);
+    font-size: 0.82rem;
+    border-top: 1px solid var(--border);
+  }
+
+  footer a { color: var(--cyan); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 600px) {
+    .hero { padding: 60px 16px 40px; }
+    .terminal-body { font-size: 0.78rem; padding: 14px 16px; }
+    .steps-grid, .sandbox-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <h1><span>🦞</span> OpenClawd</h1>
+  <p class="subtitle">The Hermes of Web3 — autonomous AI agent system for Solana</p>
+  <div class="hero-badges">
+    <span class="badge badge-solana">● Solana</span>
+    <span class="badge badge-x402">◆ x402</span>
+    <span class="badge badge-mcp">⬡ MCP</span>
+    <span class="badge badge-agents">⚙ 49 Agents</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- ONE-SHOT INSTALL -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="section-head">
+    <span>⚡</span>
+    <h2>One-Shot Install</h2>
+  </div>
+
+  <p style="color: var(--dim); margin-bottom: 20px; font-size: 0.9rem; line-height: 1.7;">
+    One command to rule them all. Installs the <code style="color:var(--cyan)">solana-clawd</code> CLI, clones the monorepo,
+    bootstraps TailClawd, scaffolds your <code style="color:var(--cyan)">~/.openclawd/</code> config, and optionally
+    installs the profiles system — all with cypherpunk lobster animations.
+  </p>
+
+  <button class="copy-btn" onclick="copyCmd(this, 'curl -fsSL https://solanaclawd.com/install.sh | bash')">
+    📋 Copy install command
+  </button>
+
+  <div class="terminal-block">
+    <div class="terminal-header">
+      <span class="dot dot-red"></span>
+      <span class="dot dot-yellow"></span>
+      <span class="dot dot-green"></span>
+      <span class="terminal-title">openclawd/install.sh — cyberpunk lobster edition</span>
+    </div>
+    <div class="terminal-body"><span class="t-dim">$</span> <span class="t-cmd">curl -fsSL https://solanaclawd.com/install.sh | bash</span>
+
+<span class="t-dim">  _
+ / |  _ __ ___  _ __   __ _  ___ _ __ ___
+/ __|| '_ ` _ \| '_ \ / _` |/ __| '__/ _ \
+\__ \| | | | | | |_) | (_| | (__| | |  __/
+|___/_| |_| |_| .__/ \__,_|\___|_|  \___|
+          <span class="t-lobster">lobster.os</span>  | <span class="t-dim">chain: solana</span>  | <span class="t-magenta">[router · chain · tailnet · agents]</span>
+
+<span class="t-dim">  ╭─ cyberpunk lobster edition ─────────────╮</span>
+<span class="t-dim">  │  ▒▒▒ solana  ▒▒ agents  ▒ x402    │</span>
+<span class="t-dim">  │  ▒▒▒ clawdrouter ▒ tailclawd   │</span>
+<span class="t-dim">  ╰─────────────────────────────────────────╯</span>
+
+<span class="t-dim">▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰</span>
+<span class="t-dim">▸</span> target dir     <span class="t-path">~/.openclawd</span>
+<span class="t-dim">▸</span> tailclawd dir  <span class="t-path">~/.openclawd/tailclawd</span>
+<span class="t-dim">▸</span> base url       <span class="t-path">https://solanaclawd.com</span>
+<span class="t-dim">▸</span> platform       <span class="t-path">mac · arm64</span>
+<span class="t-dim">▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰</span>
+
+<span class="t-magenta">●</span> preflight: curl / node / npm / git
+<span class="t-magenta">●</span> node <span class="t-success">v22.0.0 (>= 18)</span>
+
+<span class="t-dim">▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰</span>
+<span class="t-magenta">●</span> tailscale already installed <span class="t-dim">(1.72.1)</span>
+<span class="t-magenta">●</span> tailscale already logged in: <span class="t-path">machine.tailnet.ts.net</span>
+
+<span class="t-dim">▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰</span>
+<span class="t-magenta">●</span> installing solana-clawd cli from npm
+<span class="t-success">◉</span> solana-clawd installed
+
+<span class="t-dim">▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰</span>
+<span class="t-magenta">●</span> scaffolding ~/.openclawd
+<span class="t-dim">▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰</span>
+<span class="t-magenta">●</span> cloning openclawd monorepo <span class="t-dim">(shallow)</span>
+<span class="t-magenta">●</span> linking tailclawd → ~/.openclawd/tailclawd
+<span class="t-magenta">●</span> npm install tailclawd deps
+<span class="t-success">◉</span> tailclawd ready — start it with: <span class="t-cyan">cd ~/.openclawd/tailclawd && npm run dev</span>
+
+<span class="t-dim">▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰</span>
+<span class="t-magenta">●</span> building @openclawd/wallet package
+<span class="t-success">◉</span> @openclawd/wallet — Privy wallet + agentic trading SDK
+<span class="t-success">◉</span> @solana-clawd/agents-x402 — x402 agent payments
+
+<span class="t-dim">▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰</span>
+<span class="t-magenta">●</span> writing ~/.openclawd/.env
+<span class="t-success">◉</span> created ~/.openclawd/.env — fill in your provider keys
+
+<span class="t-dim">▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰</span>
+<span class="t-magenta">●</span> installing clawd-profile CLI
+<span class="t-success">◉</span> clawd-profile installed to ~/.openclawd/bin/
+<span class="t-dim">∎</span> try: clawd profile create default
+
+<span class="t-dim">▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰</span>
+
+<span class="t-neon">░▒▓█</span>  <span class="t-magenta">▓▒░</span>  <span class="t-cyan">█▓▒░</span>  <span class="t-magenta">▒░▓█</span>
+<span class="t-neon">░▒▓█</span>  <span class="t-magenta">▓▒░</span>  <span class="t-cyan">█▓▒░</span>  <span class="t-magenta">▒░▓█</span>
+<span class="t-neon">░▒▓█</span>  <span class="t-magenta">▓▒░</span>  <span class="t-cyan">█▓▒░</span>  <span class="t-magenta">▒░▓█</span>
+<span class="t-neon">░▒▓█</span>  <span class="t-magenta">▓▒░</span>  <span class="t-cyan">█▓▒░</span>  <span class="t-magenta">▒░▓█</span>
+
+<span class="t-bold">
+          ▒▓█ openclawd online █▓▒
+</span>
+
+<span class="t-bold">openclawd stack</span>
+<span class="t-dim"> ├─</span> <span class="t-magenta">solana-clawd</span>       cli             <span class="t-dim">(npm global)</span>
+<span class="t-dim"> ├─</span> <span class="t-magenta">clawdrouter</span>        model router    <span class="t-dim">($OPENROUTER_API_KEY)</span>
+<span class="t-dim"> ├─</span> <span class="t-magenta">tailclawd</span>          tailnet app     <span class="t-dim">(~/.openclawd/tailclawd)</span>
+<span class="t-dim"> ├─</span> <span class="t-magenta">@openclawd/wallet</span>  wallet SDK      <span class="t-dim">(Privy + Grok 4.20)</span>
+<span class="t-dim"> ├─</span> <span class="t-magenta">@solana-clawd/x402</span>  agent payments  <span class="t-dim">(USDC x402 protocol)</span>
+<span class="t-dim"> └─</span> <span class="t-magenta">$CLAWD</span>             8cHz…pump      <span class="t-dim">(solana mainnet)</span>
+
+<span class="t-bold">Next steps</span>
+<span class="t-cyan">1.</span> Edit env:       <span class="t-magenta">$EDITOR ~/.openclawd/.env</span>
+<span class="t-cyan">2.</span> Tailnet login:  <span class="t-magenta">sudo tailscale up</span>  <span class="t-dim">(skip if already up)</span>
+<span class="t-cyan">3.</span> Launch node:    <span class="t-magenta">cd ~/.openclawd/tailclawd && npm run dev</span>
+<span class="t-cyan">4.</span> Expose it:      <span class="t-magenta">tailscale serve --bg --https=443 http://127.0.0.1:3110</span>
+<span class="t-cyan">5.</span> Pair device:    <span class="t-magenta">solana-clawd pair <CODE></span>
+<span class="t-cyan">6.</span> Mint agent:     <span class="t-magenta">solana-clawd mint</span>
+<span class="t-cyan">7.</span> Status:         <span class="t-magenta">solana-clawd status</span>
+<span class="t-cyan">8.</span> Profiles:       <span class="t-magenta">clawd profile create default</span>
+
+<span class="t-lobster">🦞</span> <span class="t-bold">welcome to the claw</span> <span class="t-lobster">🦞</span></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- WHAT THE INSTALLER DOES -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="section-head">
+    <span>⚙</span>
+    <h2>What's Included</h2>
+  </div>
+
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">1</div>
+      <h3>Tailscale + Tailnet</h3>
+      <p>Installs Tailscale, logs you in, and sets up <code>tailscale serve</code> on port 3110 so your claw is accessible from any device on your tailnet.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">2</div>
+      <h3>solana-clawd CLI</h3>
+      <p>Global npm package with OODA loop trading, 31 MCP tools, Go + TypeScript agent framework. Run from anywhere on your machine.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">3</div>
+      <h3>TailClawd Web UI</h3>
+      <p>Browser-accessible Clawd Code via your private tailnet. 14 streaming endpoints, real-time SSE, live token counter, cost tracking, model selector.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">4</div>
+      <h3>@openclawd/wallet</h3>
+      <p>Privy-powered embedded Solana wallet with Grok 4.20 Beta as the AI reasoning layer. Agent swap, permissions, on-chain settlement.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">5</div>
+      <h3>@solana-clawd/x402</h3>
+      <p>Agent-to-agent USDC payment protocol via x402. Monetize MCP servers, HTTP APIs, and tool calls with one-line integration.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">6</div>
+      <h3>clawd-profile CLI</h3>
+      <p>Profile manager inspired by Hermes — each profile is an isolated agent home with its own config, CLAW.md personality, memories, sessions, skills.</p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- E2B CLOUD SANDBOXES -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="section-head">
+    <span>☁</span>
+    <h2>E2B Cloud Sandboxes</h2>
+  </div>
+
+  <p style="color: var(--dim); margin-bottom: 20px; font-size: 0.9rem; line-height: 1.7;">
+    Instant, isolated cloud sandboxes for running OpenClawd agents. Each template is pre-loaded with the tools, SDKs, and
+    runtime your claw needs. Fork from theordlibrary on E2B.
+  </p>
+
+  <div class="sandbox-grid">
+    <div class="sandbox-card">
+      <div class="sandbox-tag">E2B TEMPLATE</div>
+      <h3>🦞 Clawd v2</h3>
+      <p>The latest OpenClawd agent runtime — includes the full monorepo, all dependencies, solana-clawd CLI, TailClawd UI, @openclawd/wallet, profiles system, and the E2B sandbox bridge.</p>
+      <div class="sandbox-cmd">
+        <span class="prompt">$</span>
+        <span class="cmd">e2b template fork theordlibrary/clawd-v2</span>
+      </div>
+    </div>
+
+    <div class="sandbox-card">
+      <div class="sandbox-tag">E2B TEMPLATE</div>
+      <h3>🦞 Clawd (Legacy)</h3>
+      <p>The original OpenClawd agent — same runtime with solana-clawd CLI, TailClawd, x402 payments, and the full honcho brain. Good for existing deployments.</p>
+      <div class="sandbox-cmd">
+        <span class="prompt">$</span>
+        <span class="cmd">e2b template fork theordlibrary/clawd</span>
+      </div>
+    </div>
+
+    <div class="sandbox-card">
+      <div class="sandbox-tag">E2B TEMPLATE</div>
+      <h3>⚡ Solana Dev Env</h3>
+      <p>Pre-built Solana development environment with Anchor, Rust, Node.js, and all Solana SDKs. Use as a base for agent coding tasks, smart contract development, and on-chain tooling.</p>
+      <div class="sandbox-cmd">
+        <span class="prompt">$</span>
+        <span class="cmd">e2b template fork theordlibrary/solana-dev-env</span>
+      </div>
+    </div>
+  </div>
+
+  <p style="color: var(--dim); margin-bottom: 12px; font-size: 0.85rem; line-height: 1.7;">
+    Or use via curl one-liners — works anywhere with E2B CLI installed:
+  </p>
+
+  <div style="display: flex; flex-direction: column; gap: 10px;">
+    <div class="sandbox-cmd" style="padding: 10px 14px;">
+      <span class="prompt" style="color: var(--neon);">$</span>
+      <span class="cmd" style="color: var(--cyan);">e2b template fork theordlibrary/clawd-v2</span>
+      <span class="copy-hint">ibyiv77pobbc6mv8luif</span>
+    </div>
+    <div class="sandbox-cmd" style="padding: 10px 14px;">
+      <span class="prompt" style="color: var(--neon);">$</span>
+      <span class="cmd" style="color: var(--cyan);">e2b template fork theordlibrary/clawd</span>
+      <span class="copy-hint">srsbqb24j095xwd4fiad</span>
+    </div>
+    <div class="sandbox-cmd" style="padding: 10px 14px;">
+      <span class="prompt" style="color: var(--neon);">$</span>
+      <span class="cmd" style="color: var(--cyan);">e2b template fork theordlibrary/solana-dev-env</span>
+      <span class="copy-hint">stbd55taifr4ajbxzulu</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- PROFILES QUICKSTART -->
+  <!-- ═══════════════════════════════════════════ -->
+  <div class="section-head">
+    <span>👤</span>
+    <h2>Profiles — Running Multiple Agents</h2>
+  </div>
+
+  <p style="color: var(--dim); margin-bottom: 20px; font-size: 0.9rem; line-height: 1.7;">
+    Every agent needs a home. A <strong style="color: var(--white)">profile</strong> is an isolated agent home directory with its own config, secrets, CLAW.md personality, memories, sessions, skills, and gateway state.
+  </p>
+
+  <div class="terminal-block">
+    <div class="terminal-header">
+      <span class="dot dot-red"></span>
+      <span class="dot dot-yellow"></span>
+      <span class="dot dot-green"></span>
+      <span class="terminal-title">clawd-profile — profile manager</span>
+    </div>
+    <div class="terminal-body"><span class="t-dim">$</span> <span class="t-cmd">clawd profile create default</span>
+<span class="t-success">◉</span> created profile <span class="t-bold t-lobster">default</span> at <span class="t-dim">~/.openclawd/profiles/default</span>
+<span class="t-success">◉</span> alias installed: <span class="t-magenta">~/.local/bin/default</span>
+<span class="t-dim">∎</span> edit <span class="t-cyan">~/.openclawd/profiles/default/CLAW.md</span> to shape this claw's personality
+
+<span class="t-dim">$</span> <span class="t-cmd">clawd profile create degen-trader</span>
+<span class="t-success">◉</span> created profile <span class="t-bold t-lobster">degen-trader</span> at <span class="t-dim">~/.openclawd/profiles/degen-trader</span>
+<span class="t-success">◉</span> alias installed: <span class="t-magenta">~/.local/bin/degen-trader</span>
+<span class="t-dim">∎</span> edit <span class="t-cyan">~/.openclawd/profiles/degen-trader/CLAW.md</span> to shape this claw's personality
+
+<span class="t-dim">$</span> <span class="t-cmd">clawd profile list</span>
+
+<span class="t-bold t-cyan">openclawd profiles</span>  <span class="t-dim">(~/.openclawd/profiles)</span>
+
+<span class="t-success">●</span> <span class="t-bold">default</span>  <span class="t-dim">(active)</span>
+<span class="t-dim">○</span> degen-trader
+
+<span class="t-dim">$</span> <span class="t-cmd">clawd profile use degen-trader</span>
+<span class="t-success">◉</span> active profile is now <span class="t-bold t-lobster">degen-trader</span>
+
+<span class="t-dim">$</span> <span class="t-cmd">clawd profile clone default arb-hunter</span>
+<span class="t-success">◉</span> cloned default → arb-hunter
+
+<span class="t-dim">$</span> <span class="t-cmd">degen-trader "buy 0.1 SOL of $PEPE"</span>
+<span class="t-lobster">🦞</span> <span class="t-bold">launching degen-trader profile...</span></div>
+  </div>
+
+  <div class="sandbox-grid" style="margin-top: 24px;">
+    <div class="sandbox-card">
+      <div class="sandbox-tag">CLAW.md</div>
+      <h3>The Soul of the Claw</h3>
+      <p>Each profile ships with a <strong style="color:var(--white)">CLAW.md</strong> — personality charter defining identity, operating style, hard limits, and domain focus. Replace Hermes' SOUL.md with OpenClawd's lobster-themed equivalent.</p>
+    </div>
+    <div class="sandbox-card">
+      <div class="sandbox-tag">MULTI-AGENT</div>
+      <h3>Honcho Integration</h3>
+      <p>Run multiple profiles in parallel with Honcho. Each service gets its own profile, own config, and own memory bank — zero state collision.</p>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<footer>
+  <p>
+    <a href="https://solanaclawd.com">solanaclawd.com</a> ·
+    <a href="https://github.com/x402agent/openclawd">GitHub</a> ·
+    <a href="https://x.com/clawddevs">Twitter</a> ·
+    <a href="https://t.me/clawdtoken">Telegram</a>
+  </p>
+  <p style="margin-top: 8px;">
+    $CLAWD · 8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump ·
+    Built by <a href="https://8bit.io">8BIT Labs</a> ·
+    Inspired by <a href="https://nousresearch.com">Nous Research</a>
+  </p>
+</footer>
+
+<script>
+  function copyCmd(btn, text) {
+    navigator.clipboard.writeText(text).then(() => {
+      const orig = btn.innerHTML;
+      btn.innerHTML = '✓ Copied!';
+      btn.style.background = 'rgba(152,195,121,0.15)';
+      btn.style.color = '#98c379';
+      btn.style.borderColor = 'rgba(152,195,121,0.4)';
+      setTimeout(() => {
+        btn.innerHTML = orig;
+        btn.style.background = '';
+        btn.style.color = '';
+        btn.style.borderColor = '';
+      }, 2000);
+    });
+  }
+</script>
+
+</body>
+</html>
