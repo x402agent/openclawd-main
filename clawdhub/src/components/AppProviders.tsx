@@ -3,6 +3,7 @@ import { useRouterState } from '@tanstack/react-router'
 import { lazy, Suspense, useEffect, useRef } from 'react'
 import { convex, convexUrl } from '../convex/client'
 import { getUserFacingConvexError } from '../lib/convexError'
+import { initSentryClient } from '../lib/sentry-client'
 import { persistWalletSession, type NanosolanaWalletSession } from '../lib/nanosolanaWalletSession'
 import { isPublicPath } from '../lib/publicRoutes'
 import { clearAuthError, setAuthError } from '../lib/useAuthError'
@@ -104,6 +105,11 @@ function WalletSessionBootstrap() {
 
 export function AppProviders({ children }: { children: React.ReactNode }) {
   const pathname = useRouterState({ select: (state) => state.location.pathname })
+
+  // Initialize Sentry client-side error monitoring
+  useEffect(() => {
+    initSentryClient()
+  }, [])
 
   if (!convex) {
     return (
