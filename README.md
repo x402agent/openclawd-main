@@ -241,7 +241,7 @@ See [articles/ARTICLE_PAYMENTS.md](./articles/ARTICLE_PAYMENTS.md).
 ┌────────────────────────────▼─────────────────────────────────┐
 │ Router and payments                                          │
 │ clawdrouter · x402-openrouter-main · workers · services      │
-│ plugin.delivery                                              │
+│ plugin.delivery · api-registrar                              │
 └────────────────────────────┬─────────────────────────────────┘
                              │ routed model calls + settlement
 ┌────────────────────────────▼─────────────────────────────────┐
@@ -253,11 +253,19 @@ See [articles/ARTICLE_PAYMENTS.md](./articles/ARTICLE_PAYMENTS.md).
 ┌────────────────────────────▼─────────────────────────────────┐
 │ Skills and knowledge                                         │
 │ clawdhub · skills · acp_registry · articles · llm-wiki-tang  │
+│ clawd-vault · werk-integration                                │
 └────────────────────────────┬─────────────────────────────────┘
                              │ signed Solana actions
 ┌────────────────────────────▼─────────────────────────────────┐
 │ Chain                                                        │
 │ Solana · Helius RPC · Jupiter · SPL USDC · $CLAWD            │
+└──────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────┐
+│ 🐾 Security: ClawdVault (hermes-vault)                        │
+│ vault-agent · vault-mcp · hermes-vault services               │
+│ ─────────────────────────────────────────────────────────────│
+│ 💰 Monetization: WURK.fun                                     │
+│ werk-mcp · werk-integration skill · x402 payments            │
 └──────────────────────────────────────────────────────────────┘
 ```
 
@@ -275,6 +283,9 @@ For the full layer map, request flow, and directory breakdown, read [STACK.md](.
 | Cloud and orchestration | [`openclawd-stack/`](./openclawd-stack/), [`clawd-cloud-os/`](./clawd-cloud-os/), [`CLI/`](./CLI/) |
 | Skills and knowledge | [`clawdhub/`](./clawdhub/), [`skills/`](./skills/), [`acp_registry/`](./acp_registry/), [`articles/`](./articles/), [`llm-wiki-tang/`](./llm-wiki-tang/) |
 | SDKs, examples, assets | [`solana-go-main/`](./solana-go-main/), [`API/`](./API/), [`examples/`](./examples/), [`gfx/`](./gfx/), [`npm/`](./npm/) |
+| Security (ClawdVault) | [`skills/clawd-vault/`](./skills/clawd-vault/), [`MCP/vault-mcp/`](./MCP/vault-mcp/), [`agents/vault-agent.json`](./agents/vault-agent.json), [`services/hermes-vault/`](./services/hermes-vault/) |
+| API Registrar | [`api-registrar/`](./api-registrar/) - X-verified API key registration with Solana wallet auth |
+| Monetization (WURK) | [`skills/wurk-integration/`](./skills/wurk-integration/), [`MCP/wurk-mcp/`](./MCP/wurk-mcp/) - x402 job monetization on Solana/Base |
 
 `tailclawd-backup/` exists as a backup directory and is not part of the primary stack path.
 
@@ -294,6 +305,7 @@ Typical minimum variables:
 - `HELIUS_API_KEY` or `HELIUS_RPC_URL`
 - `SOLANA_RPC_URL`
 - `TELEGRAM_BOT_TOKEN` or `TAILSCALE_AUTH_KEY` for specific surfaces
+- `WURK_API_KEY` for agent monetization via WURK.fun (see [`api-registrar/`](./api-registrar/))
 
 Per-project example env files also exist in:
 
