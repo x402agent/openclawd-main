@@ -16,6 +16,7 @@ import { Honcho } from '@honcho-ai/sdk';
 import type { ClawdVault } from '../memory/clawdvault.js';
 import type { SandboxPayments, PaidFetchArgs, PaidFetchResult } from '../payments.js';
 import { TOOL_SCHEMAS, executeToolCall } from '../tools/registry.js';
+import { openaiTradingHandler } from './openai-trading.js';
 
 // Honcho client for mirroring chat turns + reasoning on demand. Falls back to
 // a no-op if HONCHO_API_KEY is not set.
@@ -465,3 +466,5 @@ agentRegistry.register(
     'Firecrawl-backed web research agent — scrape, search, map, and crawl any site',
   ),
 );
+// GPT-5.4 OpenAI Trading Agent — Responses API with swap, analyze, image gen, web search at birth
+agentRegistry.register(openaiTradingHandler);

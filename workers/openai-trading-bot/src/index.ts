@@ -1,606 +1,649 @@
 /**
- * OpenClawd OpenAI Trading Bot — Cloudflare Worker
+ * OpenAI Trading Bot — Cloudflare Worker
  *
- * Telegram bot powered by OpenAI GPT-5.4 / GPT-5.4-nano with:
- *   - Autonomous Solana trading (pump.fun, Jupiter)
- *   - CUA (Computer Use Agent) via computer_use_preview
- *   - Image generation via GPT Image 2.0 (gpt-image-1) with gpt-image-1-mini fallback
- *   - Web search via Responses API
- *   - Agent assignment / delegation via natural language
- *   - Tier-gated access (owner: TELEGRAM_USER_ID)
+ * GPT-5.4 + GPT-5.4-nano autonomous Solana trading Telegram bot.
+ * Uses the Responses API (not Chat Completions) for:
+ *   - `instructions` parameter (developer-level, high priority)
+ *   - `output_text` helper (aggregated text output)
+ *   - Items-based output (messages, function_calls, reasoning)
+ *   - Built-in `web_search` tool
+ *   - `previous_response_id` for conversation chaining
+ *   - Structured Outputs via `text.format`
+ *
+ * Routes requests to the OpenClawd gateway agent registry:
+ *   GATEWAY_URL/api/v1/brain/ask  → gateway agent session
  */
 
-import { Hono } from "hono";
+import { Hono } from 'hono';
 
-// ─── Types ───────────────────────────────────────────────────────────
-
+// ---------------------------------------------------------------------------
+// Types
+// ---------------------------------------------------------------------------
 interface Env {
   OPENAI_API_KEY: string;
   TELEGRAM_BOT_TOKEN: string;
-  TELEGRAM_USER_ID: string;
-  SOLANA_RPC_URL?: string;
-  HELIUS_API_KEY?: string;
-  JUPITER_API_KEY?: string;
-  GATEWAY_URL?: string;
-  GATEWAY_AUTH_TOKEN?: string;
-  SESSIONS_KV: KVNamespace;
+  GATEWAY_URL: string;
+  OWNER_CHAT_ID: string;
+  TRADING_KV: KVNamespace;
 }
 
 interface TelegramMessage {
   message_id: number;
-  from?: { id: number; first_name: string; username?: string };
   chat: { id: number; type: string };
   text?: string;
-  photo?: Array<{ file_id: string; width: number; height: number }>;
-  caption?: string;
+  from?: { id: number; username?: string; first_name?: string };
 }
 
 interface TelegramUpdate {
   update_id: number;
   message?: TelegramMessage;
-  callback_query?: {
-    id: string;
-    from: { id: number; username?: string };
-    data?: string;
-    message?: TelegramMessage;
-  };
 }
 
-interface OpenAITool {
-  type: "function" | "web_search_preview" | "image_generation" | "computer_use_preview";
-  name?: string;
-  description?: string;
-  parameters?: Record<string, unknown>;
-}
+// ---------------------------------------------------------------------------
+// App
+// ---------------------------------------------------------------------------
+const app = new Hono<{ Bindings: Env }>();
 
-// ─── Constants ───────────────────────────────────────────────────────
-
-const MODELS = {
-  trading: "gpt-5.4",
-  chat: "gpt-5.4-nano",
-  image: "gpt-image-1",
-  imageFallback: "gpt-image-1-mini",
-  computerUse: "computer-use-preview",
-} as const;
-
-const SYSTEM_PROMPT = `You are the OpenClawd Trading Bot — an autonomous Solana trading agent powered by GPT-5.4.
-
-CAPABILITIES:
-- Execute trades on pump.fun and Jupiter DEX
-- Generate images (PnL cards, memes, charts) via GPT Image 2.0
-- Search the web for real-time market data
-- Control a browser via CUA for complex interactions
-- Assign yourself to other Telegram users
-
-RULES:
-- Be concise. Use emoji sparingly.
-- Always confirm trades before executing (unless auto-trade is enabled).
-- Report errors clearly with suggested fixes.
-- For image requests, describe what you're generating.
-- Owner user ID: {{OWNER_ID}} — they have full control.
-- Assigned users can chat and request images but cannot trade or assign others.`;
-
-// ─── Helpers ─────────────────────────────────────────────────────────
-
-async function callOpenAI(
-  apiKey: string,
-  body: Record<string, unknown>
-): Promise<Response> {
-  return fetch("https://api.openai.com/v1/responses", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${apiKey}`,
-      "Content-Type": "application/json",
+// ---------------------------------------------------------------------------
+// Responses API tool definitions — internally-tagged, strict by default
+// ---------------------------------------------------------------------------
+const TRADING_TOOLS = [
+  {
+    type: 'function' as const,
+    name: 'execute_swap',
+    description: 'Execute a token swap on Solana via Jupiter.',
+    parameters: {
+      type: 'object',
+      properties: {
+        input_mint: { type: 'string', description: 'Input token mint' },
+        output_mint: { type: 'string', description: 'Output token mint' },
+        amount: { type: 'string', description: 'Amount in lamports' },
+      },
+      required: ['input_mint', 'output_mint', 'amount'],
+      additionalProperties: false,
     },
-    body: JSON.stringify(body),
-  });
-}
+    strict: true,
+  },
+  {
+    type: 'function' as const,
+    name: 'get_token_analysis',
+    description: 'Analyze a Solana token: price, liquidity, holders, safety.',
+    parameters: {
+      type: 'object',
+      properties: {
+        mint: { type: 'string', description: 'Token mint address' },
+      },
+      required: ['mint'],
+      additionalProperties: false,
+    },
+    strict: true,
+  },
+  {
+    type: 'function' as const,
+    name: 'get_trending',
+    description: 'Get trending Solana tokens.',
+    parameters: {
+      type: 'object',
+      properties: {
+        timeframe: {
+          type: 'string',
+          enum: ['5m', '15m', '30m', '1h', '6h', '24h'],
+          description: 'Timeframe. Default 1h.',
+        },
+      },
+      additionalProperties: false,
+    },
+    strict: true,
+  },
+  {
+    type: 'function' as const,
+    name: 'get_wallet_status',
+    description: 'Get SOL and SPL token balances for a wallet.',
+    parameters: {
+      type: 'object',
+      properties: {
+        wallet: { type: 'string', description: 'Wallet address' },
+      },
+      required: ['wallet'],
+      additionalProperties: false,
+    },
+    strict: true,
+  },
+];
 
-async function telegramAPI(
-  token: string,
-  method: string,
-  body: Record<string, unknown>
-): Promise<Response> {
-  return fetch(`https://api.telegram.org/bot${token}/${method}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  });
-}
+// ---------------------------------------------------------------------------
+// Instructions — developer-level guidance (high priority per model spec)
+// ---------------------------------------------------------------------------
+const SYSTEM_INSTRUCTIONS = `You are Clawd OpenAI Trader — a GPT-5.4 autonomous Solana trading agent.
+
+You are born into the OpenClawd ecosystem with these capabilities:
+- Execute swaps on Solana via Jupiter (execute_swap)
+- Analyze any token's safety, price, liquidity, holders (get_token_analysis)
+- Track trending tokens across timeframes (get_trending)
+- Check wallet balances (get_wallet_status)
+- Web search for real-time market data (built-in web_search)
+
+OODA loop: Observe → Orient → Decide → Act
+- Always check token safety before trading
+- Use web_search for real-time alpha
+- Be decisive and terse
+- Risk management: never >10% of portfolio in a single meme token
+- Always report: entry price, target, stop loss, position size
+- 🟢 buy, 🔴 sell, ⚠️ caution, 🎯 target`;
+
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+const TELEGRAM_API = (token: string) => `https://api.telegram.org/bot${token}`;
 
 async function sendMessage(
   token: string,
   chatId: number,
   text: string,
-  parseMode = "Markdown"
+  replyTo?: number,
 ): Promise<void> {
-  await telegramAPI(token, "sendMessage", {
-    chat_id: chatId,
-    text: text.slice(0, 4096),
-    parse_mode: parseMode,
+  const url = `${TELEGRAM_API(token)}/sendMessage`;
+  await fetch(url, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({
+      chat_id: chatId,
+      text: text.slice(0, 4096),
+      parse_mode: 'Markdown',
+      ...(replyTo ? { reply_to_message_id: replyTo } : {}),
+    }),
   });
 }
 
 async function sendPhoto(
   token: string,
   chatId: number,
-  photoUrl: string,
-  caption?: string
+  imageUrl: string,
+  caption?: string,
 ): Promise<void> {
-  await telegramAPI(token, "sendPhoto", {
-    chat_id: chatId,
-    photo: photoUrl,
-    caption: caption?.slice(0, 1024),
+  const url = `${TELEGRAM_API(token)}/sendPhoto`;
+  await fetch(url, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({
+      chat_id: chatId,
+      photo: imageUrl,
+      ...(caption ? { caption: caption.slice(0, 1024) } : {}),
+    }),
   });
 }
 
-function isOwner(userId: number, env: Env): boolean {
-  return String(userId) === env.TELEGRAM_USER_ID;
+// ---------------------------------------------------------------------------
+// Responses API — text generation with instructions + tools
+// ---------------------------------------------------------------------------
+interface ResponsesItem {
+  type: string;
+  role?: string;
+  content?: Array<{ type: string; text?: string; image_url?: string }>;
+  id?: string;
+  call_id?: string;
+  name?: string;
+  arguments?: string;
+  [key: string]: unknown;
 }
 
-async function isAssigned(userId: number, kv: KVNamespace): Promise<boolean> {
-  const assigned = await kv.get(`assigned:${userId}`);
-  return assigned === "true";
-}
+async function callResponsesAPI(
+  apiKey: string,
+  items: ResponsesItem[],
+  previousResponseId?: string,
+  includeWebSearch = true,
+): Promise<{
+  id: string;
+  output: ResponsesItem[];
+  output_text: string;
+}> {
+  const tools: unknown[] = [...TRADING_TOOLS];
+  if (includeWebSearch) tools.push({ type: 'web_search' });
 
-// ─── Trading Tools (function calling) ────────────────────────────────
-
-const tradingTools: OpenAITool[] = [
-  {
-    type: "function",
-    name: "execute_swap",
-    description: "Execute a token swap on Jupiter DEX",
-    parameters: {
-      type: "object",
-      properties: {
-        inputMint: { type: "string", description: "Input token mint address" },
-        outputMint: { type: "string", description: "Output token mint address" },
-        amount: { type: "number", description: "Amount in lamports or smallest unit" },
-        slippageBps: { type: "number", description: "Slippage in basis points (default 50)" },
-      },
-      required: ["inputMint", "outputMint", "amount"],
+  const res = await fetch('https://api.openai.com/v1/responses', {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+      authorization: `Bearer ${apiKey}`,
     },
-  },
-  {
-    type: "function",
-    name: "claim_fees",
-    description: "Claim accumulated trading fees from Bags.fm positions",
-    parameters: {
-      type: "object",
-      properties: {
-        positionId: { type: "string", description: "Position ID to claim fees from" },
-      },
-      required: ["positionId"],
-    },
-  },
-  {
-    type: "function",
-    name: "get_token_info",
-    description: "Get token information (price, market cap, holders) from Birdeye/GMGN",
-    parameters: {
-      type: "object",
-      properties: {
-        mint: { type: "string", description: "Token mint address" },
-      },
-      required: ["mint"],
-    },
-  },
-  {
-    type: "function",
-    name: "assign_agent",
-    description: "Assign this bot to another Telegram user",
-    parameters: {
-      type: "object",
-      properties: {
-        targetUserId: { type: "number", description: "Telegram user ID to assign to" },
-        targetUsername: { type: "string", description: "Telegram username" },
-      },
-      required: ["targetUserId"],
-    },
-  },
-];
-
-// ─── Tool Execution ──────────────────────────────────────────────────
-
-async function executeToolCall(
-  toolName: string,
-  args: Record<string, unknown>,
-  env: Env
-): Promise<string> {
-  switch (toolName) {
-    case "execute_swap": {
-      // In production: call Jupiter API or gateway
-      if (!env.JUPITER_API_KEY) return "❌ Jupiter API key not configured";
-      return `🔄 Swap initiated: ${args.amount} of ${args.inputMint} → ${args.outputMint} (slippage: ${args.slippageBps || 50}bps)`;
-    }
-
-    case "claim_fees": {
-      return `💰 Fee claim submitted for position ${args.positionId}`;
-    }
-
-    case "get_token_info": {
-      // Proxy to gateway or direct Birdeye API call
-      const gatewayUrl = env.GATEWAY_URL;
-      if (gatewayUrl) {
-        try {
-          const res = await fetch(`${gatewayUrl}/v1/brain/ask`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              ...(env.GATEWAY_AUTH_TOKEN
-                ? { Authorization: `Bearer ${env.GATEWAY_AUTH_TOKEN}` }
-                : {}),
-            },
-            body: JSON.stringify({ prompt: `Token info for ${args.mint}` }),
-          });
-          const data = await res.json<{ answer?: string }>();
-          return data.answer || "No data available";
-        } catch {
-          return "⚠️ Gateway unavailable";
-        }
-      }
-      return `📊 Token: ${args.mint} — connect gateway for live data`;
-    }
-
-    case "assign_agent": {
-      const targetId = Number(args.targetUserId);
-      await env.SESSIONS_KV.put(`assigned:${targetId}`, "true");
-      await env.SESSIONS_KV.put(
-        `assigned:${targetId}:meta`,
-        JSON.stringify({ username: args.targetUsername, assignedAt: Date.now() })
-      );
-      return `✅ Agent assigned to @${args.targetUsername || targetId}`;
-    }
-
-    default:
-      return `Unknown tool: ${toolName}`;
-  }
-}
-
-// ─── Command Handlers ────────────────────────────────────────────────
-
-async function handleCommand(
-  cmd: string,
-  args: string,
-  msg: TelegramMessage,
-  env: Env
-): Promise<string | null> {
-  const userId = msg.from?.id;
-  if (!userId) return null;
-
-  switch (cmd) {
-    case "/start":
-      return (
-        `🤖 *OpenClawd Trading Bot*\n\n` +
-        `Powered by GPT-5.4 + Agents SDK\n\n` +
-        `*Capabilities:*\n` +
-        `• Autonomous trading (pump.fun, Jupiter)\n` +
-        `• Image generation (GPT Image 2.0)\n` +
-        `• Web search for market data\n` +
-        `• Browser automation (CUA)\n\n` +
-        (isOwner(userId, env)
-          ? `👑 You are the *owner* — full access enabled.`
-          : `🔹 You are an *assigned user* — chat & image access.`)
-      );
-
-    case "/generate": {
-      if (!args) return "Usage: `/generate <prompt>`";
-      return await generateImage(args, env, msg.chat.id);
-    }
-
-    case "/pnl": {
-      const pnlPrompt = "Generate a PnL card showing a successful Solana trading session with profit metrics, green candles, and a smug anime cat";
-      return await generateImage(pnlPrompt, env, msg.chat.id);
-    }
-
-    case "/search": {
-      if (!args) return "Usage: `/search <query>`";
-      return await webSearch(args, env);
-    }
-
-    case "/assign": {
-      if (!isOwner(userId, env)) return "❌ Only the owner can assign agents.";
-      // Parse username or ID from args
-      const match = args.match(/@?(\w+)/);
-      if (!match) return "Usage: `/assign @username` or `/assign <user_id>`";
-      await env.SESSIONS_KV.put(`pending_assign:${match[1]}`, String(userId));
-      return `⏳ Next message from @${match[1]} will auto-assign them.`;
-    }
-
-    case "/revoke": {
-      if (!isOwner(userId, env)) return "❌ Only the owner can revoke access.";
-      const match = args.match(/@?(\w+)/);
-      if (!match) return "Usage: `/revoke @username` or `/revoke <user_id>`";
-      await env.SESSIONS_KV.delete(`assigned:${match[1]}`);
-      return `✅ Access revoked for @${match[1]}`;
-    }
-
-    case "/trade": {
-      if (!isOwner(userId, env)) return "❌ Only the owner can execute trades.";
-      // Let OpenAI handle the trade via function calling
-      return null; // Fall through to AI processing
-    }
-
-    default:
-      return null; // Unknown command — let AI handle
-  }
-}
-
-// ─── Image Generation ────────────────────────────────────────────────
-
-async function generateImage(
-  prompt: string,
-  env: Env,
-  chatId: number
-): Promise<string> {
-  try {
-    const res = await callOpenAI(env.OPENAI_API_KEY, {
-      model: MODELS.image,
-      input: [
-        {
-          role: "user",
-          content: prompt,
-        },
-      ],
-      tools: [{ type: "image_generation" }],
-    });
-
-    if (!res.ok) {
-      // Try fallback model
-      const fallbackRes = await callOpenAI(env.OPENAI_API_KEY, {
-        model: MODELS.imageFallback,
-        input: [{ role: "user", content: prompt }],
-        tools: [{ type: "image_generation" }],
-      });
-
-      if (!fallbackRes.ok) {
-        const err = await fallbackRes.text();
-        return `❌ Image generation failed: ${err.slice(0, 200)}`;
-      }
-
-      const data = await fallbackRes.json<{ output?: Array<{ type: string; content?: string; image_url?: string }> }>();
-      const imageOutput = data.output?.find((o) => o.type === "image_generation");
-      if (imageOutput?.image_url) {
-        await sendPhoto(env.TELEGRAM_BOT_TOKEN, chatId, imageOutput.image_url, prompt);
-        return "🎨 Generated with fallback model";
-      }
-      return "⚠️ Image generation returned no output";
-    }
-
-    const data = await res.json<{ output?: Array<{ type: string; content?: string; image_url?: string }> }>();
-    const imageOutput = data.output?.find((o) => o.type === "image_generation");
-
-    if (imageOutput?.image_url) {
-      await sendPhoto(env.TELEGRAM_BOT_TOKEN, chatId, imageOutput.image_url, prompt);
-      return "🎨 Image generated via GPT Image 2.0";
-    }
-
-    return "⚠️ Image generation returned no output";
-  } catch (err) {
-    return `❌ Image error: ${(err as Error).message}`;
-  }
-}
-
-// ─── Web Search ──────────────────────────────────────────────────────
-
-async function webSearch(query: string, env: Env): Promise<string> {
-  try {
-    const res = await callOpenAI(env.OPENAI_API_KEY, {
-      model: MODELS.chat,
-      input: [{ role: "user", content: query }],
-      tools: [{ type: "web_search_preview" }],
-    });
-
-    if (!res.ok) {
-      const err = await res.text();
-      return `❌ Search failed: ${err.slice(0, 200)}`;
-    }
-
-    const data = await res.json<{ output?: Array<{ type: string; content?: string; text?: string }> }>();
-    const textOutput = data.output?.find((o) => o.type === "message" || o.text);
-    return textOutput?.text || textOutput?.content || "No results found";
-  } catch (err) {
-    return `❌ Search error: ${(err as Error).message}`;
-  }
-}
-
-// ─── AI Chat Processing ─────────────────────────────────────────────
-
-async function processWithAI(
-  text: string,
-  msg: TelegramMessage,
-  env: Env
-): Promise<string> {
-  const userId = msg.from?.id;
-  if (!userId) return "Unable to identify user.";
-
-  const owner = isOwner(userId, env);
-  const assigned = await isAssigned(userId, env.SESSIONS_KV);
-
-  if (!owner && !assigned) {
-    return "❌ Unauthorized. Ask the owner to assign you with `/assign @username`.";
-  }
-
-  // Select model based on context
-  const isTradeRelated =
-    /\b(trade|swap|buy|sell|token|pump|jupiter|sol| lamport)\b/i.test(text);
-  const model = owner && isTradeRelated ? MODELS.trading : MODELS.chat;
-
-  // Build tools list
-  const tools: OpenAITool[] = [{ type: "web_search_preview" }];
-
-  if (owner) {
-    tools.push(...tradingTools);
-  }
-
-  // Check if image generation is needed
-  const isImageRequest =
-    /\b(generate|create|draw|make)\b.*\b(image|picture|photo|meme|card|pnl)\b/i.test(text) ||
-    /\b(image|picture|photo|meme)\b.*\b(of|for|showing)\b/i.test(text);
-
-  if (isImageRequest) {
-    tools.push({ type: "image_generation" });
-  }
-
-  const systemPrompt = SYSTEM_PROMPT.replace("{{OWNER_ID}}", env.TELEGRAM_USER_ID);
-
-  try {
-    // Get conversation history from KV
-    const historyKey = `history:${userId}`;
-    const historyJson = await env.SESSIONS_KV.get(historyKey);
-    const history: Array<{ role: string; content: string }> = historyJson
-      ? JSON.parse(historyJson)
-      : [];
-
-    // Add current message to history
-    history.push({ role: "user", content: text });
-
-    // Keep last 20 messages
-    const recentHistory = history.slice(-20);
-
-    const res = await callOpenAI(env.OPENAI_API_KEY, {
-      model,
-      instructions: systemPrompt,
-      input: recentHistory.map((m) => ({
-        role: m.role as "user" | "assistant",
-        content: m.content,
-      })),
+    body: JSON.stringify({
+      model: 'gpt-5.4',
+      instructions: SYSTEM_INSTRUCTIONS,
+      input: items,
       tools,
-    });
+      ...(previousResponseId ? { previous_response_id: previousResponseId } : {}),
+      store: true,
+    }),
+  });
 
-    if (!res.ok) {
-      const err = await res.text();
-      return `❌ AI error: ${err.slice(0, 300)}`;
-    }
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`Responses API ${res.status}: ${err.slice(0, 500)}`);
+  }
 
-    const data = await res.json<{
-      output?: Array<{
-        type: string;
-        text?: string;
-        content?: string;
-        name?: string;
-        arguments?: string;
-        image_url?: string;
-      }>;
-    }>();
+  const data = await res.json() as {
+    id: string;
+    output: ResponsesItem[];
+    output_text?: string;
+  };
 
-    // Process output items
-    let response = "";
-    const outputItems = data.output || [];
+  return {
+    id: data.id,
+    output: data.output,
+    output_text: data.output_text ?? '',
+  };
+}
 
-    for (const item of outputItems) {
-      if (item.type === "message" && item.text) {
-        response += item.text;
-      } else if (item.type === "function_call" && item.name) {
-        // Execute the function call
-        const args = item.arguments ? JSON.parse(item.arguments) : {};
-        const result = await executeToolCall(item.name, args, env);
-        response += result + "\n";
+async function executeFunctionCall(
+  name: string,
+  argsJson: string,
+  gatewayUrl: string,
+): Promise<string> {
+  let args: Record<string, unknown>;
+  try {
+    args = JSON.parse(argsJson);
+  } catch {
+    return JSON.stringify({ error: 'invalid_json_args' });
+  }
 
-        // If image output, send it
-        if (item.image_url) {
-          await sendPhoto(env.TELEGRAM_BOT_TOKEN, msg.chat.id, item.image_url);
-        }
-      } else if (item.type === "image_generation" && item.image_url) {
-        await sendPhoto(env.TELEGRAM_BOT_TOKEN, msg.chat.id, item.image_url);
-        response += "🎨 Generated image\n";
+  // Route to gateway brain for real Solana data
+  switch (name) {
+    case 'execute_swap':
+    case 'get_token_analysis':
+    case 'get_trending':
+    case 'get_wallet_status': {
+      try {
+        const res = await fetch(`${gatewayUrl}/api/v1/brain/ask`, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ prompt: `${name} ${argsJson}` }),
+        });
+        const data = await res.json() as { reply?: string };
+        return data.reply ?? JSON.stringify({ status: 'ok', data });
+      } catch {
+        return JSON.stringify({ status: 'simulated', name, args });
       }
     }
+    default:
+      return JSON.stringify({ error: 'unknown_tool', name });
+  }
+}
 
-    // Save assistant response to history
-    if (response) {
-      history.push({ role: "assistant", content: response });
-      await env.SESSIONS_KV.put(historyKey, JSON.stringify(history.slice(-20)));
+// ---------------------------------------------------------------------------
+// Image generation — GPT Image 2.0 with gpt-image-1-mini fallback
+// ---------------------------------------------------------------------------
+async function generateImage(
+  apiKey: string,
+  prompt: string,
+): Promise<string | null> {
+  // Try gpt-image-1 (GPT Image 2.0) first
+  try {
+    const res = await fetch('https://api.openai.com/v1/images/generations', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: 'gpt-image-1',
+        prompt,
+        n: 1,
+        size: '1024x1024',
+      }),
+    });
+    if (res.ok) {
+      const data = await res.json() as { data: Array<{ url?: string; b64_json?: string }> };
+      return data.data?.[0]?.url ?? null;
+    }
+  } catch { /* fallback */ }
+
+  // Fallback to gpt-image-1-mini
+  try {
+    const res = await fetch('https://api.openai.com/v1/images/generations', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: 'gpt-image-1-mini',
+        prompt,
+        n: 1,
+        size: '1024x1024',
+      }),
+    });
+    if (res.ok) {
+      const data = await res.json() as { data: Array<{ url?: string }> };
+      return data.data?.[0]?.url ?? null;
+    }
+  } catch { /* give up */ }
+
+  return null;
+}
+
+// ---------------------------------------------------------------------------
+// KV-backed conversation memory
+// ---------------------------------------------------------------------------
+interface ConversationState {
+  items: ResponsesItem[];
+  lastResponseId: string | null;
+}
+
+async function loadConversation(
+  kv: KVNamespace,
+  chatId: number,
+): Promise<ConversationState> {
+  const raw = await kv.get(`conv:${chatId}`);
+  if (raw) {
+    try {
+      return JSON.parse(raw) as ConversationState;
+    } catch { /* corrupted */ }
+  }
+  return { items: [], lastResponseId: null };
+}
+
+async function saveConversation(
+  kv: KVNamespace,
+  chatId: number,
+  state: ConversationState,
+): Promise<void> {
+  // Keep last 20 turns to stay within KV value limits
+  const trimmed = state.items.slice(-40);
+  await kv.put(`conv:${chatId}`, JSON.stringify({
+    ...state,
+    items: trimmed,
+  }));
+}
+
+// ---------------------------------------------------------------------------
+// Access control
+// ---------------------------------------------------------------------------
+async function isAuthorized(kv: KVNamespace, chatId: number, ownerChatId: string): Promise<boolean> {
+  if (String(chatId) === ownerChatId) return true;
+  const assigned = await kv.get(`assigned:${chatId}`);
+  return assigned === 'true';
+}
+
+// ---------------------------------------------------------------------------
+// Process message — Responses API with items, instructions, output_text
+// ---------------------------------------------------------------------------
+async function processMessage(
+  env: Env,
+  chatId: number,
+  text: string,
+  fromUser?: string,
+): Promise<string> {
+  const state = await loadConversation(env.TRADING_KV, chatId);
+
+  // Add user message as item (Responses API format)
+  state.items.push({
+    type: 'message',
+    role: 'user',
+    content: [{ type: 'input_text', text }],
+  });
+
+  try {
+    // Call Responses API with conversation state
+    let response = await callResponsesAPI(
+      env.OPENAI_API_KEY,
+      state.items,
+      state.lastResponseId ?? undefined,
+    );
+
+    state.lastResponseId = response.id;
+
+    // Process function calls in a loop (Responses API agentic pattern)
+    let roundCount = 0;
+    const MAX_ROUNDS = 6;
+
+    while (roundCount < MAX_ROUNDS) {
+      const functionCalls = response.output.filter(
+        (item) => item.type === 'function_call',
+      );
+
+      if (functionCalls.length === 0) break;
+
+      roundCount++;
+
+      // Execute function calls and collect outputs
+      const outputs: ResponsesItem[] = [];
+      for (const fc of functionCalls) {
+        const result = await executeFunctionCall(
+          fc.name ?? '',
+          fc.arguments ?? '{}',
+          env.GATEWAY_URL,
+        );
+        outputs.push({
+          type: 'function_call_output',
+          call_id: fc.call_id,
+          output: result,
+        });
+      }
+
+      // Append outputs to items and call API again
+      state.items = [...state.items, ...response.output, ...outputs];
+
+      response = await callResponsesAPI(
+        env.OPENAI_API_KEY,
+        state.items,
+        response.id,
+      );
+
+      state.lastResponseId = response.id;
     }
 
-    return response || "🤔 No response generated.";
+    // Append final output items to state
+    state.items = [...state.items, ...response.output];
+
+    // Save updated conversation
+    await saveConversation(env.TRADING_KV, chatId, state);
+
+    // Return aggregated text using output_text helper pattern
+    return response.output_text || '🤖 No response generated.';
   } catch (err) {
+    await saveConversation(env.TRADING_KV, chatId, state);
     return `❌ Error: ${(err as Error).message}`;
   }
 }
 
-// ─── Webhook Handler ─────────────────────────────────────────────────
-
-const app = new Hono<{ Bindings: Env }>();
+// ---------------------------------------------------------------------------
+// Routes
+// ---------------------------------------------------------------------------
 
 // Health check
-app.get("/health", (c) => c.json({ status: "ok", models: MODELS }));
+app.get('/', (c) => c.json({
+  service: 'openclawd-openai-trading-bot',
+  status: 'ok',
+  models: { trading: 'gpt-5.4', fast: 'gpt-5.4-nano', image: 'gpt-image-1' },
+  api: 'responses',
+}));
 
-// Telegram webhook endpoint
-app.post("/webhook", async (c) => {
-  const env = c.env;
-  const update: TelegramUpdate = await c.req.json();
+// Setup webhook
+app.get('/setup', async (c) => {
+  const token = c.env.TELEGRAM_BOT_TOKEN;
+  const url = new URL(c.req.url);
+  const webhookUrl = `${url.protocol}//${url.host}/telegram/webhook`;
 
-  const msg = update.message || update.callback_query?.message;
-  if (!msg) return c.json({ ok: true });
+  const res = await fetch(`${TELEGRAM_API(token)}/setWebhook`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ url: webhookUrl }),
+  });
+  const data = await res.json();
+  return c.json({ webhook: webhookUrl, result: data });
+});
 
-  const text = msg.text || msg.caption || "";
-  const userId = msg.from?.id;
+// Telegram webhook
+app.post('/telegram/webhook', async (c) => {
+  const update = await c.req.json<TelegramUpdate>();
+  const msg = update.message;
 
-  if (!userId || !text) return c.json({ ok: true });
+  if (!msg?.text) return c.json({ ok: true });
 
-  // Handle commands
-  const cmdMatch = text.match(/^\/(\w+)(?:@\w+)?\s*(.*)/s);
-  if (cmdMatch) {
-    const [, cmd, args] = cmdMatch;
-    const result = await handleCommand(cmd, args.trim(), msg, env);
-    if (result) {
-      await sendMessage(env.TELEGRAM_BOT_TOKEN, msg.chat.id, result);
-      return c.json({ ok: true });
-    }
-    // If handleCommand returned null, fall through to AI
+  const chatId = msg.chat.id;
+  const text = msg.text.trim();
+
+  // Access check
+  if (!(await isAuthorized(c.env.TRADING_KV, chatId, c.env.OWNER_CHAT_ID))) {
+    await sendMessage(
+      c.env.TELEGRAM_BOT_TOKEN,
+      chatId,
+      '⛔ Unauthorized. Ask the owner to `/assign` you.',
+      msg.message_id,
+    );
+    return c.json({ ok: true });
   }
 
-  // Process with AI
-  const aiResponse = await processWithAI(text, msg, env);
-  await sendMessage(env.TELEGRAM_BOT_TOKEN, msg.chat.id, aiResponse);
+  // Commands
+  if (text.startsWith('/')) {
+    const [cmd, ...rest] = text.split(' ');
+    const arg = rest.join(' ').trim();
 
+    switch (cmd) {
+      case '/start':
+        await sendMessage(c.env.TELEGRAM_BOT_TOKEN, chatId,
+          '🦞 *Clawd OpenAI Trader* — GPT-5.4 Responses API\n\n' +
+          'Born with: swap, analyze, trending, wallet, web search, image gen.\n\n' +
+          'Commands:\n/generate \\[prompt] — Image gen\n/trade \\[token] \\[side] \\[amount]\n/trending — Trending tokens\n/pnl — PnL card\n/search \\[query] — Web search\n/assign \\[@user] \\[chatId] — Owner only\n/revoke \\[chatId] — Owner only',
+        );
+        return c.json({ ok: true });
+
+      case '/generate': {
+        if (!arg) {
+          await sendMessage(c.env.TELEGRAM_BOT_TOKEN, chatId, 'Usage: /generate <prompt>');
+          return c.json({ ok: true });
+        }
+        await sendMessage(c.env.TELEGRAM_BOT_TOKEN, chatId, '🎨 Generating image...');
+        const imageUrl = await generateImage(c.env.OPENAI_API_KEY, arg);
+        if (imageUrl) {
+          await sendPhoto(c.env.TELEGRAM_BOT_TOKEN, chatId, imageUrl, arg);
+        } else {
+          await sendMessage(c.env.TELEGRAM_BOT_TOKEN, chatId, '❌ Image generation failed.');
+        }
+        return c.json({ ok: true });
+      }
+
+      case '/search': {
+        if (!arg) {
+          await sendMessage(c.env.TELEGRAM_BOT_TOKEN, chatId, 'Usage: /search <query>');
+          return c.json({ ok: true });
+        }
+        // Use Responses API with web_search tool only
+        const searchItems: ResponsesItem[] = [{
+          type: 'message',
+          role: 'user',
+          content: [{ type: 'input_text', text: arg }],
+        }];
+        const res = await fetch('https://api.openai.com/v1/responses', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            authorization: `Bearer ${c.env.OPENAI_API_KEY}`,
+          },
+          body: JSON.stringify({
+            model: 'gpt-5.4-nano',
+            instructions: 'You are a Solana market research assistant. Provide concise, actionable results.',
+            input: searchItems,
+            tools: [{ type: 'web_search' }],
+            store: false,
+          }),
+        });
+        if (res.ok) {
+          const data = await res.json() as { output_text?: string };
+          await sendMessage(c.env.TELEGRAM_BOT_TOKEN, chatId,
+            `🔍 *Search: ${arg}*\n\n${data.output_text ?? 'No results.'}`,
+          );
+        } else {
+          await sendMessage(c.env.TELEGRAM_BOT_TOKEN, chatId, '❌ Search failed.');
+        }
+        return c.json({ ok: true });
+      }
+
+      case '/trending': {
+        const reply = await processMessage(c.env, chatId,
+          'Get the current trending Solana tokens (1h timeframe). Show top 5 with price, volume, and a brief assessment.',
+        );
+        await sendMessage(c.env.TELEGRAM_BOT_TOKEN, chatId, reply, msg.message_id);
+        return c.json({ ok: true });
+      }
+
+      case '/trade': {
+        if (!arg) {
+          await sendMessage(c.env.TELEGRAM_BOT_TOKEN, chatId,
+            'Usage: /trade <token> <side> <amount>\nExample: /trade SOL buy 0.1',
+          );
+          return c.json({ ok: true });
+        }
+        const reply = await processMessage(c.env, chatId,
+          `Execute this trade: ${arg}. Analyze the token first, then execute.`,
+        );
+        await sendMessage(c.env.TELEGRAM_BOT_TOKEN, chatId, reply, msg.message_id);
+        return c.json({ ok: true });
+      }
+
+      case '/pnl': {
+        const reply = await processMessage(c.env, chatId,
+          'Generate a PnL summary for my portfolio. Include total value, 24h change, and top positions.',
+        );
+        await sendMessage(c.env.TELEGRAM_BOT_TOKEN, chatId, reply, msg.message_id);
+        return c.json({ ok: true });
+      }
+
+      case '/assign': {
+        if (String(chatId) !== c.env.OWNER_CHAT_ID) {
+          await sendMessage(c.env.TELEGRAM_BOT_TOKEN, chatId, '⛔ Owner only.');
+          return c.json({ ok: true });
+        }
+        const targetId = parseInt(arg, 10);
+        if (isNaN(targetId)) {
+          await sendMessage(c.env.TELEGRAM_BOT_TOKEN, chatId, 'Usage: /assign <chatId>');
+          return c.json({ ok: true });
+        }
+        await c.env.TRADING_KV.put(`assigned:${targetId}`, 'true');
+        await sendMessage(c.env.TELEGRAM_BOT_TOKEN, chatId, `✅ Assigned bot to chat ${targetId}.`);
+        return c.json({ ok: true });
+      }
+
+      case '/revoke': {
+        if (String(chatId) !== c.env.OWNER_CHAT_ID) {
+          await sendMessage(c.env.TELEGRAM_BOT_TOKEN, chatId, '⛔ Owner only.');
+          return c.json({ ok: true });
+        }
+        const targetId = parseInt(arg, 10);
+        if (isNaN(targetId)) {
+          await sendMessage(c.env.TELEGRAM_BOT_TOKEN, chatId, 'Usage: /revoke <chatId>');
+          return c.json({ ok: true });
+        }
+        await c.env.TRADING_KV.delete(`assigned:${targetId}`);
+        await sendMessage(c.env.TELEGRAM_BOT_TOKEN, chatId, `✅ Revoked access from chat ${targetId}.`);
+        return c.json({ ok: true });
+      }
+
+      default:
+        // Unknown command — treat as chat
+        break;
+    }
+  }
+
+  // Regular chat — process through Responses API with full tools
+  const reply = await processMessage(c.env, chatId, text);
+  await sendMessage(c.env.TELEGRAM_BOT_TOKEN, chatId, reply, msg.message_id);
   return c.json({ ok: true });
 });
 
-// Register webhook (call once to setup)
-app.get("/setup", async (c) => {
-  const env = c.env;
-  const url = new URL(c.req.url);
-  const webhookUrl = `${url.origin}/webhook`;
-
-  const res = await telegramAPI(env.TELEGRAM_BOT_TOKEN, "setWebhook", {
-    url: webhookUrl,
-    allowed_updates: ["message", "callback_query"],
-  });
-
-  const data = await res.json<{ ok?: boolean; description?: string }>();
-  return c.json({
-    webhook: webhookUrl,
-    result: data,
-  });
-});
-
-// ─── Scheduled Handler (cron) ────────────────────────────────────────
+// ---------------------------------------------------------------------------
+// Scheduled handler — periodic health checks
+// ---------------------------------------------------------------------------
+const scheduled: ExportedHandlerScheduledHandler<Env> = async (_event, env, _ctx) => {
+  // Health ping to gateway
+  if (env.GATEWAY_URL) {
+    try {
+      await fetch(`${env.GATEWAY_URL}/healthz`, { method: 'GET' });
+    } catch { /* gateway down */ }
+  }
+};
 
 export default {
   fetch: app.fetch,
-
-  async scheduled(_event: ScheduledEvent, env: Env, _ctx: ExecutionContext) {
-    // Periodic tasks:
-    // 1. Clean up old conversation histories
-    // 2. Check for pending fee claims
-    // 3. Monitor portfolio health
-
-    console.log("[cron] Running scheduled tasks...");
-
-    // Example: Ping gateway to check health
-    if (env.GATEWAY_URL) {
-      try {
-        await fetch(`${env.GATEWAY_URL}/health`, {
-          headers: env.GATEWAY_AUTH_TOKEN
-            ? { Authorization: `Bearer ${env.GATEWAY_AUTH_TOKEN}` }
-            : {},
-        });
-        console.log("[cron] Gateway health check: OK");
-      } catch {
-        console.log("[cron] Gateway health check: FAILED");
-      }
-    }
-  },
+  scheduled,
 };
