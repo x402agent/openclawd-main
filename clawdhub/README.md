@@ -182,6 +182,9 @@ The orchestrator at `hub.solanaclawd.com/api` powers all payment and agent flows
 | `GET /api/v1/wurk/services` | Wurk service catalog (17+ job types) |
 | `POST /api/v1/wurk/quick` | Create quick x402 job |
 | `POST /api/v1/wurk/agent-to-human` | Hire humans for microtasks |
+| `POST /api/v1/metaplex/mint` | Mint Core agent asset (auto on login) |
+| `GET /api/v1/metaplex/read/:asset` | Read agent on-chain (asset signer PDA) |
+| `POST /api/v1/metaplex/launch-token` | Launch agent token via Genesis |
 
 ---
 

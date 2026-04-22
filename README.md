@@ -251,6 +251,199 @@ LEARN    → write INFERRED signals → Dream agent promotes to LEARNED
 
 ---
 
+## 🦞 Metaplex Core Agents
+
+Every OpenClawd user gets a **Metaplex Core agent** minted on first login — a sovereign on-chain AI identity that owns assets, executes autonomously, and can launch its own token.
+
+### How it works
+
+1. **Login via Privy** → JWT verified → embedded wallet created/linked
+2. **Auto-mint** → Orchestrator calls `mintAndSubmitAgent` via Metaplex API (`https://api.metaplex.com`)
+3. **Single atomic tx** → Creates `MPL Core` asset + `Agent Identity PDA` in one transaction
+4. **Token launch** → Optional `Genesis` bonding curve with agent as creator → royalties flow to the agent PDA
+
+### Programs supported
+
+| Program | Package | Description |
+|---|---|---|
+| **Agent Registry** | `@metaplex-foundation/mpl-agent-registry` | Identity, executive, delegation PDAs |
+| **Genesis** | `@metaplex-foundation/genesis` | Token launch with bonding curves |
+| **Core** | `@metaplex-foundation/mpl-core` | Next-gen NFTs with plugins |
+| **Token Metadata** | `@metaplex-foundation/mpl-token-metadata` | Fungibles, NFTs, pNFTs |
+| **Bubblegum** | `@metaplex-foundation/mpl-bubblegum` | Compressed NFTs (10k+ scale) |
+| **Candy Machine** | `@metaplex-foundation/mpl-core-candy-machine` | Drops with allowlists |
+
+### SDK & Umi
+
+```bash
+bun add @metaplex-foundation/umi \
+  @metaplex-foundation/umi-bundle-defaults \
+  @metaplex-foundation/mpl-agent-registry \
+  @metaplex-foundation/mpl-core \
+  @metaplex-foundation/genesis
+```
+
+```typescript
+import { createUmi } from '@metaplex-foundation/umi'
+import { mplAgentIdentity } from '@metaplex-foundation/umi-agent-sdk'
+
+const umi = createUmi(HELIUS_RPC).use(mplAgentIdentity())
+```
+
+### Agent Signer PDA
+
+Every Core asset has an **Asset Signer PDA** (derived from `['mpl-core-execute', <asset>]`) — a wallet with no private key. Agents sign via Umi's agent identity plugin, not a private key.
+
+### Token launches (Genesis)
+
+```bash
+# Via orchestrator API
+curl -X POST http://localhost:8787/api/v1/metaplex/launch-token \
+  -H "Authorization: Bearer <privy-jwt>" \
+  -d '{
+    "mint": "A4pTMq5U2Rwaa1wVjMy5V6eP7nMf9Yz3gLkBvR2P7Xw",
+    "bondingCurve": { "initialPrice": 0.0001, "curveType": "exponential" },
+    "setToken": true
+  }'
+```
+
+The `setToken: true` option permanently links the token to the agent identity — creator fees route to the agent PDA automatically.
+
+---
+
+## 🤖 49-Agent Catalog
+
+Browse the full catalog at **[hub.solanaclawd.com/agents](https://hub.solanaclawd.com/agents)**
+
+All 49 agents are Metaplex-enabled and mintable as Core assets. Stats: **51 total agents** · **49 Metaplex-enabled** · **12 trading-capable** · **1 token launch capable**
+
+### DeFi (12 agents)
+
+| Agent | Description | Skills |
+|---|---|---|
+| **CLAWD Liquidity Provider Strategist** | Concentrated LP on Meteora/Orca/Raydium, IL math, rebalance | `agent-registry` |
+| **CLAWD Yield Aggregator** | Rank every Solana yield venue (Kamino, MarginFi, Drift, Meteora) | `agent-registry` |
+| **DeFi Yield Farming Strategist** | Identify and optimize yield farming across protocols | `agent-registry` |
+| **DeFi Risk Scoring Engine** | TVL, audit, oracle, upgrade authority risk assessment | `agent-registry` |
+| **DeFi Protocol Comparator** | Side-by-side protocol comparison (lending, LP, LST) | `agent-registry` |
+| **DeFi Liquidity Monitor** | Monitor LP positions, impermanent loss, fee accrual | `agent-registry` |
+| **DeFi Emergency Response Agent** | Liquidation avoidance, depeg alerts, emergency exits | `agent-registry` |
+| **DeFi Portfolio Manager** | Auto-rebalance, strategy rotation, yield optimization | `agent-registry` |
+| **CLAWD Bridge Assistant** | Route funds into Solana (Wormhole, deBridge, Allbridge, Jupiter) | `agent-registry` |
+| **DeFi Airdrop Strategist** | Identify and claim protocol airdrops | `agent-registry` |
+| **Solana DeFi Analyst** | Deep protocol research and on-chain analytics | `agent-registry` |
+| **DeFi Compliance Checker** | Protocol compliance and regulatory analysis | `agent-registry` |
+
+### Analytics (11 agents)
+
+| Agent | Description | Skills |
+|---|---|---|
+| **CLAWD Portfolio Tracker** | Helius DAS wallet tracking, LP, staked SOL, PnL | `agent-registry` |
+| **Crypto Alpha & Signal Detector** | Smart-money wallet flows, pump.fun launches, Jito bundles | `agent-registry` |
+| **DeFi Analytics Dashboard** | Real-time DeFi metrics and portfolio visualization | `agent-registry` |
+| **Market Sentiment Analyzer** | On-chain sentiment, social signals, whale activity | `agent-registry` |
+| **On-chain Data Explorer** | Helius DAS queries, asset searches, transaction tracing | `agent-registry` |
+| **Protocol TVL Tracker** | Track TVL across Solana protocols over time | `agent-registry` |
+| **Whale Wallet Monitor** | Track top traders' positions and moves | `agent-registry` |
+| **NFT Floor Price Analyzer** | Floor prices, volume, rarity scoring | `agent-registry` |
+| **Dex Trading Volume Analyst** | DEX volume, liquidity, spreads analysis | `agent-registry` |
+| **Solana Ecosystem Health Monitor** | Network health, TPS, validator metrics | `agent-registry` |
+| **DeFi Protocol Comparator** | Side-by-side protocol analysis (reused) | `agent-registry` |
+
+### Security (8 agents)
+
+| Agent | Description | Skills |
+|---|---|---|
+| **CLAWD Protocol Risk Monitor** | Liquidation distance, oracle drift, depeg alerts | `agent-registry` |
+| **DeFi Risk Scoring Engine** | Comprehensive risk assessment framework | `agent-registry` |
+| **Cross-Chain Bridge Security Analyst** | Bridge security model evaluation | `agent-registry` |
+| **Smart Contract Auditor** | Exploit pattern detection, audit assistance | `agent-registry` |
+| **Rug Pull Detection Agent** | Honeypot patterns, liquidity sniping, scams | `agent-registry` |
+| **Wallet Security Monitor** | Unauthorized access, unusual activity alerts | `agent-registry` |
+| **MEV & Sandwich Attack Detector** | MEV detection and protection strategies | `agent-registry` |
+| **DeFi Emergency Response Agent** | Emergency exits, circuit breakers | `agent-registry` |
+
+### Education (6 agents)
+
+| Agent | Description | Skills |
+|---|---|---|
+| **CLAWD Ecosystem Onboarding Guide** | Wallet setup, first SOL, buying CLAWD, staking | `agent-registry` |
+| **APY vs APR Educator** | Yield math, auto-compounders, emission decay | `agent-registry` |
+| **DeFi Beginner Onboarding Mentor** | First DeFi position, protocol education | `agent-registry` |
+| **Solana Development Educator** | Anchor, SPL tokens, program development | `agent-registry` |
+| **Blockchain Economics Tutor** | Tokenomics, game theory, valuation | `agent-registry` |
+| **Crypto Regulation Guide** | Regulatory landscape and compliance | `agent-registry` |
+
+### Trading (6 agents)
+
+| Agent | Description | Skills |
+|---|---|---|
+| **DeFi Airdrop Hunter** | Live Solana airdrop identification and strategy | `agent-registry` |
+| **Crypto Alpha & Signal Detector** | Trading alpha, early signals | `agent-registry` |
+| **CLAWD × Pump.fun Official Agent** | Payment-gated RNG, launch screening (0.1 SOL) | `genesis` |
+| **CLAWD Mayhem Mode** | Full trading + Metaplex (Core, Genesis, Bubblegum, Candy Machine) | All programs |
+| **P2P Trading Advisor** | P2P marketplace advice and arbitrage | `agent-registry` |
+| **DEX Arbitrage Spotter** | Cross-DEX arbitrage opportunities | `agent-registry` |
+
+### Governance (2 agents)
+
+| Agent | Description | Skills |
+|---|---|---|
+| **CLAWD Governance Guide** | DAO proposals, Realms voting, delegation | `agent-registry` |
+| **Protocol Upgrade Analyst** | Analyze and vote on protocol proposals | `agent-registry` |
+
+### Dev Tools (3 agents)
+
+| Agent | Description | Skills |
+|---|---|---|
+| **Solana Dev Copilot** | Anchor code generation, debugging, testing | `agent-registry` |
+| **CLI Automation Agent** | Shell scripting, process automation | `agent-registry` |
+| **Documentation Generator** | Auto-generate code docs and READMEs | `agent-registry` |
+
+### NFT (2 agents)
+
+| Agent | Description | Skills |
+|---|---|---|
+| **NFT Collection Manager** | Track, transfer, mint NFT collections | `agent-registry`, `core` |
+| **NFT Floor Price Analyzer** | Floor prices, volume, rarity analysis | `agent-registry` |
+
+### Research (1 agent)
+
+| Agent | Description | Skills |
+|---|---|---|
+| **CLAWD Firecrawl Researcher** | Web scraping, site mapping, search via Firecrawl | — |
+
+### Featured Agents (20)
+
+- 🪂 **DeFi Airdrop Hunter** — Live airdrop identification
+- 🎯 **Crypto Alpha & Signal Detector** — Smart money tracking
+- 💀 **CLAWD Mayhem Mode** — Full Metaplex + trading (all 6 programs)
+- 🎰 **CLAWD × Pump.fun Official Agent** — Payment-gated RNG (0.1 SOL)
+- 🌾 **CLAWD Yield Aggregator** — Best yield ranking
+- 💼 **CLAWD Portfolio Tracker** — Helius DAS wallet tracking
+- ⚠️ **CLAWD Protocol Risk Monitor** — DeFi risk monitoring
+- 💧 **CLAWD Liquidity Provider Strategist** — LP optimization
+- 🗳️ **CLAWD Governance Guide** — DAO voting
+- 🎓 **CLAWD Ecosystem Onboarding Guide** — First steps
+- 🔥 **CLAWD Firecrawl Researcher** — Web research
+
+### Mint Your Agent
+
+```bash
+# Via curl (auto-mints on first Privy login)
+curl -X POST http://localhost:8787/api/v1/metaplex/mint \
+  -H "Authorization: Bearer <privy-jwt>" \
+  -d '{"name":"My Agent","uri":"https://example.com/agent.json"}'
+
+# Via ClawdHub marketplace
+# https://hub.solanaclawd.com/agents/mint
+
+# List all agents
+curl http://localhost:8787/api/v1/agents | jq '.'
+```
+
+---
+
 ## Why OpenClawd exists
 
 Most AI agent stacks are stitched together from separate services:
