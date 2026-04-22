@@ -197,6 +197,76 @@ Source: [`solana-clawd/`](./solana-clawd/) · Go SDK: [`solana-go-main/`](./sola
 
 ---
 
+## 🦞 Clawd Wallet — Privy Embedded Wallet
+
+**`@openclawd/wallet`** — Privy-powered embedded Solana wallet for the openclawd ecosystem.
+
+Private keys never leave Privy's secure TEE. Grok 4.20 Beta pre-screens every transaction. Deny-first permissions model.
+
+**Architecture:** `User → Grok 4.20 Beta → ClawdWallet (Privy TEE) → Solana blockchain`
+
+```
+         ┌─── allow ───→ auto-sign up to $50
+         ├─── ask ──────→ Grok screens → user confirms
+         └─── deny ──────→ always block
+```
+
+**React:**
+```tsx
+import { PrivyProvider, useClawdWallet } from "@openclawd/wallet/react";
+
+<PrivyProvider appId={process.env.PRIVY_APP_ID!} embeddedWallets>
+  <SwapButton />
+</PrivyProvider>
+
+// Inside any component:
+const { wallet, connectWallet } = useClawdWallet();
+// wallet.address, wallet.ready, connectWallet(), disconnect()
+```
+
+**CLI:**
+```bash
+npm i -g @openclawd/wallet
+clawd-wallet tokens              # list Jupiter tokens
+clawd-wallet quote SOL USDC 0.1  # get swap quote
+clawd-wallet balance <addr>       # check SOL balance
+```
+
+**Node.js swap:**
+```ts
+import { ClawdWallet, SwapService } from "@openclawd/wallet";
+
+const wallet = new ClawdWallet(privyWallet, { chain: "mainnet" });
+const swap = new SwapService();
+const result = await swap.execute(wallet, {
+  inputToken: "SOL", outputToken: "USDC",
+  amount: "1000000000", slippageBps: 50,
+});
+console.log(result.explorerUrl);
+```
+
+**Agentic trading:**
+```ts
+import { AgenticWallet, DEFAULT_PERMISSIONS } from "@openclawd/wallet";
+
+const agent = new AgenticWallet(wallet, {
+  privyAppId: process.env.PRIVY_APP_ID!,
+  grokApiKey: process.env.XAI_API_KEY,
+  permissions: { ...DEFAULT_PERMISSIONS, swap: "ask", maxSwapUsd: 100 },
+});
+
+const { signature, explorerUrl } = await agent.agentSwap({
+  inputToken: "SOL", outputToken: "USDC",
+  amount: "1000000000", slippageBps: 50,
+});
+```
+
+**Built-in tokens:** SOL · USDC · USDT · WBTC · WETH · BONK · WIF · POPCAT (+ any mint address)
+
+Source: [`packages/clawd-wallet/`](./packages/clawd-wallet/) · npm: [`@openclawd/wallet`](https://www.npmjs.com/package/@openclawd/wallet)
+
+---
+
 ## 🤖 50 Production Agents
 
 Every agent is a `SKILL.md` bundle + an MCP server + a REST endpoint + an optional Metaplex Core NFT.
