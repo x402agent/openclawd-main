@@ -9,9 +9,14 @@ const PORT = Number(process.env.ORCHESTRATOR_PORT ?? 8787);
 
 const honcho = new HonchoClient({
   apiKey: process.env.HONCHO_API_KEY ?? '',
-  baseUrl: process.env.HONCHO_URL,
-  app: process.env.HONCHO_WORKSPACE_ID,
+  baseUrl: process.env.HONCHO_URL ?? undefined,
+  workspace: process.env.HONCHO_WORKSPACE_ID ?? undefined,
 });
+
+// Honcho warmup is deferred — #ensureReady is called lazily on first actual
+// request so the server boots immediately even if Honcho workspace doesn't
+// exist yet. Webhook handlers and route handlers all call #ensureReady via
+// their respective honcho methods, so warmup happens on first use.
 
 const webhookRouter = buildWebhookRouter({
   honcho,

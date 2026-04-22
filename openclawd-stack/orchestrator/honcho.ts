@@ -60,31 +60,33 @@ export class HonchoClient {
   #honcho: Honcho;
   #ready: Promise<void> | null = null;
 
-  constructor(opts: { baseUrl?: string; apiKey: string; app?: string }) {
+  constructor(opts: { baseUrl?: string; apiKey: string; workspace?: string }) {
     this.#honcho = new Honcho({
       apiKey: opts.apiKey,
       baseURL: opts.baseUrl,
-      workspaceId: opts.app ?? 'solanaclawd',
+      workspace: opts.workspace ?? 'solanaclawd',
     });
   }
 
-  /** Lazy warmup — Honcho's workspace is created on first access. Call this
-   *  before any public method that talks to Honcho to ensure the workspace
-   *  exists. Idempotent. */
+  /** Lazy warmup — creates the assistant peer on first call. Fails silently
+   *  so the orchestrator can boot even if Honcho workspace doesn't exist yet.
+   *  Call `.warmup()` to trigger; all public methods call it lazily anyway. */
   async warmup(): Promise<void> {
     await this.#ensureReady();
   }
 
-  /** Lazy warmup — Honcho's workspace is created on first access. */
+  /** Wraps the private ready promise so callers can await it safely. */
   async #ensureReady(): Promise<void> {
     if (!this.#ready) {
-      // Touch the assistant peer to make sure it exists. getOrCreate is implicit.
-      this.#ready = this.#honcho
+      const promise = this.#honcho
         .peer(ASSISTANT_PEER_ID)
         .then(() => undefined)
         .catch((err) => {
-          console.error('[honcho] warmup failed', err);
+          // 404 = workspace doesn't exist yet on Honcho servers — non-fatal.
+          console.warn('[honcho] peer warmup warning:', String(err));
         });
+      // Store a promise that never rejects so #ensureReady() stays safe to await.
+      this.#ready = promise.catch(() => undefined) as Promise<void>;
     }
     await this.#ready;
   }

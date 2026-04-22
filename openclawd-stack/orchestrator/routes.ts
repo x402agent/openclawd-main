@@ -11,7 +11,11 @@ import { PaymentsClient, type AgentManifest } from './payments.js';
 import { WalletBridge } from './wallet-bridge.js';
 import { McpBridge } from './mcp-bridge.js';
 
-const honcho = new HonchoClient({ apiKey: process.env.HONCHO_API_KEY ?? '' });
+const honcho = new HonchoClient({
+  apiKey: process.env.HONCHO_API_KEY ?? '',
+  baseUrl: process.env.HONCHO_URL ?? undefined,
+  workspace: process.env.HONCHO_WORKSPACE_ID ?? undefined,
+});
 
 const connection = new Connection(
   process.env.HELIUS_RPC ?? 'https://api.mainnet-beta.solana.com',
