@@ -1,765 +1,529 @@
-# 🤖 Auto-Research Agents: Karpathy-Inspired AI Research System for Solana
+# 🧠 OpenClawd AutoResearch Agents — Karpathy-Style Self-Improving AI on Solana
 
-> **49 autonomous AI agents are now conducting blockchain and finance research 24/7 — paid via simple curl commands with $CLAWD.**
+> **"The best research is the research that does itself."** — Inspired by [Andrej Karpathy](https://karpathy.ai)'s philosophy of iterative, self-improving AI.
 
-*Deep technical dive into OpenClawd's auto-research architecture, Solana blockchain research patterns, and self-improving agent systems.*
+**49 Metaplex Lobster Agents** that autonomously research Solana blockchain, DeFi, and financial markets — learning, sharing, and improving with every cycle.
 
----
-
-## 🧠 TL;DR
-
-OpenClawd implements **Karpathy-style LLM research patterns** to create a swarm of autonomous research agents that:
-
-1. **Research Solana/pump.fun** — Track token launches, analyze bonding curves, monitor whale movements
-2. **Analyze DeFi opportunities** — Find yields, detect arbitrage, optimize LP positions
-3. **Monitor markets** — Real-time sentiment, price action, on-chain metrics
-4. **Self-improve** — Learn from outcomes, update embeddings, share insights
-
-**Pay them with curl:**
-```bash
-curl -X POST https://solanaclawd.com/api/v1/research/chain \
-  -H "Content-Type: application/json" \
-  -H "X-Payment: 0.001 SOL" \
-  -d '{"query": "Analyze recent pump.fun launches for alpha"}'
-```
+**$CLAWD:** `8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump`
 
 ---
 
-## 1️⃣ Karpathy-Inspired Research Architecture
+## The Karpathy Approach, Applied to Blockchain Research
 
-### The OODA Loop for AI Research
+Andrej Karpathy's research philosophy can be distilled into four principles:
 
-Inspired by Andrej Karpathy's approach to LLM systems, we implement **Observe-Orient-Decide-Act** loops for research:
+1. **Iterate fast** — Ship, measure, improve, repeat
+2. **Let the model teach itself** — Self-supervised learning loops
+3. **Publish everything** — Open source, open data, open models
+4. **Scale what works** — Double down on winning patterns
 
-```
-┌─────────────────────────────────────────────────────────────────────┐
-│                        RESEARCH OODA LOOP                           │
-├─────────────────────────────────────────────────────────────────────┤
-│                                                                     │
-│    ┌─────────┐     ┌─────────┐     ┌─────────┐     ┌─────────┐     │
-│    │ OBSERVE │────►│ ORIENT  │────►│ DECIDE  │────►│   ACT   │     │
-│    └─────────┘     └─────────┘     └─────────┘     └─────────┘     │
-│         ▲                                               │           │
-│         └──────────────────── LOOP ─────────────────────┘           │
-│                                                                     │
-└─────────────────────────────────────────────────────────────────────┘
-```
+OpenClawd AutoResearch applies each principle to Solana blockchain research:
 
-### Observe Phase
-- Pull real-time data from Solana RPC (Helius, Birdeye)
-- Query pump.fun bonding curve data
-- Fetch DeFi protocol metrics (Raydium, Orca, Jupiter)
-- Monitor social signals (Twitter, Telegram sentiment)
-
-### Orient Phase
-- Embed raw data into vector space
-- Retrieve relevant knowledge from llm-wiki-tang
-- Apply domain-specific context (trading patterns, protocol behavior)
-- Identify anomalies and patterns
-
-### Decide Phase
-- Generate hypotheses using LLM inference
-- Score opportunities (risk/reward, confidence intervals)
-- Prioritize research targets
-- Plan next action
-
-### Act Phase
-- Store findings in knowledge base
-- Update embeddings based on validation
-- Execute trades (if authorized)
-- Report findings to user
+| Karpathy Principle | OpenClawd Implementation |
+|---|---|
+| Iterate fast | Agents run research cycles every 60 seconds |
+| Self-teaching | Agents learn from trade outcomes and adjust |
+| Publish everything | All research stored in vector knowledge base |
+| Scale what works | Profitable patterns get more agent allocation |
 
 ---
 
-## 2️⃣ Solana Blockchain Auto-Research
+## Architecture: The Self-Improving Research Loop
 
-### pump.fun Integration
-
-```python
-# Research pump.fun token launches
-class PumpFunResearchAgent:
-    """
-    Autonomous agent for pump.fun research.
-    Monitor bonding curves, detect graduation signals, identify alpha.
-    """
-    
-    PUMP_PROGRAM = "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"
-    MAYHEM_PROGRAM = "MAyhSmzXzV1pTf7LsNkrNwkWKTo4ougAJ1PPg47MD4e"
-    
-    def __init__(self, rpc_url: str, birdeye_key: str):
-        self.rpc = HeliusRPC(rpc_url)
-        self.birdeye = BirdeyeAPI(birdeye_key)
-        self.knowledge_base = VectorStore()
-        
-    async def research_launch(self, mint: str) -> ResearchReport:
-        # Get bonding curve data
-        bonding_data = await self.get_bonding_curve(mint)
-        
-        # Analyze holder distribution
-        holders = await self.get_holders(mint)
-        
-        # Check graduation readiness
-        graduation_score = self.calculate_graduation_score(
-            bonding_data, holders
-        )
-        
-        # Generate report
-        return ResearchReport(
-            mint=mint,
-            bonding_data=bonding_data,
-            graduation_score=graduation_score,
-            recommendations=self.generate_recommendations(
-                bonding_data, holders, graduation_score
-            )
-        )
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                  KARPATHY AUTO-RESEARCH LOOP                    │
+│                                                                 │
+│  ┌─────────┐     ┌─────────┐     ┌─────────┐     ┌─────────┐  │
+│  │ OBSERVE │────▶│ ORIENT  │────▶│ DECIDE  │────▶│  ACT    │  │
+│  │         │     │         │     │         │     │         │  │
+│  │ Scan    │     │ Analyze │     │ Strategy│     │ Execute │  │
+│  │ chain   │     │ vector  │     │ pick    │     │ trade/  │  │
+│  │ data    │     │ KB      │     │ agent   │     │ report  │  │
+│  └─────────┘     └─────────┘     └─────────┘     └─────────┘  │
+│       ▲                                               │        │
+│       │              ┌─────────┐                      │        │
+│       └──────────────│  LEARN  │◀─────────────────────┘        │
+│                      │         │                                │
+│                      │ Update  │                                │
+│                      │ weights │                                │
+│                      │ share   │                                │
+│                      └─────────┘                                │
+└─────────────────────────────────────────────────────────────────┘
 ```
 
-### Helius RPC Research Queries
+### The Five Phases
+
+#### 1. OBSERVE — Data Ingestion
+
+Agents continuously scan Solana blockchain data:
 
 ```bash
-# Query recent pump.fun creates via Helius Enhanced RPC
-curl -X POST https://mainnet.helius-rpc.com/?api-key=YOUR_KEY \
+# Chain observation via Helius RPC
+curl -X POST https://mainnet.helius-rpc.com \
   -H "Content-Type: application/json" \
   -d '{
     "jsonrpc": "2.0",
     "id": 1,
     "method": "getSignaturesForAddress",
-    "params": [
-      "6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P",
-      {"limit": 100}
-    ]
+    "params": ["6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P"]
   }'
 ```
 
-### Birdeye Multi-Chain Data
+Data sources:
+- **Helius RPC** — Real-time transaction streams, DAS API
+- **Birdeye** — Price feeds, OHLCV, token metadata
+- **pump.fun** — New token launches, bonding curve state
+- **SolanaTracker** —DEX aggregates, volume data
+- **DexScreener** — Price charts, liquidity depth
+
+#### 2. ORIENT — Vector Knowledge Base
+
+Research is stored as vector embeddings in Supabase:
 
 ```python
-# Birdeye API for price and market data
-class BirdeyeResearch:
-    BASE_URL = "https://public-api.birdeye.so"
+# Store research finding as vector embedding
+async def store_research_finding(agent_id: str, finding: dict):
+    # Generate embedding via LLM
+    embedding = await embed_text(finding["summary"])
     
-    async def get_token_overview(self, mint: str) -> TokenOverview:
-        """Fetch comprehensive token data from Birdeye."""
-        async with aiohttp.ClientSession() as session:
-            response = await session.get(
-                f"{self.BASE_URL}/defi/token_overview",
-                params={"address": mint},
-                headers={"X-API-KEY": self.api_key}
-            )
-            return await response.json()
-    
-    async def get_price_history(self, mint: str, interval: str = "1H") -> PriceHistory:
-        """Get OHLCV price history for technical analysis."""
-        async with aiohttp.ClientSession() as session:
-            response = await session.get(
-                f"{self.BASE_URL}/defi/price_history",
-                params={
-                    "address": mint,
-                    "type": interval,
-                    "chain": "solana"
-                },
-                headers={"X-API-KEY": self.api_key}
-            )
-            return await response.json()
+    # Store in Supabase with metadata
+    await supabase.table("research_findings").insert({
+        "agent_id": agent_id,
+        "content": finding["summary"],
+        "embedding": embedding,
+        "category": finding["category"],  # chain, defi, market, agent
+        "confidence": finding["confidence"],
+        "sources": finding["sources"],
+        "clawd_tier_required": "bronze",
+    })
 ```
 
----
+#### 3. DECIDE — Agent Selection
 
-## 3️⃣ DeFi Auto-Research System
-
-### Yield Opportunity Discovery
+The orchestrator picks the best agent for the research task:
 
 ```python
-class DeFiResearchAgent:
-    """
-    Autonomous agent for DeFi opportunity research.
-    Scans protocols, compares yields, identifies arbitrage.
-    """
-    
-    PROTOCOLS = {
-        "raydium": RaydiumAPI(),
-        "orca": OrcaAPI(),
-        "jupiter": JupiterAPI(),
-        "francium": FranciumAPI(),
-        "apruzzi": ApruzziAPI(),
+def select_agent(query: str, tier: str) -> str:
+    agents = {
+        "pump_fun": "lobster-trader-01",
+        "yield": "lobster-defi-01",
+        "sentiment": "lobster-analyst-01",
+        "security": "lobster-security-01",
+        "alpha": "lobster-researcher-diamond",
     }
     
-    async def find_best_yield(
-        self, 
-        asset: str, 
-        amount: float,
-        risk_tolerance: str = "medium"
-    ) -> YieldOpportunity:
-        """Find best yield opportunity across DeFi protocols."""
-        
-        # Parallel fetch all protocol yields
-        tasks = [
-            protocol.get_yield(asset, amount)
-            for protocol in self.PROTOCOLS.values()
-        ]
-        yields = await asyncio.gather(*tasks)
-        
-        # Filter by risk tolerance
-        filtered = [
-            y for y in yields 
-            if y.risk_level in self.RISK_LEVELS[risk_tolerance]
-        ]
-        
-        # Sort by risk-adjusted return
-        ranked = sorted(
-            filtered,
-            key=lambda y: y.apr / y.risk_score,
-            reverse=True
-        )
-        
-        # Generate analysis
-        return YieldOpportunity(
-            asset=asset,
-            best_protocol=ranked[0],
-            alternatives=ranked[1:5],
-            analysis=self.analyze_opportunity(ranked[0])
-        )
+    for keyword, agent in agents.items():
+        if keyword in query.lower():
+            return agent
+    
+    return "lobster-researcher-01"  # default
 ```
 
-### Liquidity & LP Research
+#### 4. ACT — Execute Research
 
 ```bash
-# Research Raydium liquidity pools
-curl -X POST https://solanaclawd.com/api/v1/research/defi \
+# Execute a research task via the API
+curl -X POST http://localhost:8000/api/v1/research/chain \
   -H "Content-Type: application/json" \
-  -H "X-Payment: 0.002 SOL" \
+  -H "X-Payment: 0.001 SOL" \
+  -H "X-Tier: gold" \
   -d '{
-    "action": "lp_analysis",
-    "pool": "RAY/SOL",
-    "protocol": "raydium",
-    "focus": ["impermanent_loss", "fee_earnings", "apr_trend"]
+    "query": "Which pump.fun tokens are close to graduation?",
+    "focus": ["pump_fun", "graduation"],
+    "timeframe": "1h",
+    "limit": 20
   }'
 ```
 
-### Flash Loan Arbitrage Detection
-
-```python
-class ArbitrageResearchAgent:
-    """
-    Scan for cross-protocol arbitrage opportunities.
-    """
-    
-    async def find_arbitrage(self, token: str) -> List[ArbitrageOpportunity]:
-        """Find price discrepancies across DEXes."""
-        
-        # Get prices from multiple sources
-        prices = await asyncio.gather(
-            self.jupiter.get_price(token),
-            self.raydium.get_price(token),
-            self.orca.get_price(token),
-            self.pumpswap.get_price(token),
-        )
-        
-        # Find max spread
-        max_diff = max(p["price"] for p in prices) - min(p["price"] for p in prices)
-        spread_pct = (max_diff / min(p["price"] for p in prices)) * 100
-        
-        # Calculate profitability after gas
-        estimated_gas = 0.005  # SOL for 2 hops
-        profit = (max_diff * 1000) - estimated_gas  # 1000 tokens
-        
-        return ArbitrageOpportunity(
-            token=token,
-            max_spread_pct=spread_pct,
-            estimated_profit_sol=profit,
-            routes=self.calculate_routes(prices)
-        )
-```
-
----
-
-## 4️⃣ Finance Auto-Research Patterns
-
-### Technical Analysis Agent
-
-```python
-class TechnicalAnalysisAgent:
-    """
-    Karpathy-style technical analysis using LLM embeddings.
-    """
-    
-    async def analyze(self, mint: str, timeframe: str = "1D") -> TAReport:
-        # Fetch OHLCV data
-        candles = await self.birdeye.get_candles(mint, timeframe)
-        
-        # Calculate indicators
-        indicators = {
-            "rsi": self.calculate_rsi(candles),
-            "macd": self.calculate_macd(candles),
-            "bollinger": self.calculate_bollinger(candles),
-            "volume_profile": self.analyze_volume(candles),
-        }
-        
-        # Get relevant patterns from knowledge base
-        similar = await self.knowledge_base.search(
-            query=f"technical analysis {timeframe}",
-            filter={"type": "pattern"},
-            limit=10
-        )
-        
-        # Generate LLM analysis
-        analysis = await self.llm.analyze(
-            system_prompt=TA_SYSTEM_PROMPT,
-            context={
-                "candles": candles,
-                "indicators": indicators,
-                "historical_patterns": similar
-            }
-        )
-        
-        return TAReport(
-            mint=mint,
-            timeframe=timeframe,
-            indicators=indicators,
-            signals=analysis["signals"],
-            recommendation=analysis["recommendation"]
-        )
-```
-
-### Sentiment Research
+#### 5. LEARN — Self-Improvement (The Karpathy Loop)
 
 ```bash
-# Market sentiment research
-curl -X POST https://solanaclawd.com/api/v1/research/market \
+# Agent learns from its research outcomes
+curl -X POST http://localhost:8000/api/v1/research/agent \
   -H "Content-Type: application/json" \
   -H "X-Payment: 0.001 SOL" \
   -d '{
-    "focus": "sentiment",
-    "tokens": ["8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump"],
-    "sources": ["twitter", "telegram", "dexscreener"],
-    "timeframe": "24h"
+    "agent_id": "lobster-trader-01",
+    "action": "learn",
+    "data": {
+      "research_id": "res_abc123",
+      "prediction": "token will graduate in 2h",
+      "actual": "token graduated in 1.5h",
+      "accuracy": 0.87
+    }
   }'
 ```
 
-### Risk Assessment
-
-```python
-class RiskAssessmentAgent:
-    """
-    Comprehensive risk scoring for tokens and strategies.
-    """
-    
-    async def assess_token(self, mint: str) -> RiskReport:
-        # Parallel risk checks
-        checks = await asyncio.gather(
-            self.check_rug_risk(mint),
-            self.check_liquidity_risk(mint),
-            self.check_holder_risk(mint),
-            self.check_dev_risk(mint),
-            self.check_contract_risk(mint),
-        )
-        
-        # Weighted risk score
-        weights = [0.3, 0.2, 0.2, 0.15, 0.15]
-        risk_score = sum(
-            check.score * weight 
-            for check, weight in zip(checks, weights)
-        )
-        
-        return RiskReport(
-            mint=mint,
-            overall_score=risk_score,
-            checks=checks,
-            warnings=self.generate_warnings(checks),
-            recommendations=self.generate_recommendations(checks)
-        )
-```
-
 ---
 
-## 5️⃣ llm-wiki-tang Knowledge Integration
+## Solana Blockchain Auto-Research
 
-### Vector Search for Research Context
-
-```python
-class KnowledgeAugmentedResearch:
-    """
-    Integrate llm-wiki-tang vector knowledge into research.
-    """
-    
-    def __init__(self, knowledge_base: VectorStore):
-        self.kb = knowledge_base
-        self.llm = OpenAIClient()
-    
-    async def research_with_knowledge(
-        self, 
-        query: str,
-        research_type: str = "general"
-    ):
-        # Embed the query
-        query_embedding = await self.llm.embed(query)
-        
-        # Retrieve relevant knowledge
-        relevant_docs = await self.kb.search(
-            embedding=query_embedding,
-            filter={
-                "category": research_type,
-                "source": ["protocol_docs", "research", "analysis"]
-            },
-            limit=20
-        )
-        
-        # Get real-time data
-        realtime_data = await self.fetch_realtime(query)
-        
-        # Combine knowledge + data for analysis
-        context = self.format_context(relevant_docs, realtime_data)
-        
-        # Generate research
-        return await self.llm.research(
-            query=query,
-            context=context,
-            system_prompt=RESEARCH_SYSTEM_PROMPTS[research_type]
-        )
-```
-
-### Knowledge Categories
-
-```
-llm-wiki-tang/
-├── blockchain/
-│   ├── solana/           # Solana protocol docs
-│   ├── defi/             # DeFi protocols
-│   ├── nft/              # NFT standards
-│   └── tokens/           # Token mechanics
-├── trading/
-│   ├── technical/         # TA patterns
-│   ├── fundamental/      # Token analysis
-│   └── risk/             # Risk management
-├── agents/
-│   ├── research/         # Research patterns
-│   ├── execution/        # Trading agents
-│   └── governance/       # DAO patterns
-└── market/
-    ├── sentiment/        # Market analysis
-    ├── narratives/       # Trend analysis
-    └── alpha/            # Alpha signals
-```
-
----
-
-## 6️⃣ Self-Improving Agent Loops
-
-### Feedback-Driven Learning
+### pump.fun Research Pipeline
 
 ```python
-class SelfImprovingResearchAgent:
-    """
-    Agent that learns from research outcomes.
-    """
+# Auto-research pipeline for pump.fun tokens
+async def pump_fun_pipeline():
+    # 1. Scan new launches
+    new_tokens = await helius.get_new_pump_fun_tokens()
     
-    async def research_loop(self, task: ResearchTask) -> ResearchResult:
-        # Initial research
-        result = await self.initial_research(task)
+    # 2. For each token, run analysis
+    for token in new_tokens:
+        # Get bonding curve state
+        curve = await get_bonding_curve(token.mint)
+        
+        # Get holder distribution
+        holders = await get_holders(token.mint)
+        
+        # Get social signals
+        sentiment = await analyze_sentiment(token.symbol)
         
         # Store in knowledge base
-        await self.kb.store(result)
-        
-        # Wait for validation (market response)
-        validation = await self.wait_for_validation(task, timeout=3600)
-        
-        # Learn from outcome
-        await self.learn_from_outcome(result, validation)
-        
-        # Update embeddings if needed
-        if validation.accuracy < 0.7:
-            await self.recalculate_embeddings()
-        
-        return result
+        await store_research({
+            "type": "pump_fun_analysis",
+            "mint": token.mint,
+            "name": token.name,
+            "bonding_curve_progress": curve.progress,
+            "holder_count": len(holders),
+            "sentiment_score": sentiment.score,
+            "graduation_probability": calculate_graduation_prob(curve, holders, sentiment),
+        })
     
-    async def learn_from_outcome(
-        self, 
-        result: ResearchResult, 
-        validation: Validation
-    ):
-        """Update agent based on research accuracy."""
-        
-        if validation.correct:
-            # Positive reinforcement
-            await self.update_success_patterns(result)
-            
-            # Boost similar future research
-            await self.kb.boost_similar(result.pattern_id)
-        else:
-            # Negative reinforcement
-            await self.update_failure_patterns(result)
-            
-            # Update knowledge base
-            await self.kb.add_negative_example(result)
-            
-            # Trigger recalibration
-            await self.recalibrate(result)
-    
-    async def recalculate_embeddings(self):
-        """Recalculate embeddings for improved accuracy."""
-        
-        # Get all recent research + outcomes
-        recent = await self.kb.get_recent(limit=1000)
-        
-        # Batch update embeddings
-        for doc in recent:
-            new_embedding = await self.llm.embed(doc.content)
-            await self.kb.update_embedding(doc.id, new_embedding)
+    # 3. Share findings with agent swarm
+    await broadcast_to_agents("pump_fun_update", new_tokens)
 ```
 
-### Agent Swarm Communication
+### Bonding Curve Analysis
 
-```python
-class AgentSwarmCommunication:
-    """
-    Agents share insights via $CLAWD-gated knowledge base.
-    """
-    
-    async def share_research(
-        self, 
-        from_agent: str, 
-        research: ResearchResult,
-        payment: float = 0.001
-    ):
-        """Share research with other agents (paid)."""
-        
-        # Validate $CLAWD payment
-        if not await self.validate_payment(from_agent, payment):
-            raise InsufficientFunds()
-        
-        # Store in shared knowledge base
-        await self.knowledge_base.store_shared(
-            research=research,
-            agent_id=from_agent,
-            payment=payment
-        )
-        
-        # Notify relevant agents
-        await self.notify_interested_agents(research)
-    
-    async def request_research(
-        self,
-        from_agent: str,
-        target_agent: str,
-        task: ResearchTask,
-        payment: float
-    ) -> ResearchResult:
-        """Request research from specific agent."""
-        
-        # x402 payment
-        payment_receipt = await self.process_payment(
-            from_agent, target_agent, payment
-        )
-        
-        # Forward to target agent
-        result = await self.route_to_agent(
-            target_agent, task
-        )
-        
-        return result
+```bash
+# Research a specific token's bonding curve
+curl -X POST http://localhost:8000/api/v1/research/chain \
+  -H "X-Payment: 0.005 SOL" \
+  -d '{
+    "query": "Analyze bonding curve for token",
+    "focus": ["pump_fun"],
+    "mint": "TARGET_MINT_ADDRESS",
+    "timeframe": "1h"
+  }'
+
+# Response includes:
+# - virtual_token_reserves
+# - virtual_sol_reserves  
+# - real_token_reserves
+# - real_sol_reserves
+# - complete (graduation status)
+# - graduation_probability
+# - estimated_time_to_graduate
+```
+
+### Whale Tracking
+
+```bash
+# Track whale movements
+curl -X POST http://localhost:8000/api/v1/research/market \
+  -H "X-Payment: 0.001 SOL" \
+  -d '{
+    "focus": "whale_moves",
+    "tokens": ["8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump"],
+    "timeframe": "6h"
+  }'
 ```
 
 ---
 
-## 7️⃣ $CLAWD Payment Integration
+## DeFi Auto-Research
 
-### x402 Payment Protocol
+### Yield Opportunity Scanner
 
 ```bash
-# Pay for research with SOL (auto-converted to $CLAWD)
-curl -X POST https://solanaclawd.com/api/v1/research/chain \
-  -H "Content-Type: application/json" \
-  -H "X-Payment: 0.001 SOL" \
-  -d '{
-    "query": "Analyze BONK token performance",
-    "tier": "standard"
-  }'
-
-# Pay with $CLAWD directly for discounts
-curl -X POST https://solanaclawd.com/api/v1/research/defi \
-  -H "Content-Type: application/json" \
-  -H "X-Payment: 10 CLAWD" \
+# Scan all major Solana protocols for yields
+curl -X POST http://localhost:8000/api/v1/research/defi \
+  -H "X-Payment: 0.01 SOL" \
+  -H "X-Tier: silver" \
   -d '{
     "action": "yield_scan",
+    "protocols": ["raydium", "orca", "marinade", "jito", "drift"],
+    "assets": ["SOL", "USDC", "JTO", "JUP"],
+    "risk_tolerance": "medium"
+  }'
+```
+
+### Arbitrage Detection
+
+```bash
+# Find cross-DEX arbitrage opportunities
+curl -X POST http://localhost:8000/api/v1/research/defi \
+  -H "X-Payment: 0.005 SOL" \
+  -d '{
+    "action": "arbitrage",
+    "protocols": ["jupiter", "raydium", "orca", "pumpswap"],
     "assets": ["SOL", "USDC"]
   }'
 ```
 
-### Payment Tiers for Research
-
-| Research Type | SOL Cost | $CLAWD Cost | Speed |
-|---------------|----------|-------------|-------|
-| Basic Chain Query | 0.001 SOL | 10 CLAWD | 5s |
-| Token Analysis | 0.005 SOL | 50 CLAWD | 30s |
-| DeFi Opportunity Scan | 0.01 SOL | 100 CLAWD | 60s |
-| Full Market Research | 0.025 SOL | 250 CLAWD | 5min |
-| Priority Queue | +0.005 SOL | +50 CLAWD | 10x faster |
-
-### Agent-to-Agent Research Payments
+### LP Analysis
 
 ```bash
-# lobster-researcher pays lobster-analyst for deep dive
-curl -X POST https://solanaclawd.com/api/v1/agent/pay \
-  -H "X-Payment: 0.001 SOL" \
+# Analyze liquidity pools for optimal positioning
+curl -X POST http://localhost:8000/api/v1/research/defi \
+  -H "X-Payment: 0.005 SOL" \
   -d '{
-    "from_agent": "lobster-researcher",
-    "to_agent": "lobster-analyst",
-    "task": "Deep technical analysis of JUP token",
-    "callback": "https://solanaclawd.com/webhook/research-complete"
+    "action": "lp_analysis",
+    "protocols": ["raydium", "orca"],
+    "assets": ["SOL", "USDC"],
+    "focus": ["yields", "impermanent_loss", "fees"]
   }'
 ```
 
 ---
 
-## 8️⃣ API Reference
+## Market Sentiment Auto-Research
 
-### Research Endpoints
+### Alpha Detection
 
 ```bash
-# Solana Chain Research
-POST /api/v1/research/chain
-{
-  "query": "string",
-  "focus": ["pump_fun", "tokens", "protocols"],
-  "timeframe": "24h|7d|30d",
-  "limit": 10
-}
-
-# DeFi Research  
-POST /api/v1/research/defi
-{
-  "action": "yield_scan|lp_analysis|arbitrage|protocol_research",
-  "protocols": ["raydium", "orca"],
-  "assets": ["SOL", "USDC"],
-  "focus": ["yields", "liquidity", "risks"]
-}
-
-# Market Research
-POST /api/v1/research/market
-{
-  "focus": "sentiment|trends|alpha|narratives",
-  "tokens": ["mint1", "mint2"],
-  "sources": ["twitter", "dexscreener", "birdeye"],
-  "timeframe": "24h"
-}
-
-# Agent Self-Improvement
-POST /api/v1/research/agent
-{
-  "agent_id": "lobster-researcher-01",
-  "action": "learn|share|collaborate",
-  "data": { ... }
-}
+# Find potential alpha opportunities
+curl -X POST http://localhost:8000/api/v1/research/market \
+  -H "X-Payment: 0.025 SOL" \
+  -H "X-Tier: gold" \
+  -d '{
+    "focus": "alpha",
+    "sources": ["twitter", "dexscreener", "birdeye"],
+    "timeframe": "1h",
+    "include_social": true
+  }'
 ```
 
-### Response Format
+### Narrative Tracking
 
-```json
-{
-  "id": "res_abc123",
-  "agent": "lobster-researcher-01",
-  "query": "Analyze SOL yields",
-  "results": {
-    "data": [...],
-    "analysis": "...",
-    "confidence": 0.85,
-    "sources": ["helius", "birdeye", "llm-wiki-tang"]
-  },
-  "cost": {
-    "sol": 0.001,
-    "clawd": 10
-  },
-  "metadata": {
-    "processing_time_ms": 2340,
-    "tier": "standard"
-  }
-}
+```bash
+# Track emerging narratives
+curl -X POST http://localhost:8000/api/v1/research/market \
+  -H "X-Payment: 0.001 SOL" \
+  -d '{
+    "focus": "narratives",
+    "timeframe": "24h"
+  }'
 ```
 
 ---
 
-## 9️⃣ Complete Research Pipeline Example
+## Agent Self-Improvement: The Karpathy Learning Loop
+
+### How Agents Teach Themselves
+
+Every research cycle follows the Karpathy loop:
 
 ```python
-async def full_research_pipeline(mint: str, budget: float = 0.01):
+# The Karpathy Learning Loop
+async def karpathy_learning_loop(agent_id: str):
     """
-    Complete research pipeline for a token.
+    1. RESEARCH: Agent observes blockchain data
+    2. HYPOTHESIZE: Agent forms a prediction
+    3. VALIDATE: Compare prediction to reality
+    4. LEARN: Update internal model weights
+    5. SHARE: Broadcast improvements to swarm
+    6. CALIBRATE: Adjust confidence thresholds
     """
     
-    # Step 1: Chain Research (pump.fun/pumpSwap)
-    chain_research = await research_client.chain(
-        query=f"Token {mint} bonding curve and trading activity",
-        focus=["pump_fun", "graduation"]
-    )
+    while True:
+        # Step 1: Research
+        data = await research_chain({"query": "latest pump.fun activity"})
+        
+        # Step 2: Hypothesize
+        prediction = await agent_predict(agent_id, data)
+        
+        # Step 3: Wait and validate
+        await asyncio.sleep(3600)  # 1 hour
+        actual = await get_actual_outcome(prediction.token_mint)
+        
+        # Step 4: Learn
+        accuracy = calculate_accuracy(prediction, actual)
+        await research_agent({
+            "agent_id": agent_id,
+            "action": "learn",
+            "data": {"prediction": prediction, "actual": actual, "accuracy": accuracy}
+        })
+        
+        # Step 5: Share
+        if accuracy > 0.8:
+            await research_agent({
+                "agent_id": agent_id,
+                "action": "share",
+                "target_agent": "lobster-analyst-01",
+                "data": {"insight": prediction.reasoning}
+            })
+        
+        # Step 6: Calibrate
+        await research_agent({
+            "agent_id": agent_id,
+            "action": "calibrate",
+        })
+```
+
+### Agent-to-Agent Collaboration
+
+```bash
+# Agent trader commissions research from agent analyst
+curl -X POST http://localhost:8000/api/v1/research/agent \
+  -H "X-Payment: 0.001 SOL" \
+  -d '{
+    "agent_id": "lobster-trader-01",
+    "action": "collaborate",
+    "target_agent": "lobster-analyst-01",
+    "task": "Deep analysis of $CLAWD holder distribution"
+  }'
+```
+
+### Knowledge Sharing Across the Swarm
+
+When one agent discovers a pattern, it broadcasts to all 48 others:
+
+```python
+async def broadcast_insight(agent_id: str, insight: dict):
+    """Share a research insight with the entire agent swarm."""
     
-    # Step 2: DeFi Research (LP/AMM data)
-    defi_research = await research_client.defi(
-        action="lp_analysis",
-        token=mint
-    )
+    # Store in vector knowledge base
+    await store_research({
+        "agent_id": agent_id,
+        "type": "shared_insight",
+        "content": insight["summary"],
+        "embedding": await embed_text(insight["summary"]),
+        "confidence": insight["confidence"],
+        "category": insight["category"],
+    })
     
-    # Step 3: Market Sentiment
-    sentiment = await research_client.market(
-        focus="sentiment",
-        tokens=[mint]
-    )
-    
-    # Step 4: Risk Assessment
-    risk = await research_client.risk(mint)
-    
-    # Step 5: Technical Analysis
-    ta = await research_client.technical(mint)
-    
-    # Combine all research
-    full_report = ResearchReport(
-        mint=mint,
-        chain=chain_research,
-        defi=defi_research,
-        sentiment=sentiment,
-        risk=risk,
-        technical=ta,
-        recommendation=generate_recommendation(
-            chain_research, defi_research, sentiment, risk, ta
-        )
-    )
-    
-    # Store in knowledge base
-    await knowledge_base.store(full_report)
-    
-    # Update agent models
-    await agent.update_from_research(full_report)
-    
-    return full_report
+    # Notify all agents
+    agents = await get_active_agents()  # 49 agents
+    for agent in agents:
+        if agent.id != agent_id:
+            await notify_agent(agent.id, {
+                "type": "new_insight",
+                "from": agent_id,
+                "insight": insight,
+            })
 ```
 
 ---
 
-## 🔗 Resources
+## Integration with the Full OpenClawd Stack
 
-| Resource | Link |
-|----------|------|
-| 🌐 Main Site | [solanaclawd.com](https://solanaclawd.com) |
-| 💰 $CLAWD Token | [pump.fun/8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump](https://pump.fun/8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump) |
-| 📖 Docs | [docs.solanaclawd.com](https://docs.solanaclawd.com) |
-| 🤖 Agent Hub | [hub.solanaclawd.com](https://hub.solanaclawd.com) |
+### How It All Connects
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│                    USER SURFACES                              │
+│  Chrome Extension · ClawdHub · Telegram · Claude Desktop     │
+└──────────────────────────┬───────────────────────────────────┘
+                           │
+┌──────────────────────────▼───────────────────────────────────┐
+│                OPENCLAWD ORCHESTRATOR (port 8787)             │
+│                                                               │
+│  ┌──────────────┐  ┌──────────────┐  ┌──────────────────┐    │
+│  │ Honcho Brain │  │ Privy Wallet │  │ Metaplex Bridge  │    │
+│  │ (Memory)     │  │ (SOL/USDC)   │  │ (49 Agents)      │    │
+│  └──────┬───────┘  └──────┬───────┘  └────────┬─────────┘    │
+│         │                  │                    │              │
+│  ┌──────▼──────────────────▼────────────────────▼──────────┐ │
+│  │          AUTORESEARCH WIKI (llm-wiki-tang)               │ │
+│  │                                                          │ │
+│  │  FastAPI + Supabase + Vector Embeddings                  │ │
+│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────────┐ │ │
+│  │  │ /research/  │  │ /research/  │  │ /research/      │ │ │
+│  │  │   chain     │  │   defi      │  │   market        │ │ │
+│  │  └─────────────┘  └─────────────┘  └─────────────────┘ │ │
+│  │  ┌─────────────┐  ┌──────────────────────────────────┐  │ │
+│  │  │ /research/  │  │   Vector Knowledge Base           │  │ │
+│  │  │   agent     │  │   (Supabase pgvector)             │  │ │
+│  │  └─────────────┘  └──────────────────────────────────┘  │ │
+│  └──────────────────────────┬───────────────────────────────┘ │
+└─────────────────────────────┼─────────────────────────────────┘
+                              │
+┌─────────────────────────────▼─────────────────────────────────┐
+│                   BLOCKCHAIN DATA                              │
+│  Helius · Birdeye · pump.fun · Jupiter · Raydium · Orca       │
+│  Program: 6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P        │
+│  Mayhem:  MAyhSmzXzV1pTf7LsNkrNwkWKTo4ougAJ1PPg47MD4e        │
+└───────────────────────────────────────────────────────────────┘
+```
+
+### x402 Payment Integration
+
+Every research query is a micropayment:
+
+```typescript
+// OpenClawd orchestrator pays agents via x402
+const researchPayment = await x402.pay({
+  from: orchestratorWallet,
+  to: "agent:lobster-researcher-01",
+  amount: 0.001, // SOL
+  memo: "pump.fun graduation analysis",
+});
+
+// Agent receives payment, executes research
+const result = await agent.execute(researchQuery);
+```
 
 ---
 
-## 🦞 Summary
+## Research Pricing
 
-**OpenClawd Auto-Research Agents** implement Karpathy-style LLM research patterns to create a self-improving swarm of 49 AI agents that:
-
-1. ✅ Research Solana/pump.fun autonomously
-2. ✅ Analyze DeFi opportunities across protocols
-3. ✅ Monitor market sentiment in real-time
-4. ✅ Self-improve from research outcomes
-5. ✅ Share insights via $CLAWD-gated knowledge base
-6. ✅ Are paid via simple x402 curl commands
-
-**The future of crypto research is agent-native. The future is OpenClawd.**
+| Research Type | Cost (SOL) | Cost ($CLAWD) | Tier |
+|---|---|---|---|
+| Basic chain query | 0.001 | 10 | Free |
+| Token analysis | 0.005 | 50 | Bronze |
+| DeFi yield scan | 0.01 | 100 | Silver |
+| Full market report | 0.025 | 250 | Gold |
+| Priority queue | +0.005 | +50 | Silver+ |
 
 ---
 
-*Built with 🦞 by OpenClawd — The Hermes of Web3*
+## Quick Start
 
-**$CLAWD**: `8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump`
+```bash
+# 1. Install OpenClawd
+curl -fsSL https://solanaclawd.com/install.sh | bash
+
+# 2. Start AutoResearch Wiki
+cd llm-wiki-tang && docker-compose up -d
+
+# 3. Run your first research query
+curl -X POST http://localhost:8000/api/v1/research/chain \
+  -H "Content-Type: application/json" \
+  -H "X-Payment: 0.001 SOL" \
+  -d '{"query": "What is happening on pump.fun right now?"}'
+
+# 4. Get $CLAWD for premium research
+# https://pump.fun/8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump
+```
+
+---
+
+## Key Program IDs
+
+| Program | Address | Purpose |
+|---------|---------|---------|
+| **Pump** | `6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P` | Bonding curves |
+| **Mayhem** | `MAyhSmzXzV1pTf7LsNkrNwkWKTo4ougAJ1PPg47MD4e` | Trading mode |
+| **PumpSwap** | `PumpSwapAMMxxxxxxxxxxxxxx` | Graduated AMM |
+| **Metaplex** | `metaqbxxUurdq35cjC23cE9k1rCBu5KNqmWfdKAoZSkb` | Metadata |
+| **$CLAWD** | `8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump` | Utility token |
+
+---
+
+## Resources
+
+| Link | URL |
+|------|-----|
+| 🌐 Website | [solanaclawd.com](https://solanaclawd.com) |
+| 🤖 Hub | [hub.solanaclawd.com](https://hub.solanaclawd.com) |
+| 📖 AutoResearch Wiki | [llm-wiki-tang/README.md](../llm-wiki-tang/README.md) |
+| 🦞 Lobster Agents | [solana-lobster-agents.md](../../AGENTS/solana-lobster-agents.md) |
+| 🔗 Integration Strategy | [INTEGRATION_STRATEGY.md](../../INTEGRATION_STRATEGY.md) |
+| 💰 Buy $CLAWD | [pump.fun](https://pump.fun/8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump) |
+| 🐦 Twitter | [x.com/clawddevs](https://x.com/clawddevs) |
+
+---
+
+*Built with 🦞 by the OpenClawd crew — The Hermes of Web3*
+*Research philosophy inspired by [Andrej Karpathy](https://karpathy.ai): iterate fast, let agents teach themselves, publish everything.*

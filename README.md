@@ -309,6 +309,55 @@ See [`AGENTS/solana-lobster-agents.md`](./AGENTS/solana-lobster-agents.md) and [
 
 ---
 
+## 🧠 OpenClawd AutoResearch Wiki
+
+**Self-improving AI research engine for Solana — inspired by [Andrej Karpathy](https://karpathy.ai)'s approach to AI research.**
+
+The [`llm-wiki-tang/`](./llm-wiki-tang/) module is a FastAPI + Supabase + vector embedding knowledge base that powers autonomous blockchain and DeFi research.
+
+### Karpathy-Style Research Loop
+
+```
+OBSERVE → ORIENT → DECIDE → ACT → LEARN → repeat
+  ↑                                        │
+  └──────── 49 agents, 24/7 ───────────────┘
+```
+
+Every research cycle:
+1. **Observe** — Scan pump.fun, Birdeye, Helius RPC
+2. **Orient** — Store findings as vector embeddings
+3. **Decide** — Pick the best agent for the task
+4. **Act** — Execute trade, report, or analysis
+5. **Learn** — Update agent weights, share with swarm
+
+### Research API
+
+```bash
+# Chain research (pump.fun, tokens, graduation)
+curl -X POST http://localhost:8000/api/v1/research/chain \
+  -H "X-Payment: 0.001 SOL" \
+  -d '{"query": "Which tokens are graduating?", "focus": ["pump_fun"]}'
+
+# DeFi research (yields, LPs, arbitrage)
+curl -X POST http://localhost:8000/api/v1/research/defi \
+  -H "X-Payment: 0.005 SOL" \
+  -d '{"action": "yield_scan", "protocols": ["raydium", "orca"]}'
+
+# Market research (sentiment, alpha, whale tracking)
+curl -X POST http://localhost:8000/api/v1/research/market \
+  -H "X-Payment: 0.001 SOL" \
+  -d '{"focus": "alpha", "timeframe": "1h"}'
+
+# Agent self-improvement (learn, share, collaborate, calibrate)
+curl -X POST http://localhost:8000/api/v1/research/agent \
+  -H "X-Payment: 0.001 SOL" \
+  -d '{"agent_id": "lobster-trader-01", "action": "learn"}'
+```
+
+See [`llm-wiki-tang/README.md`](./llm-wiki-tang/README.md) and [`docs/articles/AUTO_RESEARCH_AGENTS.md`](./docs/articles/AUTO_RESEARCH_AGENTS.md).
+
+---
+
 ## 📚 Documentation
 
 | Guide | Description |
