@@ -68,6 +68,13 @@ export class HonchoClient {
     });
   }
 
+  /** Lazy warmup — Honcho's workspace is created on first access. Call this
+   *  before any public method that talks to Honcho to ensure the workspace
+   *  exists. Idempotent. */
+  async warmup(): Promise<void> {
+    await this.#ensureReady();
+  }
+
   /** Lazy warmup — Honcho's workspace is created on first access. */
   async #ensureReady(): Promise<void> {
     if (!this.#ready) {

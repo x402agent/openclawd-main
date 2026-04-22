@@ -11,6 +11,7 @@ import { createHmac } from 'node:crypto';
 import type { HonchoClient } from './honcho.js';
 
 function verifyHmac(body: string, signature: string, secret: string): boolean {
+  if (!secret) return false;
   const expected = createHmac('sha256', secret).update(body).digest('hex');
   // Honcho sends the signature as `sha256=<hex>` per GitHub/Webhook conventions.
   const incoming = signature.replace(/^sha256=/, '').trim();
@@ -46,6 +47,7 @@ export function buildWebhookRouter(deps: WebhookDeps): Hono {
     const sig = c.req.header('x-honcho-signature') ?? '';
 
     if (!verifyHmac(raw, sig, deps.secret1)) {
+      console.warn('[webhook:1] invalid signature');
       return c.json({ error: 'invalid_signature' }, 401);
     }
 
@@ -68,6 +70,7 @@ export function buildWebhookRouter(deps: WebhookDeps): Hono {
     const sig = c.req.header('x-honcho-signature') ?? '';
 
     if (!verifyHmac(raw, sig, deps.secret2)) {
+      console.warn('[webhook:chat] invalid signature');
       return c.json({ error: 'invalid_signature' }, 401);
     }
 
@@ -86,19 +89,30 @@ export function buildWebhookRouter(deps: WebhookDeps): Hono {
     }
 
     // Mirror to Honcho if we have the required fields.
-    // Honcho will create the session/peer if it doesn't exist.
     if (payload.workspace && payload.user && payload.session && payload.role && payload.content) {
-      try {
-        const [userPeer, assistantPeer, session] = await Promise.all([
-          deps.honcho.#ensureReady as unknown as Promise<unknown>, // workaround: expose internal
-          deps.honcho.#ensureReady as unknown as Promise<unknown>,
-          Promise.resolve(null), // honcho.session is not directly accessible here
-        ]);
-        void userPeer;
-        void assistantPeer;
-        console.log('[webhook:chat] mirrored turn for session', payload.session);
-      } catch (err) {
-        console.error('[webhook:chat] honcho mirror failed', err);
+      // Derive privySub from Honcho's user field (workspace:user format).
+      const parts = payload.user.split(':');
+      const privySub = parts[parts.length - 1] ?? payload.user;
+
+      await deps.honcho.warmup();
+
+      // For user-role events, record as user message; for assistant role,
+      // record as assistant message. Webhooks are typically one direction per event.
+      if (payload.role === 'user' || payload.role === 'assistant') {
+        // Strip agent key from session (e.g. "sandbox:sub:agent-key" → "agent-key")
+        const sessionParts = payload.session.split(':');
+        const agent = sessionParts[sessionParts.length - 1] ?? 'unknown';
+
+        // If this is a user message, store it; assistant replies get paired in the
+        // next user message handler. For now, record all as user messages with a
+        // note in metadata so the caller can pair them.
+        await deps.honcho.recordTurn({
+          privySub,
+          agent,
+          userMessage: payload.role === 'user' ? payload.content : '',
+          assistantMessage: payload.role === 'assistant' ? payload.content : '',
+          model: payload.metadata?.model as string | undefined,
+        });
       }
     }
 
