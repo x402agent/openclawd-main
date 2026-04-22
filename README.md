@@ -309,55 +309,101 @@ See [`AGENTS/solana-lobster-agents.md`](./AGENTS/solana-lobster-agents.md) and [
 
 ---
 
-## 🤖 OpenAI Trading Bot
+## 🤖 OpenAI Trading Agent
 
-**GPT-5.4 powered autonomous Solana trading Telegram bot** — [`workers/openai-trading-bot/`](./workers/openai-trading-bot/)
+**GPT-5.4 Responses API autonomous Solana trading agent** — deployed in two parallel surfaces:
 
-A Cloudflare Worker that connects OpenAI's latest models to Solana trading via Telegram:
+1. **Edge worker** — [`workers/openai-trading-bot/`](./workers/openai-trading-bot/) (Cloudflare Worker + Telegram)
+2. **Gateway agent** — [`openclawd-stack/gateway/agents/openai-trading.ts`](./openclawd-stack/gateway/agents/openai-trading.ts) (inside the E2B sandbox, key `openai-trader`)
+
+Both use the **OpenAI Responses API** (not legacy Chat Completions):
+
+- `instructions` parameter for high-priority developer guidance
+- `output_text` helper for aggregated streamed text
+- Items-based output (messages, function_calls, reasoning)
+- `previous_response_id` for stateful conversation chaining
+- Built-in `web_search` tool with zero config
+- `strict: true` function schemas by default
+
+### Models
 
 | Model | Purpose |
 |-------|---------|
-| `gpt-5.4` | Trading decisions, complex reasoning |
-| `gpt-5.4-nano` | Chat, agent delegation, fast responses |
+| `gpt-5.4` | Trading decisions, complex reasoning (high effort) |
+| `gpt-5.4-nano` | Fast chat, delegation, simple queries |
 | `gpt-image-1` | PnL cards, memes, visual content (GPT Image 2.0) |
-| `computer-use-preview` | Browser automation (CUA) |
+| `gpt-image-1-mini` | Fallback image generation |
+
+### Native Tools (born-with capabilities)
+
+| Tool | Purpose |
+|------|---------|
+| `execute_swap` | Jupiter aggregator swap on Solana |
+| `get_token_analysis` | Price, liquidity, holders, safety score |
+| `get_trending` | Trending Solana tokens across timeframes |
+| `get_wallet_status` | SOL + SPL balances for any wallet |
+| `generate_image` | GPT Image 2.0 generation with fallback |
+| `web_search` | Built-in OpenAI web search (real-time alpha) |
 
 ### Features
 
-- **Autonomous Trading** — Execute swaps via Jupiter, pump.fun
-- **Image Generation** — `/generate <prompt>` via GPT Image 2.0 with `gpt-image-1-mini` fallback
-- **Web Search** — Real-time market data via OpenAI Responses API
-- **CUA** — Browser automation for complex interactions
-- **Tier-Gated** — Owner (default: `1740095485`) has full access; can assign to other users
-- **Conversation Memory** — KV-backed history per user (last 20 messages)
+- **Autonomous Trading** — OODA loop discipline (Observe → Orient → Decide → Act)
+- **Agentic Function Loop** — 6-round max, executes tools + feeds results back until final answer
+- **Telegram Interface** — Owner-gated with `/assign` + `/revoke` access control
+- **Conversation Memory** — KV-backed, `previous_response_id` chaining (edge) + item-based state (gateway)
+- **Vault Persistence** — Every gateway turn written to the INFERRED tier of the Clawd vault
+- **Tier-Gated** — Owner (default: `1740095485`) has full access; others assignable
 
 ### Quick Start
 
 ```bash
+# Deploy the edge worker
 cd workers/openai-trading-bot
 npm install
 npx wrangler secret put OPENAI_API_KEY
 npx wrangler secret put TELEGRAM_BOT_TOKEN
 npx wrangler deploy
-# Register webhook
 curl https://your-worker.workers.dev/setup
+
+# Or use the gateway agent (already registered — just point at GATEWAY_URL)
+curl -X POST $GATEWAY_URL/v1/sessions \
+  -H "Authorization: Bearer $PRIVY_TOKEN" \
+  -d '{"agent":"openai-trader"}'
 ```
 
 ### Bot Commands
 
 | Command | Description |
 |---------|-------------|
-| `/start` | Welcome + tier info |
+| `/start` | Welcome + capabilities list |
 | `/generate <prompt>` | Generate image with GPT Image 2.0 |
+| `/search <query>` | Web search via Responses API |
 | `/trade <token> <side> <amount>` | Execute trade via GPT-5.4 |
-| `/pnl` | Generate PnL card |
-| `/search <query>` | Web search |
-| `/assign @user` | Assign bot to user (owner only) |
-| `/revoke @user` | Revoke access (owner only) |
+| `/trending` | Trending Solana tokens (1h) |
+| `/pnl` | Generate PnL summary |
+| `/assign <chatId>` | Assign bot to user (owner only) |
+| `/revoke <chatId>` | Revoke access (owner only) |
 
-See [`workers/openai-trading-bot/README.md`](./workers/openai-trading-bot/README.md) for full documentation.
+See [`workers/openai-trading-bot/README.md`](./workers/openai-trading-bot/README.md) and [`workers/README.md`](./workers/README.md) for full documentation.
 
 ---
+
+## ☁️ Cloudflare Workers Fleet
+
+Edge workers that compose the OpenClawd runtime — all TypeScript, all deploy with `wrangler`.
+
+| Worker | Purpose |
+|--------|---------|
+| [`openai-trading-bot`](./workers/openai-trading-bot/) | GPT-5.4 Responses API + Telegram trading bot |
+| [`agent-wallet`](./workers/agent-wallet/) | OpenClawd Agent Wallet — AES-256-GCM encrypted Solana + EVM keys, Privy proxy, E2B deploy |
+| [`email-worker`](./workers/email-worker/) | Clawd email inbox (`clawd@solanaclawd.com`) with AI auto-reply |
+| [`install-worker`](./workers/install-worker/) | Serves `https://solanaclawd.com/install.sh` (one-shot installer) |
+| [`pumpfun-mcp-worker`](./workers/pumpfun-mcp-worker/) | Remote MCP server for pump.fun scanning (Cron + KV + Convex + Telegram digests) |
+
+See [`workers/README.md`](./workers/README.md) for deployment, secrets, and gateway integration notes.
+
+---
+
 
 ## 🧠 OpenClawd AutoResearch Wiki
 
