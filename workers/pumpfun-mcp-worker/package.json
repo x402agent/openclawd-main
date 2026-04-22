@@ -1,7 +1,7 @@
 {
-  "name": "pumpfun-mcp-server",
+  "name": "openclawd-pumpfun-mcp",
   "version": "1.0.0",
-  "description": "Remote MCP server for pump.fun token scanning — Cloudflare Worker with Cron Triggers",
+  "description": "OpenClawd Remote MCP server for pump.fun token scanning — Cloudflare Worker with Cron Triggers",
   "type": "module",
   "scripts": {
     "dev": "wrangler dev",

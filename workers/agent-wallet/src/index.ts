@@ -1,5 +1,5 @@
 /**
- * NanoSolana Agent Wallet — Cloudflare Worker
+ * OpenClawd Agent Wallet — Cloudflare Worker
  *
  * Deployable agentic wallet vault on the edge.
  * AES-256-GCM encrypted keys in KV, Solana + EVM support,
@@ -160,7 +160,7 @@ async function solanaRpc(rpcUrl: string, method: string, params: unknown[]): Pro
 // ── Routes ───────────────────────────────────────────────────────
 
 app.get('/', (c) => c.json({
-  service: 'nanosolana-agent-wallet',
+  service: 'openclawd-agent-wallet',
   version: '1.0.0',
   runtime: 'cloudflare-workers',
   chains: ['solana', 'evm'],

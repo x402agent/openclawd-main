@@ -1,7 +1,7 @@
 /**
- * pumpfun-mcp-server — Cloudflare Worker
+ * openclawd-pumpfun-mcp — Cloudflare Worker
  *
- * Remote MCP server for pump.fun token scanning.
+ * OpenClawd Remote MCP server for pump.fun token scanning.
  * - Exposes MCP tools via Streamable HTTP at POST /mcp
  * - Cron Trigger runs every 15 minutes for automated scans
  * - Stores results in KV, pushes to Convex, sends Telegram digests
@@ -348,7 +348,7 @@ async function handleMcpRequest(request: Request, env: Env): Promise<Response> {
     return jsonrpc({
       protocolVersion: "2024-11-05",
       capabilities: { tools: { listChanged: false } },
-      serverInfo: { name: "pumpfun-mcp-server", version: "1.0.0" },
+      serverInfo: { name: "openclawd-pumpfun-mcp", version: "1.0.0" },
     });
   }
 
@@ -553,7 +553,7 @@ export default {
     if (url.pathname === "/" || url.pathname === "/health") {
       const latest = await env.SCANS.get("latest", { type: "json" }) as ScanResult | null;
       return corsJson({
-        name: "pumpfun-mcp-server",
+        name: "openclawd-pumpfun-mcp",
         version: "1.0.0",
         status: "healthy",
         lastScan: latest?.timestamp || "never",
@@ -778,7 +778,7 @@ export default {
 <script type="text/babel">
 const { useState, useEffect, useCallback, useMemo } = React;
 
-const API = "https://pumpfun-mcp-server.x402.workers.dev";
+const API = "https://openclawd-pumpfun-mcp.x402.workers.dev";
 
 function App() {
   const [scan, setScan] = useState(null);
