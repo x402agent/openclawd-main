@@ -188,6 +188,71 @@ The orchestrator at `hub.solanaclawd.com/api` powers all payment and agent flows
 
 ---
 
+## 🦞 Metaplex Core Agents
+
+Browse the full 49-agent catalog at **[hub.solanaclawd.com/agents](https://hub.solanaclawd.com/agents)**
+
+Every agent in ClawdHub is a **Metaplex Core asset** — a sovereign on-chain AI identity with its own wallet (Asset Signer PDA) that can own assets, execute autonomously, and launch tokens.
+
+### Stats
+
+- **51 total agents** · **49 Metaplex-enabled** · **12 trading-capable**
+- **6 Metaplex programs covered**: Agent Registry, Genesis, Core, Token Metadata, Bubblegum, Candy Machine
+
+### Programs & SDKs
+
+| Program | Icon | Description |
+|---|---|---|
+| **Agent Registry** | 🪪 | Identity, executive, delegation via MPL Core asset-signer PDAs |
+| **Genesis** | 🚀 | Token launchpools + bonding curves auto-graduating to Raydium CPMM |
+| **Core** | 🎨 | Next-gen NFTs with plugins, royalties, attributes |
+| **Token Metadata** | 🪙 | Fungibles, NFTs, pNFTs, editions |
+| **Bubblegum** | 🫧 | Compressed NFTs via Merkle trees (10k+ scale) |
+| **Candy Machine** | 🍬 | Drops with allowlists, mint limits, payment guards |
+
+```bash
+# Install Metaplex SDKs
+bun add @metaplex-foundation/umi \
+  @metaplex-foundation/umi-bundle-defaults \
+  @metaplex-foundation/mpl-agent-registry \
+  @metaplex-foundation/mpl-core \
+  @metaplex-foundation/genesis
+```
+
+### Auto-mint on Login
+
+Every user who authenticates via Privy gets a Core agent minted automatically:
+
+1. Login → JWT verified → Privy embedded wallet created
+2. Orchestrator calls `mintAndSubmitAgent` via `https://api.metaplex.com`
+3. Single atomic transaction → MPL Core asset + Agent Identity PDA
+4. Agent receives its own wallet (Asset Signer PDA) with no private key
+
+### Featured Agents
+
+| Agent | Category | Skills | Payment |
+|---|---|---|---|
+| **CLAWD Mayhem Mode** 💀 | Trading | All 6 programs | Free |
+| **CLAWD × Pump.fun Official Agent** 🎰 | Trading | `genesis` | 0.1 SOL |
+| **CLAWD Portfolio Tracker** 💼 | Analytics | `agent-registry` | Free |
+| **CLAWD Yield Aggregator** 🌾 | DeFi | `agent-registry` | Free |
+| **CLAWD Governance Guide** 🗳️ | Governance | `agent-registry` | Free |
+| **CLAWD Firecrawl Researcher** 🔥 | Research | — | Free |
+
+### Mint Your Own Agent
+
+```bash
+# Via orchestrator API
+curl -X POST http://localhost:8787/api/v1/metaplex/mint \
+  -H "Authorization: Bearer <privy-jwt>" \
+  -d '{"name":"My Agent","uri":"https://example.com/agent.json"}'
+
+# Via ClawdHub marketplace
+# https://hub.solanaclawd.com/agents/mint
+```
+
+---
+
 ## 🔐 ClawdVault Security
 
 Every skill published through ClawdHub is scanned by **ClawdVault** before going live:
