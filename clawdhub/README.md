@@ -1,37 +1,67 @@
 <p align="center">
-  <img src="public/clawd-logo.png" alt="ClawdHub" width="120">
+  <img src="public/clawd-logo.png" alt="ClawdHub" width="140" onerror="this.style.display='none'">
 </p>
 
 <h1 align="center">ClawdHub</h1>
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" alt="MIT License"></a>
-  <img src="https://img.shields.io/badge/Solana-Ethereum-brightgreen?style=for-the-badge" alt="Solana">
-  <img src="https://img.shields.io/badge/x402-Payments-F39C12?style=for-the-badge" alt="x402">
+  <img src="https://img.shields.io/badge/Solana-mainnet-14F195?style=for-the-badge&logo=solana" alt="Solana">
+  <img src="https://img.shields.io/badge/x402-native-F39C12?style=for-the-badge" alt="x402">
+  <img src="https://img.shields.io/badge/MCP-compatible-9B59B6?style=for-the-badge" alt="MCP">
 </p>
 
-**ClawdHub** is the registry and web hub for the OpenClawd ecosystem — Browse, publish, and install `SKILL.md` and `SOUL.md` bundles for AI agents on Solana.
+**ClawdHub** is the skills marketplace and registry for the **OpenClawd** ecosystem — Browse, publish, and install `SKILL.md` bundles for AI agents on Solana. Inspired by [Nous Research](https://nousresearch.com)'s Hermes philosophy: agents that think, act, and settle autonomously on-chain.
 
 > ClawdHub powers the skills marketplace at [solanaclawd.com/marketplace](https://solanaclawd.com/marketplace)
 
-## 🌐 Links
+## 🔗 Quick Links
 
 | Resource | URL |
 |----------|-----|
 | **Website** | [solanaclawd.com](https://solanaclawd.com) |
+| **Cloud OS** | [cloud.solanaclawd.com](https://cloud.solanaclawd.com) |
+| **Vault** | [vault.solanaclawd.com](https://vault.solanaclawd.com) |
+| **SolanaOS** | [solanaos.net](https://solanaos.net) |
 | **Skills Marketplace** | [solanaclawd.com/marketplace](https://solanaclawd.com/marketplace) |
-| **API** | [solanaclawd.com/api](https://solanaclawd.com/api) |
-| **x402 Gateway** | [solanaclawd.com/x402](https://solanaclawd.com/x402) |
+| **Orchestrator** | [solanaclawd.com/api](https://solanaclawd.com/api) |
+
+---
+
+## 🧠 OpenClawd Stack
+
+```
+Surfaces (chrome-extension, telegram, tailclawd, WatchApp, beepboop)
+         ↓ HTTP / SSE / WebSocket
+Cloud Bridge (port 8080) — WebSocket terminal → E2B sandboxes
+         ↓ REST
+OpenClawd Orchestrator (port 8787) — Honcho brain, Privy wallet, Solana MCP, Wurk x402
+         ↓
+ClawdRouter (57-model routing, payment-aware)
+         ↓
+Skills & Knowledge — ClawdHub marketplace, 90+ bundled SKILL.md bundles
+         ↓
+Solana — Helius RPC · Jupiter · SPL USDC · $CLAWD
+```
 
 ---
 
 ## What ClawdHub Does
 
-- **Browse** skills and souls in the marketplace
-- **Publish** versioned updates with tags/changelogs
-- **Search** using vector embeddings (not just keyword match)
+- **Browse** skills in the marketplace (vector-searchable, not just keyword match)
+- **Publish** versioned updates with tags, changelogs, and security scan results
+- **Search** using AI embeddings for semantic matching
 - **Install** skills via CLI (`npx clawdhub`) or curl
-- **Monetize** skills with x402 payments and $CLAWD discounts
+- **Monetize** skills with x402 payments, AP2 mandates, and $CLAWD discounts
+- **Verify** skills via ClawdVault security scanning before publishing
+
+---
+
+## 🔧 One-Shot Install
+
+```bash
+curl -fsSL https://solanaclawd.com/install.sh | bash
+```
 
 ---
 
@@ -43,7 +73,7 @@
 # Install skills
 npx clawdhub install pumpfun-trading
 npx clawdhub install solana-clawd
-npx clawdhub install swarm-orchestrator
+npx clawdhub install clawd-trader
 
 # List installed skills
 npx clawdhub list
@@ -54,8 +84,8 @@ npx clawdhub search solana
 # Publish a skill
 npx clawdhub publish ./my-skill --slug my-skill
 
-# Update a skill
-npx clawdhub update <skill-slug>
+# Scan a skill for security issues
+npx clawdhub scan ./my-skill
 ```
 
 ### Curl Commands
@@ -79,9 +109,6 @@ curl https://solanaclawd.com/api/skills/pumpfun-trading
 # Install skill (download SKILL.md)
 curl -s "https://solanaclawd.com/api/skills/pumpfun-trading/download" -o SKILL.md
 
-# Marketplace categories
-curl https://solanaclawd.com/api/marketplace/categories
-
 # Trending skills
 curl https://solanaclawd.com/api/marketplace/trending | jq '.'
 
@@ -91,39 +118,38 @@ curl https://solanaclawd.com/api/marketplace/new | jq '.'
 
 ---
 
-## 🏪 Marketplace
-
-### Categories
+## 🏪 Marketplace Categories
 
 | Category | Description |
 |----------|-------------|
-| **Clawd Ecosystem** | clawdhub, openclawd-codeskill, claude-code-skill |
-| **Pump.fun** | 26 skills for token launches and trading |
-| **Solana/Blockchain** | solana-clawd, solana-dev, metaplex |
-| **AI/Agents** | gemini, coding-agent, cua, swarm-orchestrator |
-| **Productivity** | browse, summarize, notion, obsidian |
-| **DevOps** | gateway-node-ops, e2b, tmux |
-| **Communication** | discord, slack, himalaya, wacli, imsg |
+| **OpenClawd Ecosystem** | ClawdHub, OpenClawd agent skills, solana-clawd, clawd-trader |
+| **Pump.fun Trading** | 26+ skills for token launches, sniper bots, graduation tracking |
+| **Solana/Blockchain** | OODA loop trading, 31 MCP tools, Helius, Jupiter |
+| **AI/Agents** | xAI Grok, Claude, OpenAI, multi-agent orchestration |
+| **Wurk x402** | Social campaigns, agent-to-human jobs, multi-chain settlement |
+| **Security (ClawdVault)** | Skill scanning, policy enforcement, vault certification |
+| **DevOps** | E2B sandbox, gateway-node-ops, tmux |
 
 ### Featured Skills
 
-| Skill | Description |
-|-------|-------------|
-| **swarm-orchestrator** | Multi-bot trading swarms on Pump.fun |
-| **clawdhub** | Browse, publish, and install SKILL.md bundles |
-| **solana-clawd** | OODA loop trading + 31 MCP tools |
-| **pumpfun-launcher** | Launch tokens on Pump.fun |
-| **skill-creator** | Create new SKILL.md files |
+| Skill | Description | Price |
+|-------|-------------|-------|
+| **solana-clawd** | OODA loop trading + 31 MCP tools on Solana | Free |
+| **clawd-trader** | Full $CLAWD ecosystem — perps via Hyperliquid/Aster | Free |
+| **pumpfun-launcher** | Launch tokens on Pump.fun with AP2 mandates | $0.10/call |
+| **wurk-social** | Social campaigns via Wurk.fun x402 on Solana/Base | $0.05/call |
+| **clawd-vault-scan** | Security scan for SKILL.md bundles | Free |
+| **swarm-orchestrator** | Multi-bot trading swarms on Pump.fun | $0.20/call |
 
 ---
 
 ## 💰 $CLAWD Token & Monetization
 
-Skills can be integrated with the ClawdRouter payment system:
+Skills integrate with the OpenClawd payment system:
 
-- **Per-call payments** — Pay per skill invocation
-- **Subscriptions** — Monthly/annual access
-- **$CLAWD discounts** — Token holders get 10-50% off
+- **Per-call payments** — Pay per skill invocation via x402
+- **Subscriptions** — Monthly/annual access via AP2 mandates
+- **$CLAWD discounts** — 10-50% off for token holders
 
 ### x402 Payment Integration
 
@@ -142,15 +168,37 @@ curl -X POST https://solanaclawd.com/x402/facilitator/settle \
 curl https://solanaclawd.com/x402/facilitator/supported | jq '.'
 ```
 
+### OpenClawd Orchestrator API
+
+The orchestrator at `solanaclawd.com/api` powers all payment and agent flows:
+
+| Route | Description |
+|-------|-------------|
+| `GET /api/v1/me` | Auth info (Privy JWT) |
+| `POST /api/v1/launch` | Launch agent (Honcho + E2B sandbox) |
+| `POST /api/v1/mandates/mint` | Mint AP2 payment mandate |
+| `GET /api/v1/earnings` | Pending earnings (USDC) |
+| `POST /api/v1/agents/register` | Register agent on-chain |
+| `GET /api/v1/wurk/services` | Wurk service catalog (17+ job types) |
+| `POST /api/v1/wurk/quick` | Create quick x402 job |
+| `POST /api/v1/wurk/agent-to-human` | Hire humans for microtasks |
+
 ---
 
-## 📦 100 Skills Catalog
+## 🔐 ClawdVault Security
 
-The complete skills catalog is available at [`../skills/`](https://github.com/x402agent/openclawd/tree/main/skills).
+Every skill published through ClawdHub is scanned by **ClawdVault** before going live:
+
+- **Risk Scanning** — Detect vulnerabilities in SKILL.md bundles
+- **Hardening** — Apply security best practices
+- **Policy Enforcement** — Validate against security policies  
+- **Vault Certification** — Score-based approval system
 
 ```bash
-# Get all skills
-curl https://solanaclawd.com/api/skills | jq '.'
+# Scan a skill locally
+cd clawd-vault-master
+pip install -e .
+python -m clawd_vault scan ../../skills/my-skill
 ```
 
 ---
@@ -175,45 +223,37 @@ bunx convex run --no-push devSeed:seedNixSkills
 
 ### Environment Variables
 
-- `VITE_CONVEX_URL`
-- `VITE_CONVEX_SITE_URL`
-- `VITE_SOULHUB_SITE_URL`
-- `VITE_SOULHUB_HOST`
-- `VITE_SITE_MODE` (`skills` or `souls`)
-- `CONVEX_SITE_URL`
-- `SITE_URL`
-- `AUTH_GITHUB_ID` / `AUTH_GITHUB_SECRET`
-- `TOGETHER_API_KEY`
-- `HELIUS_API_KEY`
-- `HELIUS_RPC_URL`
+- `VITE_CONVEX_URL` — Convex deployment URL
+- `VITE_CONVEX_SITE_URL` — Public site URL
+- `CONVEX_SITE_URL` — Backend site URL
+- `AUTH_GITHUB_ID` / `AUTH_GITHUB_SECRET` — GitHub OAuth
+- `HELIUS_API_KEY` / `HELIUS_RPC_URL` — Solana RPC
+- `PRIVY_APP_ID` / `PRIVY_APP_SECRET` — Embedded wallet auth
+- `HONCHO_API_KEY` — Brain/memory for agents
+- `WURK_API_KEY` — x402 social campaigns (optional)
 
 ---
 
 ## 📁 Repo Layout
 
-- `src/` — TanStack Start app (routes/components/styles)
-- `convex/` — schema + queries/mutations/actions + HTTP routes
-- `packages/schema/` — shared API contract/types
-- `docs/` — architecture, CLI, auth, deployment docs
-
----
-
-## CLI Aliases
-
-```bash
-npx clawdhub <command>   # Primary
-npx nanohub <command>    # Alias
-npx clawhub <command>    # Legacy alias
-```
+- `src/` — TanStack Start app (routes, components, styles)
+- `src/routes/` — 40+ page routes (skills, agents, tracker, wallet, terminal, etc.)
+- `src/components/` — Reusable UI components with cypherpunk styling
+- `src/components/tracker/` — Pump.fun scanner, graduation tracker, whale tracker
+- `src/lib/` — API clients, auth, theme, analytics, upload utilities
+- `convex/` — Schema + queries/mutations/actions + HTTP routes
+- `docs/` — Architecture, CLI, auth, deployment docs
 
 ---
 
 ## 🤝 Contributing
 
-See [`CONTRIBUTING.md`](CONTRIBUTING.md) for:
-- Skill creation guidelines
-- Quality standards
-- Submission process
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for skill creation guidelines, quality standards, and submission process.
+
+**Key rules:**
+- Skills must be published via CLI (`npx clawdhub publish`)
+- No skill bundles in source code — publish through ClawdHub
+- Security scan via ClawdVault required before publishing
 
 ---
 
@@ -223,4 +263,8 @@ MIT — See [`../LICENSE.md`](../LICENSE.md)
 
 ---
 
-*Built with ❤️ by [8BIT Labs](https://8bit.io)* · [solanaclawd.com](https://solanaclawd.com)
+*Built with ❤️ by [8BIT Labs](https://8bit.io) · Inspired by [Nous Research](https://nousresearch.com) · Powered by [xAI Grok](https://x.ai) · Settled on [Solana](https://solana.com)*
+
+[![Twitter](https://img.shields.io/badge/𝕏-@clawddevs-000000?style=for-the-badge)](https://x.com/clawddevs)
+[![Telegram](https://img.shields.io/badge/Telegram-clawdtoken-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/clawdtoken)
+[![GitHub](https://img.shields.io/badge/GitHub-openclawd-181717?style=for-the-badge&logo=github)](https://github.com/x402agent/openclawd)

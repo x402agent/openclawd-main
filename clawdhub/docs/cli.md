@@ -19,8 +19,8 @@ bun clawhub --help
 
 - `--workdir <dir>`: working directory (default: cwd; falls back to Clawdbot workspace if configured)
 - `--dir <dir>`: install dir under workdir (default: `skills`)
-- `--site <url>`: base URL for browser login (default: `https://clawhub.ai`)
-- `--registry <url>`: API base URL (default: discovered, else `https://clawhub.ai`)
+- `--site <url>`: base URL for browser login (default: `https://solanaclawd.com`)
+- `--registry <url>`: API base URL (default: discovered, else `https://solanaclawd.com`)
 - `--no-input`: disable prompts
 
 Env equivalents:

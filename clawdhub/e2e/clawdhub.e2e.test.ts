@@ -37,13 +37,13 @@ function getRegistry() {
   return (
     process.env.CLAWHUB_REGISTRY?.trim() ||
     process.env.CLAWDHUB_REGISTRY?.trim() ||
-    'https://clawhub.ai'
+    'https://solanaclawd.com'
   )
 }
 
 function getSite() {
   return (
-    process.env.CLAWHUB_SITE?.trim() || process.env.CLAWDHUB_SITE?.trim() || 'https://clawhub.ai'
+    process.env.CLAWHUB_SITE?.trim() || process.env.CLAWDHUB_SITE?.trim() || 'https://solanaclawd.com'
   )
 }
 
