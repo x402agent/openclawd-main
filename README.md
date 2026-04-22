@@ -167,6 +167,11 @@ The heart of the stack: **`openclawd-stack/orchestrator/`** — a single Hono se
 | `GET /api/v1/wurk/submissions` | Retrieve job submissions |
 | `POST /webhook/` | Honcho event webhook |
 | `POST /webhook/chat` | Honcho chat turn webhook |
+| `POST /api/v1/metaplex/mint` | Mint Core agent asset (auto on login) |
+| `GET /api/v1/metaplex/read/:asset` | Read agent on-chain (asset signer PDA) |
+| `POST /api/v1/metaplex/register` | Register identity/executive |
+| `POST /api/v1/metaplex/launch-token` | Launch agent token via Genesis |
+| `POST /api/v1/metaplex/delegate` | Delegate execution to another agent |
 
 ### Environment variables
 
