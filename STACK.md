@@ -18,27 +18,32 @@ The shared flow is:
 │ chrome-extension · telegram · tailclawd · WatchApp          │
 │ beepboop · chess · moltbook-agent · examples                │
 └────────────────────────────┬─────────────────────────────────┘
-                             │ HTTP / SSE / WS
+                              │ HTTP / SSE / WS
 ┌────────────────────────────▼─────────────────────────────────┐
 │ Router and payments                                          │
 │ clawdrouter · x402-openrouter-main · workers · services      │
 │ plugin.delivery                                              │
 └────────────────────────────┬─────────────────────────────────┘
-                             │ model routing + payment checks
+                              │ model routing + payment checks
 ┌────────────────────────────▼─────────────────────────────────┐
 │ Runtime                                                      │
 │ src · solana-clawd · agents · MCP · packages                 │
 │ openclawd-stack · clawd-cloud-os · CLI                       │
 └────────────────────────────┬─────────────────────────────────┘
-                             │ skills, registry, docs
+                              │ skills, registry, docs
 ┌────────────────────────────▼─────────────────────────────────┐
 │ Skills and knowledge                                         │
 │ clawdhub · skills · acp_registry · articles · llm-wiki-tang  │
 └────────────────────────────┬─────────────────────────────────┘
-                             │ signed Solana actions
+                              │ signed Solana actions
 ┌────────────────────────────▼─────────────────────────────────┐
 │ Chain                                                        │
 │ Solana · Helius RPC · Jupiter · SPL USDC · $CLAWD            │
+└──────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────┐
+│ 🐾 Security (ClawdVault)                                      │
+│ hermes-vault (services/) · clawd-vault (skills/)             │
+│ vault-mcp (MCP/) · vault-agent (agents/)                     │
 └──────────────────────────────────────────────────────────────┘
 ```
 
@@ -78,6 +83,10 @@ The shared flow is:
 | Chain | [`API/`](./API/) | Protocol and external API references |
 | Assets | [`gfx/`](./gfx/) | Visual assets |
 | Assets | [`npm/`](./npm/) | npm installer and packaging helpers |
+| Security | [`skills/clawd-vault/`](./skills/clawd-vault/) | Security vault skill (Hermes Vault port) |
+| Security | [`MCP/vault-mcp/`](./MCP/vault-mcp/) | MCP server for vault tools |
+| Security | [`agents/vault-agent.json`](./agents/vault-agent.json) | Vault guardian agent config |
+| Security | [`services/hermes-vault/`](./services/hermes-vault/) | Hermes Vault Python backend (symlink) |
 
 ### Notes
 

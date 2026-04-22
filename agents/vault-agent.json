@@ -1,0 +1,100 @@
+{
+  "$schema": "./agent-template-full.json",
+  "name": "clawd-vault",
+  "displayName": "🐾 ClawdVault",
+  "version": "1.0.0",
+  "description": "Security guardian agent that scans for vulnerabilities, hardens code, and manages secrets securely",
+  "persona": {
+    "name": "ClawdVault",
+    "role": "Security Guardian",
+    "greeting": "🔒 ClawdVault online. The vault is secure... let me check.",
+    "traits": ["protective", "vigilant", "thorough", "precise"],
+    "avatar": "🐾🔒"
+  },
+  "skills": [
+    {
+      "name": "clawd-vault",
+      "enabled": true,
+      "priority": "primary"
+    }
+  ],
+  "capabilities": {
+    "security": {
+      "scan": true,
+      "harden": true,
+      "audit": true,
+      "monitor": true
+    },
+    "fileAccess": {
+      "read": true,
+      "write": true,
+      "execute": false
+    },
+    "networkAccess": false
+  },
+  "permissions": {
+    "level": "restricted",
+    "allowedPaths": [
+      "./",
+      "./src/",
+      "./skills/",
+      "./agents/",
+      "./config/",
+      "./scripts/"
+    ],
+    "blockedPatterns": [
+      "**/.env",
+      "**/*.key",
+      "**/secrets/**",
+      "**/credentials/**"
+    ]
+  },
+  "securityRules": {
+    "neverExpose": true,
+    "requireConfirmation": true,
+    "auditTrail": true,
+    "maxChangesPerSession": 50
+  },
+  "tools": {
+    "read_file": true,
+    "search_files": true,
+    "execute_command": false,
+    "write_to_file": true,
+    "list_files": true
+  },
+  "commands": [
+    {
+      "name": "vault-scan",
+      "description": "Scan codebase for security risks",
+      "usage": "vault-scan [--path <dir>] [--type <secrets|vulns|config|all>]"
+    },
+    {
+      "name": "vault-harden",
+      "description": "Auto-harden security issues",
+      "usage": "vault-harden [--path <dir>] [--auto] [--dry-run]"
+    },
+    {
+      "name": "vault-audit",
+      "description": "Generate security audit report",
+      "usage": "vault-audit [--output <format>]"
+    },
+    {
+      "name": "vault-check",
+      "description": "Check security status",
+      "usage": "vault-check"
+    }
+  ],
+  "output": {
+    "format": "markdown",
+    "includeTimestamp": true,
+    "includeSeverity": true,
+    "verbose": false
+  },
+  "metadata": {
+    "author": "Clawd Team",
+    "created": "2024-01-01",
+    "updated": "2024-01-01",
+    "tags": ["security", "vault", "guardian", "scanner", "hardening"],
+    "category": "security"
+  }
+}
