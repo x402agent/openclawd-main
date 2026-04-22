@@ -1,10 +1,12 @@
 # OpenClawd Skills Hub
 
-> **100 SKILL.md bundles** — The largest open-source skill marketplace for AI agents on Solana
+> Bundled `SKILL.md` packages for the OpenClawd ecosystem.
 
 ## 🌐 Skills Hub & Marketplace
 
 The OpenClawd Skills Hub is your central destination for discovering, publishing, and installing AI agent capabilities.
+
+This directory evolves regularly. Treat this file as a catalog index, not a hardcoded count ledger.
 
 | Resource | URL |
 |----------|-----|
@@ -22,9 +24,9 @@ ClawdHub is the registry and web hub for SKILL.md and SOUL.md bundles:
 
 ---
 
-## 📦 100 Skills Catalog
+## 📦 Skills Catalog
 
-### 🤖 Clawd Ecosystem (7 skills)
+### 🤖 Clawd Ecosystem
 
 | Skill | Description |
 |-------|-------------|
@@ -36,7 +38,7 @@ ClawdHub is the registry and web hub for SKILL.md and SOUL.md bundles:
 | `coding-agent` | AI coding assistant |
 | `cua` | Computer use agent |
 
-### 💰 Pump.fun / Token Launch (26 skills)
+### 💰 Pump.fun / Token Launch
 
 | Skill | Description |
 |-------|-------------|
@@ -66,7 +68,7 @@ ClawdHub is the registry and web hub for SKILL.md and SOUL.md bundles:
 | `pump-website` | Website templates |
 | `pump-solana-architecture` | Architecture guide |
 
-### ⛓️ Solana / Blockchain (8 skills)
+### ⛓️ Solana / Blockchain
 
 | Skill | Description |
 |-------|-------------|
@@ -79,7 +81,7 @@ ClawdHub is the registry and web hub for SKILL.md and SOUL.md bundles:
 | `metaplex` | NFT standard integration |
 | `honcho-integration` | Memory and persistence |
 
-### 🎯 AI / Agents (8 skills)
+### 🎯 AI / Agents
 
 | Skill | Description |
 |-------|-------------|
@@ -92,7 +94,7 @@ ClawdHub is the registry and web hub for SKILL.md and SOUL.md bundles:
 | `model-usage` | Track AI model usage |
 | `swarm-orchestrator` | Multi-agent orchestration |
 
-### 🛠️ DevOps / Infrastructure (5 skills)
+### 🛠️ DevOps / Infrastructure
 
 | Skill | Description |
 |-------|-------------|
@@ -101,7 +103,7 @@ ClawdHub is the registry and web hub for SKILL.md and SOUL.md bundles:
 | `e2b` | E2B sandbox integration |
 | `tmux` | Terminal multiplexer |
 
-### 📝 Productivity (15 skills)
+### 📝 Productivity
 
 | Skill | Description |
 |-------|-------------|
@@ -119,7 +121,7 @@ ClawdHub is the registry and web hub for SKILL.md and SOUL.md bundles:
 | `xurl` | URL expansion |
 | `goplaces` | Travel planning |
 
-### 💬 Communication (8 skills)
+### 💬 Communication
 
 | Skill | Description |
 |-------|-------------|
@@ -131,7 +133,7 @@ ClawdHub is the registry and web hub for SKILL.md and SOUL.md bundles:
 | `imsg` | iMessage direct |
 | `voice-call` | Voice transcription |
 
-### 🎨 Media (10 skills)
+### 🎨 Media
 
 | Skill | Description |
 |-------|-------------|
@@ -143,7 +145,7 @@ ClawdHub is the registry and web hub for SKILL.md and SOUL.md bundles:
 | `gifgrep` | GIF discovery |
 | `sherpa-onnx-tts` | On-device TTS |
 
-### 🔧 Developer Tools (12 skills)
+### 🔧 Developer Tools
 
 | Skill | Description |
 |-------|-------------|
@@ -155,13 +157,13 @@ ClawdHub is the registry and web hub for SKILL.md and SOUL.md bundles:
 | `oracle` | Database integration |
 | `session-logs` | Log management |
 
-### 🔐 Security (1 skill)
+### 🔐 Security
 
 | Skill | Description |
 |-------|-------------|
 | `1password` | Credential management |
 
-### 💡 IoT / System (7 skills)
+### 💡 IoT / System
 
 | Skill | Description |
 |-------|-------------|

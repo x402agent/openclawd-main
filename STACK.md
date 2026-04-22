@@ -1,256 +1,276 @@
-# OpenClawd — The Unified Stack
+# OpenClawd Stack Map
 
-> One cohesive Solana AI agent stack. Every directory in this monorepo is a layer in a single pipeline: **Surface → Router → Runtime → Skills → Settlement → Chain**.
+> Technical map for the current monorepo checkout.
 
-This document is the single source of truth for how all 33 projects fit together, what role each plays, and which models power each layer.
+This file explains how the major directories in this repo fit together. It is intentionally stricter than the root [README.md](./README.md): it focuses on directories that are actually present in this checkout and avoids product copy that tends to drift.
 
----
+The shared flow is:
 
-## 1. Stack at a Glance
-
-```
-┌──────────────────────────────────────────────────────────────────────┐
-│  SURFACES                                                            │
-│  chrome-extension · beepboop · WatchApp · tailclawd · telegram       │
-│  x-bot · chess · moltbook-agent · bots · examples                    │
-└────────────────────────────────────┬─────────────────────────────────┘
-                                     │ HTTP / SSE / WS
-┌────────────────────────────────────▼─────────────────────────────────┐
-│  GATEWAY + PAYMENTS                                                  │
-│  clawdrouter · x402-openrouter-main · workers (CF edge)              │
-│  plugin.delivery · services · websocket-server                       │
-└────────────────────────────────────┬─────────────────────────────────┘
-                                     │ model routing + x402 settle
-┌────────────────────────────────────▼─────────────────────────────────┐
-│  RUNTIME                                                             │
-│  src (engine) · agents (50) · MCP · openclawd-stack · CLI            │
-│  clawd-cloud-os · API                                                │
-└────────────────────────────────────┬─────────────────────────────────┘
-                                     │ SKILL.md · agent.json
-┌────────────────────────────────────▼─────────────────────────────────┐
-│  SKILLS + REGISTRY                                                   │
-│  clawdhub · skills (100) · acp_registry · articles · llm-wiki-tang   │
-└────────────────────────────────────┬─────────────────────────────────┘
-                                     │ signed txns
-┌────────────────────────────────────▼─────────────────────────────────┐
-│  CHAIN                                                               │
-│  solana-clawd · solana-go-main · gfx · packages · npm                │
-└──────────────────────────────────────────────────────────────────────┘
-```
+**Surface -> Router -> Runtime -> Skills -> Settlement -> Chain**
 
 ---
 
-## 2. Layers → Directories
+## 1. Stack at a glance
+
+```text
+┌──────────────────────────────────────────────────────────────┐
+│ Surfaces                                                     │
+│ chrome-extension · telegram · tailclawd · WatchApp          │
+│ beepboop · chess · moltbook-agent · examples                │
+└────────────────────────────┬─────────────────────────────────┘
+                             │ HTTP / SSE / WS
+┌────────────────────────────▼─────────────────────────────────┐
+│ Router and payments                                          │
+│ clawdrouter · x402-openrouter-main · workers · services      │
+│ plugin.delivery                                              │
+└────────────────────────────┬─────────────────────────────────┘
+                             │ model routing + payment checks
+┌────────────────────────────▼─────────────────────────────────┐
+│ Runtime                                                      │
+│ src · solana-clawd · agents · MCP · packages                 │
+│ openclawd-stack · clawd-cloud-os · CLI                       │
+└────────────────────────────┬─────────────────────────────────┘
+                             │ skills, registry, docs
+┌────────────────────────────▼─────────────────────────────────┐
+│ Skills and knowledge                                         │
+│ clawdhub · skills · acp_registry · articles · llm-wiki-tang  │
+└────────────────────────────┬─────────────────────────────────┘
+                             │ signed Solana actions
+┌────────────────────────────▼─────────────────────────────────┐
+│ Chain                                                        │
+│ Solana · Helius RPC · Jupiter · SPL USDC · $CLAWD            │
+└──────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 2. Layer-to-directory map
 
 | Layer | Directory | Role |
-|-------|-----------|------|
-| **Surface** | `chrome-extension/` | Browser-side page agent + MCP bridge |
-| | `beepboop/` | macOS menu-bar companion (voice/vision/claw pointer) |
-| | `WatchApp/` | watchOS wallet-state app |
-| | `tailclawd/` + `tailclawd-backup/` | Claude Code in a browser via Tailscale |
-| | `telegram/` | Telegram bot surface |
-| | `x-bot/` | Twitter/X bot surface |
-| | `bots/` | Pump.fun sniper + mayhem trader bots |
-| | `chess/` | Wallet-signed chess hub |
-| | `moltbook-agent/` | Educational agent surface |
-| | `examples/` | Reference clients |
-| **Gateway** | `clawdrouter/` | **Model router** — 57 models, 15-dim scoring, x402/MPP/AP2/A2A |
-| | `x402-openrouter-main/` | Native x402 facilitator for Solana |
-| | `workers/` | Cloudflare edge workers (agent-wallet, email, pumpfun-mcp) |
-| | `plugin.delivery/` | Paid skill/plugin delivery |
-| | `services/` | Gateway, bridge, monitoring |
-| | `websocket-server/` | Real-time streams |
-| **Runtime** | `src/` | Core TypeScript engine (commands, tools, memory, bridge) |
-| | `agents/` | 50 production AI agents (MCP + REST) |
-| | `MCP/` | Model Context Protocol servers |
-| | `openclawd-stack/` | OpenShell + E2B + nemoClawd + Privy wallet runtime |
-| | `CLI/` | `clawd` command-line |
-| | `clawd-cloud-os/` | Browser-terminal cloud OS |
-| | `API/` | BDS + Pump.fun API specs |
-| **Skills** | `clawdhub/` | ClawdHub marketplace (search, publish, install) |
-| | `skills/` | 100 bundled `SKILL.md` files |
-| | `acp_registry/` | Project registry JSON |
-| | `articles/` | 42 docs (architecture, payments, models, SEO) |
-| | `llm-wiki-tang/` | Vector-indexed knowledge base |
-| **Chain** | `solana-clawd/` | Go + TS agent framework with OODA loop |
-| | `solana-go-main/` | Solana Go SDK |
-| | `gfx/` | Visualizations / graphics |
-| | `packages/` | Shared npm packages |
-| | `npm/` | CLI installers |
+|---|---|---|
+| Surface | [`chrome-extension/`](./chrome-extension/) | Browser-side surface and page-agent bridge |
+| Surface | [`telegram/`](./telegram/) | Telegram bot surface |
+| Surface | [`tailclawd/`](./tailclawd/) | Browser-hosted Clawd Code over Tailscale |
+| Surface | [`WatchApp/`](./WatchApp/) | watchOS-facing app |
+| Surface | [`beepboop/`](./beepboop/) | macOS companion surface |
+| Surface | [`chess/`](./chess/) | Wallet-signed chess surface |
+| Surface | [`moltbook-agent/`](./moltbook-agent/) | Educational surface |
+| Surface | [`examples/`](./examples/) | Reference clients and demos |
+| Router | [`clawdrouter/`](./clawdrouter/) | 57-model router and local scoring layer |
+| Router | [`x402-openrouter-main/`](./x402-openrouter-main/) | Solana-native x402 facilitator and payment gateway |
+| Router | [`workers/`](./workers/) | Cloudflare worker deployments |
+| Router | [`services/`](./services/) | Backend services and support processes |
+| Router | [`plugin.delivery/`](./plugin.delivery/) | Paid plugin and package delivery flow |
+| Runtime | [`src/`](./src/) | Core TypeScript engine |
+| Runtime | [`solana-clawd/`](./solana-clawd/) | Go plus TypeScript Solana agent framework |
+| Runtime | [`agents/`](./agents/) | Agent catalog and deploy-oriented assets |
+| Runtime | [`MCP/`](./MCP/) | MCP servers |
+| Runtime | [`packages/`](./packages/) | Shared npm packages, including wallet components |
+| Runtime | [`openclawd-stack/`](./openclawd-stack/) | Browser and sandbox runtime stack |
+| Runtime | [`clawd-cloud-os/`](./clawd-cloud-os/) | Browser-terminal cloud OS surface |
+| Runtime | [`CLI/`](./CLI/) | CLI-related code and docs |
+| Skills | [`clawdhub/`](./clawdhub/) | Marketplace, search, publish, and install flows |
+| Skills | [`skills/`](./skills/) | Bundled `SKILL.md` library |
+| Skills | [`acp_registry/`](./acp_registry/) | Registry JSON and metadata |
+| Skills | [`articles/`](./articles/) | Longer-form docs and reference material |
+| Skills | [`llm-wiki-tang/`](./llm-wiki-tang/) | Knowledge-base and indexing layer |
+| Chain | [`solana-go-main/`](./solana-go-main/) | Go Solana SDK support code |
+| Chain | [`API/`](./API/) | Protocol and external API references |
+| Assets | [`gfx/`](./gfx/) | Visual assets |
+| Assets | [`npm/`](./npm/) | npm installer and packaging helpers |
 
-Every request flows top-to-bottom. Every payment + on-chain effect flows bottom-up.
+### Notes
 
----
-
-## 3. The One Request Flow
-
-```
-user @ chrome-extension
-   │   "screen for rugs in this token"
-   ▼
-clawdrouter  ← picks model via 15-dim scorer, checks x402 payment
-   │
-   ├─→ xai/grok-4.20-beta           (default reasoning, 256K ctx, Solana-aware)
-   ├─→ moonshot/kimi-k2.6            (long-context agentic tool use, 320K ctx)
-   ├─→ anthropic/claude-sonnet-4.6   (deep audits, premium tier)
-   ▼
-agents / solana-clawd runtime  ← OODA loop, 31 MCP tools
-   │
-   ▼
-skills (SKILL.md)  ← e.g. pumpfun-analytics, rug-screener
-   │
-   ▼
-solana-clawd + solana-go-main  ← on-chain reads + signed txs
-   │
-   ▼
-x402 settle  ← 70% owner / 15% $CLAWD buyback / 10% treasury / 5% operator
-```
+- [`tailclawd-backup/`](./tailclawd-backup/) is present in the repo but should be treated as backup or legacy material, not a primary stack layer.
+- This file only maps directories that exist in this checkout. Hosted services and historical components may be referenced elsewhere, but they are intentionally not modeled here unless they have code in-tree.
 
 ---
 
-## 4. Unified Model Strategy
+## 3. Request flow
 
-ClawdRouter is the **only** model entry point. Every surface (Chrome, Telegram, Watch, TailClawd, Beepboop, WatchApp, chess, bots) goes through it. The registry lives in [`clawdrouter/src/models/registry.ts`](clawdrouter/src/models/registry.ts).
-
-### Default tier routing
-
-| Tier | Eco | Auto | Premium |
-|------|-----|------|---------|
-| `SIMPLE` | `nvidia/gpt-oss-120b` (free) | `google/gemini-2.5-flash` | `nvidia/kimi-k2.5` |
-| `MEDIUM` | `google/gemini-2.5-flash-lite` | `nvidia/kimi-k2.5` | `openai/gpt-5.3-codex` |
-| `COMPLEX` | `google/gemini-2.5-flash-lite` | `google/gemini-3.1-pro` | `anthropic/claude-opus-4.6` |
-| `REASONING` | `xai/grok-4-1-fast` | **`xai/grok-4.20-beta`** 🆕 | `anthropic/claude-sonnet-4.6` |
-
-### 🆕 Newly added flagship models
-
-| Model | ID | Context | Strengths | Tier |
-|-------|-----|---------|-----------|------|
-| **Grok 4.20 Beta** | `xai/grok-4.20-beta` | 256K | Solana-aware, reasoning+vision+agentic+tools, fast | budget → auto reasoning default |
-| **Kimi K2.6** | `moonshot/kimi-k2.6` | 320K | Agentic tool-use, long-context code + audit, multimodal | budget → agentic workflows |
-
-Both are available through the standard aliases:
-
-```bash
-# Grok 4.20 Beta
-clawd chat --model grok          # → xai/grok-4.20-beta
-clawd chat --model grok-4.20
-clawd chat --model grok-beta
-
-# Kimi K2.6
-clawd chat --model kimi          # → moonshot/kimi-k2.6
-clawd chat --model kimi-k2
-clawd chat --model kimi-k2.6
+```text
+user request
+  -> surface
+  -> clawdrouter
+  -> runtime or agent
+  -> skills and registry lookup
+  -> Solana reads or signed actions
+  -> payment verification and settlement
+  -> response back to the surface
 ```
 
-OpenRouter upstream IDs are wired in [`clawdrouter/src/upstream/openrouter.ts`](clawdrouter/src/upstream/openrouter.ts):
-- `xai/grok-4.20-beta` → `x-ai/grok-4.20-beta`
-- `moonshot/kimi-k2.6` → `moonshotai/kimi-k2.6-instruct`
+### Example path
 
-### NemoClawd + ClawdHub Godmode
-
-Both downstream consumers now default to the new models:
-
-- `openclawd-stack/NemoClawd-main/Pump-Fun/lair-tg` → `OPENROUTER_MODEL=x-ai/grok-4.20-beta`
-- `clawdhub/server/routes/api/godmode/chat.post.ts` ultraplinian race includes **Grok 4.20 Beta** and **Kimi K2.6** in the fast tier.
-
----
-
-## 5. Single Environment Contract
-
-Every component reads the same env surface:
-
-```bash
-# ── Gateway / Router ────────────────────────────
-OPENROUTER_API_KEY=       # clawdrouter, clawdhub godmode, nemoclawd
-OPENROUTER_MODEL=x-ai/grok-4.20-beta  # default for pass-through callers
-CLAWD_API=https://solanaclawd.com/api
-GATEWAY=https://solanaclawd.com/x402
-
-# ── Chain ───────────────────────────────────────
-HELIUS_API_KEY=
-HELIUS_RPC_URL=https://mainnet.helius-rpc.com
-SOLANA_PRIVATE_KEY=
-PRIVY_APP_ID=
-
-# ── AI (fallbacks) ──────────────────────────────
-XAI_API_KEY=              # direct xAI for grok-4.20-beta
-ANTHROPIC_API_KEY=        # direct Anthropic
-MOONSHOT_API_KEY=         # direct Kimi
-
-# ── Infra ───────────────────────────────────────
-TAILSCALE_AUTH_KEY=
-E2B_API_KEY=
+```text
+telegram or chrome-extension
+  -> clawdrouter
+  -> agents or solana-clawd runtime
+  -> MCP tools + SKILL.md guidance
+  -> Jupiter / Helius / Solana RPC
+  -> x402 settlement where required
 ```
 
 ---
 
-## 6. Single Quick Start (whole stack)
+## 4. Model routing
 
-**One-line install** (clones the repo to `~/.openclawd`, installs the `solana-clawd` CLI, scaffolds `.env`):
+ClawdRouter is the intended model entry point for the stack.
 
-```bash
-curl -fsSL https://solanaclawd.com/install.sh | bash
-```
+- Registry: [`clawdrouter/src/models/registry.ts`](./clawdrouter/src/models/registry.ts)
+- OpenRouter mappings: [`clawdrouter/src/upstream/openrouter.ts`](./clawdrouter/src/upstream/openrouter.ts)
+- Moonshot mappings: [`clawdrouter/src/upstream/moonshot.ts`](./clawdrouter/src/upstream/moonshot.ts)
 
-After install, pair + mint:
+The local model registry currently contains **57** models.
 
-```bash
-solana-clawd pair <CODE>
-solana-clawd mint
-solana-clawd status
-```
+### Notable defaults in this repo
 
-<details>
-<summary>Manual install</summary>
+| Purpose | Model |
+|---|---|
+| Reasoning default | `xai/grok-4.20-beta` |
+| Long-context default | `moonshot/kimi-k2.6` |
+| Example premium coding route | `openai/gpt-5.3-codex` |
+| Example premium reasoning route | `anthropic/claude-sonnet-4.6` |
 
-```bash
-git clone https://github.com/x402agent/openclawd.git
-cd openclawd
+### Environment-driven defaults
 
-# 1. Core env
-cp .env.example .env  # fill OPENROUTER_API_KEY, HELIUS_API_KEY, etc.
+The repo-wide defaults are defined in [`.env.example`](./.env.example):
 
-# 2. Install router (models + x402 gateway)
-cd clawdrouter && pnpm install && pnpm build && cd ..
+- `CLAWDROUTER_DEFAULT_SIMPLE`
+- `CLAWDROUTER_DEFAULT_MEDIUM`
+- `CLAWDROUTER_DEFAULT_COMPLEX`
+- `CLAWDROUTER_DEFAULT_REASONING`
+- `CLAWDROUTER_DEFAULT_LONGCTX`
 
-# 3. Install Solana runtime (OODA + MCP)
-cd solana-clawd && make install && cd ..
-
-# 4. Install ClawdHub + skills
-npx clawdhub install pumpfun-trading solana-clawd swarm-orchestrator
-
-# 5. Launch the stack
-clawd daemon                  # solana-clawd runtime
-pnpm --filter clawdrouter dev # model router on :8787
-pnpm --filter clawdhub dev    # marketplace on :3000
-```
-
-</details>
-
-Any surface (Chrome, Telegram, Watch, etc.) points at `http://localhost:8787` (or `https://solanaclawd.com/x402`) and the whole stack is live.
-
-### Publishing the CLI
-
-To cut a new `solana-clawd` release to npm:
-
-```bash
-export NPM_TOKEN=npm_xxxxxxxxxxxxxxxxxxxxxxxx   # never commit
-./scripts/publish.sh
-```
-
-See [`scripts/publish.sh`](scripts/publish.sh) and [`scripts/.npmrc.example`](scripts/.npmrc.example) — the token is expanded at read-time by npm, never written to disk.
+If those values change, prefer updating `.env.example` and the router registry rather than copying model tables across multiple docs.
 
 ---
 
-## 7. Where to go next
+## 5. Payment and settlement path
 
-- Full architecture: [`articles/architecture.md`](articles/architecture.md)
-- Model tuning: [`articles/MODELS.md`](articles/MODELS.md)
-- Payments: [`articles/ARTICLE_PAYMENTS.md`](articles/ARTICLE_PAYMENTS.md)
-- Skills: [`skills/README.md`](skills/README.md)
-- x402 integration: [`articles/x402-proxy-worker.md`](articles/x402-proxy-worker.md)
-- Registry: [`acp_registry/registry.json`](acp_registry/registry.json)
+The billing path is centered on Solana settlement.
+
+| Component | Responsibility |
+|---|---|
+| [`clawdrouter/`](./clawdrouter/) | model routing, provider abstraction, payment-aware request flow |
+| [`x402-openrouter-main/`](./x402-openrouter-main/) | x402 facilitator and Solana-native payment handling |
+| [`workers/`](./workers/) | edge deployments and gateway entry points |
+| [`services/`](./services/) | supporting processes for gateway-oriented behavior |
+
+Protocols referenced in the repo:
+
+- `x402`
+- `MPP`
+- `AP2`
+- `A2A`
+
+Core payment docs:
+
+- [articles/ARTICLE_PAYMENTS.md](./articles/ARTICLE_PAYMENTS.md)
+- [articles/x402-proxy-worker.md](./articles/x402-proxy-worker.md)
+- [clawdrouter/README.md](./clawdrouter/README.md)
 
 ---
 
-**One monorepo. One router. One settlement layer. Grok 4.20 Beta + Kimi K2.6 added. All 33 projects, one stack.**
+## 6. Skills and agent layer
+
+The skills and agent system spans several directories:
+
+| Directory | Purpose |
+|---|---|
+| [`skills/`](./skills/) | checked-in skill bundles |
+| [`clawdhub/`](./clawdhub/) | search, install, publish, and marketplace flows |
+| [`agents/`](./agents/) | 50-agent catalog and agent metadata |
+| [`acp_registry/`](./acp_registry/) | registry JSON for agent discovery |
+
+Primary references:
+
+- [agents/README.md](./agents/README.md)
+- [skills/README.md](./skills/README.md)
+- [articles/AGENT_GUIDE.md](./articles/AGENT_GUIDE.md)
+- [articles/ARTICLE_SKILLS.md](./articles/ARTICLE_SKILLS.md)
+
+---
+
+## 7. Environment contract
+
+The shared env surface lives in [`.env.example`](./.env.example).
+
+### Router and model keys
+
+- `OPENROUTER_API_KEY`
+- `CLAWDROUTER_BASE_URL`
+- `CLAWDROUTER_API_KEY`
+- `XAI_API_KEY`
+- `ANTHROPIC_API_KEY`
+- `OPENAI_API_KEY`
+- `MOONSHOT_API_KEY`
+
+### Runtime and sandboxing
+
+- `E2B_API_KEY`
+- `PRIVY_APP_ID`
+- `PRIVY_APP_SECRET`
+- `HONCHO_URL`
+- `HONCHO_API_KEY`
+
+### Solana and data providers
+
+- `HELIUS_API_KEY`
+- `HELIUS_RPC_URL`
+- `SOLANA_RPC_URL`
+- `SOLANA_CLAWD_BASE_URL`
+- `CLAWD_MINT`
+- `BIRDEYE_API_KEY`
+- `JUPITER_API_KEY`
+- `SOLANA_TRACKER_KEY`
+- `DFLOW_API_KEY`
+
+### Surface-specific keys
+
+- `TELEGRAM_BOT_TOKEN`
+- `TAILSCALE_AUTH_KEY`
+
+### Subproject env examples
+
+- [`openclawd-stack/.env.example`](./openclawd-stack/.env.example)
+- [`openclawd-stack/orchestrator/.env.example`](./openclawd-stack/orchestrator/.env.example)
+- [`openclawd-stack/bridge/.env.example`](./openclawd-stack/bridge/.env.example)
+- [`llm-wiki-tang/.env.example`](./llm-wiki-tang/.env.example)
+- [`clawd-cloud-os/.env.example`](./clawd-cloud-os/.env.example)
+
+---
+
+## 8. How to read the repo
+
+Use the docs in this order:
+
+1. [README.md](./README.md) for product-level orientation.
+2. This file for layer and directory mapping.
+3. [articles/architecture.md](./articles/architecture.md) for deeper architecture notes.
+4. Component READMEs such as [clawdrouter/README.md](./clawdrouter/README.md), [solana-clawd/README.md](./solana-clawd/README.md), [packages/clawd-wallet/README.md](./packages/clawd-wallet/README.md), and [tailclawd/README.md](./tailclawd/README.md).
+
+---
+
+## 9. High-signal entry points
+
+- Product overview: [README.md](./README.md)
+- Architecture article: [articles/architecture.md](./articles/architecture.md)
+- Models: [articles/MODELS.md](./articles/MODELS.md)
+- Payments: [articles/ARTICLE_PAYMENTS.md](./articles/ARTICLE_PAYMENTS.md)
+- Agents: [agents/README.md](./agents/README.md)
+- Skills: [skills/README.md](./skills/README.md)
+- Router: [clawdrouter/README.md](./clawdrouter/README.md)
+- Wallet: [packages/clawd-wallet/README.md](./packages/clawd-wallet/README.md)
+- TailClawd: [tailclawd/README.md](./tailclawd/README.md)
+
+---
+
+## 10. Maintenance rule
+
+When the repo changes, update this file to reflect:
+
+- directories that actually exist
+- the current shared env contract
+- the current request path
+
+Do not use this file as a product landing page. Keep it operational and structural.

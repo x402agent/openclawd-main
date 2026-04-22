@@ -1,10 +1,10 @@
 # OpenClawd Articles
 
-> 42 documentation articles covering architecture, payments, deployment, AI, SEO, and more.
+> Documentation index for the OpenClawd ecosystem.
 
 ## Overview
 
-This directory contains comprehensive documentation for the OpenClawd ecosystem. Articles are organized by category.
+This directory contains the longer-form architecture, payments, deployment, AI, and operations docs for the repo. The exact article count changes over time; use this file as the index, not the source of truth for a hardcoded total.
 
 ## Categories
 
@@ -78,7 +78,6 @@ This directory contains comprehensive documentation for the OpenClawd ecosystem.
 |----------|-------------|
 | `I18N_WORKFLOW.md` | Internationalization workflow |
 | `permissions-sandboxing.md` | Security and permissions |
-| `permissions-sandboxing.md` | Full permissions guide |
 | `ipfs-setup.md` | IPFS setup guide |
 
 ### ClawdRouter
