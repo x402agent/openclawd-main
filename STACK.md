@@ -72,6 +72,7 @@ The shared flow is:
 | Runtime | [`MCP/`](./MCP/) | MCP servers |
 | Runtime | [`packages/`](./packages/) | Shared npm packages, including wallet components |
 | Runtime | [`openclawd-stack/`](./openclawd-stack/) | Browser and sandbox runtime stack |
+| Runtime | [`openclawd-stack/bridge/`](./openclawd-stack/bridge/) | WebSocket terminal bridge connecting browser to E2B sandboxes; talks to orchestrator for auth + wallet + MCP |
 | Runtime | [`clawd-cloud-os/`](./clawd-cloud-os/) | Browser-terminal cloud OS surface |
 | Runtime | [`CLI/`](./CLI/) | CLI-related code and docs |
 | Skills | [`clawdhub/`](./clawdhub/) | Marketplace, search, publish, and install flows |

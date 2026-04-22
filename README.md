@@ -458,6 +458,35 @@ python -m clawd_vault scan ../../skills/my-skill
 
 See [`clawd-vault-master/`](./clawd-vault-master/).
 
+### Cloud Bridge
+
+[`openclawd-stack/bridge/`](./openclawd-stack/bridge/) — WebSocket bridge server that connects browser terminals to E2B sandboxes. The bridge runs independently and talks to the **Orchestrator** at `http://localhost:8787` for sandbox lifecycle management.
+
+**What it does:**
+- Creates E2B sandboxes on demand (`/create?userId=`)
+- Proxies WebSocket terminal connections (`/terminal/{sandboxId}`)
+- Health checks and admin monitoring endpoints
+
+**Architecture:**
+```
+Browser Terminal  ←WebSocket→  Bridge (bridge/)  ←E2B API→  E2B Sandboxes
+                                   │
+                                   ↓ REST
+                           Orchestrator (:8787)
+                           privy auth · wallet · MCP
+```
+
+**Run locally:**
+```bash
+cd openclawd-stack/bridge
+cp .env.example .env   # add E2B_API_KEY
+npm run dev            # starts on port 8080
+```
+
+**Deploy options:** Railway · Fly.io · Docker · Vercel
+
+See [`openclawd-stack/bridge/README.md`](./openclawd-stack/bridge/README.md).
+
 ### ClawdCloudOS
 
 [`clawd-cloud-os/`](./clawd-cloud-os/) — browser-terminal cloud OS surface at **[cloud.solanaclawd.com](https://cloud.solanaclawd.com)**
@@ -506,6 +535,12 @@ See [`clawd-vault-master/`](./clawd-vault-master/).
 │ beepboop · chess · moltbook-agent                               │
 └────────────────────────────┬────────────────────────────────────┘
                              │ HTTP / SSE / WS
+┌────────────────────────────▼────────────────────────────────────┐
+│ Cloud Bridge (port 8080)                                         │
+│ bridge/ · WebSocket terminal · E2B sandbox lifecycle             │
+│ Talks to Orchestrator (:8787) for auth + wallet + MCP           │
+└────────────────────────────┬────────────────────────────────────┘
+                             │
 ┌────────────────────────────▼────────────────────────────────────┐
 │ OpenClawd Orchestrator (port 8787)                               │
 │ honcho brain · e2b sandbox · privy wallet · solana mcp         │
