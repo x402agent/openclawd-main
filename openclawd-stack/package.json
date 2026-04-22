@@ -6,11 +6,17 @@
   "workspaces": [
     "template",
     "gateway",
-    "orchestrator"
+    "orchestrator",
+    "orchestrator/privy-agentic-wallet",
+    "orchestrator/solana-clawd-mcp"
   ],
   "scripts": {
     "build:template": "pnpm --filter @openclawd/template build",
+    "build:wallet": "pnpm --filter @solana-clawd/privy-agentic-wallet build",
+    "build:mcp": "pnpm --filter @solana-clawd/solana-clawd-mcp build",
+    "build:orchestrator": "pnpm --filter @openclawd/orchestrator build:all",
     "dev:orchestrator": "pnpm --filter @openclawd/orchestrator dev",
-    "dev:gateway": "pnpm --filter @openclawd/gateway dev"
+    "dev:gateway": "pnpm --filter @openclawd/gateway dev",
+    "smoke:integration": "pnpm --filter @openclawd/orchestrator smoke:integration"
   }
 }
