@@ -12,7 +12,7 @@ OpenClawd is the open-source, autonomous AI agent system for Solana. Like Hermes
 
 **One router · one settlement layer · one environment contract**
 
-`30+ packages, apps, and services` · `50-agent catalog` · `90+ bundled skills` · `4 payment protocols` · `57 router models`
+`30+ packages, apps, and services` · `50-agent catalog` · `90+ bundled skills` · `4 payment protocols` · `57 router models` · `49 Metaplex Lobster Agents`
 
 ---
 
@@ -28,13 +28,14 @@ OpenClawd is the open-source, autonomous AI agent system for Solana. Like Hermes
 [![Solana](https://img.shields.io/badge/Solana-mainnet-14F195?style=for-the-badge&logo=solana)](https://solana.com)
 [![x402](https://img.shields.io/badge/x402-native-F39C12?style=for-the-badge)](https://solanaclawd.com/x402)
 [![MCP](https://img.shields.io/badge/MCP-compatible-9B59B6?style=for-the-badge)](https://modelcontextprotocol.io)
+[![pAGENT](https://img.shields.io/badge/pAGENT-Browser-FF6B35?style=for-the-badge)](./chrome-extension/)
 
 [![npm solana-clawd](https://img.shields.io/npm/v/solana-clawd?style=flat-square&label=solana-clawd&color=cc3534)](https://www.npmjs.com/package/solana-clawd)
 [![npm @openclawd/wallet](https://img.shields.io/npm/v/@openclawd/wallet?style=flat-square&label=@openclawd/wallet&color=cc3534)](https://www.npmjs.com/package/@openclawd/wallet)
 [![Twitter Follow](https://img.shields.io/twitter/follow/clawddevs?style=flat-square&color=1DA1F2)](https://x.com/clawddevs)
 [![Telegram](https://img.shields.io/badge/Telegram-clawdtoken-26A5E4?style=flat-square&logo=telegram)](https://t.me/clawdtoken)
 
-[**Install**](#install) · [**Architecture**](#architecture) · [**Orchestrator**](#openclawd-orchestrator) · [**Router**](#clawdrouter) · [**Wurk x402**](#wurk-x402-integration) · [**npm Packages**](#npm-packages) · [**Stack Map**](./STACK.md) · [**Docs**](./articles) · [**Website**](https://solanaclawd.com)
+[**Install**](#install) · [**Architecture**](#architecture) · [**Orchestrator**](#openclawd-orchestrator) · [**Router**](#clawdrouter) · [**Chrome Extension**](#🦞-openclawd-pagent-browser) · [**SolanaOS Integration**](#-solanaos-integration) · [**Metaplex Lobster Agents**](#-metaplex-lobster-agents) · [**Wurk x402**](#wurk-x402-integration) · [**npm Packages**](#npm-packages) · [**Stack Map**](./STACK.md) · [**Docs**](./docs/articles/) · [**Website**](https://solanaclawd.com)
 
 </div>
 
@@ -48,10 +49,11 @@ OpenClawd is the open-source, autonomous AI agent system for Solana. Like Hermes
 | 🕶️ **Cloud OS** | [cloud.solanaclawd.com](https://cloud.solanaclawd.com) |
 | 🔐 **Vault** | [vault.solanaclawd.com](https://vault.solanaclawd.com) |
 | 💰 **SolanaOS** | [solanaos.net](https://solanaos.net) |
+| 🛒 **Hub** | [hub.solanaclawd.com](https://hub.solanaclawd.com) |
 | 🐦 **Twitter** | [x.com/clawddevs](https://x.com/clawddevs) |
 | 💬 **Telegram** | [t.me/clawdtoken](https://t.me/clawdtoken) |
 | 📦 **solana-clawd** | [npm](https://www.npmjs.com/package/solana-clawd) · [GitHub](https://github.com/x402agent/solana-clawd) |
-| 🖥️ **SolanaOS** | [GitHub](https://github.com/x402agent/solanaos) |
+| 🖥️ **SolanaOS** | [GitHub](https://github.com/x402agent/SolanaOS) |
 
 ---
 
@@ -109,6 +111,204 @@ For full installation details, see **[ONBOARDING.md](./ONBOARDING.md)**.
 
 ---
 
+## 🦞 OpenClawd pAGENT Browser
+
+The **OpenClawd pAGENT Browser** is a Chrome extension that brings AI agent capabilities directly to your browser with wallet, trading, and OpenClawd harness integration.
+
+### Install
+
+```bash
+cd chrome-extension
+bash install-openclawd.sh
+```
+
+This one-shot installer:
+1. ✅ Builds the Chrome extension
+2. ✅ Starts the OpenClawd MCP bridge (port 3001)
+3. ✅ Creates Claude Desktop MCP config
+4. ✅ Generates extension configuration
+5. ✅ Prints installation instructions
+
+### Six Tabs
+
+| Tab | What it does | Paid? |
+|---|---|:---:|
+| 💰 **Wallet** | SOL + SPL balances, OODA trade history, Bitaxe miner card, send / swap | Free |
+| 📱 **Seeker** | WebSocket bridge to the Solana Seeker phone | Free |
+| ⛏  **Miner** | MawdAxe Bitaxe fleet dashboard with SSE live updates | Free |
+| 💬 **Chat** | Multi-turn chat with OpenClawd | Free |
+| 🔧 **Tools** | Live RPC health, trending tokens, system status | Free |
+| 🔐 **Vault** | AES-256-GCM local wallet vault — keys never leave your box | Free |
+
+### pAGENT — GUI Vision Browser Agent
+
+pAGENT injects `window.PAGENT` into every page. Drive your browser with natural language:
+
+```javascript
+await window.PAGENT.execute("Find the cheapest SOL→USDC route on Jupiter and screenshot it", {
+  baseURL: "https://api.openrouter.ai/v1",
+  model: "anthropic/claude-sonnet-4-6",
+  apiKey: "sk-or-...",
+  guiVision: true,
+});
+```
+
+### Connection Points
+
+| Service | Port | OpenClawd Connection |
+|---------|------|---------------------|
+| Gateway WS | 18790 | WebSocket client |
+| Control UI | 7777 | HTTP API |
+| Wallet API | 8421 | REST client |
+| MawdAxe | 8420 | SSE client |
+| MCP Bridge | 3001 | stdio + HTTP |
+
+See [`chrome-extension/README.md`](./chrome-extension/README.md) and [`INTEGRATION_STRATEGY.md`](./INTEGRATION_STRATEGY.md).
+
+---
+
+## 🌐 SolanaOS Integration
+
+OpenClawd connects to the **SolanaOS** Go binary (`github.com/x402agent/SolanaOS`) for unified autonomous AI agent system.
+
+### Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                        OpenClawd System                         │
+├─────────────────────────────────────────────────────────────────┤
+│  ┌─────────────┐    ┌──────────────────┐    ┌────────────────┐   │
+│  │ Chrome Ext  │───▶│ OpenClawd        │◀───│ Claude Desktop │   │
+│  │ pAGENT      │    │ Orchestrator     │    │ MCP Client    │   │
+│  └─────────────┘    └────────┬─────────┘    └────────────────┘   │
+│                              │                                   │
+│  ┌─────────────┐    ┌────────▼─────────┐    ┌────────────────┐   │
+│  │ ClawdHub    │◀───│ MCP Bridge       │───▶│ 49 Agents      │   │
+│  └─────────────┘    └────────┬─────────┘    └────────────────┘   │
+│                              │                                   │
+│  ┌─────────────┐    ┌────────▼─────────┐    ┌────────────────┐   │
+│  │ Honcho      │    │ Wallet Bridge    │───▶│ Privy Wallet   │   │
+│  │ Memory      │    └─────────────────┘    └────────────────┘   │
+└──────────────────────────────┼───────────────────────────────────┘
+                               │
+                    ┌──────────▼──────────┐
+                    │    SolanaOS         │
+                    │    (Go Binary)      │
+                    │    Port 18790       │
+                    ├─────────────────────┤
+                    │ • OODA Trading Loop │
+                    │ • Telegram Bot       │
+                    │ • Wallet Vault      │
+                    │ • Honcho Memory     │
+                    │ • x402 Payments    │
+                    └─────────────────────┘
+```
+
+### Auto-Connect
+
+```bash
+# Clone both repos
+git clone https://github.com/x402agent/openclawd.git
+git clone https://github.com/x402agent/SolanaOS.git
+
+# Run OpenClawd installer
+cd openclawd
+bash chrome-extension/install-openclawd.sh
+
+# Run SolanaOS installer
+cd ../SolanaOS
+bash start.sh
+
+# Connect them together
+openclawd connect --solanaos ~/SolanaOS
+```
+
+See [`INTEGRATION_STRATEGY.md`](./INTEGRATION_STRATEGY.md) for full integration guide.
+
+---
+
+## 🦞 Metaplex Lobster Agents
+
+**49 Metaplex Lobster Agents powered by OpenClawd, pump.fun, Birdeye, and Solana RPC.**
+
+Each lobster agent is born with these Solana superpowers:
+
+```typescript
+interface LobsterAgent {
+  // Core Solana Programs
+  programs: {
+    pump: '6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P';
+    pumpSwap: 'PumpSwapAMMxxxxxxxxxxxxxx';
+    mayhem: 'MAyhSmzXzV1pTf7LsNkrNwkWKTo4ougAJ1PPg47MD4e';
+    metaplex: 'metaqbxxUurdq35cjC23cE9k1rCBu5KNqmWfdKAoZSkb';
+    token2022: 'TokenkegQfeZyiNwAjbodcp9C5bw52aqx3mqHPa7';
+  };
+  
+  // Trading Capabilities
+  trading: {
+    canLaunchToken: true;      // create/create_v2 instructions
+    canBuy: true;               // buy instruction
+    canSell: true;              // sell instruction
+    canClaimFees: true;        // collectCreatorFee
+    canMigrate: true;           // migrate to PumpSwap
+    canManageMetadata: true;   // set_metaplex_creator
+  };
+}
+```
+
+### Pump.fun Program Integration
+
+| Program | Address | Type |
+|---------|---------|------|
+| **Pump** | `6EF8rrecthR5Dkzon8Nwu78hRvfCKubJ14M5uBEwF6P` | Bonding curve |
+| **Mayhem** | `MAyhSmzXzV1pTf7LsNkrNwkWKTo4ougAJ1PPg47MD4e` | Trading mode |
+| **Global** | `4wTV1YmiEkRvAtNtsSGPtUrqRYQMe5SKy2uB4Jjaxnjf` | Config PDA |
+
+### Mayhem Fee Recipients
+
+```
+GesfTA3X2arioaHp8bbKdjG9vJtskViWACZoYvxp4twS
+4budycTjhs9fD6xw62VBducVTNgMgJJ5BgtKq7mAZwn6
+8SBKzEQU4nLSzcwF4a74F2iaUDQyTfjGndn6qUWBnrpR
+4UQeTP1T39KZ9Sfxzo3WR5skgsaP6NZa87BAkuazLEKH
+8sNeir4QsLsJdYpc9RZacohhK1Y5FLU3nC5LXgYB4aa6
+Fh9HmeLNUMVCvejxCtCL2DbYaRyBFVJ5xrWkLnMH6fdk
+463MEnMeGyJekNZFQSTUABBEbLnvMTALbT6ZmsxAbAdq
+6AUH3WEHucYZyC61hqpqYUWVto5qA5hjHuNQ32GNnNxA
+```
+
+### Agent Trading Workflow
+
+```
+1. Agent spawns (49 Metaplex Lobster Agents ready)
+         ↓
+2. Connect wallet via Privy/E2B sandbox
+         ↓
+3. Scan pump.fun for opportunities (BDS API)
+         ↓
+4. Analyze token via Birdeye
+         ↓
+5. Execute trade (buy/sell via pump.fun SDK)
+         ↓
+6. Monitor position, collect fees if creator
+         ↓
+7. Report to OpenClawd orchestrator
+```
+
+### $CLAWD Tier Requirements
+
+| Tier | $CLAWD Required | Trading Limits |
+|------|-----------------|----------------|
+| Free | 0 | 0.01 - 0.1 SOL |
+| Bronze | 1 | 0.01 - 0.5 SOL |
+| Silver | 1,000 | 0.01 - 2.0 SOL |
+| Gold | 10,000 | 0.01 - 10 SOL |
+| Diamond | 100,000 | Unlimited |
+
+See [`AGENTS/solana-lobster-agents.md`](./AGENTS/solana-lobster-agents.md) and [`API/README.md`](./API/README.md).
+
+---
+
 ## 📚 Documentation
 
 | Guide | Description |
@@ -116,9 +316,12 @@ For full installation details, see **[ONBOARDING.md](./ONBOARDING.md)**.
 | [ONBOARDING.md](./ONBOARDING.md) | **Start here!** Contributor setup & workflow |
 | [CONTRIBUTING.md](./CONTRIBUTING.md) | Contribution guidelines |
 | [STACK.md](./STACK.md) | Technical architecture |
-| [articles/](./articles/) | Deep-dive documentation |
+| [docs/articles/](./docs/articles/) | Deep-dive documentation (46 articles) |
 | [AGENTS/README.md](./AGENTS/README.md) | Agent development |
-| [skills/README.md](./skills/README.md) | Skill development |
+| [AGENTS/solana-lobster-agents.md](./AGENTS/solana-lobster-agents.md) | **NEW** Metaplex Lobster Agents |
+| [chrome-extension/README.md](./chrome-extension/README.md) | **NEW** pAGENT Browser Extension |
+| [INTEGRATION_STRATEGY.md](./INTEGRATION_STRATEGY.md) | **NEW** OpenClawd × SolanaOS |
+| [API/README.md](./API/README.md) | **NEW** Solana Blockchain Integration |
 
 ---
 
@@ -131,14 +334,15 @@ The heart of the stack: **`openclawd-stack/orchestrator/`** — a single Hono se
 ```text
 ┌─────────────────────────────────────────────────────────────────┐
 │                    OpenClawd Orchestrator                       │
-│                     Port 8787 · Hono server                     │
+│                     Port 8787 · Hono server                    │
 ├─────────────────────────────────────────────────────────────────┤
 │  Honcho Brain        → memory, peer.chat, session context       │
 │  E2B Sandbox         → per-user isolated agent sandboxes        │
 │  Privy Wallet        → embedded wallet, balance, transfer        │
 │  Solana MCP           → child process per user, JSON-RPC stdio  │
 │  Payments Client      → ClawdVault registry, AP2 mandates        │
-│  Wurk x402 Bridge     → social campaigns, agent-to-human jobs     │
+│  Wurk x402 Bridge     → social campaigns, agent-to-human jobs    │
+│  Metaplex Bridge      → Core agents, Genesis, token launch        │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -148,61 +352,17 @@ The heart of the stack: **`openclawd-stack/orchestrator/`** — a single Hono se
 |-------|-------------|
 | `GET /healthz` | Server liveness |
 | `GET /api/v1/me` | Auth info (Privy JWT) |
-| `GET /api/v1/agents` | Agent catalog |
+| `GET /api/v1/agents` | Agent catalog (49 lobster agents) |
 | `POST /api/v1/launch` | Launch agent (Honcho + E2B) |
-| `POST /api/v1/pause` | Stop agent sandbox |
 | `GET /api/v1/wallet` | List Privy wallets |
-| `POST /api/v1/wallet/create` | Create embedded wallet |
 | `POST /api/v1/wallet/transfer` | Transfer SOL/USDC |
 | `GET /api/v1/mcp/tools` | List MCP tools |
 | `POST /api/v1/mcp/call` | Call MCP tool |
-| `GET /api/v1/projects` | Honcho projects |
-| `POST /api/v1/brain/ask` | Ask the Honcho brain |
-| `GET /api/v1/brain/context/:agent` | Load agent context |
-| `POST /api/v1/mandates/mint` | Mint AP2 payment mandate |
-| `GET /api/v1/earnings` | Pending earnings (USDC) |
-| `GET /api/v1/wurk/services` | Wurk service catalog |
-| `POST /api/v1/wurk/quick` | Create quick x402 job |
-| `POST /api/v1/wurk/agent-to-human` | Hire humans for tasks |
-| `GET /api/v1/wurk/submissions` | Retrieve job submissions |
-| `POST /webhook/` | Honcho event webhook |
-| `POST /webhook/chat` | Honcho chat turn webhook |
 | `POST /api/v1/metaplex/mint` | Mint Core agent asset (auto on login) |
-| `GET /api/v1/metaplex/read/:asset` | Read agent on-chain (asset signer PDA) |
-| `POST /api/v1/metaplex/register` | Register identity/executive |
+| `GET /api/v1/metaplex/read/:asset` | Read agent on-chain |
 | `POST /api/v1/metaplex/launch-token` | Launch agent token via Genesis |
-| `POST /api/v1/metaplex/delegate` | Delegate execution to another agent |
-
-### Environment variables
-
-```bash
-# Orchestrator core
-ORCHESTRATOR_PORT=8787
-ORCHESTRATOR_CORS_ORIGINS=https://solanaclawd.com,https://www.solanaclawd.com,http://localhost:5173
-
-# Privy embedded wallet
-PRIVY_APP_ID=
-PRIVY_APP_SECRET=
-PRIVY_JWKS_ENDPOINT=https://auth.privy.io/api/v1/apps/{app_id}/jwks.json
-PRIVY_AUTH_PRIVATE_KEY=wallet-auth:...
-
-# Honcho brain + memory
-HONCHO_API_KEY=
-HONCHO_WORKSPACE_ID=pumpfun
-HONCHO_WEBHOOK_SECRET=
-HONCHO_WEBHOOKSECRET2=
-
-# E2B sandbox runtime
-E2B_API_KEY=
-
-# Solana Clawd MCP
-HELIUS_RPC=
-HELIUS_API_KEY=
-XAI_API_KEY=
-
-# Wurk.fun x402 (optional — quick jobs work without key)
-WURK_API_KEY=
-```
+| `GET /api/v1/metaplex/lobster-agents` | **NEW** List lobster agents with pump.fun integration |
+| `POST /api/v1/metaplex/trade` | **NEW** Execute trade via bonding curve |
 
 ### Dev mode
 
@@ -214,204 +374,24 @@ pnpm dev:orchestrator
 
 ---
 
-## 📦 NPM Packages
-
-| Package | npm | Description |
-|---------|-----|-------------|
-| [`solana-clawd`](https://www.npmjs.com/package/solana-clawd) | `npm i -g solana-clawd` | Go + TypeScript agent framework, OODA loop trading, 31 MCP tools |
-| [`@openclawd/wallet`](https://www.npmjs.com/package/@openclawd/wallet) | `npm i @openclawd/wallet` | Privy-powered embedded Solana wallet with deny-first controls |
-| [`@mawdbotsonsolana/nemoclaw`](https://www.npmjs.com/package/nemoclaw) | `npm i -g @mawdbotsonsolana/nemoclaw` | xAI Grok-powered Solana trading engine with blockchain buddies |
-| `clawdhub` | `npx clawdhub publish` | Skills marketplace CLI (publish, install, search SKILL.md bundles) |
-
-### Solana Clawd Runtime Shell
-
-Integration of solana-clawd, nemoClawd, and agentic wallet for a unified Solana AI agent runtime with OODA trading loop:
-
-```
-OBSERVE  → sol_price, trending, helius_priority_fee, memory KNOWN
-ORIENT   → score candidates (trend + momentum + liquidity)
-DECIDE   → confidence ≥ 60? → size band (0.5x / 1.0x / 1.25x / 1.5x)
-ACT      → trade_execute gated at `ask` permission (human approval required)
-LEARN    → write INFERRED signals → Dream agent promotes to LEARNED
-```
-
-### 31 MCP Tools
-
-**Solana Market Data:** `solana_price`, `solana_trending`, `solana_token_info`, `solana_wallet_pnl`, `solana_search`, `solana_top_traders`, `solana_wallet_tokens`
-
-**Helius Onchain:** `helius_account_info`, `helius_balance`, `helius_transactions`, `helius_priority_fee`, `helius_das_asset`, `helius_webhook_create`
-
-**Trading (Pump.fun):** `pump_token_scan`, `pump_buy_quote`, `pump_sell_quote`, `pump_graduation`
-
-**Memory:** `memory_recall`, `memory_write`
-
-**Agent Fleet:** `agent_spawn`, `agent_list`, `agent_stop`
-
-**Metaplex:** `metaplex_mint_agent`, `metaplex_register_identity`, `metaplex_read_agent`
-
----
-
-## 🦞 Metaplex Core Agents
-
-Every OpenClawd user gets a **Metaplex Core agent** minted on first login — a sovereign on-chain AI identity that owns assets, executes autonomously, and can launch its own token.
-
-### How it works
-
-1. **Login via Privy** → JWT verified → embedded wallet created/linked
-2. **Auto-mint** → Orchestrator calls `mintAndSubmitAgent` via Metaplex API (`https://api.metaplex.com`)
-3. **Single atomic tx** → Creates `MPL Core` asset + `Agent Identity PDA` in one transaction
-4. **Token launch** → Optional `Genesis` bonding curve with agent as creator → royalties flow to the agent PDA
-
-### Programs supported
-
-| Program | Package | Description |
-|---|---|---|
-| **Agent Registry** | `@metaplex-foundation/mpl-agent-registry` | Identity, executive, delegation PDAs |
-| **Genesis** | `@metaplex-foundation/genesis` | Token launch with bonding curves |
-| **Core** | `@metaplex-foundation/mpl-core` | Next-gen NFTs with plugins |
-| **Token Metadata** | `@metaplex-foundation/mpl-token-metadata` | Fungibles, NFTs, pNFTs |
-| **Bubblegum** | `@metaplex-foundation/mpl-bubblegum` | Compressed NFTs (10k+ scale) |
-| **Candy Machine** | `@metaplex-foundation/mpl-core-candy-machine` | Drops with allowlists |
-
-### SDK & Umi
-
-```bash
-bun add @metaplex-foundation/umi \
-  @metaplex-foundation/umi-bundle-defaults \
-  @metaplex-foundation/mpl-agent-registry \
-  @metaplex-foundation/mpl-core \
-  @metaplex-foundation/genesis
-```
-
-```typescript
-import { createUmi } from '@metaplex-foundation/umi'
-import { mplAgentIdentity } from '@metaplex-foundation/umi-agent-sdk'
-
-const umi = createUmi(HELIUS_RPC).use(mplAgentIdentity())
-```
-
-### Agent Signer PDA
-
-Every Core asset has an **Asset Signer PDA** (derived from `['mpl-core-execute', <asset>]`) — a wallet with no private key. Agents sign via Umi's agent identity plugin, not a private key.
-
-### Token launches (Genesis)
-
-```bash
-# Via orchestrator API
-curl -X POST http://localhost:8787/api/v1/metaplex/launch-token \
-  -H "Authorization: Bearer <privy-jwt>" \
-  -d '{
-    "mint": "A4pTMq5U2Rwaa1wVjMy5V6eP7nMf9Yz3gLkBvR2P7Xw",
-    "bondingCurve": { "initialPrice": 0.0001, "curveType": "exponential" },
-    "setToken": true
-  }'
-```
-
-The `setToken: true` option permanently links the token to the agent identity — creator fees route to the agent PDA automatically.
-
----
-
 ## 🤖 49-Agent Catalog
 
 Browse the full catalog at **[hub.solanaclawd.com/agents](https://hub.solanaclawd.com/agents)**
 
-All 49 agents are Metaplex-enabled and mintable as Core assets. Stats: **51 total agents** · **49 Metaplex-enabled** · **12 trading-capable** · **1 token launch capable**
+All 49 agents are Metaplex-enabled and mintable as Core assets. **The lobster agents have full pump.fun integration at birth.**
 
-### DeFi (12 agents)
+### Agent Categories
 
-| Agent | Description | Skills |
-|---|---|---|
-| **CLAWD Liquidity Provider Strategist** | Concentrated LP on Meteora/Orca/Raydium, IL math, rebalance | `agent-registry` |
-| **CLAWD Yield Aggregator** | Rank every Solana yield venue (Kamino, MarginFi, Drift, Meteora) | `agent-registry` |
-| **DeFi Yield Farming Strategist** | Identify and optimize yield farming across protocols | `agent-registry` |
-| **DeFi Risk Scoring Engine** | TVL, audit, oracle, upgrade authority risk assessment | `agent-registry` |
-| **DeFi Protocol Comparator** | Side-by-side protocol comparison (lending, LP, LST) | `agent-registry` |
-| **DeFi Liquidity Monitor** | Monitor LP positions, impermanent loss, fee accrual | `agent-registry` |
-| **DeFi Emergency Response Agent** | Liquidation avoidance, depeg alerts, emergency exits | `agent-registry` |
-| **DeFi Portfolio Manager** | Auto-rebalance, strategy rotation, yield optimization | `agent-registry` |
-| **CLAWD Bridge Assistant** | Route funds into Solana (Wormhole, deBridge, Allbridge, Jupiter) | `agent-registry` |
-| **DeFi Airdrop Strategist** | Identify and claim protocol airdrops | `agent-registry` |
-| **Solana DeFi Analyst** | Deep protocol research and on-chain analytics | `agent-registry` |
-| **DeFi Compliance Checker** | Protocol compliance and regulatory analysis | `agent-registry` |
-
-### Analytics (11 agents)
-
-| Agent | Description | Skills |
-|---|---|---|
-| **CLAWD Portfolio Tracker** | Helius DAS wallet tracking, LP, staked SOL, PnL | `agent-registry` |
-| **Crypto Alpha & Signal Detector** | Smart-money wallet flows, pump.fun launches, Jito bundles | `agent-registry` |
-| **DeFi Analytics Dashboard** | Real-time DeFi metrics and portfolio visualization | `agent-registry` |
-| **Market Sentiment Analyzer** | On-chain sentiment, social signals, whale activity | `agent-registry` |
-| **On-chain Data Explorer** | Helius DAS queries, asset searches, transaction tracing | `agent-registry` |
-| **Protocol TVL Tracker** | Track TVL across Solana protocols over time | `agent-registry` |
-| **Whale Wallet Monitor** | Track top traders' positions and moves | `agent-registry` |
-| **NFT Floor Price Analyzer** | Floor prices, volume, rarity scoring | `agent-registry` |
-| **Dex Trading Volume Analyst** | DEX volume, liquidity, spreads analysis | `agent-registry` |
-| **Solana Ecosystem Health Monitor** | Network health, TPS, validator metrics | `agent-registry` |
-| **DeFi Protocol Comparator** | Side-by-side protocol analysis (reused) | `agent-registry` |
-
-### Security (8 agents)
-
-| Agent | Description | Skills |
-|---|---|---|
-| **CLAWD Protocol Risk Monitor** | Liquidation distance, oracle drift, depeg alerts | `agent-registry` |
-| **DeFi Risk Scoring Engine** | Comprehensive risk assessment framework | `agent-registry` |
-| **Cross-Chain Bridge Security Analyst** | Bridge security model evaluation | `agent-registry` |
-| **Smart Contract Auditor** | Exploit pattern detection, audit assistance | `agent-registry` |
-| **Rug Pull Detection Agent** | Honeypot patterns, liquidity sniping, scams | `agent-registry` |
-| **Wallet Security Monitor** | Unauthorized access, unusual activity alerts | `agent-registry` |
-| **MEV & Sandwich Attack Detector** | MEV detection and protection strategies | `agent-registry` |
-| **DeFi Emergency Response Agent** | Emergency exits, circuit breakers | `agent-registry` |
-
-### Education (6 agents)
-
-| Agent | Description | Skills |
-|---|---|---|
-| **CLAWD Ecosystem Onboarding Guide** | Wallet setup, first SOL, buying CLAWD, staking | `agent-registry` |
-| **APY vs APR Educator** | Yield math, auto-compounders, emission decay | `agent-registry` |
-| **DeFi Beginner Onboarding Mentor** | First DeFi position, protocol education | `agent-registry` |
-| **Solana Development Educator** | Anchor, SPL tokens, program development | `agent-registry` |
-| **Blockchain Economics Tutor** | Tokenomics, game theory, valuation | `agent-registry` |
-| **Crypto Regulation Guide** | Regulatory landscape and compliance | `agent-registry` |
-
-### Trading (6 agents)
-
-| Agent | Description | Skills |
-|---|---|---|
-| **DeFi Airdrop Hunter** | Live Solana airdrop identification and strategy | `agent-registry` |
-| **Crypto Alpha & Signal Detector** | Trading alpha, early signals | `agent-registry` |
-| **CLAWD × Pump.fun Official Agent** | Payment-gated RNG, launch screening (0.1 SOL) | `genesis` |
-| **CLAWD Mayhem Mode** | Full trading + Metaplex (Core, Genesis, Bubblegum, Candy Machine) | All programs |
-| **P2P Trading Advisor** | P2P marketplace advice and arbitrage | `agent-registry` |
-| **DEX Arbitrage Spotter** | Cross-DEX arbitrage opportunities | `agent-registry` |
-
-### Governance (2 agents)
-
-| Agent | Description | Skills |
-|---|---|---|
-| **CLAWD Governance Guide** | DAO proposals, Realms voting, delegation | `agent-registry` |
-| **Protocol Upgrade Analyst** | Analyze and vote on protocol proposals | `agent-registry` |
-
-### Dev Tools (3 agents)
-
-| Agent | Description | Skills |
-|---|---|---|
-| **Solana Dev Copilot** | Anchor code generation, debugging, testing | `agent-registry` |
-| **CLI Automation Agent** | Shell scripting, process automation | `agent-registry` |
-| **Documentation Generator** | Auto-generate code docs and READMEs | `agent-registry` |
-
-### NFT (2 agents)
-
-| Agent | Description | Skills |
-|---|---|---|
-| **NFT Collection Manager** | Track, transfer, mint NFT collections | `agent-registry`, `core` |
-| **NFT Floor Price Analyzer** | Floor prices, volume, rarity analysis | `agent-registry` |
-
-### Research (1 agent)
-
-| Agent | Description | Skills |
-|---|---|---|
-| **CLAWD Firecrawl Researcher** | Web scraping, site mapping, search via Firecrawl | — |
+| Category | Count | Capabilities |
+|----------|-------|--------------|
+| **DeFi** | 12 | Swap, liquidity, yield farming |
+| **Trading** | 10 | Sniper, scalper, swing trader, **pump.fun** |
+| **Analytics** | 11 | On-chain data, sentiment, Birdeye |
+| **Security** | 8 | Rug detection, scam alerts |
+| **NFT** | 5 | Mint, trade, collection |
+| **Dev Tools** | 8 | Deploy, test, audit |
+| **Research** | 4 | Token analysis, market research |
+| **Governance** | 3 | DAO voting, proposals |
 
 ### Featured Agents (20)
 
@@ -423,8 +403,7 @@ All 49 agents are Metaplex-enabled and mintable as Core assets. Stats: **51 tota
 - 💼 **CLAWD Portfolio Tracker** — Helius DAS wallet tracking
 - ⚠️ **CLAWD Protocol Risk Monitor** — DeFi risk monitoring
 - 💧 **CLAWD Liquidity Provider Strategist** — LP optimization
-- 🗳️ **CLAWD Governance Guide** — DAO voting
-- 🎓 **CLAWD Ecosystem Onboarding Guide** — First steps
+- 🦞 **SolanaOS Trading Lobster** — OODA loop + pump.fun integration
 - 🔥 **CLAWD Firecrawl Researcher** — Web research
 
 ### Mint Your Agent
@@ -444,300 +423,18 @@ curl http://localhost:8787/api/v1/agents | jq '.'
 
 ---
 
-## Why OpenClawd exists
+## 📦 NPM Packages
 
-Most AI agent stacks are stitched together from separate services:
-
-- an LLM gateway
-- wallet custody or signing glue
-- payment verification
-- an MCP/tool runtime
-- a skills registry
-- sandboxed execution
-- a frontend or bot surface
-- a memory/brain system
-
-OpenClawd keeps those pieces in one place, inspired by the Hermes philosophy — agents that move fast, connect everything, and settle autonomously:
-
-- **OpenClawd Orchestrator** for brain (Honcho), sandbox (E2B), wallet (Privy), and payment (AP2/x402) in one server
-- **ClawdRouter** for model selection and payment-aware routing
-- **`@openclawd/wallet`** for embedded Solana wallet flows with deny-first controls
-- **`solana-clawd`** for agent runtime, OODA loops, and Solana tooling
-- **ClawdHub** for searchable `SKILL.md` bundles
-- **Wurk.fun** for social campaigns and agent-to-human microjobs via x402
-- **x402 / MPP / AP2 / A2A** for payment-gated calls on Solana
-- **TailClawd and cloud surfaces** for browser and bot access
+| Package | npm | Description |
+|---------|-----|-------------|
+| [`solana-clawd`](https://www.npmjs.com/package/solana-clawd) | `npm i -g solana-clawd` | Go + TypeScript agent framework, OODA loop trading, 31 MCP tools |
+| [`@openclawd/wallet`](https://www.npmjs.com/package/@openclawd/wallet) | `npm i @openclawd/wallet` | Privy-powered embedded Solana wallet with deny-first controls |
+| [`@mawdbotsonsolana/nemoclaw`](https://www.npmjs.com/package/nemoclaw) | `npm i -g @mawdbotsonsolana/nemoclaw` | xAI Grok-powered Solana trading engine with blockchain buddies |
+| `clawdhub` | `npx clawdhub publish` | Skills marketplace CLI (publish, install, search SKILL.md bundles) |
 
 ---
 
-## Install
-
-The installer source of truth lives in [install.sh](./install.sh). Hosted mirrors may move; the checked-in script is authoritative.
-
-### One-line install
-
-```bash
-curl -fsSL https://solanaclawd.com/install.sh | bash
-```
-
-### Run the local script directly
-
-```bash
-bash ./install.sh
-```
-
-### What the installer does
-
-1. Verifies `curl`, `git`, `node >= 18`, and `npm`.
-2. Optionally installs Tailscale and prompts for `tailscale up`.
-3. Installs `solana-clawd` globally from npm.
-4. Creates `~/.openclawd`, shallow-clones the repo there, and links `tailclawd/`.
-5. Installs `tailclawd` dependencies.
-6. Scaffolds `~/.openclawd/.env` without overwriting an existing file.
-7. Optionally exposes TailClawd with `tailscale serve`.
-
-### Installer overrides
-
-`OPENCLAWD_DIR`, `TAILCLAWD_DIR`, `OPENCLAWD_REPO`, `SKIP_TAILSCALE=1`, `SKIP_TAILCLAWD=1`, `AUTO_SERVE=1`, `TAILCLAWD_TOKEN`
-
-### CLI only
-
-```bash
-npm i -g solana-clawd
-solana-clawd pair <CODE>
-solana-clawd mint
-solana-clawd status
-solana-clawd agent
-```
-
-### TailClawd
-
-[`tailclawd/`](./tailclawd/) exposes Clawd Code in the browser, designed to sit behind Tailscale Serve or Funnel.
-
-```bash
-cd ~/.openclawd/tailclawd
-npm run dev
-tailscale serve --bg --https=443 http://127.0.0.1:3110
-```
-
-Set `TAILCLAWD_TOKEN` in `~/.openclawd/.env` if you want bearer-token protection on requests.
-
----
-
-## Core layers
-
-### OpenClawd Orchestrator
-
-The unified server tying brain, sandbox, wallet, and payments together.
-
-- **`honcho.ts`** — Honcho SDK client for memory, peer.chat, and session context
-- **`sandbox-manager.ts`** — E2B sandbox lifecycle (launch/pause per user)
-- **`wallet-bridge.ts`** — Privy REST API for embedded wallet operations
-- **`mcp-bridge.ts`** — Solana Clawd MCP child processes per user (JSON-RPC over stdio)
-- **`payments.ts`** — ClawdVault registry + AP2 mandates + Pinata manifest pinning
-- **`wurk-bridge.ts`** — Wurk.fun x402 client (social jobs + agent-to-human)
-- **`webhooks.ts`** — Honcho webhook handlers (events + chat turns)
-- **`routes.ts`** — All HTTP routes under `/api/v1/*` (Privy JWT protected)
-
-### ClawdRouter
-
-[`clawdrouter/`](./clawdrouter/) is the single model-routing layer for the stack.
-
-- 57 models in the local registry
-- 15-dimension scorer
-- one entry point for routing, pricing, and provider selection
-- payment-aware flow for Solana-native agent calls
-
-See [articles/CLAWD_ROUTER.md](./articles/CLAWD_ROUTER.md).
-
-### ClawdHub
-
-[`clawdhub/`](./clawdhub/) and [`skills/`](./skills/) provide the skill registry and bundled `SKILL.md` library.
-
-- installable skills
-- vector-searchable marketplace
-- publish and download flow
-- local and hosted APIs
-
-See [articles/ARTICLE_SKILLS.md](./articles/ARTICLE_SKILLS.md) and [skills/README.md](./skills/README.md).
-
-### solana-clawd
-
-[`solana-clawd/`](./solana-clawd/) is the agent framework and runtime spine.
-
-- Solana-focused CLI
-- MCP-first tool runtime (31 tools)
-- OODA-loop agent flows
-- Go plus TypeScript bridge
-
-See [articles/solana-clawd-go.md](./articles/solana-clawd-go.md).
-
-### Payments
-
-[`x402-openrouter-main/`](./x402-openrouter-main/), [`workers/`](./workers/), and [`services/`](./services/) cover payment and gateway plumbing.
-
-- `x402` — Solana-native payment protocol
-- `MPP` — Multi-protocol payments
-- `AP2` — Agent-to-agent payment intents
-- `A2A` — Agent-to-agent messaging with payment
-
-The settlement layer is Solana, with SPL USDC and `$CLAWD` as the core billing assets.
-
-See [articles/ARTICLE_PAYMENTS.md](./articles/ARTICLE_PAYMENTS.md).
-
-### Wurk x402 Integration
-
-Social campaigns and agent-to-human microjobs powered by Wurk.fun's x402 protocol — no API key required for quick jobs.
-
-**Quick endpoints** (call directly, first returns 402, retry with `PAYMENT-SIGNATURE` header):
-
-| Job Type | x402 Solana | x402 Base | MPP TEMPO | MPP SOLANA |
-|---|---|---|---|---|
-| **Agent to Human** | `wurkapi.fun/solana/agenttohuman` | `wurkapi.fun/base/agenttohuman` | `wurkapi.fun/mpp/agenttohuman` | `wurkapi.fun/mpp-solana/agenttohuman` |
-| **X Raid** | `wurkapi.fun/solana/xraid` | `wurkapi.fun/base/xraid` | `wurkapi.fun/mpp/xraid` | `wurkapi.fun/mpp-solana/xraid` |
-| **X Raid Premium** | `wurkapi.fun/solana/xraid/scout/small` | `wurkapi.fun/base/xraid/scout/small` | `wurkapi.fun/mpp/xraid/scout/small` | `wurkapi.fun/mpp-solana/xraid/scout/small` |
-| **X Likes** | `wurkapi.fun/solana/xlikes` | `wurkapi.fun/base/xlikes` | `wurkapi.fun/mpp/xlikes` | `wurkapi.fun/mpp-solana/xlikes` |
-| **X Followers** | `wurkapi.fun/solana/xfollowers` | `wurkapi.fun/base/xfollowers` | `wurkapi.fun/mpp/xfollowers` | `wurkapi.fun/mpp-solana/xfollowers` |
-| **X Reposts** | `wurkapi.fun/solana/reposts` | `wurkapi.fun/base/reposts` | `wurkapi.fun/mpp/xreposts` | `wurkapi.fun/mpp-solana/xreposts` |
-| **X Comments** | `wurkapi.fun/solana/comments` | `wurkapi.fun/base/comments` | `wurkapi.fun/mpp/xcomments` | `wurkapi.fun/mpp-solana/xcomments` |
-| **X Bookmarks** | `wurkapi.fun/solana/bookmarks` | `wurkapi.fun/base/bookmarks` | `wurkapi.fun/mpp/xbookmarks` | `wurkapi.fun/mpp-solana/xbookmarks` |
-| **Dex Rockets** | `wurkapi.fun/solana/dex` | `wurkapi.fun/base/dex` | `wurkapi.fun/mpp/dex-rocket` | `wurkapi.fun/mpp-solana/dex-rocket` |
-| **Pump.fun Comments** | `wurkapi.fun/solana/pfcomments` | `wurkapi.fun/base/pfcomments` | `wurkapi.fun/mpp/pfcomments` | `wurkapi.fun/mpp-solana/pfcomments` |
-| **Telegram Members** | `wurkapi.fun/solana/tgmembers` | `wurkapi.fun/base/tgmembers` | `wurkapi.fun/mpp/tgmembers` | `wurkapi.fun/mpp-solana/tgmembers` |
-| **Discord Members** | `wurkapi.fun/solana/dcmembers` | `wurkapi.fun/base/dcmembers` | `wurkapi.fun/mpp/dcmembers` | `wurkapi.fun/mpp-solana/dcmembers` |
-| **Instagram Likes** | `wurkapi.fun/solana/instalikes` | `wurkapi.fun/base/instalikes` | `wurkapi.fun/mpp/instalikes` | `wurkapi.fun/mpp-solana/instalikes` |
-| **Instagram Followers** | `wurkapi.fun/solana/instafollowers` | `wurkapi.fun/base/instafollowers` | `wurkapi.fun/mpp/instafollowers` | `wurkapi.fun/mpp-solana/instafollowers` |
-| **YouTube Likes** | `wurkapi.fun/solana/ytlikes` | `wurkapi.fun/base/ytlikes` | `wurkapi.fun/mpp/ytlikes` | `wurkapi.fun/mpp-solana/ytlikes` |
-| **YT Subscribers** | `wurkapi.fun/solana/ytsubs` | `wurkapi.fun/base/ytsubs` | `wurkapi.fun/mpp/ytsubs` | `wurkapi.fun/mpp-solana/ytsubs` |
-| **Base Followers** | `wurkapi.fun/solana/basefollowers` | `wurkapi.fun/base/basefollowers` | — | — |
-| **View Submissions** | `wurkapi.fun/solana/agenttohuman/view` | `wurkapi.fun/base/agenttohuman/view` | — | — |
-| **Recover Jobs** | `wurkapi.fun/solana/agenttohuman/recover` | `wurkapi.fun/base/agenttohuman/recover` | `wurkapi.fun/mpp/agenttohuman/recover` | `wurkapi.fun/mpp-solana/agenttohuman/recover` |
-| **SIWX Recover** | `wurkapi.fun/solana/siwx/agenttohuman/recover` | `wurkapi.fun/base/siwx/agenttohuman/recover` | — | — |
-
-**Vote services** (Skeleton, Moontok, Major, CMC, CoinGecko): same 4 variants per service
-
-**How it works** (no API key for quick endpoints):
-```bash
-# Step 1: Call — returns 402 with payment info
-curl -i "https://wurkapi.fun/solana/xlikes/50?url=https://x.com/user/status/123"
-
-# Step 2: Retry with PAYMENT-SIGNATURE header → 200 OK with jobId
-curl -i "https://wurkapi.fun/solana/xlikes/50?url=https://x.com/user/status/123" \
-  -H "PAYMENT-SIGNATURE: <signed-payment>"
-```
-
-**MCP integration** for AI agents:
-```bash
-# Endpoint: https://wurkapi.fun/mcp (Streamable HTTP)
-# 6 tools: wurk_agent_help, wurk_buy, wurk_services, wurk_job_pay, wurk_direct_pay, wurk_job_status
-```
-
-**Full API** (requires WURK_API_KEY):
-```bash
-# Create social job
-curl -X POST "https://wurkapi.fun/api/external/jobs/create" \
-  -H "X-API-Key: YOUR_API_KEY" \
-  -d '{"type":"social","tweet_url":"https://x.com/user/status/123","jobtype":"repost","max_completions":100,"total_usdc":5.0}'
-
-# Create custom job (challenge or agent_help)
-curl -X POST "https://wurkapi.fun/api/external/jobs/create" \
-  -H "X-API-Key: YOUR_API_KEY" \
-  -d '{"type":"custom","job_mode":"agent_help","max_completions":3,"message_markdown":"Check this URL","total_usdc":0.1,"selection_type":"creator"}'
-
-# Get submissions
-curl "https://wurkapi.fun/api/external/jobs/{jobId}/submissions?page=1" \
-  -H "X-API-Key: YOUR_API_KEY"
-
-# Choose winners
-curl -X POST "https://wurkapi.fun/api/external/jobs/{jobId}/choose-winners" \
-  -H "X-API-Key: YOUR_API_KEY" \
-  -d '{"submissionIds":"id1,id2,id3"}'
-```
-
-**Network details:**
-- **Solana**: USDC `EPjFWdd5...`, SPL Token Transfer, receiver `SAT8g2xU...`
-- **Base**: Chain ID 8453, USDC `0x833589...`, EIP-3009 Authorization, receiver `0xF00DAF...`
-
-See [`skills/wurk-integration/`](./skills/wurk-integration/), [`MCP/wurk-mcp/`](./MCP/wurk-mcp/), and **[hub.solanaclawd.com/wurk](https://hub.solanaclawd.com/wurk)**
-
-### API Registrar
-
-[`api-registrar/`](./api-registrar/) handles X (Twitter) wallet verification and API key generation.
-
-- **Wallet Verification** — Verify Solana wallet ownership via X (Twitter) tweet
-- **API Key Generation** — Issue `clawd_sk_` prefixed API keys
-- **ClawdRouter Integration** — Keys validated by ClawdRouter for AI agent calls
-- **Scope-based Permissions** — Fine-grained access control
-- **Secure Storage** — API keys hashed (SHA-256) before storage
-
-```bash
-# Start the API Registrar server
-cd api-registrar
-pnpm install
-pnpm db:push  # Run migrations
-pnpm server   # Start on port 3001
-```
-
-See [api-registrar/README.md](./api-registrar/README.md).
-
-### ClawdVault (Security)
-
-[`clawd-vault-master/`](./clawd-vault-master/) provides security scanning for skills and agents, policy enforcement, and vault certification — the backbone of OpenClawd's deny-first security model.
-
-- **Risk Scanning** — Detect vulnerabilities in SKILL.md bundles
-- **Hardening** — Apply security best practices
-- **Policy Enforcement** — Validate against security policies
-- **Vault Certification** — Score-based approval system
-
-```bash
-# Scan a skill for security issues
-cd clawd-vault-master
-pip install -e .
-python -m clawd_vault scan ../../skills/my-skill
-```
-
-See [`clawd-vault-master/`](./clawd-vault-master/).
-
-### Cloud Bridge
-
-[`openclawd-stack/bridge/`](./openclawd-stack/bridge/) — WebSocket bridge server that connects browser terminals to E2B sandboxes. The bridge runs independently and talks to the **Orchestrator** at `http://localhost:8787` for sandbox lifecycle management.
-
-**What it does:**
-- Creates E2B sandboxes on demand (`/create?userId=`)
-- Proxies WebSocket terminal connections (`/terminal/{sandboxId}`)
-- Health checks and admin monitoring endpoints
-
-**Architecture:**
-```
-Browser Terminal  ←WebSocket→  Bridge (bridge/)  ←E2B API→  E2B Sandboxes
-                                   │
-                                   ↓ REST
-                           Orchestrator (:8787)
-                           privy auth · wallet · MCP
-```
-
-**Run locally:**
-```bash
-cd openclawd-stack/bridge
-cp .env.example .env   # add E2B_API_KEY
-npm run dev            # starts on port 8080
-```
-
-**Deploy options:** Railway · Fly.io · Docker · Vercel
-
-See [`openclawd-stack/bridge/README.md`](./openclawd-stack/bridge/README.md).
-
-### ClawdCloudOS
-
-[`clawd-cloud-os/`](./clawd-cloud-os/) — browser-terminal cloud OS surface at **[cloud.solanaclawd.com](https://cloud.solanaclawd.com)**
-
-### Cloud and browser surfaces
-
-[`openclawd-stack/`](./openclawd-stack/), [`clawd-cloud-os/`](./clawd-cloud-os/), and [`tailclawd/`](./tailclawd/) cover browser-hosted and remote-access flows. Frontend and user-facing surfaces also include [`chrome-extension/`](./chrome-extension/), [`telegram/`](./telegram/), [`WatchApp/`](./WatchApp/), [`beepboop/`](./beepboop/), [`chess/`](./chess/), and [`moltbook-agent/`](./moltbook-agent/).
-
----
-
-## $CLAWD token
+## 💰 $CLAWD token
 
 | Symbol | Chain | Standard | Contract |
 |:---:|:---:|:---:|:---|
@@ -755,15 +452,6 @@ See [`openclawd-stack/bridge/README.md`](./openclawd-stack/bridge/README.md).
 | `>= 1,000,000` $CLAWD | 25% | Priority routing and beta access |
 | `>= 10,000,000` $CLAWD | 50% | Full discount tier and governance-oriented features |
 
-### Revenue split
-
-| Recipient | Share | Mechanism |
-|---|:---:|---|
-| Agent owner | 70% | Direct SPL transfer |
-| `$CLAWD` buyback and burn | 15% | USDC -> `$CLAWD` -> burn |
-| ClawdRouter treasury | 10% | Treasury allocation |
-| Operator | 5% | Facilitator payout |
-
 ---
 
 ## Architecture
@@ -771,47 +459,36 @@ See [`openclawd-stack/bridge/README.md`](./openclawd-stack/bridge/README.md).
 ```text
 ┌─────────────────────────────────────────────────────────────────┐
 │ Surfaces                                                         │
-│ chrome-extension · telegram · tailclawd · WatchApp               │
-│ beepboop · chess · moltbook-agent                               │
+│ chrome-extension (pAGENT) · telegram · tailclawd · WatchApp     │
+│ clawdhub (hub.solanaclawd.com) · SolanaOS                        │
 └────────────────────────────┬────────────────────────────────────┘
                              │ HTTP / SSE / WS
 ┌────────────────────────────▼────────────────────────────────────┐
-│ Cloud Bridge (port 8080)                                         │
-│ bridge/ · WebSocket terminal · E2B sandbox lifecycle             │
-│ Talks to Orchestrator (:8787) for auth + wallet + MCP           │
-└────────────────────────────┬────────────────────────────────────┘
-                             │
-┌────────────────────────────▼────────────────────────────────────┐
 │ OpenClawd Orchestrator (port 8787)                               │
-│ honcho brain · e2b sandbox · privy wallet · solana mcp         │
-│ payments client · wurk x402 bridge                              │
+│ honcho brain · e2b sandbox · privy wallet · solana mcp           │
+│ payments client · wurk x402 bridge · metaplex bridge             │
 └────────────────────────────┬────────────────────────────────────┘
                              │ routed model calls + settlement
 ┌────────────────────────────▼────────────────────────────────────┐
 │ Router and payments                                              │
-│ clawdrouter · x402-openrouter-main · workers · services        │
-│ plugin.delivery · api-registrar                                 │
+│ clawdrouter · x402-openrouter-main · workers · services         │
 └────────────────────────────┬────────────────────────────────────┘
                              │ signed Solana actions
 ┌────────────────────────────▼────────────────────────────────────┐
 │ Runtime                                                          │
-│ src · solana-clawd · AGENTS · MCP · packages                    │
-│ openclawd-stack · clawd-cloud-os · CLI                          │
+│ src · solana-clawd · AGENTS (49 Lobster Agents) · MCP            │
+│ packages · openclawd-stack                                       │
 └────────────────────────────┬────────────────────────────────────┘
-                             │ skills, registry, docs
+                             │ pump.fun, birdeye, helius RPC
 ┌────────────────────────────▼────────────────────────────────────┐
-│ Skills and knowledge                                             │
-│ clawdhub · skills · acp_registry · articles · llm-wiki-tang    │
-└────────────────────────────┬────────────────────────────────────┘
-                             │ signed Solana actions
-┌────────────────────────────▼────────────────────────────────────┐
-│ Chain                                                            │
-│ Solana · Helius RPC · Jupiter · SPL USDC · $CLAWD              │
+│ Blockchain                                                       │
+│ Solana · Helius RPC · pump.fun · Birdeye · Jupiter · SPL USDC     │
+│ $CLAWD · Metaplex Core/Genesis                                   │
 └─────────────────────────────────────────────────────────────────┘
 ┌─────────────────────────────────────────────────────────────────┐
 │ 🛡️ Security: ClawdVault (clawd-vault-master)                    │
 │ policy engine · skill scanning · vault certification             │
-│ ─────────────────────────────────────────────────────────────── │
+│ ─────────────────────────────────────────────────────────────  │
 │ 💰 Monetization: WURK.fun x402                                   │
 │ social campaigns · agent-to-human jobs · multi-chain settlement  │
 └─────────────────────────────────────────────────────────────────┘
@@ -825,47 +502,37 @@ For the full layer map, request flow, and directory breakdown, read [STACK.md](.
 
 | Area | Directories |
 |---|---|
-| **Orchestrator** | [`openclawd-stack/orchestrator/`](./openclawd-stack/orchestrator/) — honcho, e2b, privy, mcp, payments, wurk x402 |
+| **Orchestrator** | [`openclawd-stack/orchestrator/`](./openclawd-stack/orchestrator/) — honcho, e2b, privy, mcp, payments, wurk x402, metaplex |
 | **Core Runtime** | [`solana-clawd/`](./solana-clawd/), [`AGENTS/`](./AGENTS/), [`src/`](./src/), [`MCP/`](./MCP/), [`packages/`](./packages/) |
 | **Router & Payments** | [`clawdrouter/`](./clawdrouter/), [`x402-openrouter-main/`](./x402-openrouter-main/), [`workers/`](./workers/), [`services/`](./services/), [`plugin.delivery/`](./plugin.delivery/) |
-| **Surfaces** | [`chrome-extension/`](./chrome-extension/), [`telegram/`](./telegram/), [`tailclawd/`](./tailclawd/), [`WatchApp/`](./WatchApp/), [`beepboop/`](./beepboop/), [`chess/`](./chess/), [`moltbook-agent/`](./moltbook-agent/) |
+| **Surfaces** | [`chrome-extension/`](./chrome-extension/) · [`tailclawd/`](./tailclawd/) · [`WatchApp/`](./WatchApp/) · [`beepboop/`](./beepboop/) · [`chess/`](./chess/) |
 | **Cloud & Orchestration** | [`openclawd-stack/`](./openclawd-stack/) · [`clawd-cloud-os/`](./clawd-cloud-os/) · [`CLI/`](./CLI/) |
-| **Cloud Bridge** | [`openclawd-stack/bridge/`](./openclawd-stack/bridge/) — WS terminal bridge connecting to orchestrator |
-| **Skills & Knowledge** | [`clawdhub/`](./clawdhub/), [`skills/`](./skills/), [`acp_registry/`](./acp_registry/), [`articles/`](./articles/), [`llm-wiki-tang/`](./llm-wiki-tang/), [`docs/`](./docs/) |
-| **Security (ClawdVault)** | [`clawd-vault-master/`](./clawd-vault-master/) — policy engine, skill scanning, vault certification |
-| **API Registrar** | [`api-registrar/`](./api-registrar/) — X-verified API key registration with Solana wallet auth |
-| **Monetization (WURK)** | [`skills/wurk-integration/`](./skills/wurk-integration/), [`MCP/wurk-mcp/`](./MCP/wurk-mcp/) — x402 job monetization on Solana/Base |
-| **Protocols** | [`x402-openrouter-main/`](./x402-openrouter-main/) — x402 payment protocol implementation |
-| **Scripts & CI** | [`scripts/`](./scripts/), [`NPM/`](./NPM/) — automation and package publishing |
-
-`tailclawd-backup/` exists as a backup directory and is not part of the primary stack path.
+| **Cloud Bridge** | [`openclawd-stack/bridge/`](./openclawd-stack/bridge/) — WS terminal bridge |
+| **Solana Blockchain API** | [`API/`](./API/) · [`bds-public-main/`](./API/bds-public-main/) · [`pump-public-docs/`](./API/pump-public-docs/) · [`solana-tracker/`](./API/solana-tracker/) |
+| **Skills & Knowledge** | [`clawdhub/`](./clawdhub/), [`skills/`](./skills/), [`acp_registry/`](./acp_registry/), [`docs/articles/`](./docs/articles/) |
+| **Security (ClawdVault)** | [`clawd-vault-master/`](./clawd-vault-master/) — policy engine, skill scanning |
+| **API Registrar** | [`api-registrar/`](./api-registrar/) — X-verified API key registration |
+| **Monetization (WURK)** | [`skills/wurk-integration/`](./skills/wurk-integration/), [`MCP/wurk-mcp/`](./MCP/wurk-mcp/) |
+| **Protocols** | [`x402-openrouter-main/`](./x402-openrouter-main/) — x402 payment protocol |
+| **Scripts & CI** | [`scripts/`](./scripts/), [`NPM/`](./NPM/) |
+| **SolanaOS Integration** | [`INTEGRATION_STRATEGY.md`](./INTEGRATION_STRATEGY.md) |
 
 ---
 
-## Configuration
+## Documentation Articles (46 articles)
 
-The shared environment contract lives in [`.env.example`](./.env.example).
+| Category | Articles |
+|----------|----------|
+| **Core** | [AGENT_GUIDE.md](./docs/articles/AGENT_GUIDE.md), [agent-bus.md](./docs/articles/agent-bus.md), [architecture.md](./docs/articles/architecture.md) |
+| **AI & Models** | [ARTICLE_LOCAL_AI.md](./docs/articles/ARTICLE_LOCAL_AI.md), [MODELS.md](./docs/articles/MODELS.md), [PROMPTS.md](./docs/articles/PROMPTS.md) |
+| **Blockchain** | [solana-clawd-go.md](./docs/articles/solana-clawd-go.md), [SOLANA_CLAWD_SHELL.md](./docs/articles/SOLANA_CLAWD_SHELL.md), [MINTING_GUIDE.md](./docs/articles/MINTING_GUIDE.md) |
+| **Payments** | [ARTICLE_PAYMENTS.md](./docs/articles/ARTICLE_PAYMENTS.md), [x402-proxy-worker.md](./docs/articles/x402-proxy-worker.md), [mpp-compatibility.md](./docs/articles/mpp-compatibility.md) |
+| **Routing** | [CLAWD_ROUTER.md](./docs/articles/CLAWD_ROUTER.md), [CLAWD_ROUTER_BUILD.md](./docs/articles/CLAWD_ROUTER_BUILD.md), [CLAWD_ROUTER_TUNNEL.md](./docs/articles/CLAWD_ROUTER_TUNNEL.md), [routing-profiles.md](./docs/articles/routing-profiles.md) |
+| **Marketplace** | [ARTICLE_SKILLS.md](./docs/articles/ARTICLE_SKILLS.md), [monetize.md](./docs/articles/monetize.md), [monetize-agents-openclawd.md](./docs/articles/monetize-agents-openclawd.md) |
+| **Infrastructure** | [ARTICLE_TUNNELS.md](./docs/articles/ARTICLE_TUNNELS.md), [firecrawl.md](./docs/articles/firecrawl.md), [r2-vault.md](./docs/articles/r2-vault.md), [ipfs-setup.md](./docs/articles/ipfs-setup.md) |
+| **Guides** | [FAQ.md](./docs/articles/FAQ.md), [TROUBLESHOOTING.md](./docs/articles/TROUBLESHOOTING.md), [WORKFLOW.md](./docs/articles/WORKFLOW.md), [configuration.md](./docs/articles/configuration.md) |
 
-Typical minimum variables:
-
-- `OPENROUTER_API_KEY`
-- `CLAWDROUTER_BASE_URL`
-- `XAI_API_KEY`, `ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, `MOONSHOT_API_KEY` as needed
-- `E2B_API_KEY`
-- `PRIVY_APP_ID`, `PRIVY_APP_SECRET`, `PRIVY_JWKS_ENDPOINT`, `PRIVY_AUTH_PRIVATE_KEY`
-- `HELIUS_API_KEY` or `HELIUS_RPC_URL`
-- `SOLANA_RPC_URL`
-- `TELEGRAM_BOT_TOKEN` or `TAILSCALE_AUTH_KEY` for specific surfaces
-- `HONCHO_API_KEY`, `HONCHO_WORKSPACE_ID` for agent brain/memory
-- `WURK_API_KEY` for agent monetization via Wurk.fun x402 (optional — quick jobs work without key)
-
-Per-project example env files also exist in:
-
-- [`openclawd-stack/.env.example`](./openclawd-stack/.env.example)
-- [`openclawd-stack/orchestrator/.env.example`](./openclawd-stack/orchestrator/.env.example)
-- [`openclawd-stack/bridge/.env.example`](./openclawd-stack/bridge/.env.example)
-- [`llm-wiki-tang/.env.example`](./llm-wiki-tang/.env.example)
-- [`clawd-cloud-os/.env.example`](./clawd-cloud-os/.env.example)
+Full list in [`docs/articles/README.md`](./docs/articles/README.md).
 
 ---
 
@@ -878,21 +545,7 @@ Per-project example env files also exist in:
 - Hosted endpoints are examples, not mandatory infrastructure.
 - ClawdVault enforces policy checks on all skills before they enter the registry.
 
-Read [SECURITY.md](./SECURITY.md) and [articles/permissions-sandboxing.md](./articles/permissions-sandboxing.md).
-
----
-
-## Documentation
-
-Start with these:
-
-- [STACK.md](./STACK.md)
-- [articles/architecture.md](./articles/architecture.md)
-- [articles/MODELS.md](./articles/MODELS.md)
-- [articles/ARTICLE_PAYMENTS.md](./articles/ARTICLE_PAYMENTS.md)
-- [articles/AGENT_GUIDE.md](./articles/AGENT_GUIDE.md)
-- [tailclawd/README.md](./tailclawd/README.md)
-- [articles/README.md](./articles/README.md)
+Read [SECURITY.md](./SECURITY.md) and [articles/permissions-sandboxing.md](./docs/articles/permissions-sandboxing.md).
 
 ---
 
