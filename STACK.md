@@ -87,6 +87,9 @@ The shared flow is:
 | Security | [`MCP/vault-mcp/`](./MCP/vault-mcp/) | MCP server for vault tools |
 | Security | [`agents/vault-agent.json`](./agents/vault-agent.json) | Vault guardian agent config |
 | Security | [`services/hermes-vault/`](./services/hermes-vault/) | Hermes Vault Python backend (symlink) |
+| Registrar | [`api-registrar/`](./api-registrar/) | X-verified API key registration service |
+| Monetization | [`skills/wurk-integration/`](./skills/wurk-integration/) | WURK skill for job monetization |
+| Monetization | [`MCP/wurk-mcp/`](./MCP/wurk-mcp/) | WURK MCP server for x402 payments |
 
 ### Notes
 
