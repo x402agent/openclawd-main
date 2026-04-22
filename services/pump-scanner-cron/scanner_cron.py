@@ -27,7 +27,7 @@ from urllib.error import URLError
 # CONFIG
 # ══════════════════════════════════════════════════════════════
 
-CONVEX_SITE_URL = os.environ.get("CONVEX_SITE_URL", "https://artful-frog-940.convex.site")
+CONVEX_SITE_URL = os.environ.get("CONVEX_SITE_URL", "https://YOUR-DEPLOYMENT.convex.site")
 ST_API_KEY = os.environ.get("SOLANA_TRACKER_API_KEY", "")
 HONCHO_API_KEY = os.environ.get("HONCHO_API_KEY", "")
 HONCHO_WORKSPACE = os.environ.get("HONCHO_PUMPFUN_WORKSPACE_ID", "pumpfun-trading")

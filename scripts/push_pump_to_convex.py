@@ -3,7 +3,7 @@
 
 import json, re, sys, urllib.request, os
 
-CONVEX_SITE = os.environ.get("CONVEX_SITE_URL", "https://artful-frog-940.convex.site")
+CONVEX_SITE = os.environ.get("CONVEX_SITE_URL", "https://YOUR-DEPLOYMENT.convex.site")
 PUMP_MD = os.environ.get("PUMP_MD", os.path.join(os.path.dirname(__file__), "..", "pump.md"))
 ENDPOINT = f"{CONVEX_SITE}/nanosolana/tracker/pump-ingest"
 

@@ -11,7 +11,7 @@ Usage:
 The CONVEX_SITE_URL is read from (in order):
     1. ~/Downloads/nanosolana-go/nanohub/.env.local
     2. Environment variable CONVEX_SITE_URL
-    3. Fallback: https://artful-frog-940.convex.site
+    3. Fallback: https://YOUR-DEPLOYMENT.convex.site
 """
 import json
 import os
@@ -32,7 +32,7 @@ except ImportError:
 
 PUMP_MD = os.path.expanduser("~/Downloads/nanosolana-go/pump.md")
 ENV_LOCAL = os.path.expanduser("~/Downloads/nanosolana-go/nanohub/.env.local")
-FALLBACK_URL = "https://artful-frog-940.convex.site"
+FALLBACK_URL = "https://YOUR-DEPLOYMENT.convex.site"
 
 
 def load_env_val(key: str) -> str | None:

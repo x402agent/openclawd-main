@@ -35,7 +35,7 @@ ENV_FILE = PROJECT_ROOT / ".env"
 NANOHUB_ENV = NANOHUB_DIR / ".env.local"
 
 DEFAULT_NETLIFY_SITE_ID = "65b49620-476e-448c-a497-f218b3cdeb35"
-DEFAULT_CONVEX_SITE_URL = "https://artful-frog-940.convex.site"
+DEFAULT_CONVEX_SITE_URL = "https://YOUR-DEPLOYMENT.convex.site"
 
 
 def load_env(path):

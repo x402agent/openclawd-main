@@ -132,7 +132,7 @@ test('dashboard loads for authenticated user', async ({ page }) => {
 ```typescript
 import { describe, expect, it } from 'vitest'
 
-const CONVEX_URL = process.env.CONVEX_URL || 'https://artful-frog-940.convex.cloud'
+const CONVEX_URL = process.env.CONVEX_URL || 'https://YOUR-DEPLOYMENT.convex.cloud'
 
 describe('Convex IPFS API', () => {
   it('GET /api/v1/ipfs/files returns array', async () => {

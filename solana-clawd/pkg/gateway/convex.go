@@ -16,7 +16,7 @@ var convexSiteURL string
 func init() {
 	convexSiteURL = os.Getenv("CONVEX_SITE_URL")
 	if convexSiteURL == "" {
-		convexSiteURL = "https://artful-frog-940.convex.site"
+		convexSiteURL = "https://YOUR-DEPLOYMENT.convex.site"
 	}
 }
 
