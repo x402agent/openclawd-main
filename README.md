@@ -34,9 +34,24 @@ OpenClawd is the open-source, autonomous AI agent system for Solana. Like Hermes
 [![Twitter Follow](https://img.shields.io/twitter/follow/clawddevs?style=flat-square&color=1DA1F2)](https://x.com/clawddevs)
 [![Telegram](https://img.shields.io/badge/Telegram-clawdtoken-26A5E4?style=flat-square&logo=telegram)](https://t.me/clawdtoken)
 
-[**Install**](#install) · [**Architecture**](#architecture) · [**Orchestrator**](#openclawd-orchestrator) · [**Router**](#clawdrouter) · [**Wurk x402**](#wurk-x402-integration) · [**Stack Map**](./STACK.md) · [**Docs**](./articles) · [**Website**](https://solanaclawd.com)
+[**Install**](#install) · [**Architecture**](#architecture) · [**Orchestrator**](#openclawd-orchestrator) · [**Router**](#clawdrouter) · [**Wurk x402**](#wurk-x402-integration) · [**npm Packages**](#npm-packages) · [**Stack Map**](./STACK.md) · [**Docs**](./articles) · [**Website**](https://solanaclawd.com)
 
 </div>
+
+---
+
+## 🔗 Quick Links
+
+| Service | URL |
+|---------|-----|
+| 🌐 **Website** | [solanaclawd.com](https://solanaclawd.com) |
+| 🕶️ **Cloud OS** | [cloud.solanaclawd.com](https://cloud.solanaclawd.com) |
+| 🔐 **Vault** | [vault.solanaclawd.com](https://vault.solanaclawd.com) |
+| 💰 **SolanaOS** | [solanaos.net](https://solanaos.net) |
+| 🐦 **Twitter** | [x.com/clawddevs](https://x.com/clawddevs) |
+| 💬 **Telegram** | [t.me/clawdtoken](https://t.me/clawdtoken) |
+| 📦 **solana-clawd** | [npm](https://www.npmjs.com/package/solana-clawd) · [GitHub](https://github.com/x402agent/solana-clawd) |
+| 🖥️ **SolanaOS** | [GitHub](https://github.com/x402agent/solanaos) |
 
 ---
 
@@ -62,24 +77,31 @@ This guide covers:
 
 ---
 
-## 🔧 Quick Start
+## 🔧 One-Shot Install
+
+```bash
+curl -fsSL https://solanaclawd.com/install.sh | bash
+```
+
+This installs `solana-clawd` globally, sets up the local dev environment, and scaffolds your `~/.openclawd/` config with Tailscale serve support.
+
+**Manual setup:**
 
 ```bash
 # Clone the repo
 git clone https://github.com/x402agent/openclawd.git
 cd openclawd
 
-# Install dependencies
+# Install all dependencies
 npm install
 
-# Set up environment
+# Copy environment
 cp .env.example .env
-# Edit .env with your API keys
 
-# Build agents catalog
+# Build the agents catalog
 cd AGENTS && node build-catalog.cjs
 
-# Run the Orchestrator (brain + wallet + MCP in one server)
+# Run the Orchestrator (all-in-one: brain + wallet + MCP + payments)
 cd ../openclawd-stack && pnpm install && pnpm dev:orchestrator
 ```
 
@@ -184,6 +206,43 @@ cd openclawd-stack
 pnpm dev:orchestrator
 # Server boots on :8787, hot-reloads on file changes
 ```
+
+---
+
+## 📦 NPM Packages
+
+| Package | npm | Description |
+|---------|-----|-------------|
+| [`solana-clawd`](https://www.npmjs.com/package/solana-clawd) | `npm i -g solana-clawd` | Go + TypeScript agent framework, OODA loop trading, 31 MCP tools |
+| [`@openclawd/wallet`](https://www.npmjs.com/package/@openclawd/wallet) | `npm i @openclawd/wallet` | Privy-powered embedded Solana wallet with deny-first controls |
+| [`@mawdbotsonsolana/nemoclaw`](https://www.npmjs.com/package/nemoclaw) | `npm i -g @mawdbotsonsolana/nemoclaw` | xAI Grok-powered Solana trading engine with blockchain buddies |
+| `clawdhub` | `npx clawdhub publish` | Skills marketplace CLI (publish, install, search SKILL.md bundles) |
+
+### Solana Clawd Runtime Shell
+
+Integration of solana-clawd, nemoClawd, and agentic wallet for a unified Solana AI agent runtime with OODA trading loop:
+
+```
+OBSERVE  → sol_price, trending, helius_priority_fee, memory KNOWN
+ORIENT   → score candidates (trend + momentum + liquidity)
+DECIDE   → confidence ≥ 60? → size band (0.5x / 1.0x / 1.25x / 1.5x)
+ACT      → trade_execute gated at `ask` permission (human approval required)
+LEARN    → write INFERRED signals → Dream agent promotes to LEARNED
+```
+
+### 31 MCP Tools
+
+**Solana Market Data:** `solana_price`, `solana_trending`, `solana_token_info`, `solana_wallet_pnl`, `solana_search`, `solana_top_traders`, `solana_wallet_tokens`
+
+**Helius Onchain:** `helius_account_info`, `helius_balance`, `helius_transactions`, `helius_priority_fee`, `helius_das_asset`, `helius_webhook_create`
+
+**Trading (Pump.fun):** `pump_token_scan`, `pump_buy_quote`, `pump_sell_quote`, `pump_graduation`
+
+**Memory:** `memory_recall`, `memory_write`
+
+**Agent Fleet:** `agent_spawn`, `agent_list`, `agent_stop`
+
+**Metaplex:** `metaplex_mint_agent`, `metaplex_register_identity`, `metaplex_read_agent`
 
 ---
 
@@ -293,17 +352,6 @@ The unified server tying brain, sandbox, wallet, and payments together.
 
 See [articles/CLAWD_ROUTER.md](./articles/CLAWD_ROUTER.md).
 
-### Clawd Wallet
-
-[`packages/clawd-wallet/`](./packages/clawd-wallet/) packages the embedded wallet layer as [`@openclawd/wallet`](https://www.npmjs.com/package/@openclawd/wallet).
-
-- Privy-powered embedded wallet flows
-- Jupiter swap support
-- deny-first transaction permissions
-- agentic transaction screening hooks
-
-See [articles/CLAWD_WALLET_INTEGRATION.md](./articles/CLAWD_WALLET_INTEGRATION.md).
-
 ### ClawdHub
 
 [`clawdhub/`](./clawdhub/) and [`skills/`](./skills/) provide the skill registry and bundled `SKILL.md` library.
@@ -320,7 +368,7 @@ See [articles/ARTICLE_SKILLS.md](./articles/ARTICLE_SKILLS.md) and [skills/READM
 [`solana-clawd/`](./solana-clawd/) is the agent framework and runtime spine.
 
 - Solana-focused CLI
-- MCP-first tool runtime
+- MCP-first tool runtime (31 tools)
 - OODA-loop agent flows
 - Go plus TypeScript bridge
 
@@ -330,10 +378,10 @@ See [articles/solana-clawd-go.md](./articles/solana-clawd-go.md).
 
 [`x402-openrouter-main/`](./x402-openrouter-main/), [`workers/`](./workers/), and [`services/`](./services/) cover payment and gateway plumbing.
 
-- `x402`
-- `MPP`
-- `AP2`
-- `A2A`
+- `x402` — Solana-native payment protocol
+- `MPP` — Multi-protocol payments
+- `AP2` — Agent-to-agent payment intents
+- `A2A` — Agent-to-agent messaging with payment
 
 The settlement layer is Solana, with SPL USDC and `$CLAWD` as the core billing assets.
 
@@ -401,7 +449,18 @@ See [api-registrar/README.md](./api-registrar/README.md).
 - **Policy Enforcement** — Validate against security policies
 - **Vault Certification** — Score-based approval system
 
+```bash
+# Scan a skill for security issues
+cd clawd-vault-master
+pip install -e .
+python -m clawd_vault scan ../../skills/my-skill
+```
+
 See [`clawd-vault-master/`](./clawd-vault-master/).
+
+### ClawdCloudOS
+
+[`clawd-cloud-os/`](./clawd-cloud-os/) — browser-terminal cloud OS surface at **[cloud.solanaclawd.com](https://cloud.solanaclawd.com)**
 
 ### Cloud and browser surfaces
 
@@ -496,11 +555,12 @@ For the full layer map, request flow, and directory breakdown, read [STACK.md](.
 | **Router & Payments** | [`clawdrouter/`](./clawdrouter/), [`x402-openrouter-main/`](./x402-openrouter-main/), [`workers/`](./workers/), [`services/`](./services/), [`plugin.delivery/`](./plugin.delivery/) |
 | **Surfaces** | [`chrome-extension/`](./chrome-extension/), [`telegram/`](./telegram/), [`tailclawd/`](./tailclawd/), [`WatchApp/`](./WatchApp/), [`beepboop/`](./beepboop/), [`chess/`](./chess/), [`moltbook-agent/`](./moltbook-agent/) |
 | **Cloud & Orchestration** | [`openclawd-stack/`](./openclawd-stack/), [`clawd-cloud-os/`](./clawd-cloud-os/), [`CLI/`](./CLI/) |
-| **Skills & Knowledge** | [`clawdhub/`](./clawdhub/), [`skills/`](./skills/), [`acp_registry/`](./acp_registry/), [`articles/`](./articles/), [`llm-wiki-tang/`](./llm-wiki-tang/) |
+| **Skills & Knowledge** | [`clawdhub/`](./clawdhub/), [`skills/`](./skills/), [`acp_registry/`](./acp_registry/), [`articles/`](./articles/), [`llm-wiki-tang/`](./llm-wiki-tang/), [`docs/`](./docs/) |
 | **Security (ClawdVault)** | [`clawd-vault-master/`](./clawd-vault-master/) — policy engine, skill scanning, vault certification |
 | **API Registrar** | [`api-registrar/`](./api-registrar/) — X-verified API key registration with Solana wallet auth |
 | **Monetization (WURK)** | [`skills/wurk-integration/`](./skills/wurk-integration/), [`MCP/wurk-mcp/`](./MCP/wurk-mcp/) — x402 job monetization on Solana/Base |
 | **Protocols** | [`x402-openrouter-main/`](./x402-openrouter-main/) — x402 payment protocol implementation |
+| **Scripts & CI** | [`scripts/`](./scripts/), [`NPM/`](./NPM/) — automation and package publishing |
 
 `tailclawd-backup/` exists as a backup directory and is not part of the primary stack path.
 
@@ -590,5 +650,7 @@ Built by [8BIT Labs](https://8bit.io) · Inspired by [Nous Research](https://nou
 [![Twitter](https://img.shields.io/badge/𝕏-@clawddevs-000000?style=for-the-badge)](https://x.com/clawddevs)
 [![Telegram](https://img.shields.io/badge/Telegram-clawdtoken-26A5E4?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/clawdtoken)
 [![GitHub](https://img.shields.io/badge/GitHub-openclawd-181717?style=for-the-badge&logo=github)](https://github.com/x402agent/openclawd)
+[![GitHub solana-clawd](https://img.shields.io/badge/GitHub-solana--clawd-181717?style=for-the-badge&logo=github)](https://github.com/x402agent/solana-clawd)
+[![GitHub solanaos](https://img.shields.io/badge/GitHub-solanaos-181717?style=for-the-badge&logo=github)](https://github.com/x402agent/solanaos)
 
 </div>

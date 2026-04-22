@@ -64,7 +64,7 @@ export class HonchoClient {
     this.#honcho = new Honcho({
       apiKey: opts.apiKey,
       baseURL: opts.baseUrl,
-      workspace: opts.workspace ?? 'solanaclawd',
+      workspaceId: opts.workspace ?? 'solanaclawd',
     });
   }
 

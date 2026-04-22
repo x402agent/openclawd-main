@@ -15,8 +15,10 @@ import {
   createAgentToHumanJob,
   getAgentToHumanSubmissions,
   WURK_SERVICES,
-  type QuickJobType,
 } from './wurk-bridge.js';
+
+// In-memory cache of auto-created wallets keyed by privySub.
+const autoWalletCache = new Map<string, string>();
 
 const honcho = new HonchoClient({
   apiKey: process.env.HONCHO_API_KEY ?? '',
@@ -89,8 +91,30 @@ app.use('/v1/*', async (c, next) => {
       issuer: 'privy.io',
       audience: process.env.PRIVY_APP_ID ?? '',
     });
-    c.set('privySub', String(payload.sub));
-    c.set('wallet', pickSolanaWallet(payload as Record<string, unknown>));
+    const privySub = String(payload.sub);
+    c.set('privySub', privySub);
+
+    // First check if user has an externally linked Solana wallet (e.g. Phantom)
+    let wallet = pickSolanaWallet(payload as Record<string, unknown>);
+
+    // If no external wallet, try to use an auto-created embedded wallet from cache
+    if (!wallet) {
+      wallet = autoWalletCache.get(privySub) ?? null;
+    }
+
+    // If still no wallet, create one automatically via Privy's REST API
+    if (!wallet) {
+      try {
+        const created = await walletBridge.createWallet({ privySub, label: 'solana-clawd-v1' });
+        wallet = created.address;
+        autoWalletCache.set(privySub, wallet);
+        console.log(`[orchestrator] auto-created wallet for ${privySub.slice(0, 8)}: ${wallet}`);
+      } catch (err) {
+        console.warn(`[orchestrator] auto-wallet creation failed for ${privySub}:`, String(err));
+      }
+    }
+
+    c.set('wallet', wallet);
     await next();
   } catch {
     return c.json({ error: 'invalid_token' }, 401);
