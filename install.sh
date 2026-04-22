@@ -270,6 +270,28 @@ else
   fi
 fi
 
+# ─── clawd-wallet + agents-x402-solana packages ────────────────────
+hr
+REPO_DIR="$TARGET_DIR/repo"
+if [ -d "$REPO_DIR/packages/clawd-wallet" ]; then
+  if [ ! -d "$REPO_DIR/packages/clawd-wallet/dist" ]; then
+    run_with_spinner claw "building @openclawd/wallet package" \
+      bash -c "cd '$REPO_DIR/packages/clawd-wallet' && npm install --no-audit --no-fund && npm run build" \
+      || warn "clawd-wallet build failed — install manually: cd packages/clawd-wallet && npm run build"
+    ok "@openclawd/wallet — Privy wallet + agentic trading SDK"
+  else
+    ok "@openclawd/wallet already built"
+  fi
+else
+  warn "packages/clawd-wallet not found in repo — skipping"
+fi
+
+if [ -d "$REPO_DIR/packages/agents-x402-solana" ]; then
+  ok "@solana-clawd/agents-x402 — x402 agent payments (TypeScript source, no build needed)"
+else
+  warn "packages/agents-x402-solana not found in repo — skipping"
+fi
+
 # ─── ~/.openclawd/.env ────────────────────────────────────────────
 hr
 ENV_FILE="$TARGET_DIR/.env"
@@ -325,10 +347,12 @@ fi
 
 cat <<EOF
   ${BOLD}${CYAN}openclawd stack${CR}
-    ${GREY}├─${CR} ${MAGENTA}solana-clawd${CR}   cli          ${DIM}(npm global)${CR}
-    ${GREY}├─${CR} ${MAGENTA}clawdrouter${CR}    model router ${DIM}(\$OPENROUTER_API_KEY)${CR}
-    ${GREY}├─${CR} ${MAGENTA}tailclawd${CR}      tailnet app  ${DIM}($TAILCLAWD_DIR)${CR}
-    ${GREY}└─${CR} ${MAGENTA}\$CLAWD${CR}         8cHz…pump    ${DIM}(solana mainnet)${CR}
+    ${GREY}├─${CR} ${MAGENTA}solana-clawd${CR}       cli             ${DIM}(npm global)${CR}
+    ${GREY}├─${CR} ${MAGENTA}clawdrouter${CR}        model router    ${DIM}(\$OPENROUTER_API_KEY)${CR}
+    ${GREY}├─${CR} ${MAGENTA}tailclawd${CR}          tailnet app     ${DIM}($TAILCLAWD_DIR)${CR}
+    ${GREY}├─${CR} ${MAGENTA}@openclawd/wallet${CR}  wallet SDK      ${DIM}(Privy + Grok 4.20)${CR}
+    ${GREY}├─${CR} ${MAGENTA}@solana-clawd/x402${CR}  agent payments  ${DIM}(USDC x402 protocol)${CR}
+    ${GREY}└─${CR} ${MAGENTA}\$CLAWD${CR}             8cHz…pump      ${DIM}(solana mainnet)${CR}
 
   ${BOLD}Next steps${CR}
     ${CYAN}1.${CR} Edit env:       ${VIOLET}\$EDITOR $ENV_FILE${CR}
@@ -338,6 +362,8 @@ cat <<EOF
     ${CYAN}5.${CR} Pair device:    ${VIOLET}solana-clawd pair <CODE>${CR}
     ${CYAN}6.${CR} Mint agent:     ${VIOLET}solana-clawd mint${CR}
     ${CYAN}7.${CR} Status:         ${VIOLET}solana-clawd status${CR}
+    ${CYAN}8.${CR} Try examples:   ${VIOLET}cd \$REPO_DIR && npx tsx examples/lobster-trader.ts${CR}
+    ${CYAN}9.${CR} Wallet demo:    ${VIOLET}cd \$REPO_DIR && npx tsx examples/clawd-wallet-demo.ts${CR}
 
 EOF
 

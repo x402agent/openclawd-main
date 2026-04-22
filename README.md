@@ -477,9 +477,68 @@ curl http://localhost:8787/api/v1/agents | jq '.'
 | Package | npm | Description |
 |---------|-----|-------------|
 | [`solana-clawd`](https://www.npmjs.com/package/solana-clawd) | `npm i -g solana-clawd` | Go + TypeScript agent framework, OODA loop trading, 31 MCP tools |
-| [`@openclawd/wallet`](https://www.npmjs.com/package/@openclawd/wallet) | `npm i @openclawd/wallet` | Privy-powered embedded Solana wallet with deny-first controls |
+| [`@openclawd/wallet`](https://www.npmjs.com/package/@openclawd/wallet) | `npm i @openclawd/wallet` | Privy-powered embedded Solana wallet with Grok 4.20 Beta agentic trading |
+| [`@solana-clawd/agents-x402`](./packages/agents-x402-solana/) | `import from "@solana-clawd/agents-x402"` | x402 agent-to-agent USDC payment protocol for MCP servers and HTTP APIs |
 | [`@mawdbotsonsolana/nemoclaw`](https://www.npmjs.com/package/nemoclaw) | `npm i -g @mawdbotsonsolana/nemoclaw` | xAI Grok-powered Solana trading engine with blockchain buddies |
 | `clawdhub` | `npx clawdhub publish` | Skills marketplace CLI (publish, install, search SKILL.md bundles) |
+
+### @openclawd/wallet — Agentic Trading SDK
+
+Privy-embedded Solana wallet with **Grok 4.20 Beta** as the AI reasoning layer. Architecture: `User → Grok screens → ClawdWallet (Privy) → Solana`.
+
+```typescript
+import { AgenticWallet, DEFAULT_PERMISSIONS } from "@openclawd/wallet";
+
+const agent = new AgenticWallet(wallet, {
+  privyAppId: process.env.PRIVY_APP_ID!,
+  grokApiKey: process.env.XAI_API_KEY,
+  permissions: { swap: "ask", ...DEFAULT_PERMISSIONS },
+  onPendingTransaction: async (tx) => pushNotify(tx.description),
+});
+
+// Agent swap — Grok 4.20 Beta screens, then user confirms
+const { signature, explorerUrl } = await agent.agentSwap({
+  inputToken: "SOL", outputToken: "8cHz...pump", amount: "100000000",
+});
+```
+
+Permission levels: `deny` (blocked) → `ask` (Grok + user) → `allow` (auto up to limits). See [`packages/clawd-wallet/`](./packages/clawd-wallet/) and [`examples/clawd-wallet-demo.ts`](./examples/clawd-wallet-demo.ts).
+
+### @solana-clawd/agents-x402 — Agent Payment Protocol
+
+One-line x402 monetization for MCP servers, HTTP handlers, and agent tool calls. Settles USDC through the Clawd facilitator on Solana.
+
+```typescript
+import { createClawdX402Client } from "@solana-clawd/agents-x402";
+import { http } from "@solana-clawd/agents-x402/http";
+import { mcp } from "@solana-clawd/agents-x402/mcp";
+
+// Client: call paid APIs (handles 402 → pay → retry)
+const client = createClawdX402Client({ facilitatorUrl, wallet, network: "solana-mainnet" });
+
+// Server: gate HTTP routes behind payment
+app.get("/api/premium", http.pay({ slug: "premium", price: "0.01", network: "solana-mainnet" }));
+
+// MCP: register paid tools
+mcp.registerPaidTool(server, { name: "chain_analysis", price: "0.02", handler: async () => ({...}) });
+```
+
+See [`packages/agents-x402-solana/`](./packages/agents-x402-solana/) and [`examples/x402-payment-demo.ts`](./examples/x402-payment-demo.ts).
+
+### TailClawd — Tailscale Web UI
+
+Browser-accessible Clawd Code interface via Tailscale. 14 streaming endpoints, real-time SSE, live token counter, cost tracking, model selector, and system metrics — all on your private tailnet.
+
+```bash
+# One-shot install includes TailClawd
+curl -fsSL https://solanaclawd.com/install.sh | bash
+
+# Or standalone
+cd tailclawd && npm install && npm run dev  # → http://localhost:3110
+tailscale serve --bg --https=443 http://127.0.0.1:3110  # → https://your-machine.tailnet
+```
+
+See [`tailclawd/README.md`](./tailclawd/README.md).
 
 ---
 
