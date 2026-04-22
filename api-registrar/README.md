@@ -194,7 +194,7 @@ clawd_sk_01ab2cd3efgh4ijkl5mnop6qrst7uvwx
 
 ```bash
 # Include in Authorization header
-curl https://api.solanaclawd.com/chat \
+curl https://api.hub.solanaclawd.com/chat \
   -H "Authorization: Bearer clawd_sk_xxxxxxxxxxxx"
 ```
 
@@ -236,7 +236,7 @@ API keys generated here are validated by ClawdRouter using the `clawd_sk_` prefi
 // In ClawdRouter auth middleware
 if (apiKey.startsWith('clawd_sk_')) {
   // Validate against API Registrar
-  const response = await fetch('https://registrar.solanaclawd.com/validate', {
+  const response = await fetch('https://registrar.hub.solanaclawd.com/validate', {
     headers: { 'Authorization': `Bearer ${apiKey}` }
   });
 }

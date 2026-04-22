@@ -67,7 +67,49 @@ app.get('/api', (c) => c.json({
   },
   documentation: 'https://github.com/x402agent/openclawd',
   registry: 'https://github.com/x402agent/openclawd/tree/main/acp_registry',
+  hub: {
+    marketplace: 'https://hub.solanaclawd.com/marketplace',
+    agents: 'https://hub.solanaclawd.com/agents',
+    skills: 'https://hub.solanaclawd.com/skills',
+    orchestrator: 'https://solanaclawd.com/api',
+    clawdRouter: 'https://solanaclawd.com/router',
+  },
 }));
+
+// Hub integration endpoint — returns registration status for a wallet
+app.get('/api/hub/status/:walletAddress', async (c) => {
+  const wallet = c.req.param('walletAddress');
+  // Fetch from Convex database to check registration status
+  try {
+    const keys = await fetch(
+      `${process.env.CLAWDHUB_API_URL || 'https://hub.solanaclawd.com'}/api/keys/${wallet}`,
+      {
+        headers: {
+          'Authorization': `Bearer ${process.env.CLAWDROUTER_INTERNAL_SECRET || ''}`,
+        },
+      },
+    ).then(r => r.json()).catch(() => ({ keys: [] }));
+    
+    return c.json({
+      wallet,
+      registered: true,
+      keyCount: keys.keys?.length ?? 0,
+      hubUrl: 'https://hub.solanaclawd.com',
+      ecosystem: 'OpenClawd',
+      timestamp: new Date().toISOString(),
+    });
+  } catch {
+    return c.json({
+      wallet,
+      registered: false,
+      keyCount: 0,
+      hubUrl: 'https://hub.solanaclawd.com',
+      ecosystem: 'OpenClawd',
+      message: 'Wallet not yet verified — visit https://hub.solanaclawd.com to get started',
+      timestamp: new Date().toISOString(),
+    });
+  }
+});
 
 // Protected API routes (require API key)
 app.use('/api/keys/*', validateApiKey);

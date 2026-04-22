@@ -1,12 +1,12 @@
 {
-  "$schema": "https://solanaclawd.com/schemas/clawdAgentCatalog.v1.json",
+  "$schema": "https://hub.solanaclawd.com/schemas/clawdAgentCatalog.v1.json",
   "apiVersion": "1.0",
   "generatedAt": "2026-04-20T00:04:01.436Z",
   "hub": {
-    "gallery": "https://solanaclawd.com/agents",
-    "mint": "https://solanaclawd.com/agents/mint",
-    "registry": "https://solanaclawd.com/agents/registry",
-    "api": "https://solanaclawd.com/api/agents"
+    "gallery": "https://hub.solanaclawd.com/agents",
+    "mint": "https://hub.solanaclawd.com/agents/mint",
+    "registry": "https://hub.solanaclawd.com/agents/registry",
+    "api": "https://hub.solanaclawd.com/api/agents"
   },
   "stats": {
     "totalAgents": 51,
@@ -439,7 +439,7 @@
       "openingQuestions": [
         "Scrape https://docs.solana.com/developing/programming-model and summarize",
         "Search the web for the latest OpenClawd integrations and rank the top 5",
-        "Map solanaclawd.com and list every /docs/* page",
+        "Map hub.solanaclawd.com and list every /docs/* page",
         "Crawl https://example.com up to 25 pages and report when ready"
       ],
       "tokenUsage": 540,
@@ -2137,7 +2137,7 @@
       "openingQuestions": [
         "Scrape https://docs.solana.com/developing/programming-model and summarize",
         "Search the web for the latest OpenClawd integrations and rank the top 5",
-        "Map solanaclawd.com and list every /docs/* page",
+        "Map hub.solanaclawd.com and list every /docs/* page",
         "Crawl https://example.com up to 25 pages and report when ready"
       ],
       "tokenUsage": 540,
@@ -3280,7 +3280,7 @@
       "openingQuestions": [
         "Scrape https://docs.solana.com/developing/programming-model and summarize",
         "Search the web for the latest OpenClawd integrations and rank the top 5",
-        "Map solanaclawd.com and list every /docs/* page",
+        "Map hub.solanaclawd.com and list every /docs/* page",
         "Crawl https://example.com up to 25 pages and report when ready"
       ],
       "tokenUsage": 540,

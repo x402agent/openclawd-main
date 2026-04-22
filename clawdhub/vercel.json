@@ -1,0 +1,86 @@
+{
+  "framework": "vike",
+  "buildCommand": "bun run build",
+  "devCommand": "bun run dev",
+  "installCommand": "bun install",
+  "regions": ["iad1"],
+  "functions": {
+    "server/index.ts": {
+      "runtime": "nodejs22.x",
+      "memory": 512,
+      "maxDuration": 10
+    }
+  },
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
+    },
+    {
+      "source": "/webhook(/.*)?",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "/api/:path*"
+    },
+    {
+      "source": "/convex/:path*",
+      "destination": "/convex/:path*"
+    },
+    {
+      "source": "/st/:path*",
+      "destination": "/st/:path*"
+    }
+  ],
+  "env": {
+    "VITE_CONVEX_URL": "@convex-url",
+    "VITE_CONVEX_SITE_URL": "@convex-site-url",
+    "SITE_URL": "@site-url",
+    "SENTRY_DSN": "@sentry-dsn",
+    "SENTRY_ENVIRONMENT": "production",
+    "SENTRY_TRACES_SAMPLE_RATE": "0.1",
+    "VITE_SENTRY_DSN": "@sentry-dsn",
+    "VITE_SENTRY_ENVIRONMENT": "production",
+    "VITE_SENTRY_TRACES_SAMPLE_RATE": "0.1",
+    "OPENAI_API_KEY": "@openai-api-key",
+    "TOGETHER_API_KEY": "@together-api-key",
+    "HELIUS_API_KEY": "@helius-api-key",
+    "BIRDEYE_API_KEY": "@birdeye-api-key",
+    "SOLANA_TRACKER_API_KEY": "@solana-tracker-api-key",
+    "CONVEX_DEPLOY_KEY": "@convex-deploy-key"
+  }
+}
