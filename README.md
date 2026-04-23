@@ -708,6 +708,48 @@ curl http://localhost:8787/api/v1/agents | jq '.'
 | [`@solana-clawd/agents-x402`](./packages/agents-x402-solana/) | `import from "@solana-clawd/agents-x402"` | x402 agent-to-agent USDC payment protocol for MCP servers and HTTP APIs |
 | [`@mawdbotsonsolana/nemoclaw`](https://www.npmjs.com/package/nemoclaw) | `npm i -g @mawdbotsonsolana/nemoclaw` | xAI Grok-powered Solana trading engine with blockchain buddies |
 | `clawdhub` | `npx clawdhub publish` | Skills marketplace CLI (publish, install, search SKILL.md bundles) |
+| [`@openclawd/percolator`](./packages/percolator/) | `npm i @openclawd/percolator` | 🧪 Percolator perpetuals CLI — 30 commands for trading, liquidation, oracle management |
+
+---
+
+## 🧪 Percolator Perpetuals CLI
+
+**30 commands for perpetuals trading on Solana** — part of the OpenClawd ecosystem.
+
+### Features
+
+- 🏛️ **Market Management** — Initialize, configure, and close markets
+- 📈 **Trading** — Deposit, withdraw, trade with leverage
+- ⚔️ **Liquidation** — Liquidate undercollateralized positions
+- 🔮 **Oracle Management** — Push prices, set authorities
+- 📊 **Inspection** — Query market state, accounts, engine
+
+### Quick Start
+
+```bash
+cd packages/percolator
+npm install && npm run build
+npm link
+
+# List all markets
+percolator list-markets
+
+# Get market state
+percolator slab:get --slab <PUBKEY>
+```
+
+### Commands Overview
+
+| Category | Commands |
+|----------|----------|
+| Market | `init-market`, `init-lp`, `list-markets`, `close-slab` |
+| Trading | `init-user`, `deposit`, `withdraw`, `trade-cpi` |
+| Oracle | `push-oracle-price`, `set-oracle-authority` |
+| Insurance | `topup-insurance`, `withdraw-insurance`, `resolve-market` |
+| Admin | `update-admin`, `update-config` |
+| Inspection | `slab:get/header/config/nonce/engine/params/account/accounts/bitmap` |
+
+See [`packages/percolator/README.md`](./packages/percolator/README.md) for full documentation.
 
 ### @openclawd/wallet — Agentic Trading SDK
 

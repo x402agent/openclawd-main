@@ -324,11 +324,13 @@ Research access is gated by $CLAWD holdings:
 
 | Document | Description |
 |----------|-------------|
+| [OpenClawd README](../README.md) | Main monorepo |
 | [AUTO_RESEARCH_AGENTS.md](../docs/articles/AUTO_RESEARCH_AGENTS.md) | Deep dive: Karpathy-inspired auto-research |
 | [VIRAL_AGENTS_REVOLUTION.md](../docs/articles/VIRAL_AGENTS_REVOLUTION.md) | Viral article: 49 agents on Solana |
 | [solana-lobster-agents.md](../AGENTS/solana-lobster-agents.md) | Metaplex Lobster Agent reference |
 | [API/README.md](../API/README.md) | Solana blockchain integration |
 | [INTEGRATION_STRATEGY.md](../INTEGRATION_STRATEGY.md) | OpenClawd × SolanaOS |
+| [Percolator CLI](../packages/percolator/README.md) | 🧪 Perpetuals trading CLI |
 
 ---
 

@@ -1,6 +1,36 @@
 # 🧪 Percolator CLI
 
-**Perpetuals trading CLI for Solana** - Trade, manage, and monitor perpetuals markets.
+**Perpetuals trading CLI for Solana** — Trade, manage, and monitor perpetuals markets.
+
+> Part of the [OpenClawd](https://github.com/x402agent/openclawd) monorepo — the Hermes of Web3.
+
+---
+
+## Changelog
+
+### v1.1.0 (April 23, 2025)
+
+**NEW: Full Percolator CLI Package**
+
+30 commands with viral emoji branding for perpetuals trading:
+
+- 🏛️ **Market Management** — `init-market`, `list-markets`, `close-slab`, `close-all-slabs`
+- 💰 **Trading** — `init-user`, `init-lp`, `deposit`, `withdraw`, `trade-cpi`, `best-price`
+- ⚔️ **Liquidation** — `liquidate-at-oracle`, `close-account`
+- 🔮 **Oracle** — `push-oracle-price`, `set-oracle-authority`
+- 🛡️ **Insurance** — `topup-insurance`, `withdraw-insurance`, `resolve-market`
+- 👑 **Admin** — `update-admin`, `update-config`
+- 🔍 **Inspection** — `slab:get`, `slab:header`, `slab:config`, `slab:nonce`, `slab:engine`, `slab:params`, `slab:account`, `slab:accounts`, `slab:bitmap`
+- 📊 **Utilities** — `audit-cu`
+
+Features:
+- Global `--simulate` and `--json` flags
+- Support for testnet, devnet, mainnet-beta
+- Keypair-based wallet authentication
+- Custom RPC URL configuration
+- x402-ready for future payment integration
+
+---
 
 ## Features
 
@@ -173,6 +203,28 @@ percolator slab:accounts --slab <PUBKEY>
 percolator slab:engine --slab <PUBKEY>
 ```
 
+## Related Documentation
+
+| Document | Description |
+|----------|-------------|
+| [OpenClawd README](../README.md) | Main monorepo documentation |
+| [AutoResearch Wiki](../llm-wiki-tang/README.md) | Karpathy-style research engine |
+| [Solana Integration](../API/README.md) | Blockchain API reference |
+| [STACK.md](../STACK.md) | Technical architecture |
+
+## Links
+
+| Service | URL |
+|---------|-----|
+| 🌐 Website | [solanaclawd.com](https://solanaclawd.com) |
+| 📦 GitHub | [github.com/x402agent/openclawd](https://github.com/x402agent/openclawd) |
+| 🐦 Twitter | [x.com/clawddevs](https://x.com/clawddevs) |
+| 💬 Telegram | [t.me/clawdtoken](https://t.me/clawdtoken) |
+
+---
+
+*Built with 🦞 by the OpenClawd crew — The Hermes of Web3*
+
 ## License
 
-MIT
+MIT — See [`../LICENSE.md`](../LICENSE.md)
