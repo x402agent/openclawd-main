@@ -53,7 +53,7 @@ export class GrokClient {
 
   constructor(apiKey: string, model?: string, baseURL?: string) {
     // Check if using Ollama
-    const resolvedBaseURL = baseURL || process.env.GROK_BASE_URL || "https://api.x.ai/v1";
+    const resolvedBaseURL = baseURL || process.env.XAI_BASE_URL || process.env.GROK_BASE_URL || "https://api.x.ai/v1";
     this.isOllama = resolvedBaseURL.includes("localhost:11434") || 
                     resolvedBaseURL.includes("ollama");
 

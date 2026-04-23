@@ -413,30 +413,28 @@ export class SettingsManager {
   }
 
   /**
-   * Get API key from user settings or environment
+   * Get API key from user settings or environment.
+   * Accepts XAI_API_KEY (xAI's official name) and GROK_API_KEY (legacy) interchangeably.
    */
   public getApiKey(): string | undefined {
-    // First check environment variable
-    const envApiKey = process.env.GROK_API_KEY;
+    const envApiKey = process.env.XAI_API_KEY || process.env.GROK_API_KEY;
     if (envApiKey) {
       return envApiKey;
     }
 
-    // Then check user settings
     return this.getUserSetting("apiKey");
   }
 
   /**
-   * Get base URL from user settings or environment
+   * Get base URL from user settings or environment.
+   * Accepts XAI_BASE_URL and GROK_BASE_URL interchangeably.
    */
   public getBaseURL(): string {
-    // First check environment variable
-    const envBaseURL = process.env.GROK_BASE_URL;
+    const envBaseURL = process.env.XAI_BASE_URL || process.env.GROK_BASE_URL;
     if (envBaseURL) {
       return envBaseURL;
     }
 
-    // Then check user settings
     const userBaseURL = this.getUserSetting("baseURL");
     return (
       userBaseURL || DEFAULT_USER_SETTINGS.baseURL || "https://api.x.ai/v1"
