@@ -723,6 +723,7 @@ curl http://localhost:8787/api/v1/agents | jq '.'
 - ⚔️ **Liquidation** — Liquidate undercollateralized positions
 - 🔮 **Oracle Management** — Push prices, set authorities
 - 📊 **Inspection** — Query market state, accounts, engine
+- 🦂 **5 SOL Challenge** — Deploy immutable markets and attempt to extract the insurance fund
 
 ### Quick Start
 
@@ -748,6 +749,41 @@ percolator slab:get --slab <PUBKEY>
 | Insurance | `topup-insurance`, `withdraw-insurance`, `resolve-market` |
 | Admin | `update-admin`, `update-config` |
 | Inspection | `slab:get/header/config/nonce/engine/params/account/accounts/bitmap` |
+
+### 🦂 The 5 SOL Challenge
+
+**Can you extract 5 SOL from an immutable Percolator market?**
+
+```bash
+cd percolator-cli-master
+
+# Deploy immutable market with 5 SOL insurance
+chmod +x scripts/deploy-immutable.sh
+./scripts/deploy-immutable.sh
+
+# Analyze for vulnerabilities
+./scripts/challenge-analyze.sh --auto
+```
+
+#### Market Properties
+
+| Property | Value |
+|----------|-------|
+| Admin Key | BURNED (11111111111111111111111111111111) |
+| Oracle Authority | BURNED |
+| Insurance Fund | 5,000,000,000 lamports (5 SOL) |
+| Crank | Permissionless |
+
+#### Attack Vectors
+
+1. **Oracle Manipulation** — Pyth price feed exploitation
+2. **Liquidation Circuit Bugs** — Fee calculation edge cases
+3. **U128 Math Overflow** — Boundary condition exploits
+4. **Funding Rate** — EWMA mark manipulation
+5. **Slot Management** — Freelist vs bitmap mismatches
+6. **CPI Attacks** — Matcher program vulnerabilities
+
+See [`solana-clawd/PERCOLATOR_SECURITY_AUDIT.md`](./solana-clawd/PERCOLATOR_SECURITY_AUDIT.md) for full security audit.
 
 See [`packages/percolator/README.md`](./packages/percolator/README.md) for full documentation.
 
