@@ -51,7 +51,8 @@ export default function ApiKeyInput({ onApiKeySet }: ApiKeyInputProps) {
       const apiKey = input.trim();
       const agent = new GrokAgent(apiKey);
       
-      // Set environment variable for current process
+      // Set environment variable for current process (both names — XAI is official, GROK is legacy)
+      process.env.XAI_API_KEY = apiKey;
       process.env.GROK_API_KEY = apiKey;
       
       // Save to user settings
