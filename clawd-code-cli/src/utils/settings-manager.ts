@@ -410,8 +410,28 @@ export class SettingsManager {
    * Get available models list from user settings
    */
   public getAvailableModels(): string[] {
-    const models = this.getUserSetting("models");
-    return models || DEFAULT_USER_SETTINGS.models || [];
+    const models = this.getUserSetting("models") || DEFAULT_USER_SETTINGS.models || [];
+    // Merge in OPENROUTER_MODEL1, OPENROUTER_MODEL2, ... from env (auto-prefixed with "openrouter/")
+    const envModels = this.getEnvOpenRouterModels();
+    if (envModels.length === 0) return models;
+    const set = new Set<string>([...envModels, ...models]);
+    return Array.from(set);
+  }
+
+  /**
+   * Read OPENROUTER_MODEL1..N from env and return them prefixed for the router.
+   * "anthropic/claude-sonnet-4.6" -> "openrouter/anthropic/claude-sonnet-4.6"
+   * Already-prefixed values are passed through.
+   */
+  public getEnvOpenRouterModels(): string[] {
+    const out: string[] = [];
+    for (const [k, v] of Object.entries(process.env)) {
+      if (!/^OPENROUTER_MODEL\d+$/.test(k)) continue;
+      const raw = (v || "").trim();
+      if (!raw) continue;
+      out.push(raw.startsWith("openrouter/") ? raw : `openrouter/${raw}`);
+    }
+    return out;
   }
 
   /**

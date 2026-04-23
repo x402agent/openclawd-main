@@ -174,11 +174,16 @@ export function toOpenRouterModelId(clawdModelId: string): string {
     'nvidia/kimi-k2.5': 'moonshotai/kimi-k2.5-instruct',
   };
 
-  // Anthropic models — map to latest OpenRouter IDs
+  // DeepSeek direct-provider free tier on OpenRouter
+  const DEEPSEEK_MAP: Record<string, string> = {
+    'deepseek/deepseek-v3.2': 'deepseek/deepseek-v3.2',
+  };
+
+  // Anthropic models — pass through OpenRouter IDs (they track upstream names)
   const ANTHROPIC_MAP: Record<string, string> = {
-    'anthropic/claude-sonnet-4.6': 'anthropic/claude-sonnet-4',
-    'anthropic/claude-opus-4.6': 'anthropic/claude-opus-4',
-    'anthropic/claude-haiku-4.5': 'anthropic/claude-haiku-4',
+    'anthropic/claude-sonnet-4.6': 'anthropic/claude-sonnet-4.6',
+    'anthropic/claude-opus-4.6': 'anthropic/claude-opus-4.6',
+    'anthropic/claude-haiku-4.5': 'anthropic/claude-haiku-4.5',
   };
 
   // xAI/Grok models
