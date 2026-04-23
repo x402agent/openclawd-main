@@ -231,8 +231,17 @@ export class SettingsManager {
       migrated.models = [...newModels, ...(migrated.models || [])];
     }
 
+    // Migration from version 2 to 3: Add free OpenRouter models wired into
+    // ClawdRouter / Vibe Studio (claude-sonnet-4.6, deepseek-v3.2).
+    if (fromVersion < 3) {
+      const defaultModels = DEFAULT_USER_SETTINGS.models || [];
+      const existingModels = new Set(migrated.models || []);
+      const newModels = defaultModels.filter(model => !existingModels.has(model));
+      migrated.models = [...newModels, ...(migrated.models || [])];
+    }
+
     // Add future migrations here:
-    // if (fromVersion < 3) { ... }
+    // if (fromVersion < 4) { ... }
 
     migrated.settingsVersion = SETTINGS_VERSION;
     return migrated;
