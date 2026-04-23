@@ -18,8 +18,11 @@ triggers:
   - funding rate
   - ewma
   - oracle manipulation
+  - security audit
+  - exploit
 
 commands:
+  # Risk Engine Commands
   - name: status
     description: Display Percolator risk engine status
     command: clawd percolator status
@@ -62,11 +65,22 @@ commands:
     description: Show ClawVault memory statistics
     command: clawd percolator vault
 
+  # Deployment Commands
   - name: deploy-immutable
-    description: Deploy an immutable Percolator market
+    description: Deploy an immutable Percolator market with 5 SOL insurance
     command: |
-      # Deploy immutable market with burned admin keys
-      # See CLAUDE.md for full deployment guide
+      # Run from percolator-cli-master directory:
+      chmod +x scripts/deploy-immutable.sh
+      ./scripts/deploy-immutable.sh
+      
+      # This will:
+      # 1. Generate market keypair
+      # 2. Create slab account (200KB)
+      # 3. Create vault token account
+      # 4. Initialize market
+      # 5. BURN admin keys
+      # 6. Fund insurance with 5 SOL
+      # 7. Verify immutability
 
   - name: verify-immutable
     description: Verify market immutability
@@ -76,6 +90,7 @@ commands:
         required: true
     command: percolator verify-immutable --slab {slab}
 
+  # Market Inspection Commands
   - name: slab-config
     description: View market configuration
     params:
@@ -91,6 +106,25 @@ commands:
         type: string
         required: true
     command: percolator slab-engine --slab {slab}
+
+  - name: slab-params
+    description: View risk parameters
+    params:
+      - name: slab
+        type: string
+        required: true
+    command: percolator slab-params --slab {slab}
+
+  - name: slab-account
+    description: View specific account state
+    params:
+      - name: slab
+        type: string
+        required: true
+      - name: idx
+        type: integer
+        required: true
+    command: percolator slab-account --slab {slab} --idx {idx}
 
   - name: slab-accounts
     description: List all market accounts
@@ -108,6 +142,7 @@ commands:
         required: true
     command: percolator best-price --slab {slab}
 
+  # Keeper Commands
   - name: keeper-crank
     description: Run keeper crank (permissionless)
     params:
@@ -133,6 +168,7 @@ commands:
         required: true
     command: percolator liquidate-at-oracle --slab {slab} --target-idx {target} --oracle {oracle}
 
+  # Security Commands
   - name: burn-admin
     description: Burn admin keys to make market immutable
     params:
@@ -149,8 +185,9 @@ commands:
         required: true
     command: percolator burn-oracle-auth --slab {slab}
 
+  # Challenge Commands
   - name: challenge
-    description: Information about the 5 SOL challenge
+    description: Display 5 SOL challenge information
     command: |
       echo "🦂 THE 5 SOL CHALLENGE"
       echo "======================"
@@ -164,7 +201,7 @@ commands:
       echo "  • Crank: Permissionless"
       echo "  • Trading: Requires external matcher"
       echo ""
-      echo "Attack Vectors to Investigate:"
+      echo "Attack Vectors:"
       echo "  1. Oracle Manipulation (Pyth price feeds)"
       echo "  2. Liquidation Circuit Exploits"
       echo "  3. Funding Rate Calculation Bugs"
@@ -174,25 +211,53 @@ commands:
       echo ""
       echo "See CLAUDE.md for full exploration guide."
 
+  - name: analyze
+    description: Analyze market for vulnerabilities
+    params:
+      - name: slab
+        type: string
+        required: false
+    command: |
+      # Run from percolator-cli-master directory:
+      chmod +x scripts/challenge-analyze.sh
+      ./scripts/challenge-analyze.sh {slab}
+
+  - name: security-audit
+    description: View security audit report
+    command: |
+      cat solana-clawd/PERCOLATOR_SECURITY_AUDIT.md
+
 security_notes:
   - Markets are immutable once admin keys are burned
   - Insurance fund can only be extracted through liquidation profits
   - Keeper crank is permissionless - anyone can run it
   - Oracle prices come from external Pyth feeds
   - Trading requires a separate matcher program
+  - Only way to extract insurance is via legitimate liquidation profits
 
 examples:
+  - description: Deploy immutable market
+    command: |
+      cd percolator-cli-master
+      chmod +x scripts/deploy-immutable.sh
+      ./scripts/deploy-immutable.sh
+
   - description: Check risk status
     command: clawd percolator status
 
-  - description: Calculate position size
-    command: clawd percolator size --signal 0.8 --confidence 0.9 --capital 5000000000
-
-  - description: View market accounts
-    command: percolator slab-accounts --slab 7RcEUzq9GLK3iCSDqW8M4c8jKjNQXx3wQg7kqZ5mMz8
-
-  - description: Run keeper crank
-    command: percolator keeper-crank --slab <SLAB> --oracle <ORACLE>
+  - description: Analyze deployed market
+    command: |
+      cd percolator-cli-master
+      ./scripts/challenge-analyze.sh <SLAB_PUBKEY>
 
   - description: Get challenge info
     command: clawd percolator challenge
+
+  - description: View market engine state
+    command: percolator slab-engine --slab <SLAB>
+
+  - description: List market accounts
+    command: percolator slab-accounts --slab <SLAB>
+
+  - description: Run keeper crank
+    command: percolator keeper-crank --slab <SLAB> --oracle <ORACLE>
