@@ -11,7 +11,7 @@ Every agent needs a home. A **profile** is an isolated agent home directory with
     ├── default/
     │   ├── config.yaml     ← model, provider, toolsets, terminal defaults
     │   ├── .env            ← scoped secrets
-    │   ├── CLAW.md         ← personality / operating charter
+    │   ├── CLAWD.md         ← personality / operating charter
     │   ├── memories/       ← long-term memory store
     │   ├── sessions/       ← conversation history
     │   ├── skills/         ← profile-local skill overrides
@@ -71,9 +71,9 @@ trader "buy 0.1 SOL of $PEPE"
 
 ---
 
-## CLAW.md — The Soul of the Claw
+## CLAWD.md — The Soul of the Claw
 
-Each profile ships with a **CLAW.md** (adapted from Hermes' `SOUL.md`). This is the personality charter for that agent — its identity, operating style, hard limits, and domain focus.
+Each profile ships with a **CLAWD.md** (adapted from Hermes' `SOUL.md`). This is the personality charter for that agent — its identity, operating style, hard limits, and domain focus.
 
 Edit it to shape your agent:
 - Change the persona (trader vs researcher vs security auditor)
