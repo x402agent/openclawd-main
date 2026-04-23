@@ -32,12 +32,15 @@ If you find a vulnerability, a leaked secret, or a credential that appears live:
 - Never commit `.env`, `.env.local`, private keys, or provider exports.
 - For hosted deployments, store secrets in provider dashboards or secret stores.
 - If a secret lands in git history, rotate it first and then scrub history with `git filter-repo` or BFG before republishing.
+- The repo installs local git hooks via `npm install` or `npm run hooks:install`; pre-commit blocks staged `.env` files, key files, and common live-secret patterns.
 
 ## Public Release Checklist
 
 Run these before merging release-facing changes or publishing a fork:
 
 ```bash
+npm run hooks:install
+npm run guard:worktree
 npm run doctor
 npm run release:check
 ```

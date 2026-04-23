@@ -1,0 +1,3 @@
+#!/bin/sh
+node scripts/guard-secrets.mjs --worktree || exit 1
+npm run release:check

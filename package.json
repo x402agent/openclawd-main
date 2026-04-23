@@ -9,6 +9,7 @@
     "npm": ">=10"
   },
   "scripts": {
+    "prepare": "node scripts/install-git-hooks.mjs",
     "install:all": "npm run install:agents && npm run install:router && npm run install:registrar && npm run install:cli && npm run install:hub && npm run install:wallet && npm run install:stack",
     "install:agents": "cd AGENTS && npm install --no-audit --no-fund",
     "install:router": "cd clawdrouter && npm install --no-audit --no-fund",
@@ -24,7 +25,10 @@
     "dev:registrar": "cd api-registrar && npm run dev",
     "dev:cli": "cd clawd-code-cli && npm run dev",
     "dev:orchestrator": "cd openclawd-stack && pnpm dev:orchestrator",
+    "hooks:install": "node scripts/install-git-hooks.mjs",
     "doctor": "node scripts/doctor.mjs",
+    "guard:staged": "node scripts/guard-secrets.mjs --staged",
+    "guard:worktree": "node scripts/guard-secrets.mjs --worktree",
     "release:check": "node scripts/release-check.mjs"
   },
   "repository": {

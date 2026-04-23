@@ -19,6 +19,7 @@ Minimum local toolchain:
 git clone https://github.com/x402agent/openclawd.git
 cd openclawd
 cp .env.example .env
+npm run hooks:install
 npm run doctor
 npm run install:all
 ```
@@ -59,6 +60,7 @@ npm run dev:orchestrator
 Run the checks relevant to your change before opening a PR:
 
 ```bash
+npm run guard:worktree
 npm run doctor
 npm run release:check
 npm run build:catalog
