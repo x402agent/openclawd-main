@@ -24,7 +24,7 @@ const checks = [
   },
   {
     file: "SECURITY_VAULT_INTEGRATION.md",
-    patterns: [/`agents\/vault-agent\.json`/i],
+    patterns: [/`agents\/vault-agent\.json`/],
   },
 ];
 
