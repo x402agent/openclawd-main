@@ -94,13 +94,21 @@ function loadModel(): string | undefined {
   let model = process.env.XAI_MODEL || process.env.GROK_MODEL;
 
   if (!model) {
-    // Use the unified model loading from settings manager
     try {
       const manager = getSettingsManager();
       model = manager.getCurrentModel();
     } catch (error) {
       // Ignore errors, model will remain undefined
     }
+  }
+
+  // Fallback: if no XAI key but OpenRouter is configured, default to the first
+  // OPENROUTER_MODEL{N} env var (e.g. OPENROUTER_MODEL1=anthropic/claude-sonnet-4.6).
+  if (!model && !process.env.XAI_API_KEY && !process.env.GROK_API_KEY && process.env.OPENROUTER_API_KEY) {
+    try {
+      const envModels = getSettingsManager().getEnvOpenRouterModels();
+      if (envModels.length > 0) model = envModels[0];
+    } catch {}
   }
 
   return model;

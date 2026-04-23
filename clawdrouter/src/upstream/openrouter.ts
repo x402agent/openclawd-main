@@ -219,12 +219,13 @@ export function toOpenRouterModelId(clawdModelId: string): string {
 
   return (
     NVIDIA_FREE_MAP[clawdModelId] ??
+    DEEPSEEK_MAP[clawdModelId] ??
     ANTHROPIC_MAP[clawdModelId] ??
     XAI_MAP[clawdModelId] ??
     ZAI_MAP[clawdModelId] ??
     MINIMAX_MAP[clawdModelId] ??
     MOONSHOT_MAP[clawdModelId] ??
-    clawdModelId // Pass through as-is for OpenAI, Google, DeepSeek
+    clawdModelId // Pass through as-is for OpenAI, Google
   );
 }
 
