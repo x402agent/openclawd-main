@@ -53,6 +53,13 @@ const BUDGET_MODELS: ModelEntry[] = [
     qualityScore: 70, speedMs: 700, enabled: true, free: true,
   },
   {
+    id: 'deepseek/deepseek-v3.2',
+    provider: 'deepseek', name: 'DeepSeek V3.2',
+    inputPricePerM: 0, outputPricePerM: 0,
+    contextWindow: 163_000, features: ['reasoning', 'tools'], tier: 'budget',
+    qualityScore: 76, speedMs: 650, enabled: true, free: true,
+  },
+  {
     id: 'nvidia/mistral-large-3-675b',
     provider: 'nvidia', name: 'Mistral Large 3 675B',
     inputPricePerM: 0, outputPricePerM: 0,
@@ -384,7 +391,7 @@ const PREMIUM_MODELS: ModelEntry[] = [
     provider: 'anthropic', name: 'Claude Sonnet 4.6',
     inputPricePerM: 3.00, outputPricePerM: 15.00,
     contextWindow: 200_000, features: ['reasoning', 'vision', 'agentic', 'tools', 'solana'], tier: 'premium',
-    qualityScore: 94, speedMs: 500, enabled: true, free: false,
+    qualityScore: 94, speedMs: 500, enabled: true, free: true,
   },
   {
     id: 'xai/grok-3',
@@ -527,8 +534,8 @@ export function formatModelTable(): string {
   const sections = [
     { title: '🆓 Free Models', models: MODEL_REGISTRY.filter(m => m.free) },
     { title: '💰 Budget Models', models: BUDGET_MODELS.filter(m => !m.free) },
-    { title: '⚡ Mid-Range Models', models: MID_MODELS },
-    { title: '👑 Premium Models', models: PREMIUM_MODELS },
+    { title: '⚡ Mid-Range Models', models: MID_MODELS.filter(m => !m.free) },
+    { title: '👑 Premium Models', models: PREMIUM_MODELS.filter(m => !m.free) },
   ];
 
   for (const { title, models } of sections) {

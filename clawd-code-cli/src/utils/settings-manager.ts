@@ -70,6 +70,8 @@ const DEFAULT_USER_SETTINGS: Partial<UserSettings> = {
     "ollama/kimi-k2.5:cloud",
     "ollama/mxbai-embed-large:latest",
     // OpenRouter models (use with baseURL: "https://openrouter.ai/api/v1")
+    "openrouter/anthropic/claude-sonnet-4.6",
+    "openrouter/deepseek/deepseek-v3.2",
     "openrouter/anthropic/claude-opus-4.7",
     "openrouter/anthropic/claude-sonnet-4",
     "openrouter/anthropic/claude-3.5-sonnet",
