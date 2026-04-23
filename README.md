@@ -1,13 +1,43 @@
-# OpenClawd
+<div align="center">
 
-> Solana-native AI agent stack for routing, orchestration, payments, skills, MCP, browser automation, and local or hosted inference.
+# 🦞 OpenClawd 🦞
 
-OpenClawd is the public monorepo behind the Clawd ecosystem. It combines an orchestrator, model router, wallet tooling, x402/AP2 payment rails, MCP servers, browser surfaces, package libraries, edge workers, and a large checked-in skill and agent catalog so teams can fork one repo and ship chain-native AI products quickly.
+### *“Claws that code, brains that deploy.”*
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](./LICENSE.md)
-[![Node](https://img.shields.io/badge/Node-20%2B-339933?style=for-the-badge&logo=node.js&logoColor=white)](./.nvmrc)
+**A red-shelled, Solana-native AI agent stack — routing, orchestration, payments, skills, MCP, browser automation, and local or hosted inference.**
+
+[![🦞 $CLAWD](https://img.shields.io/badge/%F0%9F%A6%9E%20%24CLAWD-Buy%20on%20Jupiter-FF3B30?style=for-the-badge)](https://jup.ag/swap/SOL-8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump)
+[![Site](https://img.shields.io/badge/site-solanaclawd.com-FF6B35?style=for-the-badge&logo=safari&logoColor=white)](https://solanaclawd.com)
+[![GitHub](https://img.shields.io/badge/GitHub-x402agent%2Fsolana--clawd-E63946?style=for-the-badge&logo=github&logoColor=white)](https://github.com/x402agent/solana-clawd)
+[![Telegram](https://img.shields.io/badge/Telegram-%40clawdtoken-D62828?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/clawdtoken)
+[![X clawddevs](https://img.shields.io/badge/X-%40clawddevs-FB6F92?style=for-the-badge&logo=x&logoColor=white)](https://x.com/clawddevs)
+[![X 0rdlibrary](https://img.shields.io/badge/X-%400rdlibrary-FFB4A2?style=for-the-badge&logo=x&logoColor=white)](https://x.com/0rdlibrary)
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-FF1744?style=for-the-badge)](./LICENSE.md)
+[![Node](https://img.shields.io/badge/Node-20%2B-FF5252?style=for-the-badge&logo=node.js&logoColor=white)](./.nvmrc)
 [![Solana](https://img.shields.io/badge/Solana-native-14F195?style=for-the-badge&logo=solana&logoColor=black)](https://solana.com)
-[![MCP](https://img.shields.io/badge/MCP-compatible-111827?style=for-the-badge)](https://modelcontextprotocol.io)
+[![MCP](https://img.shields.io/badge/MCP-compatible-FF8C42?style=for-the-badge)](https://modelcontextprotocol.io)
+
+</div>
+
+```
+                          🦞  $CLAWD  🦞
+              ╭─────────────────────────────────────────╮
+              │   ____   _                   _          │
+              │  / ___| | |  __ _  __      __| |        │
+              │ | |     | | / _` | \ \ /\ / /| |        │
+              │ | |___  | || (_| |  \ V  V / | |        │
+              │  \____| |_| \__,_|   \_/\_/  |_|        │
+              │                                         │
+              │      ◢█◣  red shell, sharp claws  ◢█◣   │
+              ╰─────────────────────────────────────────╯
+                  🦀  forged on Solana  🦀
+```
+
+> 🦞 **$CLAWD CA:** `8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump`
+> 🌐 [solanaclawd.com](https://solanaclawd.com) · 🐙 [github.com/x402agent/solana-clawd](https://github.com/x402agent/solana-clawd) · 💬 [t.me/clawdtoken](https://t.me/clawdtoken) · 🐦 [@clawddevs](https://x.com/clawddevs) · 📚 [@0rdlibrary](https://x.com/0rdlibrary)
+
+OpenClawd is the public monorepo behind the 🦞 Clawd ecosystem — an orchestrator, model router, wallet tooling, x402/AP2 payment rails, MCP servers, browser surfaces, package libraries, edge workers, and a large checked-in skill and agent catalog so teams can fork one repo and ship chain-native AI products quickly.
 
 ## What Ships
 
