@@ -1,10 +1,10 @@
-# funGrok CLI Architecture
+# Clawd Code CLI Architecture
 
-This document describes the architecture of funGrok CLI, designed for scalability and enterprise-level usage.
+This document describes the architecture of Clawd Code CLI, designed for scalability and enterprise-level usage.
 
 ## Overview
 
-funGrok CLI is a conversational AI CLI tool that integrates with:
+Clawd Code CLI is a conversational AI CLI tool that integrates with:
 - **Grok AI** (X.AI) for natural language processing
 - **Solana Blockchain** via Helius DAS API and Birdeye
 - **MCP (Model Context Protocol)** for extensibility
@@ -130,7 +130,7 @@ Tools are modular, stateless components that perform specific operations:
 ```
 User: "Get price of SOL"
    ↓
-GrokAgent identifies solana_get_price tool
+Clawd agent identifies solana_get_price tool
    ↓
 SolanaTool.getPrice("So11111...")
    ↓
@@ -371,7 +371,7 @@ Already implemented for:
 
 ### Adding MCP Servers
 
-Configure in `.grok/settings.json`:
+Configure in `.clawd/settings.json`:
 
 ```json
 {
@@ -401,4 +401,3 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for development guidelines.
 ## Questions?
 
 Open an issue or start a discussion for architecture questions.
-

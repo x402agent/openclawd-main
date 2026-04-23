@@ -9,65 +9,48 @@
 
 🦞 *"Claws that code, brains that deploy"* 🦞
 
+Powered by xAI Grok models.
+
 </div>
 
 ```
-    ╔═══════════════════════════════════════════════════════════════════════╗
-    ║                                                                       ║
-    ║   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄   ║
-    ║  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓   ║
-    ║  ▓                                                                 ▓   ║
-    ║  ▓   ██╗   ██╗ ██████╗ ██████╗ ███╗   ██╗██╗ ██████╗         ▓   ║
-    ║  ▓   ██║   ██║██╔═══██╗██╔══██╗████╗  ██║██║██╔════╝         ▓   ║
-    ║  ▓   ███████║██║   ██║██████╔╝██╔██╗ ██║██║██║  ███╗        ▓   ║
-    ║  ▓   ██╔══██║██║   ██║██╔══██╗██║╚██╗██║██║██║   ██║        ▓   ║
-    ║  ▓   ██║   ██║╚██████╔╝██║  ██║██║ ╚████║██║╚██████╔╝        ▓   ║
-    ║  ▓   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝ ╚═════╝         ▓   ║
-    ║  ▓                                                                 ▓   ║
-    ║  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓   ║
-    ║                                                                       ║
-    ║          🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞          ║
-    ║                                                                       ║
-    ║          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░          ║
-    ║          ░  🦞  C L A W D  C O D E  C L I  🦞  ░          ║
-    ║          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░          ║
-    ║                                                                       ║
-    ║          "Claws that code, brains that deploy"                        ║
-    ║                                                                       ║
-    ║          ╔═══════════════════════════════════════════╗                ║
-    ║          ║   🦞 Solana Blockchain Integration 🦞   ║                ║
-    ║          ║   ┌───────────────────────────────┐     ║                ║
-    ║          ║   │ • OODA Loop Trading            │     ║                ║
-    ║          ║   │ • MCP Tools & Extensions      │     ║                ║
-    ║          ║   │ • Smart Contract Deployment   │     ║                ║
-    ║          ║   │ • Wallet & Token Management   │     ║                ║
-    ║          ║   └───────────────────────────────┘     ║                ║
-    ║          ╚═══════════════════════════════════════════╝                ║
-    ║                                                                       ║
-    ║          Type 'clawd --help' to get started                           ║
-    ║                                                                       ║
-    ║   ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀   ║
-    ║                                                                       ║
-    ╚═══════════════════════════════════════════════════════════════════════╝
+    ╔═══════════════════════════════════════════════════════════╗
+    ║                                                           ║
+    ║     ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄     ║
+    ║   ╱▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔╲    ║
+    ║  ║  █████╗  ║                                           ║   ║
+    ║  ║ ██╔══██╗ ║   🦞 CLAWD CODE CLI 🦞                   ║   ║
+    ║  ║ ╚══█╔═╝ ║                                           ║   ║
+    ║  ║   ██║   ║   "Claws that code, brains that deploy"    ║   ║
+    ║  ║   ██║   ║                                           ║   ║
+    ║  ║   ╚═╝   ║   ┌─────────────────────────────────┐     ║   ║
+    ║  ║         ║   │ AI-Powered CLI for Solana       │     ║   ║
+    ║  ║  ▄█████╗ ║   │ Terminal • Blockchain • Deploy  │     ║   ║
+    ║  ║ ██╔══██╗║   └─────────────────────────────────┘     ║   ║
+    ║  ║ ╚══█╔═╝ ║                                           ║   ║
+    ║  ║   ██║   ║   Type 'clawd --help' to get started      ║   ║
+    ║  ║   ╚═╝   ║                                           ║   ║
+    ║   ╲▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔╱    ║
+    ║     ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀     ║
+    ║                                                           ║
+    ╚═══════════════════════════════════════════════════════════╝
 ```
 
 ## Features
 
-- **🦞 Lobster-Themed UI**: Beautiful ASCII art with clawd branding
-- **🤖 Conversational AI**: Natural language interface powered by Grok
+- **🤖 Conversational AI**: Natural language interface powered by Clawd on Grok
 - **📝 Smart File Operations**: AI automatically uses tools to view, create, and edit files
 - **⚡ Bash Integration**: Execute shell commands through natural conversation
 - **🔌 MCP Tools**: Extend capabilities with Model Context Protocol servers
-- **💬 Interactive UI**: Beautiful terminal interface with ASCII art
+- **💬 Interactive UI**: Lobster-branded terminal interface with ASCII art
 - **🌍 Global Installation**: Install and use anywhere with `bun add -g clawd-code-cli`
 - **🪙 Solana Integration**: Query Solana assets, token prices, and wallet data using Helius DAS API and Birdeye
-- **🔗 ClawdRouter Integration**: Works seamlessly with ClawdRouter for LLM routing
 
 ## Installation
 
 ### Prerequisites
 - Bun 1.0+ (or Node.js 18+ as fallback)
-- Grok API key from X.AI
+- Grok API key from xAI
 - (Optional) Helius API key for Solana DAS API integration
 - (Optional) Birdeye API key for Solana token price data
 
@@ -83,7 +66,7 @@ npm install -g clawd-code-cli
 
 ### Local Development
 ```bash
-git clone <repository>
+git clone https://github.com/8bit/clawd-code-cli.git
 cd clawd-code-cli
 bun install
 bun run build
@@ -117,8 +100,8 @@ clawd [options]
 Options:
   -V, --version          output the version number
   -d, --directory <dir>  set working directory
-  -k, --api-key <key>    API key (or set API_KEY env var)
-  -u, --base-url <url>   API base URL (or set BASE_URL env var)
+  -k, --api-key <key>    Grok API key (or set GROK_API_KEY env var)
+  -u, --base-url <url>   Grok API base URL (or set GROK_BASE_URL env var)
   -m, --model <model>    AI model to use
   -p, --prompt <prompt>  process a single prompt and exit (headless mode)
   --max-tool-rounds <rounds>  maximum number of tool execution rounds (default: 400)
@@ -144,13 +127,13 @@ clawd mcp list
 
 ## Setup
 
-1. Get your Grok API key from [X.AI](https://x.ai)
+1. Get your Grok API key from [xAI](https://x.ai)
 
 2. Set up your API key (choose one method):
 
 **Method 1: Environment Variable**
 ```bash
-export API_KEY=your_api_key_here
+export GROK_API_KEY=your_api_key_here
 ```
 
 **Method 2: .env File**
@@ -163,6 +146,17 @@ cp .env.example .env
 ```bash
 clawd --api-key your_api_key_here
 ```
+
+### Custom Instructions
+
+Create a project or user-level instruction file to shape Clawd's behavior:
+
+```bash
+mkdir -p .clawd
+touch .clawd/CLAWD.md
+```
+
+Clawd also falls back to legacy `.grok/GROK.md` files for compatibility.
 
 ### Solana Blockchain Integration (Optional)
 

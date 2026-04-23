@@ -1,6 +1,6 @@
-# Scaling funGrok CLI for Enterprise Use
+# Scaling Clawd Code CLI for Enterprise Use
 
-This guide outlines strategies for scaling funGrok CLI to support 1,000+ daily active users on Solana.
+This guide outlines strategies for scaling Clawd Code CLI to support 1,000+ daily active users on Solana.
 
 ## Current Architecture Limitations
 
@@ -206,7 +206,7 @@ export class RedisCache {
 Use a load balancer (nginx, HAProxy) to distribute requests across multiple instances:
 
 ```nginx
-upstream fungrok_backend {
+upstream clawd_backend {
     least_conn;
     server localhost:3001;
     server localhost:3002;
@@ -216,7 +216,7 @@ upstream fungrok_backend {
 server {
     listen 80;
     location / {
-        proxy_pass http://fungrok_backend;
+        proxy_pass http://clawd_backend;
     }
 }
 ```
@@ -235,14 +235,14 @@ export class Metrics {
   constructor() {
     this.registry = new Registry();
     this.apiCalls = new Counter({
-      name: 'fungrok_api_calls_total',
+      name: 'clawd_api_calls_total',
       help: 'Total number of API calls',
       labelNames: ['tool', 'status'],
       registers: [this.registry]
     });
     
     this.apiDuration = new Histogram({
-      name: 'fungrok_api_duration_seconds',
+      name: 'clawd_api_duration_seconds',
       help: 'API call duration in seconds',
       labelNames: ['tool'],
       registers: [this.registry]
@@ -354,4 +354,3 @@ k6 run --vus 100 --duration 1m stress-test.js
 ## Questions?
 
 Open an issue or discussion for scaling questions.
-

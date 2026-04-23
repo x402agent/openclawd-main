@@ -1,6 +1,6 @@
-# Contributing to funGrok CLI
+# Contributing to Clawd Code CLI
 
-Thank you for your interest in contributing to funGrok CLI! This document provides guidelines and instructions for contributing to the project.
+Thank you for your interest in contributing to Clawd Code CLI. This document provides guidelines and instructions for contributing to the project.
 
 ## Table of Contents
 
@@ -27,12 +27,12 @@ Thank you for your interest in contributing to funGrok CLI! This document provid
 1. **Fork the repository** on GitHub
 2. **Clone your fork** locally:
    ```bash
-   git clone https://github.com/funpump-ai/funGrok-cli.git
-   cd funGrok-cli
+   git clone https://github.com/8bit/clawd-code-cli.git
+   cd clawd-code-cli
    ```
 3. **Add the upstream remote**:
    ```bash
-   git remote add upstream https://github.com/funpump-ai/funGrok-cli.git
+   git remote add upstream https://github.com/8bit/clawd-code-cli.git
    ```
 
 ## Development Setup
@@ -85,7 +85,7 @@ bun run dev:node
 ## Project Structure
 
 ```
-funGrok-cli/
+clawd-code-cli/
 ├── src/
 │   ├── agent/          # Core agent logic and orchestration
 │   ├── commands/        # CLI command handlers
@@ -355,4 +355,3 @@ class SolanaTool {
 - Reach out to maintainers for guidance
 
 Thank you for contributing! 🚀
-

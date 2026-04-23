@@ -3,7 +3,7 @@
   "configVersion": 0,
   "workspaces": {
     "": {
-      "name": "@vibe-kit/grok-cli",
+      "name": "clawd-code-cli",
       "dependencies": {
         "@modelcontextprotocol/sdk": "^1.17.0",
         "axios": "^1.7.0",

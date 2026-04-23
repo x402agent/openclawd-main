@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to funGrok CLI will be documented in this file.
+All notable changes to Clawd Code CLI will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
@@ -30,7 +30,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Input validation for Solana addresses
 
 ### Changed
-- ASCII art logo changed from "GROK" to "funGrok"
+- Rebranded the terminal UI from funGrok to Clawd Code CLI
+- Updated startup copy, help text, and MCP client metadata for Clawd branding
+- Moved preferred config and instruction paths to `.clawd/` with legacy `.grok/` fallback
 - Updated package.json with proper metadata and keywords
 - Enhanced Solana tool with input validation and error handling
 - Improved error messages throughout the codebase
@@ -49,5 +51,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Morph Fast Apply support
 - Interactive terminal UI
 
-[Unreleased]: https://github.com/funpump-ai/funGrok-cli/compare/v0.0.34...HEAD
-
+[Unreleased]: https://github.com/8bit/clawd-code-cli/compare/v0.0.34...HEAD

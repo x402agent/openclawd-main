@@ -15,9 +15,9 @@ We actively support and provide security updates for the following versions:
 
 Instead, please report them via one of the following methods:
 
-1. **Email**: Send details to security@fungrok.dev (if available)
-2. **Private Security Advisory**: Use GitHub's private vulnerability reporting feature
-3. **Direct Contact**: Contact maintainers directly through their GitHub profiles
+1. **Private Security Advisory**: Use GitHub's private vulnerability reporting feature
+2. **Direct Contact**: Contact maintainers directly through their GitHub profiles
+3. **GitHub Security Tab**: Open a private report through the repository security workflow when available
 
 ### What to Include
 
@@ -41,7 +41,7 @@ When reporting a vulnerability, please include:
 
 1. **Never commit API keys or secrets**
    - Use environment variables or `.env` files (gitignored)
-   - Store user settings in `~/.grok/user-settings.json` (not in repo)
+   - Store user settings in `~/.clawd/user-settings.json` (not in repo)
 
 2. **Keep dependencies updated**
    ```bash
@@ -135,7 +135,7 @@ When reporting a vulnerability, please include:
 
 ### API Key Storage
 
-- **User Settings**: Stored in `~/.grok/user-settings.json` (user's home directory)
+- **User Settings**: Stored in `~/.clawd/user-settings.json` (user's home directory)
 - **Environment Variables**: Read from `process.env` (not committed)
 - **Never**: Store in code, commit to git, or log to console
 
@@ -206,4 +206,3 @@ We thank security researchers who responsibly disclose vulnerabilities.
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-
