@@ -1,0 +1,44 @@
+{
+  "name": "@openclawd/percolator",
+  "version": "0.1.0",
+  "description": "Clawd Perps - The viral perpetuals trading CLI for Solana",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./package": "./package.json",
+    "./abi/*": "./dist/abi/*.js",
+    "./commands/*": "./dist/commands/*.js",
+    "./runtime/*": "./dist/runtime/*.js",
+    "./solana/*": "./dist/solana/*.js"
+  },
+  "bin": {
+    "clawd-perps": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@pythnetwork/hermes-client": "^2.1.0",
+    "@pythnetwork/pyth-solana-receiver": "^0.13.0",
+    "@solana/spl-token": "^0.3.11",
+    "@solana/web3.js": "^1.95.4",
+    "commander": "^12.1.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.10",
+    "tsup": "^8.3.5",
+    "tsx": "^4.21.0",
+    "typescript": "^5.7.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

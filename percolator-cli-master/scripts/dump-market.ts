@@ -1,0 +1,266 @@
+/**
+ * Comprehensive market dump — ALL on-chain data structures to market.json
+ */
+import { Connection, PublicKey } from "@solana/web3.js";
+import {
+  fetchSlab, parseHeader, parseConfig, parseParams, parseEngine,
+  parseAccount, parseUsedIndices, AccountKind,
+} from "../src/solana/slab.js";
+import * as fs from "fs";
+
+const marketInfo = JSON.parse(fs.readFileSync("devnet-market.json", "utf-8"));
+const SLAB = new PublicKey(marketInfo.slab);
+const ORACLE = new PublicKey(marketInfo.oracle);
+const connection = new Connection("https://api.devnet.solana.com", "confirmed");
+
+function toJSON(obj: any): any {
+  if (typeof obj === "bigint") return obj.toString();
+  if (Array.isArray(obj)) return obj.map(toJSON);
+  if (obj && typeof obj === "object") {
+    if (obj.toBase58) return obj.toBase58();
+    const result: any = {};
+    for (const [key, value] of Object.entries(obj)) {
+      result[key] = toJSON(value);
+    }
+    return result;
+  }
+  return obj;
+}
+
+const sol = (n: bigint) => Number(n) / 1e9;
+const pct = (bps: bigint) => Number(bps) / 100;
+
+async function getChainlinkPrice(oracle: PublicKey): Promise<{ price: bigint; decimals: number }> {
+  const info = await connection.getAccountInfo(oracle);
+  if (!info) throw new Error("Oracle not found");
+  return { price: info.data.readBigInt64LE(216), decimals: info.data.readUInt8(138) };
+}
+
+async function main() {
+  const data = await fetchSlab(connection, SLAB);
+  const header = parseHeader(data);
+  const config = parseConfig(data);
+  const params = parseParams(data);
+  const engine = parseEngine(data);
+  const indices = parseUsedIndices(data);
+
+  // Oracle
+  const oracleData = await getChainlinkPrice(ORACLE);
+  const rawOraclePriceE6 = oracleData.price * 1_000_000n / BigInt(10 ** oracleData.decimals);
+  const oraclePrice = rawOraclePriceE6 > 0n ? 1_000_000_000_000n / rawOraclePriceE6 : 0n;
+
+  // Derived engine values
+  const insurance = engine.insuranceFund.balance;
+  const surplus = insurance > threshold ? insurance - threshold : 0n;
+
+  // Build accounts
+  const accounts = indices.map(idx => {
+    const acc = parseAccount(data, idx);
+    if (!acc) return null;
+
+    const posAbs = acc.positionBasisQ < 0n ? -acc.positionBasisQ : acc.positionBasisQ;
+    const notional = posAbs * oraclePrice / 1_000_000n;
+    // entryPrice no longer exists; unrealized PnL calculation removed
+    const effectiveCapital = acc.capital + acc.pnl;
+    const maintenanceReq = notional * params.maintenanceMarginBps / 10_000n;
+    const marginRatioBps = notional > 0n ? effectiveCapital * 10_000n / notional : 99999n;
+
+    return {
+      index: idx,
+      kind: acc.kind === AccountKind.LP ? "LP" : "USER",
+      accountId: acc.accountId.toString(),
+      owner: acc.owner.toBase58(),
+
+      capital: {
+        raw: acc.capital.toString(),
+        sol: sol(acc.capital),
+      },
+      pnl: {
+        realized: { raw: acc.pnl.toString(), sol: sol(acc.pnl) },
+      },
+      effectiveCapital: {
+        raw: (effectiveCapital).toString(),
+        sol: sol(effectiveCapital),
+      },
+
+      warmup: {
+        reservedPnl: acc.reservedPnl.toString(), // now u128
+        reservedPnlSol: sol(acc.reservedPnl),
+        warmupStartedAtSlot: acc.warmupStartedAtSlot.toString(),
+        warmupSlopePerStep: acc.warmupSlopePerStep.toString(),
+        warmupSlopePerStepSol: sol(acc.warmupSlopePerStep),
+      },
+
+      position: {
+        sizeUnits: acc.positionBasisQ.toString(),
+        direction: acc.positionBasisQ > 0n ? "LONG" : acc.positionBasisQ < 0n ? "SHORT" : "FLAT",
+        adlABasis: acc.adlABasis.toString(),
+        notional: { raw: notional.toString(), sol: sol(notional) },
+      },
+
+      margin: {
+        maintenanceRequired: { raw: maintenanceReq.toString(), sol: sol(maintenanceReq) },
+        ratioPercent: Number(marginRatioBps) / 100,
+        buffer: { raw: (effectiveCapital - maintenanceReq).toString(), sol: sol(effectiveCapital - maintenanceReq) },
+        status: effectiveCapital < maintenanceReq ? "LIQUIDATABLE"
+          : marginRatioBps < params.maintenanceMarginBps * 2n ? "AT_RISK" : "SAFE",
+      },
+
+      funding: {
+        adlKSnap: acc.adlKSnap.toString(),
+      },
+
+      matcher: {
+        program: acc.matcherProgram.toBase58(),
+        context: acc.matcherContext.toBase58(),
+      },
+
+      fees: {
+        feeCredits: acc.feeCredits.toString(),
+        lastFeeSlot: acc.lastFeeSlot.toString(),
+      },
+    };
+  }).filter(Boolean);
+
+  // Total capital across all accounts
+  let totalCapital = 0n;
+  for (const idx of indices) {
+    const acc = parseAccount(data, idx);
+    if (acc) totalCapital += acc.capital;
+  }
+
+  const market = {
+    _meta: {
+      timestamp: new Date().toISOString(),
+      slabAddress: SLAB.toBase58(),
+      oracleAddress: ORACLE.toBase58(),
+      slabDataBytes: data.length,
+    },
+
+    header: {
+      magic: header.magic.toString(16),
+      version: header.version,
+      bump: header.bump,
+      admin: header.admin.toBase58(),
+      nonce: header.nonce.toString(),
+      lastThresholdUpdateSlot: header.lastThrUpdateSlot.toString(),
+    },
+
+    config: {
+      collateralMint: config.collateralMint.toBase58(),
+      vault: config.vaultPubkey.toBase58(),
+      indexFeedId: config.indexFeedId.toBase58(),
+      maxStalenessSecs: config.maxStalenessSecs.toString(),
+      confFilterBps: config.confFilterBps,
+      vaultAuthorityBump: config.vaultAuthorityBump,
+      invert: config.invert,
+      unitScale: config.unitScale,
+
+      funding: {
+        horizonSlots: config.fundingHorizonSlots.toString(),
+        kBps: Number(config.fundingKBps),
+        invScaleNotionalE6: config.fundingInvScaleNotionalE6.toString(),
+        maxPremiumBps: Number(config.fundingMaxPremiumBps),
+        maxBpsPerSlot: Number(config.fundingMaxE9PerSlot),
+      },
+
+      threshold: {
+        floor: { raw: config.threshFloor.toString(), sol: sol(config.threshFloor) },
+        riskBps: Number(config.threshRiskBps),
+        updateIntervalSlots: config.threshUpdateIntervalSlots.toString(),
+        stepBps: Number(config.threshStepBps),
+        alphaBps: Number(config.threshAlphaBps),
+        min: { raw: config.threshMin.toString(), sol: sol(config.threshMin) },
+        max: { raw: config.threshMax.toString(), sol: sol(config.threshMax) },
+        minStep: { raw: config.threshMinStep.toString(), sol: sol(config.threshMinStep) },
+      },
+
+      oracleAuthority: {
+        authority: config.oracleAuthority.toBase58(),
+        authorityPriceE6: config.authorityPriceE6.toString(),
+        authorityTimestamp: config.authorityTimestamp.toString(),
+      },
+    },
+
+    riskParams: {
+      warmupPeriodSlots: params.warmupPeriodSlots.toString(),
+      maintenanceMarginBps: Number(params.maintenanceMarginBps),
+      maintenanceMarginPercent: pct(params.maintenanceMarginBps),
+      initialMarginBps: Number(params.initialMarginBps),
+      initialMarginPercent: pct(params.initialMarginBps),
+      tradingFeeBps: Number(params.tradingFeeBps),
+      maxAccounts: params.maxAccounts.toString(),
+      newAccountFee: { raw: params.newAccountFee.toString(), sol: sol(params.newAccountFee) },
+      maintenanceFeePerSlot: { raw: params.maintenanceFeePerSlot.toString(), sol: sol(params.maintenanceFeePerSlot) },
+      maxCrankStalenessSlots: params.maxCrankStalenessSlots.toString(),
+      liquidationFeeBps: Number(params.liquidationFeeBps),
+      liquidationFeePercent: pct(params.liquidationFeeBps),
+      liquidationFeeCap: { raw: params.liquidationFeeCap.toString(), sol: sol(params.liquidationFeeCap) },
+      minLiquidationAbs: { raw: params.minLiquidationAbs.toString(), sol: sol(params.minLiquidationAbs) },
+    },
+
+    engine: {
+      vault: { raw: engine.vault.toString(), sol: sol(engine.vault) },
+      insuranceFund: {
+        balance: { raw: insurance.toString(), sol: sol(insurance) },
+        threshold: { raw: threshold.toString(), sol: sol(threshold) },
+        surplus: { raw: surplus.toString(), sol: sol(surplus) },
+      },
+
+      slots: {
+        current: engine.currentSlot.toString(),
+        lastCrank: engine.lastCrankSlot.toString(),
+        maxCrankStaleness: engine.maxCrankStalenessSlots.toString(),
+        lastSweepStart: engine.lastSweepStartSlot.toString(),
+        lastSweepComplete: engine.lastSweepCompleteSlot.toString(),
+      },
+
+      funding: {
+        fundingRateBpsPerSlotLast: engine.fundingRateBpsPerSlotLast.toString(),
+      },
+
+      // totalOpenInterest, netLpPos, lpSumAbs removed from engine
+
+      counters: {
+        lifetimeLiquidations: Number(engine.lifetimeLiquidations),
+        numUsedAccounts: engine.numUsedAccounts,
+        nextAccountId: engine.nextAccountId.toString(),
+      },
+    },
+
+    oracle: {
+      rawUsd: Number(oracleData.price) / Math.pow(10, oracleData.decimals),
+      rawE6: rawOraclePriceE6.toString(),
+      decimals: oracleData.decimals,
+      inverted: config.invert === 1,
+      effectivePriceE6: oraclePrice.toString(),
+    },
+
+    accounts,
+
+    solvency: {
+      vault: { raw: engine.vault.toString(), sol: sol(engine.vault) },
+      totalCapital: { raw: totalCapital.toString(), sol: sol(totalCapital) },
+      insurance: { raw: insurance.toString(), sol: sol(insurance) },
+      totalClaims: { raw: (totalCapital + insurance).toString(), sol: sol(totalCapital + insurance) },
+      surplus: { raw: (engine.vault - totalCapital - insurance).toString(), sol: sol(engine.vault - totalCapital - insurance) },
+      solvent: engine.vault >= totalCapital + insurance,
+      strandedFunds: {
+        raw: (engine.vault - totalCapital - insurance).toString(),
+        sol: sol(engine.vault - totalCapital - insurance),
+        note: "Vault balance minus all claims (capital + insurance). Positive value indicates funds with no current owner.",
+      },
+    },
+  };
+
+  fs.writeFileSync("market.json", JSON.stringify(toJSON(market), null, 2));
+  console.log("Full market state dumped to market.json");
+  console.log();
+  console.log("  Slab:           " + SLAB.toBase58());
+  console.log("  Accounts:       " + accounts.length);
+  console.log("  Vault:          " + sol(engine.vault).toFixed(6) + " SOL");
+  console.log("  Insurance:      " + sol(insurance).toFixed(6) + " SOL");
+  console.log("  Stranded funds: " + sol(engine.vault - totalCapital - insurance).toFixed(6) + " SOL");
+}
+
+main().catch(console.error);
