@@ -1,5 +1,5 @@
 {
-  "name": "@solana-clawd/cloud-clawd-bridge",
+  "name": "@openclawd/cloud-clawd-bridge",
   "version": "1.0.0",
   "description": "WebSocket bridge for Cloud Clawd browser terminal",
   "type": "module",
