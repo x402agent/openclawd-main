@@ -9,11 +9,11 @@ Your Ollama instance has the following models available:
 | Model | Size | Use Case |
 |-------|------|----------|
 | `ollama/glm-5.1:cloud` | ~10GB | General purpose, cloud-optimized |
-| `ollama/gemma4:latest` | ~9.6GB | Google's latest Gemma model |
 | `ollama/8bit/DeepSolana:latest` | ~2GB | DeepSeek variant optimized for Solana |
 | `ollama/minimax-m2.7:cloud` | ~6GB | MiniMax cloud model |
 | `ollama/minimax-m2.1:cloud` | ~4GB | MiniMax lightweight variant |
 | `ollama/kimi-k2.5:cloud` | ~6GB | Kimi cloud model |
+| `ollama/kimi-k2.6:cloud` | cloud | Kimi K2.6 cloud model |
 
 ## Quick Start
 

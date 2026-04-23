@@ -6,7 +6,7 @@ import * as os from "os";
  * Current settings version - increment this when adding new models or changing settings structure
  * This triggers automatic migration for existing users
  */
-const SETTINGS_VERSION = 2;
+const SETTINGS_VERSION = 3;
 
 /**
  * User-level settings stored in ~/.clawd/user-settings.json
@@ -63,11 +63,11 @@ const DEFAULT_USER_SETTINGS: Partial<UserSettings> = {
     "grok-3-mini-fast",
     // Ollama models (use with baseURL: "http://localhost:11434/v1")
     "ollama/glm-5.1:cloud",
-    "ollama/gemma4:latest",
     "ollama/8bit/DeepSolana:latest",
     "ollama/minimax-m2.7:cloud",
     "ollama/minimax-m2.1:cloud",
     "ollama/kimi-k2.5:cloud",
+    "ollama/kimi-k2.6:cloud",
     "ollama/mxbai-embed-large:latest",
     // OpenRouter models (use with baseURL: "https://openrouter.ai/api/v1")
     "openrouter/anthropic/claude-sonnet-4.6",

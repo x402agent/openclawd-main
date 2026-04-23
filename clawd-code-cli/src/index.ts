@@ -360,9 +360,12 @@ program
       const model = options.model || loadModel();
       const maxToolRounds = parseInt(options.maxToolRounds) || 400;
 
-      if (!apiKey) {
+      // Accept OpenRouter-only mode: if no XAI key is set but OPENROUTER_API_KEY is,
+      // the per-model provider config will route through OpenRouter.
+      const hasOpenRouter = Boolean(process.env.OPENROUTER_API_KEY);
+      if (!apiKey && !hasOpenRouter) {
         console.error(
-          "❌ Error: API key required. Set XAI_API_KEY (or GROK_API_KEY), use --api-key, or set \"apiKey\" in ~/.clawd/user-settings.json"
+          "❌ Error: API key required. Set XAI_API_KEY (or GROK_API_KEY) or OPENROUTER_API_KEY, use --api-key, or set \"apiKey\" in ~/.clawd/user-settings.json"
         );
         process.exit(1);
       }
