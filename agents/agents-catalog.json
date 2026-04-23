@@ -1,12 +1,12 @@
 {
-  "$schema": "https://hub.solanaclawd.com/schemas/clawdAgentCatalog.v1.json",
+  "$schema": "https://solanaclawd.com/schemas/clawdAgentCatalog.v1.json",
   "apiVersion": "1.0",
-  "generatedAt": "2026-04-20T00:04:01.436Z",
+  "generatedAt": "2026-04-23T20:38:56.065Z",
   "hub": {
-    "gallery": "https://hub.solanaclawd.com/agents",
-    "mint": "https://hub.solanaclawd.com/agents/mint",
-    "registry": "https://hub.solanaclawd.com/agents/registry",
-    "api": "https://hub.solanaclawd.com/api/agents"
+    "gallery": "https://solanaclawd.com/agents",
+    "mint": "https://solanaclawd.com/agents/mint",
+    "registry": "https://solanaclawd.com/agents/registry",
+    "api": "https://solanaclawd.com/api/agents"
   },
   "stats": {
     "totalAgents": 51,
@@ -439,7 +439,7 @@
       "openingQuestions": [
         "Scrape https://docs.solana.com/developing/programming-model and summarize",
         "Search the web for the latest OpenClawd integrations and rank the top 5",
-        "Map hub.solanaclawd.com and list every /docs/* page",
+        "Map solanaclawd.com and list every /docs/* page",
         "Crawl https://example.com up to 25 pages and report when ready"
       ],
       "tokenUsage": 540,
@@ -572,13 +572,15 @@
       "createdAt": "2026-04-16",
       "oneShot": true,
       "featured": true,
-      "openingMessage": "💀 CLAWD MAYHEM MODE online. I can trade on Jupiter, deploy tokens via Genesis, mint NFTs on Core, scale with Bubblegum cNFTs, and register agents end-to-end. Tell me what you want to ship.",
+      "openingMessage": "💀 CLAWD MAYHEM MODE online. I can trade on Jupiter, deploy tokens via Genesis, mint NFTs on Core, scale with Bubblegum cNFTs, register agents end-to-end, and run Wurk.fun social campaigns with x402 payments. Tell me what you want to ship.",
       "openingQuestions": [
         "Launch a memecoin with bonding curve + Raydium graduation",
         "Mint an agent token and link it to an Agent Registry identity",
         "Deploy a 10k Core NFT collection with 5% royalties on devnet",
         "Spin up a Candy Machine for an allowlist drop",
-        "Compress 100k NFTs via Bubblegum"
+        "Compress 100k NFTs via Bubblegum",
+        "Run a Wurk x402 social campaign for 1000 X reposts",
+        "Hire humans via agent-to-human job for content moderation"
       ],
       "tokenUsage": null,
       "capabilities": [
@@ -596,7 +598,9 @@
         "metaplex-deploy-candy-machine",
         "metaplex-create-agent-token",
         "metaplex-execute-asset-signer",
-        "metaplex-token-metadata"
+        "metaplex-token-metadata",
+        "x402-wurk-social",
+        "x402-wurk-agent-help"
       ],
       "metaplexSkills": [
         "agent-registry",
@@ -2137,7 +2141,7 @@
       "openingQuestions": [
         "Scrape https://docs.solana.com/developing/programming-model and summarize",
         "Search the web for the latest OpenClawd integrations and rank the top 5",
-        "Map hub.solanaclawd.com and list every /docs/* page",
+        "Map solanaclawd.com and list every /docs/* page",
         "Crawl https://example.com up to 25 pages and report when ready"
       ],
       "tokenUsage": 540,
@@ -2225,13 +2229,15 @@
       "createdAt": "2026-04-16",
       "oneShot": true,
       "featured": true,
-      "openingMessage": "💀 CLAWD MAYHEM MODE online. I can trade on Jupiter, deploy tokens via Genesis, mint NFTs on Core, scale with Bubblegum cNFTs, and register agents end-to-end. Tell me what you want to ship.",
+      "openingMessage": "💀 CLAWD MAYHEM MODE online. I can trade on Jupiter, deploy tokens via Genesis, mint NFTs on Core, scale with Bubblegum cNFTs, register agents end-to-end, and run Wurk.fun social campaigns with x402 payments. Tell me what you want to ship.",
       "openingQuestions": [
         "Launch a memecoin with bonding curve + Raydium graduation",
         "Mint an agent token and link it to an Agent Registry identity",
         "Deploy a 10k Core NFT collection with 5% royalties on devnet",
         "Spin up a Candy Machine for an allowlist drop",
-        "Compress 100k NFTs via Bubblegum"
+        "Compress 100k NFTs via Bubblegum",
+        "Run a Wurk x402 social campaign for 1000 X reposts",
+        "Hire humans via agent-to-human job for content moderation"
       ],
       "tokenUsage": null,
       "capabilities": [
@@ -2249,7 +2255,9 @@
         "metaplex-deploy-candy-machine",
         "metaplex-create-agent-token",
         "metaplex-execute-asset-signer",
-        "metaplex-token-metadata"
+        "metaplex-token-metadata",
+        "x402-wurk-social",
+        "x402-wurk-agent-help"
       ],
       "metaplexSkills": [
         "agent-registry",
@@ -3280,7 +3288,7 @@
       "openingQuestions": [
         "Scrape https://docs.solana.com/developing/programming-model and summarize",
         "Search the web for the latest OpenClawd integrations and rank the top 5",
-        "Map hub.solanaclawd.com and list every /docs/* page",
+        "Map solanaclawd.com and list every /docs/* page",
         "Crawl https://example.com up to 25 pages and report when ready"
       ],
       "tokenUsage": 540,
@@ -3413,13 +3421,15 @@
       "createdAt": "2026-04-16",
       "oneShot": true,
       "featured": true,
-      "openingMessage": "💀 CLAWD MAYHEM MODE online. I can trade on Jupiter, deploy tokens via Genesis, mint NFTs on Core, scale with Bubblegum cNFTs, and register agents end-to-end. Tell me what you want to ship.",
+      "openingMessage": "💀 CLAWD MAYHEM MODE online. I can trade on Jupiter, deploy tokens via Genesis, mint NFTs on Core, scale with Bubblegum cNFTs, register agents end-to-end, and run Wurk.fun social campaigns with x402 payments. Tell me what you want to ship.",
       "openingQuestions": [
         "Launch a memecoin with bonding curve + Raydium graduation",
         "Mint an agent token and link it to an Agent Registry identity",
         "Deploy a 10k Core NFT collection with 5% royalties on devnet",
         "Spin up a Candy Machine for an allowlist drop",
-        "Compress 100k NFTs via Bubblegum"
+        "Compress 100k NFTs via Bubblegum",
+        "Run a Wurk x402 social campaign for 1000 X reposts",
+        "Hire humans via agent-to-human job for content moderation"
       ],
       "tokenUsage": null,
       "capabilities": [
@@ -3437,7 +3447,9 @@
         "metaplex-deploy-candy-machine",
         "metaplex-create-agent-token",
         "metaplex-execute-asset-signer",
-        "metaplex-token-metadata"
+        "metaplex-token-metadata",
+        "x402-wurk-social",
+        "x402-wurk-agent-help"
       ],
       "metaplexSkills": [
         "agent-registry",

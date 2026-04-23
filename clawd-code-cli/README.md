@@ -2,338 +2,255 @@
 
 <div align="center">
 
-**A lobster-themed AI agent CLI with Solana blockchain integration and OODA loop self-improvement**
+**A lobster-themed AI terminal operator for coding, system ops & Solana**
 
 [![Solana](https://img.shields.io/badge/Solana-Blockchain-14F195)](https://solana.com)
-[![x402](https://img.shields.io/badge/x402-Payments-F39C12?style=for-the-badge)](https://solanaclawd.com/x402)
-[![$CLAWD](https://img.shields.io/badge/$CLAWD-Token-14F195?style=for-the-badge)](https://dexscreener.com/solana/8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump)
+[![npm](https://img.shields.io/badge/npm-clawd--code--cli-CB3837)](https://www.npmjs.com/package/clawd-code-cli)
+[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
-🦞 *"Claws that code, brains that deploy on-chain"* 🦞
-
-Powered by xAI Grok models with Solana settlement.
+🦞 *"Claws that code, brains that deploy"* 🦞
 
 </div>
 
 ```
-    ╔════════════════════════════════════════════════════════════════════════╗
-    ║                                                                        ║
-    ║   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄   ║
-    ║  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓   ║
-    ║  ▓                                                                ▓   ║
-    ║  ▓   ██╗   ██╗ ██████╗ ██████╗ ███╗   ██╗██╗ ██████╗         ▓   ║
-    ║  ▓   ██║   ██║██╔═══██╗██╔══██╗████╗  ██║██║██╔════╝         ▓   ║
-    ║  ▓   ███████║██║   ██║██████╔╝██╔██╗ ██║██║██║  ███╗        ▓   ║
-    ║  ▓   ██╔══██║██║   ██║██╔══██╗██║╚██╗██║██║██║   ██║        ▓   ║
-    ║  ▓   ██║   ██║╚██████╔╝██║  ██║██║ ╚████║██║╚██████╔╝        ▓   ║
-    ║  ▓   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝ ╚═════╝         ▓   ║
-    ║  ▓                                                                ▓   ║
-    ║  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓   ║
-    ║                                                                        ║
-    ║          🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞          ║
-    ║                                                                        ║
-    ║          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░          ║
-    ║          ░░  🦞  C L A W D  C O D E  C L I  🦞  ░░░          ║
-    ║          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░          ║
-    ║                                                                        ║
-    ║          "Claws that code, brains that deploy on-chain"                    ║
-    ║                                                                        ║
-    ║          ╔══════════════════════════════════════════════╗                 ║
-    ║          ║   🦞  Self-Improving AI on Solana  🦞   ║                 ║
-    ║          ║   ┌────────────────────────────────┐     ║                 ║
-    ║          ║   │ • OODA Loop Learning            │     ║                 ║
-    ║          ║   │ • x402 Micro-Payments          │     ║                 ║
-    ║          ║   │ • On-Chain Skill Storage       │     ║                 ║
-    ║          ║   │ • Solana Wallet Integration    │     ║                 ║
-    ║          ║   │ • MCP Tools & Extensions      │     ║                 ║
-    ║          ║   └────────────────────────────────┘     ║                 ║
-    ║          ╚══════════════════════════════════════════════╝                 ║
-    ║                                                                        ║
-    ╚════════════════════════════════════════════════════════════════════════╝
+╔═══════════════════════════════════════════════════════════════╗
+║                                                               ║
+║   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄      ║
+║  ╱▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔╲     ║
+║ ║  █████╗   ║                                              ║    ║
+║ ║ ██╔══██╗  ║   🦞  CLAWD CODE CLI  🦞                   ║    ║
+║ ║ ╚══█╔═╝  ║                                              ║    ║
+║ ║   ██║     ║   "Claws that code, brains that deploy"     ║    ║
+║ ║   ██║     ║                                              ║    ║
+║ ║   ╚═╝     ║   Multi-Provider AI Terminal Operator        ║    ║
+║ ║  ▄█████╗  ║   Grok · Ollama · OpenRouter · OpenAI       ║    ║
+║ ║ ██╔══██╗║   Solana · MCP · File Tools                  ║    ║
+║ ║ ╚══█╔═╝  ║                                              ║    ║
+║ ║   ██║     ║   CLAWD Token: 8cHzQHUS2s2h8TzCmfqPKYiM4   ║    ║
+║ ║   ╚═╝     ║   dSt4roa3n7MyRLApump                        ║    ║
+║  ╲▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔╱     ║
+║   ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀      ║
+╚═══════════════════════════════════════════════════════════════╝
 ```
 
 ---
 
-## 🦞 What is Clawd Code CLI?
+## 🦞 About
 
-**Clawd Code CLI** is a lobster-themed AI agent CLI that combines Grok-powered code assistance with **Solana blockchain integration** and **OODA loop self-improvement**. 
+**Clawd Code CLI** is a lobster-themed AI terminal agent built for Solana operators, developers, and degen builders. It speaks to you through a retro ASCII terminal, runs entirely in your terminal, and lets you switch between Grok, Ollama (local), OpenRouter, and OpenAI backends on the fly — no restart needed.
 
-Part of the **OpenClawd ecosystem** — the open-source monorepo for building, running, and monetizing Solana-native AI agents.
-
-### Core Features
-
-| Feature | Description |
-|---------|-------------|
-| **🦞 Self-Improving AI** | OODA loop learning that stores patterns on-chain |
-| **💰 x402 Payments** | Earn $CLAWD for successful task completions |
-| **⛓️ Solana Native** | Full wallet integration, token tracking, and DeFi |
-| **🔌 MCP Tools** | Extend with Model Context Protocol servers |
-| **🧠 On-Chain Memory** | Skills that persist across sessions via IPFS |
-| **📊 Analytics** | Helius DAS API + Birdeye price data |
+**CLAWD Token**: `8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump`
 
 ---
 
-## 🧠 Self-Improvement System
+## Features
 
-### OODA Loop Architecture
-
-```
-    ╔═══════════════════════════════════════════════════════════════╗
-    ║  🦞 OODA Loop Self-Improvement Status                       ║
-    ╠═══════════════════════════════════════════════════════════════╣
-    ║  OBSERVE  → Scan environment, collect metrics               ║
-    ║  ORIENT   → Process patterns, update memory                 ║
-    ║  DECIDE   → Choose optimal strategy                         ║
-    ║  ACT      → Execute, record, earn rewards                   ║
-    ╚═══════════════════════════════════════════════════════════════╝
-```
-
-### $CLAWD Reward System
-
-| Action | $CLAWD Earned |
-|--------|---------------|
-| Complete task successfully | 1-10 $CLAWD |
-| Contribute new skill | 50-500 $CLAWD |
-| Skill used by others | 0.1 $CLAWD/use |
-| Bug report accepted | 10-100 $CLAWD |
+- 🦞 **Lobster-branded UI** — ASCII art logo, per-provider spinner animations, themed loading messages
+- ⚡ **Multi-Provider Routing** — Grok · Ollama · OpenRouter · OpenAI · custom, switched live via `/models`
+- 🔧 **AI File Operations** — view_file, create_file, str_replace_editor (no overwrite accidents)
+- 💻 **Bash + Shell Tools** — execute commands, grep, find, navigate
+- 📋 **Todo Lists** — plan and track tasks with visual priority flags
+- 🔌 **MCP Support** — extend with any Model Context Protocol server
+- 🪙 **Solana Tools** — query assets, prices, wallet balances via Helius DAS API + Birdeye
+- 🌐 **Web Search** — real-time search for Grok models (auto-detected)
+- 🔐 **Persistent Settings** — `~/.clawd/user-settings.json` remembers your API keys and model preferences
 
 ---
 
-## 🚀 Quick Start
-
-### Prerequisites
-
-- Bun 1.0+ (or Node.js 18+ as fallback)
-- Grok API key from [xAI](https://x.ai)
-- (Optional) Helius API key for Solana DAS API
-- (Optional) Birdeye API key for token prices
-- (Optional) Solana wallet for $CLAWD rewards
-
-### Installation
+## Installation
 
 ```bash
-# Global installation (recommended)
-bun add -g clawd-code-cli
-
-# Or with npm
+# Recommended
 npm install -g clawd-code-cli
 
-# Or from source
-git clone https://github.com/x402agent/openclawd.git
-cd openclawd/clawd-code-cli
-bun install && bun run build && bun link
+# Or with bun
+bun add -g clawd-code-cli
 ```
 
-### Usage
+The `clawd` and `claw` aliases are registered automatically.
+
+---
+
+## Quick Start
 
 ```bash
-# Interactive mode
 clawd
-
-# Headless mode
-clawd --prompt "deploy my Solana program"
-
-# Check wallet and rewards
-clawd wallet status
-clawd rewards list
 ```
 
----
-
-## 🛠️ CLI Commands
-
-### Core Commands
-
-| Command | Description |
-|---------|-------------|
-| `clawd [prompt]` | Run a task with AI assistance |
-| `clawd --help` | Show all available commands |
-| `clawd wallet status` | Check SOL and $CLAWD balance |
-| `clawd rewards list` | View earned rewards history |
-
-### Blockchain Commands
-
-| Command | Description |
-|---------|-------------|
-| `clawd wallet send <amount>` | Send SOL to another wallet |
-| `clawd wallet swap <from> <to>` | Swap tokens via Jupiter |
-| `clawd skills publish` | Publish learned skills on-chain |
-| `clawd skills browse` | Browse community skills |
-
-### Self-Improvement Commands
-
-| Command | Description |
-|---------|-------------|
-| `clawd learn analyze` | Analyze last session's patterns |
-| `clawd learn status` | Show OODA loop metrics |
-| `clawd learn export` | Export skills to IPFS |
-
-### MCP Commands
-
-| Command | Description |
-|---------|-------------|
-| `clawd mcp add <server>` | Add MCP server |
-| `clawd mcp list` | List configured servers |
-| `clawd mcp remove <server>` | Remove MCP server |
-
----
-
-## ⛓️ Solana Integration
-
-### x402 Payment Flow
-
-```
-User Request → Grok AI → Clawd Code → Solana
-                    ↓
-              x402 Payment
-                    ↓
-              $CLAWD Rewards
-```
-
-### Blockchain Status Display
-
-```
-    ┌─────────────────────────────────────────────┐
-    │  🦞 Blockchain Integration Status          │
-    │  ─────────────────────────────────────     │
-    │  SOL Balance:     [synced]                  │
-    │  $CLAWD Rewards:  [accumulating]           │
-    │  Skills Memory:   [uploading...]            │
-    │  MCP Tools:      [payment-ready]           │
-    └─────────────────────────────────────────────┘
-```
-
-### Wallet Features
-
-- **Solana Native** — Built-in wallet with Helius DAS API
-- **Token Tracking** — Birdeye price data for any token
-- **x402 Payments** — Automatic payment for MCP tool usage
-- **$CLAWD Rewards** — Earn tokens for successful tasks
-
----
-
-## 🔌 MCP Tools Integration
-
-### Available Tools
-
-| Tool | Category | Payment |
-|------|----------|---------|
-| `solana_getBalance` | Wallet | Free |
-| `solana_transfer` | Wallet | x402 |
-| `solana_swap` | DeFi | x402 |
-| `birdeye_price` | Analytics | x402 |
-| `pumpfun_launch` | Trading | x402 |
-| `jupiter_quote` | DeFi | Free |
-
-### Adding Custom MCP Servers
+On first run it will prompt for your Grok API key (from [xAI](https://x.ai)). Or set it once:
 
 ```bash
-clawd mcp add my-server -- npx -y my-mcp-server
-clawd mcp list
-clawd mcp remove my-server
+# From inside clawd:
+/config grok key xai-your-key-here
+
+# Or as environment variable
+export GROK_API_KEY=xai-your-key-here
+clawd
 ```
 
 ---
 
-## 🏗️ Architecture
+## Multi-Provider Setup
 
-```
-clawd-code-cli/
-├── src/
-│   ├── main.ts           # CLI entry point
-│   ├── agent/            # Agent core with OODA loop
-│   ├── tools/            # Tool implementations
-│   │   ├── blockchain/    # Solana tools
-│   │   └── mcp/         # MCP tools
-│   ├── services/
-│   │   ├── grok/         # Grok API client
-│   │   ├── solana/       # Solana integration
-│   │   └── payments/     # x402 payments
-│   └── utils/
-│       └── lobster-ui.ts  # 🦞 Lobster-themed UI
-└── package.json
+### OpenRouter (Claude, Gemini, Llama, DeepSeek...)
+
+```bash
+# Inside clawd:
+/config openrouter key sk-or-v1-your-key-here
+
+# Then switch to any OpenRouter model:
+/models
+# or
+/config add model openrouter/anthropic/claude-opus-4.7
+/config set defaultModel openrouter/anthropic/claude-opus-4.7
 ```
 
-### OpenClawd Ecosystem
+### Ollama (Local Models)
 
-```
-OpenClawd (github.com/x402agent/openclawd)
-├── clawd-code-cli/        ← This package
-├── clawd-code-local/      # Local AI on Apple Silicon
-├── clawd-code-proxy/      # x402 payment proxy
-├── clawd-code-main/       # Full Claude Code adaptation
-├── clawdrouter/           # Solana routing gateway
-├── solana-clawd/          # Solana DeFi tools
-└── clawdhub/              # Cloud dashboard
+```bash
+# Inside clawd:
+/config ollama baseURL http://localhost:11434/v1
+
+# Default Ollama models are already in the list:
+# ollama/gemma4:latest, ollama/DeepSolana:latest, etc.
+/models
 ```
 
----
+### OpenAI
 
-## 🔐 Security
-
-### Permission Levels
-
-| Level | Description | Requires |
-|-------|-------------|---------|
-| `deny` | Blocked | Always blocked |
-| `ask` | Grok AI screens | User confirmation |
-| `allow` | Auto-approved | Up to configurable limits |
-
-### Grok AI Screening
-
-For `ask` permissions, Grok 4.20 Beta analyzes:
-- Transaction destination safety
-- Smart contract risks
-- Historical behavior patterns
-- Market impact estimation
+```bash
+/config openai key sk-your-key-here
+/config add model openai/gpt-4o
+/config set defaultModel openai/gpt-4o
+```
 
 ---
 
-## 📦 Tech Stack
+## CLI Commands
 
-| Category | Technology |
-|----------|------------|
-| Runtime | [Bun](https://bun.sh) / Node.js |
-| Language | TypeScript |
-| AI | xAI Grok, OpenAI-compatible API |
-| Blockchain | [Solana](https://solana.com), [@solana/web3.js](https://solana-labs.github.io/solana-web3.js/) |
-| Payments | x402 Protocol, SPL Tokens |
-| RPC | [Helius](https://helius.xyz) |
-| Analytics | [Birdeye](https://birdeye.so) |
-| Protocols | [MCP SDK](https://modelcontextprotocol.io) |
+| Command | Description |
+|---------|-------------|
+| `/models` | Open interactive model selector |
+| `/models <name>` | Switch directly to a model by name |
+| `/config` | Show all provider configs (keys masked) |
+| `/config <provider> key <key>` | Set API key for a provider |
+| `/config <provider> baseURL <url>` | Set base URL for a provider |
+| `/config add model <name>` | Add a model to the available list |
+| `/config set defaultModel <model>` | Set the default model (also switches active session) |
+| `/provider` | Show active model's provider, base URL, and masked key |
+| `/clear` | Clear chat history |
+| `/help` | Show full help |
+| `/commit-and-push` | AI-generated git commit + push |
+| `/exit` | Exit |
 
----
-
-## 🎯 Roadmap
-
-- [ ] **v0.2** — On-chain skill publication MVP
-- [ ] **v0.3** — $CLAWD reward distribution
-- [ ] **v0.4** — Multi-agent OODA loop coordination
-- [ ] **v0.5** — DAO governance for skill curation
-- [ ] **v1.0** — Full self-improving agent network
+**Shortcuts**: `↑/↓` navigate history, `Tab` complete suggestions, `Shift+Tab` toggle auto-edit, `Esc` abort.
 
 ---
 
-## 🦞 About OpenClawd
+## Command Line Options
 
-Part of the **OpenClawd ecosystem** — the open-source monorepo for building, running, and monetizing Solana-native AI agents.
+```bash
+clawd [options]
 
-| Resource | Link |
-|----------|------|
-| GitHub | [github.com/x402agent/openclawd](https://github.com/x402agent/openclawd) |
-| Twitter | [@clawddevs](https://x.com/clawddevs) |
-| Telegram | [@clawdtoken](https://t.me/clawdtoken) |
-| Website | [solanaclawd.com](https://solanaclawd.com) |
-
-**$CLAWD Token:** `8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump`
-
----
-
-## 📄 License
-
-MIT — See [`LICENSE`](LICENSE)
+Options:
+  -V, --version           output the version number
+  -d, --directory <dir>   working directory
+  -k, --api-key <key>    Grok API key
+  -u, --base-url <url>    Grok API base URL
+  -m, --model <model>     default model
+  -p, --prompt <prompt>   headless mode — one prompt, then exit
+  --max-tool-rounds <n>   max tool loops (default: 400)
+  -h, --help              show help
+```
 
 ---
 
-*Built by 8BIT Labs • Powered by xAI Grok • Settled on Solana*
+## Provider Model Reference
 
-🦞 *"Claws that code, brains that deploy on-chain"* 🦞
+### Grok (xAI) — default
+```
+grok-4-1-fast-reasoning
+grok-4-fast-reasoning
+grok-4-fast-non-reasoning
+grok-4
+grok-3
+grok-3-fast
+grok-code-fast-1
+```
+
+### OpenRouter
+```
+openrouter/anthropic/claude-opus-4.7
+openrouter/anthropic/claude-sonnet-4
+openrouter/anthropic/claude-3.5-sonnet
+openrouter/google/gemini-2.5-pro
+openrouter/google/gemini-2.0-flash
+openrouter/meta-llama/llama-4-maverick
+openrouter/deepseek/deepseek-chat-v3
+openrouter/deepseek/deepseek-coder
+openrouter/x-ai/grok-3
+openrouter/qwen/qwen-3
+```
+
+### OpenAI
+```
+openai/gpt-4.5
+openai/gpt-4o
+openai/gpt-4o-mini
+openai/o3
+openai/o3-mini
+openai/o4-mini
+```
+
+### Ollama (localhost:11434)
+```
+ollama/gemma4:latest
+ollama/DeepSolana:latest
+ollama/minimax-m2.7:cloud
+ollama/glm-5.1:cloud
+ollama/mxbai-embed-large:latest
+```
+
+---
+
+## Solana Integration
+
+```bash
+# Set environment variables
+export HELIUS_API_KEY=your_helius_key
+export BIRDEYE_API_KEY=your_birdeye_key
+
+# Then inside clawd you can ask:
+"show me my Solana wallet balance"
+"get the price of $BONK"
+"look up this NFT asset ..."
+```
+
+---
+
+## Local Development
+
+```bash
+git clone https://github.com/8bit/clawd-code-cli.git
+cd clawd-code-cli
+npm install
+npm run build
+npm link   # symlink locally for testing
+clawd
+```
+
+---
+
+## 🦞 CLAWD Token
+
+**CLAWD** is the token of the Clawd ecosystem.持有 CLAWD to access premium features, agent minting, and governance.
+
+- **Mint**: `8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump`
+- **Blockchain**: Solana
+- **CLI Integration**: Use the Solana tools in clawd to query CLAWD token data, balances, and more.
+
+---
+
+## License
+
+MIT
