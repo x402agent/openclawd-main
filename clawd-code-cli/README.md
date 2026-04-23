@@ -53,6 +53,7 @@
 
 ## Features
 
+- **🦞 Lobster-Themed UI**: Beautiful ASCII art with clawd branding
 - **🤖 Conversational AI**: Natural language interface powered by Grok
 - **📝 Smart File Operations**: AI automatically uses tools to view, create, and edit files
 - **⚡ Bash Integration**: Execute shell commands through natural conversation
@@ -60,6 +61,7 @@
 - **💬 Interactive UI**: Beautiful terminal interface with ASCII art
 - **🌍 Global Installation**: Install and use anywhere with `bun add -g clawd-code-cli`
 - **🪙 Solana Integration**: Query Solana assets, token prices, and wallet data using Helius DAS API and Birdeye
+- **🔗 ClawdRouter Integration**: Works seamlessly with ClawdRouter for LLM routing
 
 ## Installation
 
