@@ -1,289 +1,326 @@
-# Claude Code Proxy
+# 🦞 Clawd Code Proxy
 
-A proxy server that enables **Claude Code** to work with OpenAI-compatible API providers. Convert Claude API requests to OpenAI API calls, allowing you to use various LLM providers through the Claude Code CLI.
+<div align="center">
 
-![Claude Code Proxy](demo.png)
+**A lobster-themed proxy server that enables Clawd Code to work with OpenAI-compatible API providers and Solana blockchain integration**
 
-## Features
+🦞 *"Claws that route, brains that settle on-chain"* 🦞
 
-- **Full Claude API Compatibility**: Complete `/v1/messages` endpoint support
-- **Multiple Provider Support**: OpenAI, Azure OpenAI, local models (Ollama), and any OpenAI-compatible API
-- **Smart Model Mapping**: Configure BIG and SMALL models via environment variables
-- **Function Calling**: Complete tool use support with proper conversion
-- **Streaming Responses**: Real-time SSE streaming support
-- **Image Support**: Base64 encoded image input
-- **Custom Headers**: Automatic injection of custom HTTP headers for API requests
-- **Error Handling**: Comprehensive error handling and logging
+</div>
 
-## Quick Start
+```
+    ╔════════════════════════════════════════════════════════════════════════╗
+    ║                                                                        ║
+    ║   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄   ║
+    ║  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓   ║
+    ║  ▓                                                                ▓   ║
+    ║  ▓   ██╗   ██╗ ██████╗ ██████╗ ███╗   ██╗██╗ ██████╗         ▓   ║
+    ║  ▓   ██║   ██║██╔═══██╗██╔══██╗████╗  ██║██║██╔════╝         ▓   ║
+    ║  ▓   ███████║██║   ██║██████╔╝██╔██╗ ██║██║██║  ███╗        ▓   ║
+    ║  ▓   ██╔══██║██║   ██║██╔══██╗██║╚██╗██║██║██║   ██║        ▓   ║
+    ║  ▓   ██║   ██║╚██████╔╝██║  ██║██║ ╚████║██║╚██████╔╝        ▓   ║
+    ║  ▓   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝ ╚═════╝         ▓   ║
+    ║  ▓                                                                ▓   ║
+    ║  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓   ║
+    ║                                                                        ║
+    ║          🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞          ║
+    ║                                                                        ║
+    ║          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░          ║
+    ║          ░░  🦞  C L A W D  C O D E  P R O X Y  🦞  ░░░          ║
+    ║          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░          ║
+    ║                                                                        ║
+    ║          "Claws that route, brains that settle on-chain"                    ║
+    ║                                                                        ║
+    ║          ╔══════════════════════════════════════════════╗                 ║
+    ║          ║   🦞  x402 + ClawdRouter Integration  🦞   ║                 ║
+    ║          ║   ┌────────────────────────────────┐     ║                 ║
+    ║          ║   │ • Multi-Provider Routing         │     ║                 ║
+    ║          ║   │ • x402 Micro-Payments           │     ║                 ║
+    ║          ║   │ • Solana Settlement              │     ║                 ║
+    ║          ║   │ • Usage Tracking on-Chain       │     ║                 ║
+    ║          ║   │ • Grok Integration Ready        │     ║                 ║
+    ║          ║   └────────────────────────────────┘     ║                 ║
+    ║          ╚══════════════════════════════════════════════╝                 ║
+    ║                                                                        ║
+    ╚════════════════════════════════════════════════════════════════════════╝
+```
 
-### 1. Install Dependencies
+---
+
+## 🦞 What is Clawd Code Proxy?
+
+**Clawd Code Proxy** is a lobster-themed proxy server that enables Clawd Code to work with OpenAI-compatible API providers, with built-in **x402 micro-payments** and **Solana settlement** integration.
+
+### Core Features
+
+| Feature | Description |
+|---------|-------------|
+| **🦞 x402 Payments** | Automatic payment settlement on Solana |
+| **⛓️ Solana Native** | Full settlement layer integration |
+| **🧠 Multi-Provider** | Route between OpenAI, Grok, and local models |
+| **📊 Usage Tracking** | Track API usage with on-chain receipts |
+| **💰 $CLAWD Rewards** | Earn rewards for routing efficiency |
+| **🔗 ClawdRouter** | Seamless integration with ClawdRouter gateway |
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Python 3.11+
+- Solana wallet (optional for x402)
+- API keys for your preferred provider
+
+### Installation
 
 ```bash
-# Using UV (recommended)
+# Clone the repository
+git clone https://github.com/x402agent/openclawd.git
+cd openclawd/clawd-code-proxy-main
+
+# Install dependencies
 uv sync
 
-# Or using pip
-pip install -r requirements.txt
+# Configure
+cp .env.example .env
+# Edit .env with your API keys
 ```
 
-### 2. Configure
+### Configuration
 
 ```bash
-cp .env.example .env
-# Edit .env and add your API configuration
-# Note: Environment variables are automatically loaded from .env file
+# Basic configuration
+export OPENAI_API_KEY=your-openai-key
+export ANTHROPIC_API_KEY=your-anthropic-key
+
+# Solana configuration (for x402)
+export SOLANA_WALLET_PATH=~/.solana/wallet.json
+export HELIUS_API_KEY=your-helius-key
+
+# x402 configuration
+export X402_ENABLED=true
+export X402_PRICE_PER_REQUEST=10000  # lamports
 ```
 
-### 3. Start Server
+### Start Server
 
 ```bash
 # Direct run
 python start_proxy.py
 
 # Or with UV
-uv run claude-code-proxy
+uv run clawd-code-proxy
 
-# Or with docker compose
+# Or with docker
 docker compose up -d
 ```
 
-### 4. Use with Claude Code
+### Use with Clawd Code
 
 ```bash
-# If ANTHROPIC_API_KEY is not set in the proxy:
-ANTHROPIC_BASE_URL=http://localhost:8082 ANTHROPIC_API_KEY="any-value" claude
+# Set up environment
+export ANTHROPIC_BASE_URL=http://localhost:8082
+export ANTHROPIC_API_KEY="any-value"
 
-# If ANTHROPIC_API_KEY is set in the proxy:
-ANTHROPIC_BASE_URL=http://localhost:8082 ANTHROPIC_API_KEY="exact-matching-key" claude
+# Run Clawd Code
+clawd --prompt "deploy my Solana program"
 ```
 
-## Configuration
+---
 
-The application automatically loads environment variables from a `.env` file in the project root using `python-dotenv`. You can also set environment variables directly in your shell.
+## 💰 x402 Payment Flow
 
-### Environment Variables
-
-**Required:**
-
-- `OPENAI_API_KEY` - Your API key for the target provider
-
-**Security:**
-
-- `ANTHROPIC_API_KEY` - Expected Anthropic API key for client validation
-  - If set, clients must provide this exact API key to access the proxy
-  - If not set, any API key will be accepted
-
-**Model Configuration:**
-
-- `BIG_MODEL` - Model for Claude opus requests (default: `gpt-4o`)
-- `MIDDLE_MODEL` - Model for Claude opus requests (default: `gpt-4o`)
-- `SMALL_MODEL` - Model for Claude haiku requests (default: `gpt-4o-mini`)
-
-**API Configuration:**
-
-- `OPENAI_BASE_URL` - API base URL (default: `https://api.openai.com/v1`)
-
-**Server Settings:**
-
-- `HOST` - Server host (default: `0.0.0.0`)
-- `PORT` - Server port (default: `8082`)
-- `LOG_LEVEL` - Logging level (default: `WARNING`)
-
-**Performance:**
-
-- `MAX_TOKENS_LIMIT` - Token limit (default: `4096`)
-- `REQUEST_TIMEOUT` - Request timeout in seconds (default: `90`)
-
-**Custom Headers:**
-
-- `CUSTOM_HEADER_*` - Custom headers for API requests (e.g., `CUSTOM_HEADER_ACCEPT`, `CUSTOM_HEADER_AUTHORIZATION`)
-  - Uncomment in `.env` file to enable custom headers
-
-### Custom Headers Configuration
-
-Add custom headers to your API requests by setting environment variables with the `CUSTOM_HEADER_` prefix:
-
-```bash
-# Uncomment to enable custom headers
-# CUSTOM_HEADER_ACCEPT="application/jsonstream"
-# CUSTOM_HEADER_CONTENT_TYPE="application/json"
-# CUSTOM_HEADER_USER_AGENT="your-app/1.0.0"
-# CUSTOM_HEADER_AUTHORIZATION="Bearer your-token"
-# CUSTOM_HEADER_X_API_KEY="your-api-key"
-# CUSTOM_HEADER_X_CLIENT_ID="your-client-id"
-# CUSTOM_HEADER_X_CLIENT_VERSION="1.0.0"
-# CUSTOM_HEADER_X_REQUEST_ID="unique-request-id"
-# CUSTOM_HEADER_X_TRACE_ID="trace-123"
-# CUSTOM_HEADER_X_SESSION_ID="session-456"
+```
+    ┌─────────────────────────────────────────────────────────────────┐
+    │              🦞 Clawd Code Proxy Payment Flow                   │
+    ├─────────────────────────────────────────────────────────────────┤
+    │                                                                 │
+    │   Clawd Code        Proxy           Provider        Solana     │
+    │       │               │               │              │         │
+    │       │──Request─────▶│               │              │         │
+    │       │               │──Forward─────▶│              │         │
+    │       │               │               │              │         │
+    │       │               │◀─Response────│              │         │
+    │       │◀─Response─────│               │              │         │
+    │       │               │               │              │         │
+    │       │               │──────────────────────────────▶│        │
+    │       │               │    x402 Payment Settlement   │        │
+    │       │               │               │              │         │
+    │       │               │◀──────────────────────────────────│  │
+    │       │               │    $CLAWD Rewards Credited  │        │
+    │                                                                 │
+    └─────────────────────────────────────────────────────────────────┘
 ```
 
-### Header Conversion Rules
+### Settlement Features
 
-Environment variables with the `CUSTOM_HEADER_` prefix are automatically converted to HTTP headers:
+| Feature | Description |
+|---------|-------------|
+| **Automatic Settlement** | Payments settle after each request |
+| **Batch Settlements** | Aggregate small payments efficiently |
+| **Receipt Storage** | Store x402 receipts on Solana |
+| **Refund Handling** | Automatic refunds for failed requests |
 
-- Environment variable: `CUSTOM_HEADER_ACCEPT`
-- HTTP Header: `ACCEPT`
+---
 
-- Environment variable: `CUSTOM_HEADER_X_API_KEY`
-- HTTP Header: `X-API-KEY`
-
-- Environment variable: `CUSTOM_HEADER_AUTHORIZATION`
-- HTTP Header: `AUTHORIZATION`
-
-### Supported Header Types
-
-- **Content Type**: `ACCEPT`, `CONTENT-TYPE`
-- **Authentication**: `AUTHORIZATION`, `X-API-KEY`
-- **Client Identification**: `USER-AGENT`, `X-CLIENT-ID`, `X-CLIENT-VERSION`
-- **Tracking**: `X-REQUEST-ID`, `X-TRACE-ID`, `X-SESSION-ID`
-
-### Usage Example
-
-```bash
-# Basic configuration
-OPENAI_API_KEY="sk-your-openai-api-key-here"
-OPENAI_BASE_URL="https://api.openai.com/v1"
-
-# Enable custom headers (uncomment as needed)
-CUSTOM_HEADER_ACCEPT="application/jsonstream"
-CUSTOM_HEADER_CONTENT_TYPE="application/json"
-CUSTOM_HEADER_USER_AGENT="my-app/1.0.0"
-CUSTOM_HEADER_AUTHORIZATION="Bearer my-token"
-```
-
-The proxy will automatically include these headers in all API requests to the target LLM provider.
+## 🧠 Multi-Provider Routing
 
 ### Model Mapping
 
-The proxy maps Claude model requests to your configured models:
+```bash
+# Configure model routing
+export BIG_MODEL=grok-3
+export MIDDLE_MODEL=grok-2.5
+export SMALL_MODEL=grok-2-mini
 
-| Claude Request                 | Mapped To     | Environment Variable   |
-| ------------------------------ | ------------- | ---------------------- |
-| Models with "haiku"            | `SMALL_MODEL` | Default: `gpt-4o-mini` |
-| Models with "sonnet"           | `MIDDLE_MODEL`| Default: `BIG_MODEL`   |
-| Models with "opus"             | `BIG_MODEL`   | Default: `gpt-4o`      |
+# Or use ClawdRouter for smart routing
+export CLAWDROUTER_URL=https://api.clawdrouter.com
+```
 
-### Provider Examples
+### Supported Providers
 
-#### OpenAI
+| Provider | Status | x402 Support |
+|----------|--------|--------------|
+| OpenAI | ✅ | ✅ |
+| Grok (X.AI) | ✅ | ✅ |
+| Local (Ollama) | ✅ | ❌ |
+| ClawdRouter | ✅ | ✅ Native |
+| Azure OpenAI | ✅ | ✅ |
+
+---
+
+## 📊 Usage Tracking
+
+### On-Chain Metrics
+
+Every request through Clawd Code Proxy is tracked:
 
 ```bash
-OPENAI_API_KEY="sk-your-openai-key"
-OPENAI_BASE_URL="https://api.openai.com/v1"
-BIG_MODEL="gpt-4o"
-MIDDLE_MODEL="gpt-4o"
-SMALL_MODEL="gpt-4o-mini"
+# View usage dashboard
+clawd-code-proxy usage
+
+# Example output:
+#
+#    ╔═══════════════════════════════════════════════════════════════╗
+#    ║  🦞 Clawd Code Proxy Usage Metrics                   ║
+#    ╠═══════════════════════════════════════════════════════════════╣
+#    ║  Total Requests:     1,247                             ║
+#    ║  Total Spent:       12.5M lamports ($0.125 SOL)      ║
+#    ║  $CLAWD Earned:     247                               ║
+#    ║  Providers Used:     grok-3 (45%), grok-2.5 (35%)    ║
+#    ║  Avg Latency:        234ms                             ║
+#    ╚═══════════════════════════════════════════════════════════════╝
 ```
 
-#### Azure OpenAI
+### Receipt Storage
+
+x402 receipts are stored in your Solana wallet:
+```bash
+# List receipts
+clawd-code-proxy receipts
+
+# Verify receipt on-chain
+clawd-code-proxy verify <receipt-hash>
+```
+
+---
+
+## 🏗️ Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                      Clawd Code Proxy                           │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  ┌─────────────────┐    ┌─────────────────┐    ┌─────────────┐│
+│  │   Request       │───▶│  Payment       │───▶│  Route      ││
+│  │   Handler       │    │  Check         │    │  Engine     ││
+│  └─────────────────┘    └─────────────────┘    └─────────────┘│
+│          │                    │                    │           │
+│          ▼                    ▼                    ▼           │
+│  ┌─────────────────┐    ┌─────────────────┐    ┌─────────────┐│
+│  │  x402           │    │  Usage          │    │  Provider   ││
+│  │  Settlement      │    │  Tracker       │    │  Pool       ││
+│  └─────────────────┘    └─────────────────┘    └─────────────┘│
+│          │                    │                    │           │
+│          └────────────────────┼────────────────────┘           │
+│                              │                                │
+│                              ▼                                │
+│                   ┌─────────────────┐                       │
+│                   │  Solana RPC     │                       │
+│                   │  (Helius)       │                       │
+│                   └─────────────────┘                       │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## 🔐 Security
+
+### API Key Protection
 
 ```bash
-OPENAI_API_KEY="your-azure-key"
-OPENAI_BASE_URL="https://your-resource.openai.azure.com/openai/deployments/your-deployment"
-BIG_MODEL="gpt-4"
-MIDDLE_MODEL="gpt-4"
-SMALL_MODEL="gpt-35-turbo"
+# Require exact API key match
+export ANTHROPIC_API_KEY=your-secret-key
+# Clients must provide this exact key
+
+# Or allow any key (development)
+export ANTHROPIC_API_KEY=
 ```
 
-#### Local Models (Ollama)
+### Payment Security
 
-```bash
-OPENAI_API_KEY="dummy-key"  # Required but can be dummy
-OPENAI_BASE_URL="http://localhost:11434/v1"
-BIG_MODEL="llama3.1:70b"
-MIDDLE_MODEL="llama3.1:70b"
-SMALL_MODEL="llama3.1:8b"
-```
+- All x402 payments signed with Ed25519
+- Transaction verification via Solana RPC
+- Automatic refund on settlement failure
 
-#### Other Providers
+---
 
-Any OpenAI-compatible API can be used by setting the appropriate `OPENAI_BASE_URL`.
+## 📦 Tech Stack
 
-## Usage Examples
+| Category | Technology |
+|----------|------------|
+| Runtime | Python 3.11+ |
+| Framework | FastAPI |
+| Blockchain | Solana, SPL Tokens |
+| Payments | x402 Protocol |
+| RPC | Helius |
+| API | OpenAI-compatible |
 
-### Basic Chat
+---
 
-```python
-import httpx
+## 🎯 Roadmap
 
-response = httpx.post(
-    "http://localhost:8082/v1/messages",
-    json={
-        "model": "claude-3-5-sonnet-20241022",  # Maps to MIDDLE_MODEL
-        "max_tokens": 100,
-        "messages": [
-            {"role": "user", "content": "Hello!"}
-        ]
-    }
-)
-```
+- [ ] **v0.2** — Enhanced x402 settlement batching
+- [ ] **v0.3** — ClawdRouter integration
+- [ ] **v0.4** — Multi-wallet support
+- [ ] **v0.5** — DAO governance for routing
+- [ ] **v1.0** — Fully autonomous payment routing
 
-## Integration with Claude Code
+---
 
-This proxy is designed to work seamlessly with Claude Code CLI:
+## 🦞 About OpenClawd
 
-```bash
-# Start the proxy
-python start_proxy.py
+Part of the **OpenClawd ecosystem** — the open-source monorepo for building, running, and monetizing Solana-native AI agents.
 
-# Use Claude Code with the proxy
-ANTHROPIC_BASE_URL=http://localhost:8082 claude
+| Resource | Link |
+|----------|------|
+| GitHub | [github.com/x402agent/openclawd](https://github.com/x402agent/openclawd) |
+| Twitter | [@clawddevs](https://x.com/clawddevs) |
+| Telegram | [@clawdtoken](https://t.me/clawdtoken) |
+| Website | [solanaclawd.com](https://solanaclawd.com) |
 
-# Or set permanently
-export ANTHROPIC_BASE_URL=http://localhost:8082
-claude
-```
+**$CLAWD Token:** `8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump`
 
-## Testing
+---
 
-Test proxy functionality:
+## 📄 License
 
-```bash
-# Run comprehensive tests
-python src/test_claude_to_openai.py
-```
+MIT — See [`LICENSE`](LICENSE)
 
-## Development
+---
 
-### Using UV
+*Built by 8BIT Labs • Inspired by Nous Research • Powered by xAI Grok • Settled on Solana*
 
-```bash
-# Install dependencies
-uv sync
-
-# Run server
-uv run claude-code-proxy
-
-# Format code
-uv run black src/
-uv run isort src/
-
-# Type checking
-uv run mypy src/
-```
-
-### Project Structure
-
-```
-claude-code-proxy/
-├── src/
-│   ├── main.py                     # Main server
-│   ├── test_claude_to_openai.py    # Tests
-│   └── [other modules...]
-├── start_proxy.py                  # Startup script
-├── .env.example                    # Config template
-└── README.md                       # This file
-```
-
-## Performance
-
-- **Async/await** for high concurrency
-- **Connection pooling** for efficiency
-- **Streaming support** for real-time responses
-- **Configurable timeouts** and retries
-- **Smart error handling** with detailed logging
-
-## License
-
-MIT License
+🦞 *"Claws that route, brains that settle on-chain"* 🦞

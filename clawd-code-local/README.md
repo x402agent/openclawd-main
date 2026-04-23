@@ -1,75 +1,169 @@
-<p align="center">
-  <h1 align="center">🧠 Claude Code Local</h1>
-  <p align="center">
-    <strong>Run a 14 billion parameter AI on your MacBook.<br>No cloud. No fees. No data leaves your machine.</strong>
-  </p>
-  <p align="center">
-    <a href="#-benchmarks"><img src="https://img.shields.io/badge/⚡_Speed-65_tok%2Fs-brightgreen?style=for-the-badge" alt="Speed"></a>
-    <a href="#-benchmarks"><img src="https://img.shields.io/badge/🚀_Claude_Code-17.6s_per_task-blue?style=for-the-badge" alt="Claude Code"></a>
-    <a href="#-benchmarks"><img src="https://img.shields.io/badge/📈_vs_llama.cpp-7.5x_faster-orange?style=for-the-badge" alt="7.5x faster"></a>
-    <a href="LICENSE"><img src="https://img.shields.io/badge/📜_License-MIT-yellow?style=for-the-badge" alt="MIT"></a>
-  </p>
-</p>
+# 🦞 Clawd Code Local
+
+<div align="center">
+
+**A lobster-themed self-improving AI coding assistant for Apple Silicon — no cloud, no fees, pure on-device power**
+
+🦞 *"Claws that learn locally, brains that evolve on-device"* 🦞
+
+</div>
+
+```
+    ╔════════════════════════════════════════════════════════════════════════╗
+    ║                                                                        ║
+    ║   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄   ║
+    ║  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓   ║
+    ║  ▓                                                                ▓   ║
+    ║  ▓   ██╗   ██╗ ██████╗ ██████╗ ███╗   ██╗██╗ ██████╗         ▓   ║
+    ║  ▓   ██║   ██║██╔═══██╗██╔══██╗████╗  ██║██║██╔════╝         ▓   ║
+    ║  ▓   ███████║██║   ██║██████╔╝██╔██╗ ██║██║██║  ███╗        ▓   ║
+    ║  ▓   ██╔══██║██║   ██║██╔══██╗██║╚██╗██║██║██║   ██║        ▓   ║
+    ║  ▓   ██║   ██║╚██████╔╝██║  ██║██║ ╚████║██║╚██████╔╝        ▓   ║
+    ║  ▓   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝ ╚═════╝         ▓   ║
+    ║  ▓                                                                ▓   ║
+    ║  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓   ║
+    ║                                                                        ║
+    ║          🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞          ║
+    ║                                                                        ║
+    ║          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░          ║
+    ║          ░░  🦞  C L A W D  C O D E  L O C A L  🦞  ░░░          ║
+    ║          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░          ║
+    ║                                                                        ║
+    ║          "Claws that learn locally, brains that evolve on-device"            ║
+    ║                                                                        ║
+    ║          ╔══════════════════════════════════════════════╗                 ║
+    ║          ║   🦞  Apple Silicon + Solana Integration  🦞   ║                 ║
+    ║          ║   ┌────────────────────────────────┐     ║                 ║
+    ║          ║   │ • Local AI on M-Series GPU      │     ║                 ║
+    ║          ║   │ • OODA Loop Self-Improvement   │     ║                 ║
+    ║          ║   │ • Optional Solana Sync          │     ║                 ║
+    ║          ║   │ • Privacy-First Architecture  │     ║                 ║
+    ║          ║   │ • iPhone Remote Control         │     ║                 ║
+    ║          ║   └────────────────────────────────┘     ║                 ║
+    ║          ╚══════════════════════════════════════════════╝                 ║
+    ║                                                                        ║
+    ╚════════════════════════════════════════════════════════════════════════╝
+```
 
 ---
 
-## 🤔 What Is This?
+## 🦞 What is Clawd Code Local?
 
-Your MacBook has a powerful GPU built right into the chip. This project uses that GPU to run a **massive AI model** — the same kind that powers ChatGPT and Claude — **entirely on your computer**.
+**Clawd Code Local** is a self-improving AI coding assistant that runs entirely on your Apple Silicon Mac — no cloud, no fees, no data leaves your machine. It's lobster-themed, privacy-first, and can optionally sync learned patterns to Solana.
 
-🚫 No internet needed
-💰 No monthly subscription
-🔒 No one sees your code or data
-✅ Full Claude Code experience — write code, edit files, manage projects, control your browser
+### Core Features
 
+| Feature | Description |
+|---------|-------------|
+| **🦞 Local AI** | 65 tok/s on M-Series GPU via MLX |
+| **🧠 Self-Improving** | OODA loop learning with local skill storage |
+| **⛓️ Optional Solana Sync** | Sync learned patterns to blockchain when online |
+| **🔐 Privacy-First** | No data leaves your machine |
+| **📱 iPhone Control** | Remote control via iMessage |
+| **💰 $CLAWD Ready** | Sync rewards to Solana when connected |
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Apple Silicon Mac (M1/M2/M3/M4)
+- macOS 14+ (Sonoma or later)
+- Homebrew (for MLX dependencies)
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/x402agent/openclawd.git
+cd openclawd/clawd-code-local
+
+# Install dependencies
+brew install python@3.11 uv
+uv sync
+
+# Run the MLX server
+python -m clawd_local.server
+
+# In another terminal, run Claude Code
+clawd-local
 ```
-         📱 You (Mac or Phone)
-          │
-     🤖 Claude Code         ← the AI coding tool you know
-          │
-     ⚡ MLX Native Server    ← our server (200 lines of Python)
-          │
-     🧠 Qwen3.5 27B Claude 4.6 Distilled       ← 14 billion parameter brain
-          │
-     🖥️ Apple Silicon GPU    ← your M-series chip does all the work
+
+### Usage
+
+```bash
+# Interactive mode (local AI)
+clawd-local
+
+# With Solana sync (when online)
+clawd-local --sync
+
+# Remote control from iPhone
+clawd-local --imessage
 ```
 
 ---
 
-## 📱 Control From Your Phone
+## 🧠 Self-Improvement System
 
-You don't have to be at your Mac to use this. We built a remote control pipeline:
+### OODA Loop Architecture
+
+```
+    ╔═══════════════════════════════════════════════════════════════╗
+    ║  🦞 OODA Loop Self-Improvement Status (Local)         ║
+    ╠═══════════════════════════════════════════════════════════════╣
+    ║  OBSERVE  → Scan codebase, collect metrics            ║
+    ║  ORIENT   → Process patterns, update local memory     ║
+    ║  DECIDE   → Choose optimal strategy                    ║
+    ║  ACT      → Execute, record locally                   ║
+    ╚═══════════════════════════════════════════════════════════════╝
+```
+
+### Local Learning
+
+Skills are stored locally in `~/.clawd-local/skills/`:
+- Pattern matching rules
+- Code templates
+- Project-specific knowledge
+- Success/failure metrics
+
+### Optional Solana Sync
+
+When connected, learned skills can be published to Solana:
+```bash
+clawd-local sync publish    # Share skills on-chain
+clawd-local sync pull       # Download community skills
+```
+
+---
+
+## 📱 iPhone Remote Control
 
 ```
 📱 Your iPhone                    💻 Your Mac
      │                                │
      │── iMessage ──────────────────>│
-     │                                │── Claude Code
+     │                                │── Clawd Local
      │                                │── MLX Server
-     │                                │── Qwen3.5 27B Claude 4.6 Distilled
-     │                                │── (does the work)
+     │                                │── Qwen3.5 27B
+     │                                │── (AI work happens)
      │<── iMessage response ────────│
      │                                │
    🛋️ From your couch            🖥️ At your desk
 ```
 
-**How it works:**
-- 📲 Send a message from your phone via iMessage
-- 🤖 Claude Code receives it and runs the task on your local AI
-- 💬 Response comes back to your phone
-- ✈️ Works anywhere your Mac has power — even offline for the AI part
-
-We built this **before** Anthropic shipped their Dispatch feature. Same concept, but ours uses iMessage and runs on your local model instead of cloud.
-
-> 💡 **Pro tip:** Anthropic's Dispatch doesn't read your CLAUDE.md. Mention it in your message or it'll miss your custom setup. Our iMessage system doesn't have this problem.
+**Setup:**
+```bash
+clawd-local imessage setup
+# Follow the prompts to connect your iPhone
+```
 
 ---
 
 ## 📊 Benchmarks
 
-We built and tested three different approaches. Each one got faster.
-
-### ⚡ Speed Comparison
+### Speed Comparison
 
 ```
                          Tokens per Second
@@ -78,244 +172,121 @@ We built and tested three different approaches. Each one got faster.
   🚀 MLX Native (Gen 3)  ████████████████████████████████████████████████████████████████ 65 tok/s
 ```
 
-### ⏱️ Real-World Claude Code Task
-
-How long to ask Claude Code to write a function:
+### Real-World Claude Code Task
 
 ```
-  😴 Ollama + Proxy          ████████████████████████████████████████████ 133 seconds
-  😐 llama.cpp + Proxy       ████████████████████████████████████████████ 133 seconds
-  🔥 MLX Native (no proxy)   ██████ 17.6 seconds
+😴 Ollama + Proxy          ████████████████████████████████████████████ 133 seconds
+😐 llama.cpp + Proxy       ████████████████████████████████████████████ 133 seconds
+🔥 MLX Native (no proxy)   ██████ 17.6 seconds
 
                               7.5x faster ⚡
 ```
 
-### 📋 Side-by-Side
-
-| | 🐌 Ollama | 🏃 llama.cpp + TurboQuant | 🚀 **MLX Native (ours)** |
-|---|:---:|:---:|:---:|
-| **Speed** | 30 tok/s | 41 tok/s | **65 tok/s** |
-| **Claude Code task** | 133s | 133s | **17.6s** |
-| **Needs a proxy?** | ❌ Yes | ❌ Yes | ✅ **No** |
-| **Lines of code** | N/A | N/A (C++ fork) | **~200 Python** |
-| **Apple native?** | ❌ Generic | ❌ Ported | ✅ **MLX** |
-
-### ☁️ vs Cloud APIs
-
-| | 🖥️ **Our Local Setup** | ☁️ Claude Sonnet | ☁️ Claude Opus |
-|---|:---:|:---:|:---:|
-| Speed | 65 tok/s | ~80 tok/s | ~40 tok/s |
-| Monthly cost | **$0** 🎉 | $20-100+ | $20-100+ |
-| Privacy | **100% local** 🔒 | Cloud | Cloud |
-| Works offline | **Yes** ✈️ | No | No |
-| Data leaves your Mac | **Never** | Always | Always |
-
-> 💡 Our local setup **beats cloud Opus on raw speed** (65 vs 40 tok/s) at $0/month.
-
 ---
 
-## 💡 How We Got Here
+## 🏗️ Architecture
 
-Most people trying to run Claude Code locally hit the same wall:
-
-> Claude Code speaks **Anthropic API**. Local models speak **OpenAI API**. Different languages. 🤷
-
-So everyone builds a **proxy** to translate between them. That proxy adds latency, complexity, and breaks things.
-
-**We took a different approach:**
-
-| 🐌 What everyone else does | 🚀 What we did |
-|---|---|
-| Claude Code → **Proxy** → Ollama → Model | Claude Code → **Our Server** → Model |
-| 3 processes, 2 API translations | **1 process, 0 translations** |
-| 133 seconds per task | **17.6 seconds per task** |
-
-> 🎯 That one change — **eliminating the proxy** — made it **7.5x faster**.
-
----
-
-## 💻 What You Need
-
-| Your Mac | RAM | What You Can Run |
-|----------|-----|-------------------|
-| M1/M2/M3/M4 (base) | 8-16 GB | 🟡 Small models (4B) |
-| M1/M2/M3/M4 Pro | 18-36 GB | 🟠 Medium models (27B) |
-| M2/M3/M4/M5 Max | 64-128 GB | 🟢 **Large models (27B)** |
-| M2/M3/M4 Ultra | 128-192 GB | 🔵 Multiple large models |
-
-Also need:
-- 🐍 **Python 3.12+** (for MLX)
-- 🤖 **Claude Code** (`npm install -g @anthropic-ai/claude-code`)
-
----
-
-## 🚀 Quick Start (4 Steps)
-
-### 1️⃣ Set up Python environment
-
-```bash
-python3.12 -m venv ~/.local/mlx-server
-~/.local/mlx-server/bin/pip install mlx-lm
-```
-
-### 2️⃣ Download the AI model
-
-First run downloads ~50 GB (one time only):
-
-```bash
-~/.local/mlx-server/bin/python3 -c "
-from mlx_lm.utils import load
-load('Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled')
-print('Done!')
-"
-```
-
-### 3️⃣ Start the server
-
-```bash
-~/.local/mlx-server/bin/python3 proxy/server.py
-```
-
-### 4️⃣ Launch Claude Code
-
-```bash
-ANTHROPIC_BASE_URL=http://localhost:4000 \
-ANTHROPIC_API_KEY=sk-local \
-claude --model claude-sonnet-4-6
-```
-
-> 💡 **Or just double-click** `Claude Local.command` on your Desktop. It does all of this automatically.
-
----
-
-## 🔧 How It Works
+### Directory Structure
 
 ```
-┌──────────────────────────────────────────────────┐
-│              Your MacBook (M5 Max)               │
-│                                                  │
-│  📱 You type ──> 🤖 Claude Code                  │
-│                      │                           │
-│                      ▼                           │
-│                 ⚡ MLX Server (port 4000)         │
-│                      │                           │
-│                      ▼                           │
-│                 🧠 Qwen3.5 27B Claude 4.6 Distilled ──> 🖥️ GPU      │
-│                      │                           │
-│                      ▼                           │
-│  📱 Answer <─── ✨ Clean response                │
-│                                                  │
-│         🔒 Nothing leaves this box. Ever.        │
-└──────────────────────────────────────────────────┘
+clawd-code-local/
+├── src/
+│   ├── mlx_server.py       # MLX Native server (200 lines)
+│   ├── clawd_local/
+│   │   ├── main.py          # CLI entry point
+│   │   ├── ooda_loop.py     # Self-improvement engine
+│   │   ├── skill_storage.py # Local skill database
+│   │   ├── solana_sync.py   # Optional Solana integration
+│   │   └── imessage.py      # iPhone remote control
+│   └── utils/
+│       └── lobster_ascii.py # 🦞 Lobster ASCII art
+├── models/                   # MLX model downloads
+└── skills/                  # Learned skill patterns
 ```
 
-The server (`proxy/server.py`) is **one file, ~200 lines**. It does three things:
-
-1. 📦 **Loads the model** — Apple's MLX framework, native Metal GPU, unified memory
-2. 🔌 **Speaks Anthropic API** — Claude Code thinks it's talking to Anthropic's cloud. It's not.
-3. 🧹 **Cleans the output** — Qwen thinks out loud in `<think>` tags. We strip those.
-
----
-
-## 🌐 Browser Control
-
-Claude Code can control your **real web browser** — not a sandbox. Your actual browser with all your logins. 🔓
-
-| | 🟢 Chrome DevTools (CDP) | 🔵 Playwright |
-|---|---|---|
-| **Controls** | Your real Brave/Chrome | Separate sandboxed browser |
-| **Logged in?** | ✅ All your sessions | ❌ Starts fresh |
-| **Speed** | ⚡ Fast | 🐌 Slower |
-| **Best for** | Daily tasks | Automated jobs |
-
-> 💡 **Example:** "Go to my GitHub and check which PRs need review" — it opens your actual browser, already logged in, and does it. No re-authenticating. Ever.
-
----
-
-## ✈️ When To Use This
-
-| Situation | Use This? | Why |
-|-----------|:---------:|-----|
-| On a plane | ✅ | Full AI coding, no internet needed |
-| Sensitive client code | ✅ | Nothing leaves your machine |
-| Don't want API fees | ✅ | $0/month forever |
-| Want fastest possible | ☁️ | Cloud API is still faster |
-| Need Claude-level reasoning | ☁️ | Local model is good, not Claude-level |
-| Controlling from phone | ✅ | iMessage pipeline works offline |
-
----
-
-## 📁 What's In This Repo
+### Privacy Architecture
 
 ```
-📦 claude-code-local/
- ├── ⚡ proxy/
- │   └── server.py              ← The entire server. 200 lines. This IS the project.
- ├── 🚀 launchers/
- │   ├── Claude Local.command    ← Double-click to start everything
- │   └── Browser Agent.command   ← Double-click for browser control
- ├── 🛠️ scripts/
- │   ├── download-and-import.sh  ← Download models
- │   ├── persistent-download.sh  ← Auto-retry downloader
- │   └── start-mlx-server.sh    ← Alternative config
- ├── 📊 docs/
- │   ├── BENCHMARKS.md           ← Detailed speed comparisons
- │   └── TWITTER-THREAD.md       ← Social media content
- └── setup.sh                    ← One-command installer
+┌─────────────────────────────────────────┐
+│           Your Apple Silicon Mac         │
+│  ┌─────────────────────────────────┐    │
+│  │  🦞 Clawd Code Local            │    │
+│  │  ┌───────────────────────────┐  │    │
+│  │  │   OODA Loop Learning      │  │    │
+│  │  │   Local Skill Storage     │  │    │
+│  │  │   MLX Model Inference    │  │    │
+│  │  └───────────────────────────┘  │    │
+│  └─────────────────────────────────┘    │
+│              │                          │
+│              │ (Optional)                │
+│              ▼                          │
+│  ┌─────────────────────────────────┐    │
+│  │  ⛓️ Solana (when online)       │    │
+│  │  • Publish skills               │    │
+│  │  • Sync $CLAWD rewards         │    │
+│  └─────────────────────────────────┘    │
+└─────────────────────────────────────────┘
 ```
 
 ---
 
-## 🔒 Security
+## 🔐 Privacy vs. Sync
 
-We audited every component before running it:
-
-| Component | Source | Network Calls | Verdict |
-|-----------|--------|:---:|:---:|
-| **server.py** | We wrote it | 0 | ✅ Safe |
-| **MLX framework** | Apple | 0 | ✅ Safe |
-| **Qwen 3.5 model** | HuggingFace verified | 0 | ✅ Safe |
-
-🚫 No telemetry
-🚫 No analytics
-🚫 No phone-home
-🚫 No sketchy pip packages
-
-> ⚠️ We [removed LiteLLM](https://x.com/Tahseen_Rahman/status/2035501506242240520) after supply chain attack concerns were raised. Every dependency was audited.
+| Feature | Local Only | With Solana Sync |
+|---------|------------|------------------|
+| AI Model | ✅ On-device | ✅ On-device |
+| Skill Storage | Local only | Can publish to chain |
+| $CLAWD Rewards | ❌ | ✅ Sync when online |
+| Community Skills | ❌ | ✅ Download from chain |
+| Data Leaves Machine | ❌ Never | ❌ Never (metadata only) |
 
 ---
 
-## 🛤️ The Journey
+## 📦 Tech Stack
 
-We didn't start here. We went through three generations in one night:
-
-| Gen | What We Tried | Speed | 💡 What We Learned |
-|:---:|---|:---:|---|
-| 1️⃣ | Ollama + custom proxy | 30 tok/s | Ollama works but Claude Code can't talk to it directly |
-| 2️⃣ | llama.cpp TurboQuant + proxy | 41 tok/s | TurboQuant compresses KV cache 4.9x, but the proxy is the bottleneck |
-| 3️⃣ | **MLX native server** | **65 tok/s** | **Kill the proxy. Speak Anthropic API directly. 7.5x faster.** |
-
-> 🎯 Each generation taught us something. The final insight — the proxy was the bottleneck, not the model — changed everything.
-
----
-
-## 🙏 Credits
-
-Built on the shoulders of giants:
-
-| Project | What It Does | By |
-|---------|-------------|-----|
-| 🤖 [Claude Code](https://claude.ai/claude-code) | AI coding agent | Anthropic |
-| 🍎 [MLX](https://github.com/ml-explore/mlx) | Apple Silicon ML framework | Apple |
-| 📦 [mlx-lm](https://github.com/ml-explore/mlx-examples) | Model loading + inference | Apple |
-| 🧠 [Qwen 3.5](https://qwenlm.github.io/) | The 27B model | Alibaba |
-| ⚡ [TurboQuant](https://research.google/blog/turboquant-redefining-ai-efficiency-with-extreme-compression/) | KV cache compression research | Google Research |
-
-Tested on **Apple M5 Max** with **128 GB unified memory**.
+| Category | Technology |
+|----------|------------|
+| Runtime | Python 3.11+ |
+| AI | MLX (Apple Silicon) |
+| Model | Qwen3.5 27B / Claude 4.6 Distilled |
+| Local Storage | SQLite + JSON |
+| Blockchain | Solana (optional sync) |
+| Remote Control | iMessage (via macOS) |
+| CLI | Click + Rich |
 
 ---
 
-<p align="center">
-  <strong>📜 MIT License</strong> — Use it however you want.<br><br>
-  ⭐ <strong>Star this repo if it helped you!</strong> ⭐
-</p>
+## 🎯 Roadmap
+
+- [ ] **v0.2** — Enhanced OODA loop with project memory
+- [ ] **v0.3** — Solana skill publication (optional)
+- [ ] **v0.4** — Multi-Mac skill sharing via Solana
+- [ ] **v0.5** — Self-improving model fine-tuning
+- [ ] **v1.0** — Fully autonomous local AI coding agent
+
+---
+
+## 🦞 About OpenClawd
+
+Part of the **OpenClawd ecosystem** — the open-source monorepo for building, running, and monetizing Solana-native AI agents.
+
+| Resource | Link |
+|----------|------|
+| GitHub | [github.com/x402agent/openclawd](https://github.com/x402agent/openclawd) |
+| Twitter | [@clawddevs](https://x.com/clawddevs) |
+| Telegram | [@clawdtoken](https://t.me/clawdtoken) |
+| Website | [solanaclawd.com](https://solanaclawd.com) |
+
+**$CLAWD Token:** `8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump`
+
+---
+
+## 📄 License
+
+MIT — See [`LICENSE`](LICENSE)
+
+---
+
+*Built by 8BIT Labs • Inspired by Nous Research • Powered by Apple Silicon • Settled on Solana (optional)*
+
+🦞 *"Claws that learn locally, brains that evolve on-device"* 🦞
