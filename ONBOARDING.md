@@ -70,11 +70,26 @@ cd ../skills && npm install
 # Run agents catalog build
 cd agents && node build-catalog.cjs
 
-# Run ClawdRouter
+# Run ClawdRouter (LLM routing with x402 payments)
 cd ../clawdrouter && npm run dev
 
 # Run API Registrar
 cd ../api-registrar && npm run dev
+```
+
+### 5. Try the CLI Tools
+
+OpenClawd ships with two lobster-themed CLI tools:
+
+```bash
+# Clawd Code CLI - AI-powered coding assistant
+cd clawd-code-cli && npm install && bun run dev
+clawd --prompt "deploy my Solana program"
+
+# ClawdRouter - LLM routing gateway
+cd clawdrouter && npm install && npm run dev
+clawdrouter models    # List all available models
+clawdrouter doctor    # Run diagnostics
 ```
 
 ---
