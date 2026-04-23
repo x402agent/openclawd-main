@@ -1,3 +1,3 @@
 {
-  "model": "grok-4-fast-reasoning"
+  "model": "ollama/kimi-k2.6:cloud"
 }
