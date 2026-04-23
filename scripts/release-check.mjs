@@ -52,9 +52,11 @@ for (const file of trackedFiles) {
       error(rule.message(file));
     }
   }
-  if (file.startsWith("tailclawd-backup/")) {
-    warn(`backup directory still tracked: ${file}`);
-  }
+}
+
+const trackedBackupFiles = trackedFiles.filter((file) => file.startsWith("tailclawd-backup/"));
+if (trackedBackupFiles.length > 0) {
+  warn(`backup directory still tracked: tailclawd-backup/ (${trackedBackupFiles.length} files)`);
 }
 
 const topLevelDocs = ["README.md", "CONTRIBUTING.md", "SECURITY.md", "STACK.md"];
@@ -106,7 +108,11 @@ const textLikeBasenames = new Set([
 ]);
 
 const secretPatterns = [
-  { name: "AWS access key", pattern: /\bA(?:K|S)IA[0-9A-Z]{16}\b/g },
+  {
+    name: "AWS access key",
+    pattern: /\bA(?:K|S)IA[0-9A-Z]{16}\b/g,
+    allowExample: (match) => match.endsWith("EXAMPLE"),
+  },
   { name: "GitHub token", pattern: /\b(?:ghp|gho|ghu|ghs)_[A-Za-z0-9]{20,}\b/g },
   { name: "GitHub fine-grained token", pattern: /\bgithub_pat_[A-Za-z0-9_]{20,}\b/g },
   { name: "OpenAI project key", pattern: /\bsk-proj-[A-Za-z0-9_-]{20,}\b/g },
@@ -124,16 +130,21 @@ for (const file of trackedFiles) {
   if (!textLikeExtensions.has(extension) && !textLikeBasenames.has(basename)) {
     continue;
   }
-  if (file.startsWith("legacy/") || file.startsWith("solana-go-main/")) {
+  if (
+    file.startsWith("legacy/") ||
+    file.startsWith("solana-go-main/") ||
+    file.includes("/node_modules/")
+  ) {
     continue;
   }
 
   const body = readUtf8(file);
   if (body == null) continue;
 
-  for (const { name, pattern } of secretPatterns) {
-    pattern.lastIndex = 0;
-    if (pattern.test(body)) {
+  for (const { name, pattern, allowExample } of secretPatterns) {
+    const matches = Array.from(body.matchAll(pattern));
+    const suspicious = matches.some((match) => !allowExample?.(match[0]));
+    if (suspicious) {
       error(`possible ${name} found in tracked file: ${file}`);
     }
   }
