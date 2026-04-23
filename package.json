@@ -1,0 +1,31 @@
+{
+  "name": "openclawd",
+  "version": "0.1.0",
+  "private": true,
+  "description": "OpenClawd monorepo root — Solana-native AI agent stack.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20",
+    "npm": ">=10"
+  },
+  "scripts": {
+    "install:all": "npm run install:agents && npm run install:router && npm run install:registrar && npm run install:cli && npm run install:hub && npm run install:wallet",
+    "install:agents": "cd AGENTS && npm install --no-audit --no-fund",
+    "install:router": "cd clawdrouter && npm install --no-audit --no-fund",
+    "install:registrar": "cd api-registrar && npm install --no-audit --no-fund",
+    "install:cli": "cd clawd-code-cli && npm install --no-audit --no-fund",
+    "install:hub": "cd clawdhub && npm install --no-audit --no-fund",
+    "install:wallet": "cd packages/clawd-wallet && npm install --no-audit --no-fund",
+    "build:catalog": "cd AGENTS && node build-catalog.cjs",
+    "lint": "npm --prefix clawdrouter run lint --if-present && npm --prefix api-registrar run lint --if-present && npm --prefix clawd-code-cli run lint --if-present",
+    "typecheck": "npm --prefix clawdrouter run typecheck --if-present && npm --prefix api-registrar run typecheck --if-present && npm --prefix clawd-code-cli run typecheck --if-present",
+    "dev:router": "cd clawdrouter && npm run dev",
+    "dev:registrar": "cd api-registrar && npm run dev",
+    "dev:cli": "cd clawd-code-cli && npm run dev",
+    "doctor": "node scripts/doctor.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/x402agent/openclawd.git"
+  }
+}
