@@ -136,7 +136,7 @@ cmd_show() {
   [ -d "$dir" ] || die "profile '$name' not found"
   printf "\n  ${BOLD}${LOBSTER}$name${CR}  ${DIM}$dir${CR}\n\n"
   [ -f "$dir/config.yaml" ] && { printf "  ${CYAN}config.yaml${CR}\n"; sed 's/^/    /' "$dir/config.yaml"; echo; }
-  [ -f "$dir/CLAW.md" ]     && { printf "  ${CYAN}CLAW.md${CR}    ${DIM}($(wc -l < "$dir/CLAW.md") lines)${CR}\n"; }
+  [ -f "$dir/CLAWD.md" ]    && { printf "  ${CYAN}CLAWD.md${CR}   ${DIM}($(wc -l < "$dir/CLAWD.md") lines)${CR}\n"; }
   [ -d "$dir/sessions" ]    && printf "  ${CYAN}sessions${CR}   ${DIM}$(find "$dir/sessions" -type f 2>/dev/null | wc -l | tr -d ' ') files${CR}\n"
   [ -d "$dir/memories" ]    && printf "  ${CYAN}memories${CR}   ${DIM}$(find "$dir/memories" -type f 2>/dev/null | wc -l | tr -d ' ') files${CR}\n"
   echo
