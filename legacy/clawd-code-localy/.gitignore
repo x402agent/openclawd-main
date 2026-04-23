@@ -1,9 +1,0 @@
-.DS_Store
-*.gguf
-*.log
-__pycache__/
-*.pyc
-.venv/
-*.part
-*.tmp
-.claude/
