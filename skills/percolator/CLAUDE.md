@@ -29,7 +29,21 @@ clawd percolator size --signal 0.7 --confidence 0.8 --capital 1000000000
 
 ## Immutable Deployment
 
-### Deploy Immutable Percolator Market
+### Quick Deploy (Automated Script)
+
+```bash
+cd percolator-cli-master
+
+# Deploy immutable market with 5 SOL insurance
+chmod +x scripts/deploy-immutable.sh
+./scripts/deploy-immutable.sh
+
+# Analyze deployed market for vulnerabilities
+chmod +x scripts/challenge-analyze.sh
+./scripts/challenge-analyze.sh --auto
+```
+
+### Manual Deploy (Step by Step)
 
 ```bash
 # 1. Generate market keypair
@@ -75,6 +89,19 @@ spl-token transfer So11111111111111111111111111111111111111112 5000000000 <VAULT
 
 # 7. Verify immutability
 percolator verify-immutable --slab <SLAB_PUBKEY>
+```
+
+### Automated Analysis
+
+```bash
+# Analyze any deployed market for vulnerabilities
+./scripts/challenge-analyze.sh <SLAB_PUBKEY>
+
+# Use auto-detect if market was deployed by deploy-immutable.sh
+./scripts/challenge-analyze.sh --auto
+
+# Verbose mode
+./scripts/challenge-analyze.sh <SLAB_PUBKEY> --verbose
 ```
 
 ### Verify Immutability
