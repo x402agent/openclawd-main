@@ -1,122 +1,52 @@
 /**
- * Clawd Perps CLI - The Viral Perpetuals Trading Interface
+ * Percolator CLI
  * 
- * 🦾 First-of-its-kind perpetuals CLI for Solana
+ * 🧪 CLI for Percolator perpetuals protocol
  * 
  * @module cli
  */
 
 import { Command } from "commander";
-import { GlobalFlags } from "./config.js";
 
-// Import commands
-import { registerInitMarket } from "./commands/init-market.js";
-import { registerInitUser } from "./commands/init-user.js";
-import { registerInitLp } from "./commands/init-lp.js";
-import { registerDeposit } from "./commands/deposit.js";
-import { registerWithdraw } from "./commands/withdraw.js";
-import { registerKeeperCrank } from "./commands/keeper-crank.js";
-import { registerTradeNocpi } from "./commands/trade-nocpi.js";
-import { registerTradeCpi } from "./commands/trade-cpi.js";
-import { registerLiquidateAtOracle } from "./commands/liquidate-at-oracle.js";
-import { registerCloseAccount } from "./commands/close-account.js";
-import { registerTopupInsurance } from "./commands/topup-insurance.js";
-import { registerUpdateAdmin } from "./commands/update-admin.js";
-import { registerCloseSlab } from "./commands/close-slab.js";
-import { registerCloseAllSlabs } from "./commands/close-all-slabs.js";
-import { registerListMarkets } from "./commands/list-markets.js";
-import { registerSlabGet } from "./commands/slab-get.js";
-import { registerSlabHeader } from "./commands/slab-header.js";
-import { registerSlabConfig } from "./commands/slab-config.js";
-import { registerSlabNonce } from "./commands/slab-nonce.js";
-import { registerSlabEngine } from "./commands/slab-engine.js";
-import { registerSlabParams } from "./commands/slab-params.js";
-import { registerSlabAccount } from "./commands/slab-account.js";
-import { registerSlabAccounts } from "./commands/slab-accounts.js";
-import { registerSlabBitmap } from "./commands/slab-bitmap.js";
-import { registerAuditCu } from "./commands/audit-cu.js";
-import { registerBestPrice } from "./commands/best-price.js";
-import { registerUpdateConfig } from "./commands/update-config.js";
-import { registerSetOracleAuthority } from "./commands/set-oracle-authority.js";
-import { registerPushOraclePrice } from "./commands/push-oracle-price.js";
-import { registerResolveMarket } from "./commands/resolve-market.js";
-import { registerWithdrawInsurance } from "./commands/withdraw-insurance.js";
-
-export function createCli(): Command {
-  const program = new Command();
-
-  program
-    .name("clawd-perps")
-    .description("🦾 Clawd Perps - The viral perpetuals trading CLI for Solana\n\n" +
-      "📈 Trade perpetuals with 5x leverage on Solana's fastest decentralized exchange\n" +
-      "⚡ Permissionless market operations\n" +
-      "🔮 Pyth/Chainlink oracle integration\n" +
-      "🛡️ Built-in liquidation protection")
-    .version("0.1.0");
-
-  // Global options
-  program
-    .option("--config <path>", "Path to config file")
-    .option("--rpc <url>", "RPC URL override")
-    .option("--program <pubkey>", "Program ID override")
-    .option("--wallet <path>", "Wallet keypair path override")
-    .option(
-      "--commitment <level>",
-      "Commitment level: processed, confirmed, finalized"
-    )
-    .option("--json", "Output in JSON format")
-    .option("--simulate", "Simulate transaction without sending");
-
-  // Register all commands
-  registerInitMarket(program);
-  registerInitUser(program);
-  registerInitLp(program);
-  registerDeposit(program);
-  registerWithdraw(program);
-  registerKeeperCrank(program);
-  registerTradeNocpi(program);
-  registerTradeCpi(program);
-  registerLiquidateAtOracle(program);
-  registerCloseAccount(program);
-  registerTopupInsurance(program);
-  registerUpdateAdmin(program);
-  registerCloseSlab(program);
-  registerCloseAllSlabs(program);
-  registerListMarkets(program);
-  registerSlabGet(program);
-  registerSlabHeader(program);
-  registerSlabConfig(program);
-  registerSlabNonce(program);
-  registerSlabEngine(program);
-  registerSlabParams(program);
-  registerSlabAccount(program);
-  registerSlabAccounts(program);
-  registerSlabBitmap(program);
-  registerAuditCu(program);
-  registerBestPrice(program);
-  registerUpdateConfig(program);
-
-  // Binary market commands
-  registerSetOracleAuthority(program);
-  registerPushOraclePrice(program);
-  registerResolveMarket(program);
-  registerWithdrawInsurance(program);
-
-  return program;
+export interface GlobalFlags {
+  cluster: string;
+  commitment: string;
+  simulate: boolean;
+  json: boolean;
+  keypair: string;
+  verbose: boolean;
+  programId: string;
+  rpcUrl: string;
 }
 
-/**
- * Extract global flags from parsed command.
- */
 export function getGlobalFlags(cmd: Command): GlobalFlags {
-  const opts = cmd.optsWithGlobals();
   return {
-    config: opts.config,
-    rpc: opts.rpc,
-    program: opts.program,
-    wallet: opts.wallet,
-    commitment: opts.commitment,
-    json: opts.json ?? false,
-    simulate: opts.simulate ?? false,
+    cluster: cmd.opts().cluster ?? process.env.CLUSTER ?? "mainnet-beta",
+    commitment: cmd.opts().commitment ?? "confirmed",
+    simulate: cmd.opts().simulate ?? false,
+    json: cmd.opts().json ?? false,
+    keypair: cmd.opts().keypair ?? process.env.KEYPAIR ?? "~/.config/solana/id.json",
+    verbose: cmd.opts().verbose ?? false,
+    programId: cmd.opts().programId ?? process.env.PROGRAM_ID ?? "PERC8m2tkHwVBEZSCz3E5JhcUVE5sWsEG8q39h7mSS5M",
+    rpcUrl: cmd.opts().rpcUrl ?? process.env.RPC_URL ?? "https://api.mainnet-beta.solana.com",
   };
+}
+
+export function createProgram(): Command {
+  const program = new Command();
+  
+  program
+    .name("percolator")
+    .description("🧪 Percolator perpetuals CLI\n\nTrade, manage, and monitor perpetuals markets on Solana")
+    .version("1.0.0")
+    .option("-c, --cluster <cluster>", "Solana cluster", "mainnet-beta")
+    .option("--commitment <commitment>", "Transaction commitment level", "confirmed")
+    .option("--simulate", "Simulate transactions", false)
+    .option("--json", "Output JSON format", false)
+    .option("-k, --keypair <path>", "Keypair path", process.env.KEYPAIR ?? "~/.config/solana/id.json")
+    .option("-v, --verbose", "Verbose output", false)
+    .option("--program-id <pubkey>", "Program ID", process.env.PROGRAM_ID ?? "PERC8m2tkHwVBEZSCz3E5JhcUVE5sWsEG8q39h7mSS5M")
+    .option("--rpc-url <url>", "RPC URL", process.env.RPC_URL);
+
+  return program;
 }
