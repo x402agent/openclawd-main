@@ -1,0 +1,43 @@
+{
+    "name": "clawdbot",
+    "version": "1.2.0",
+    "description": "🦞 Clawd-powered agentic CLI with Privy server wallets, Helius RPC, and Birdeye — Solana prediction engine terminal",
+    "keywords": [
+        "cli",
+        "lobster",
+        "clawd",
+        "clawdbot",
+        "braille",
+        "unicode",
+        "animation",
+        "terminal",
+        "solana",
+        "prediction",
+        "privy",
+        "wallet",
+        "agentic"
+    ],
+    "author": "8bit",
+    "license": "MIT",
+    "type": "module",
+    "bin": {
+        "clawd": "./bin/mawd.js"
+    },
+    "files": [
+        "bin/",
+        "README.md",
+        "LICENSE"
+    ],
+    "dependencies": {
+        "unicode-animations": "^1.0.3",
+        "dotenv": "^16.4.5"
+    },
+    "engines": {
+        "node": ">=18"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/8bit/clawd"
+    },
+    "homepage": "https://github.com/8bit/clawd#readme"
+}
