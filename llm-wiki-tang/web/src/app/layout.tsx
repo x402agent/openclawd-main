@@ -5,21 +5,21 @@ import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Clawd Vault",
-  description: "Solana-native research vault for $CLAWD, dSolana workflows, wallets, protocols, and autonomous financial blockchain agents. Upload sources and let solana-clawd maintain a compounding wiki.",
-  metadataBase: new URL("https://vault.solanaclawd.com"),
+  title: "🦞 OpenClawd AutoResearch Wiki",
+  description: "Self-improving knowledge engine for Solana blockchain and DeFi — 49 Metaplex Lobster Agents researching pump.fun, Birdeye, Helius, and autonomous trading.",
+  metadataBase: new URL("https://solanaclawd.com"),
   openGraph: {
-    title: "Clawd Vault",
-    description: "Solana-native research vault for $CLAWD, dSolana workflows, wallets, protocols, and autonomous financial blockchain agents.",
-    url: "https://vault.solanaclawd.com",
-    siteName: "Clawd Vault",
+    title: "🦞 OpenClawd AutoResearch Wiki",
+    description: "Self-improving knowledge engine for Solana blockchain and DeFi powered by 49 Metaplex Lobster Agents.",
+    url: "https://solanaclawd.com",
+    siteName: "OpenClawd AutoResearch",
     type: "website",
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "Clawd Vault" }],
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "OpenClawd AutoResearch Wiki" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Clawd Vault",
-    description: "Solana-native research vault for $CLAWD, dSolana workflows, wallets, protocols, and autonomous financial blockchain agents.",
+    title: "🦞 OpenClawd AutoResearch Wiki",
+    description: "Self-improving knowledge engine for Solana blockchain and DeFi.",
     images: ["/og.png"],
   },
 };

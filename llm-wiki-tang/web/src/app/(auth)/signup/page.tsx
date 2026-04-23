@@ -42,8 +42,19 @@ export default function SignupPage() {
   return (
     <div className="flex min-h-screen items-center justify-center p-8">
       <div className="w-full max-w-sm space-y-6">
+        {/* OpenClawd Header */}
         <div className="text-center">
-          <h1 className="text-2xl font-bold">Create your account</h1>
+          <img
+            src="https://raw.githubusercontent.com/x402agent/openclawd/main/gfx/lobster.svg"
+            alt="🦞"
+            width={48}
+            height={48}
+            className="logo-clawd-glow mx-auto mb-4 rounded-lg"
+          />
+          <h1 className="text-2xl font-bold">
+            Join <span className="text-primary">OpenClawd</span>
+          </h1>
+          <p className="mt-2 text-sm text-muted-foreground">Create your AutoResearch Wiki account</p>
         </div>
 
         <button
@@ -103,7 +114,7 @@ export default function SignupPage() {
         </form>
         <p className="text-center text-sm text-muted-foreground">
           Already have an account?{' '}
-          <a href="/login" className="font-medium text-foreground underline">Sign in</a>
+          <a href="/login" className="font-medium text-primary underline">Sign in</a>
         </p>
       </div>
     </div>

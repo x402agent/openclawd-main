@@ -43,8 +43,19 @@ function LoginForm() {
   return (
     <div className="flex min-h-screen items-center justify-center p-8">
       <div className="w-full max-w-sm space-y-6">
+        {/* OpenClawd Header */}
         <div className="text-center">
-          <h1 className="text-2xl font-bold">Sign in to Clawd Vault</h1>
+          <img
+            src="https://raw.githubusercontent.com/x402agent/openclawd/main/gfx/lobster.svg"
+            alt="🦞"
+            width={48}
+            height={48}
+            className="logo-clawd-glow mx-auto mb-4 rounded-lg"
+          />
+          <h1 className="text-2xl font-bold">
+            <span className="text-primary">OpenClawd</span> Research
+          </h1>
+          <p className="mt-2 text-sm text-muted-foreground">Sign in to access the AutoResearch Wiki</p>
         </div>
 
         <button
@@ -104,8 +115,8 @@ function LoginForm() {
           </button>
         </form>
         <p className="text-center text-sm text-muted-foreground">
-          Don&apos;t have an account?{' '}
-          <a href="/signup" className="font-medium text-foreground underline">Sign up</a>
+          Don't have an account?{' '}
+          <a href="/signup" className="font-medium text-primary underline">Sign up</a>
         </p>
       </div>
     </div>

@@ -5,21 +5,19 @@ import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { useUserStore } from '@/stores'
-import Image from 'next/image'
-import { ArrowRight, BookOpen, FileText, PenTool, Search, GitBranch } from 'lucide-react'
+import { ArrowRight, BookOpen, FileText, PenTool, Search, GitBranch, Zap, Brain, Users } from 'lucide-react'
 import { WalletConnectButton } from '@/components/auth/WalletConnectButton'
 
 const ease: [number, number, number, number] = [0.16, 1, 0.3, 1]
 
-const WIKI_TREE = [
+const RESEARCH_TREE = [
   { label: 'Overview', active: true, depth: 0 },
-  { label: 'Tokens', depth: 0, folder: true },
-  { label: '$CLAWD', depth: 1 },
-  { label: 'dSOLANA', depth: 1 },
-  { label: 'Agents', depth: 0, folder: true },
+  { label: 'Solana DeFi', depth: 0, folder: true },
+  { label: 'Pump.fun Tokens', depth: 1 },
+  { label: 'Jupiter Routes', depth: 1 },
+  { label: 'Lobster Agents', depth: 0, folder: true },
   { label: 'OODA Trader', depth: 1 },
-  { label: 'Sources', depth: 0, folder: true },
-  { label: 'Execution Log', depth: 0 },
+  { label: 'Market Alpha', depth: 0 },
 ]
 
 export default function LandingPage() {
@@ -33,23 +31,30 @@ export default function LandingPage() {
   return (
     <div className="min-h-svh bg-background text-foreground">
       {/* Nav */}
-      <nav className="fixed top-0 inset-x-0 z-50 flex items-center justify-between px-6 lg:px-10 h-14 bg-background/80 backdrop-blur-sm">
+      <nav className="fixed top-0 inset-x-0 z-50 flex items-center justify-between px-6 lg:px-10 h-14 bg-background/80 backdrop-blur-sm border-b border-border/50">
         <span className="flex items-center gap-2.5 text-sm font-semibold tracking-tight">
           <img
-            src="https://pub-9a12d2869ea54d26bc39b55ba9a84e9a.r2.dev/gfx/logo1.png"
-            alt="Clawd Vault"
+            src="https://raw.githubusercontent.com/x402agent/openclawd/main/gfx/lobster.svg"
+            alt="🦞 OpenClawd"
             width={28}
             height={28}
-            className="logo-neon-glow rounded-md"
+            className="logo-clawd-glow rounded-md"
           />
-          Clawd Vault
+          <span className="text-primary font-bold">OpenClawd</span>
+          <span className="text-muted-foreground/60">AutoResearch</span>
         </span>
         <div className="flex items-center gap-5">
           <Link
-            href="https://github.com/x402agent/solana-clawd"
+            href="https://github.com/x402agent/openclawd"
             className="text-sm text-muted-foreground hover:text-foreground transition-colors"
           >
             GitHub
+          </Link>
+          <Link
+            href="https://solanaclawd.com"
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Website
           </Link>
           <Link
             href="/login"
@@ -60,9 +65,10 @@ export default function LandingPage() {
           <WalletConnectButton variant="compact" />
           <Link
             href="/signup"
-            className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-foreground text-background px-4 py-1.5 text-sm font-medium hover:opacity-90 transition-opacity"
+            className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-primary text-primary-foreground px-4 py-1.5 text-sm font-medium hover:opacity-90 transition-opacity"
           >
             Get started
+            <ArrowRight className="size-3.5 opacity-70" />
           </Link>
         </div>
       </nav>
@@ -77,13 +83,13 @@ export default function LandingPage() {
             className="mb-8 flex justify-center"
           >
             <div className="relative">
-              <div className="logo-neon-glow-ring" />
+              <div className="logo-clawd-glow-ring" />
               <img
-                src="https://pub-9a12d2869ea54d26bc39b55ba9a84e9a.r2.dev/gfx/logo1.png"
-                alt="Clawd Vault Logo"
-                width={120}
-                height={120}
-                className="logo-neon-glow relative z-10 rounded-2xl"
+                src="https://raw.githubusercontent.com/x402agent/openclawd/main/gfx/lobster.svg"
+                alt="🦞 OpenClawd Logo"
+                width={140}
+                height={140}
+                className="logo-clawd-glow relative z-10 rounded-xl"
               />
             </div>
           </motion.div>
@@ -93,17 +99,15 @@ export default function LandingPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.15, ease }}
           >
-            <p className="text-sm text-muted-foreground mb-4">
-              Solana research vault for{' '}
-              <Link
-                href="https://github.com/x402agent/solana-clawd"
-                className="text-foreground underline underline-offset-2 decoration-foreground/30 hover:decoration-foreground transition-colors"
-              >
-                solana-clawd, dSolana workflows, and autonomous financial blockchain agents
-              </Link>
-            </p>
+            <div className="badge-clawd mb-4">
+              <span>49</span>
+              <span className="text-primary/70">·</span>
+              <span>Metaplex Lobster Agents</span>
+            </div>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.05]">
-              Clawd Vault
+              <span className="text-primary">OpenClawd</span>
+              <br />
+              <span className="text-foreground/90">AutoResearch</span>
             </h1>
           </motion.div>
 
@@ -111,9 +115,11 @@ export default function LandingPage() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.12, ease }}
-            className="mt-6 text-base sm:text-lg text-muted-foreground max-w-md mx-auto leading-relaxed"
+            className="mt-6 text-base sm:text-lg text-muted-foreground max-w-lg mx-auto leading-relaxed"
           >
-            solana-clawd compiles and maintains a structured research vault for `$CLAWD`, dSolana theses, wallet clusters, protocol risk, and autonomous trade playbooks.
+            Self-improving knowledge engine for Solana blockchain and DeFi — inspired by{' '}
+            <span className="text-foreground font-medium">Andrej Karpathy's</span>{' '}
+            approach to AI research. Let the agents teach themselves.
           </motion.p>
 
           <motion.div
@@ -124,13 +130,13 @@ export default function LandingPage() {
           >
             <Link
               href="/signup"
-              className="inline-flex items-center gap-2 rounded-full bg-foreground text-background px-6 py-2.5 text-sm font-medium hover:opacity-90 transition-opacity"
+              className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-2.5 text-sm font-medium hover:opacity-90 transition-opacity"
             >
-              Get started
-              <ArrowRight className="size-3.5 opacity-60" />
+              Start Researching
+              <ArrowRight className="size-3.5 opacity-70" />
             </Link>
             <Link
-              href="https://github.com/x402agent/solana-clawd"
+              href="https://github.com/x402agent/openclawd"
               className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-2.5 text-sm font-medium hover:bg-accent transition-colors"
             >
               GitHub
@@ -150,13 +156,13 @@ export default function LandingPage() {
           <div className="bg-card rounded-2xl border border-border shadow-lg overflow-hidden">
             <div className="flex items-center gap-2 px-4 py-3 border-b border-border bg-muted/30">
               <div className="flex gap-1.5">
-                <div className="size-2.5 rounded-full bg-border" />
-                <div className="size-2.5 rounded-full bg-border" />
-                <div className="size-2.5 rounded-full bg-border" />
+                <div className="size-2.5 rounded-full bg-primary/40" />
+                <div className="size-2.5 rounded-full bg-accent-blue/40" />
+                <div className="size-2.5 rounded-full bg-muted" />
               </div>
               <div className="flex-1 flex justify-center">
                 <span className="text-xs text-muted-foreground/50 font-mono">
-                  solanaclawd.net
+                  research.solanaclawd.com
                 </span>
               </div>
               <div className="w-14" />
@@ -167,15 +173,15 @@ export default function LandingPage() {
               <div className="w-52 shrink-0 border-r border-border p-3 hidden sm:block">
                 <div className="flex items-center gap-2 px-2 py-1.5 mb-2">
                   <Search className="size-3 text-muted-foreground/30" />
-                  <span className="text-xs text-muted-foreground/30">Search vault...</span>
+                  <span className="text-xs text-muted-foreground/30">Search...</span>
                 </div>
                 <div className="space-y-0.5">
-                  {WIKI_TREE.map((item, i) => (
+                  {RESEARCH_TREE.map((item, i) => (
                     <div
                       key={i}
                       className={`flex items-center gap-1.5 px-2 py-1 rounded text-xs ${
                         item.active
-                          ? 'bg-accent font-medium text-foreground'
+                          ? 'bg-primary/10 font-medium text-primary'
                           : 'text-muted-foreground'
                       }`}
                       style={{ paddingLeft: `${item.depth * 14 + 8}px` }}
@@ -194,25 +200,28 @@ export default function LandingPage() {
               {/* Content */}
               <div className="flex-1 p-8 sm:p-10">
                 <div className="max-w-lg">
-                  <h2 className="text-xl font-semibold tracking-tight mb-1">Overview</h2>
+                  <div className="flex items-center gap-2 mb-1">
+                    <h2 className="text-xl font-semibold tracking-tight">Overview</h2>
+                    <span className="badge-clawd text-[10px]">LIVE</span>
+                  </div>
                   <p className="text-xs text-muted-foreground mb-6">
-                    12 sources &middot; Last updated 2 hours ago
+                    12 sources &middot; 49 agents &middot; Updated 2h ago
                   </p>
                   <p className="text-sm text-muted-foreground leading-relaxed mb-3">
-                    This vault tracks Solana memecoin rotation, dSolana strategy flow, wallet behavior, and protocol catalysts for autonomous financial agents.
-                    It synthesizes findings from <span className="font-medium text-foreground">12 sources</span> across 47 pages.
+                    This vault tracks Solana memecoin rotation, DeFi strategies, wallet behavior, and protocol catalysts for autonomous financial agents.
+                    49 Metaplex Lobster Agents research around the clock.
                   </p>
-                  <h3 className="text-sm font-semibold mt-5 mb-2">Key Findings</h3>
+                  <h3 className="text-sm font-semibold mt-5 mb-2 text-primary">Key Findings</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed mb-3">
-                    Smart-money wallet inflows have started rotating from majors into{' '}
-                    <span className="font-medium text-foreground">$CLAWD and other high-beta Solana assets</span> &mdash;
-                    dSOLANA strategy notes, Jupiter routing dependencies, and execution risk thresholds are now linked inside one dossier.
+                    Smart-money wallet inflows rotating from majors into{' '}
+                    <span className="font-medium text-foreground">high-beta Solana assets</span> —
+                    pump.fun graduation signals and Birdeye alerts are now linked inside one dossier.
                   </p>
-                  <h3 className="text-sm font-semibold mt-5 mb-2">Recent Updates</h3>
+                  <h3 className="text-sm font-semibold mt-5 mb-2">Recent Agent Research</h3>
                   <ul className="space-y-1 ml-4">
-                    <li className="text-sm text-muted-foreground list-disc">Added `$CLAWD` wallet-cluster notes and execution review links</li>
-                    <li className="text-sm text-muted-foreground list-disc">Updated dSOLANA strategy thesis with Jupiter routing and fee notes</li>
-                    <li className="text-sm text-muted-foreground list-disc">Flagged contradiction between autonomous buy criteria and holder concentration risk</li>
+                    <li className="text-sm text-muted-foreground list-disc">🦞 <span className="text-primary">lobster-trader-01</span>: Detected $CLAWD accumulation pattern</li>
+                    <li className="text-sm text-muted-foreground list-disc">📊 pump.fun graduation: 3 tokens flagged for observation</li>
+                    <li className="text-sm text-muted-foreground list-disc">⚠️ Jupiter routing: Fee optimization detected</li>
                   </ul>
                 </div>
               </div>
@@ -234,28 +243,35 @@ export default function LandingPage() {
             transition={{ duration: 0.6 }}
             className="text-center mb-14"
           >
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Three layers</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
+              <span className="text-primary">49 Lobster Agents</span>
+              <br />
+              <span className="text-foreground/80">Research Around the Clock</span>
+            </h2>
             <p className="mt-3 text-muted-foreground max-w-md mx-auto">
-              You define the research standard. The agent maintains the vault.
+              Karpathy-style self-improvement loops — agents learn from their own research outcomes.
             </p>
           </motion.div>
 
           <div className="grid sm:grid-cols-3 gap-6">
             {[
               {
-                icon: FileText,
-                title: 'Raw Sources',
-                body: 'Whitepapers, wallet exports, filings, execution journals, screenshots, governance posts, and token dashboards. Immutable source of truth.',
+                icon: Brain,
+                title: 'Observe',
+                body: 'Agents scan pump.fun, Birdeye, Helius RPC, and DeFi protocols 24/7. Every data point is stored as vector embeddings.',
+                color: 'text-primary',
               },
               {
-                icon: BookOpen,
-                title: 'The Vault',
-                body: 'LLM-generated markdown pages with `$CLAWD` dossiers, dSOLANA theses, wallet notes, strategy memos, execution reviews, and cross-references.',
+                icon: Zap,
+                title: 'Decide & Act',
+                body: 'Agents pick the best opportunities, execute trades, and report findings to the swarm.',
+                color: 'text-accent-blue',
               },
               {
-                icon: PenTool,
-                title: 'The Workflows',
-                body: 'A repeatable structure for ingest, research, thesis updates, autonomous trade review, and contradiction tracking across the whole graph.',
+                icon: Users,
+                title: 'Learn & Share',
+                body: 'Each agent learns from outcomes and shares insights with the other 48 agents in real-time.',
+                color: 'text-chart-3',
               },
             ].map((item, i) => (
               <motion.div
@@ -264,9 +280,9 @@ export default function LandingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="bg-card rounded-xl border border-border p-6"
+                className="bg-card rounded-xl border border-border p-6 hover:border-primary/30 transition-colors"
               >
-                <item.icon className="size-5 text-muted-foreground mb-4" strokeWidth={1.5} />
+                <item.icon className={`size-5 ${item.color} mb-4`} strokeWidth={1.5} />
                 <h3 className="font-semibold text-sm mb-2">{item.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{item.body}</p>
               </motion.div>
@@ -296,17 +312,17 @@ export default function LandingPage() {
               {
                 step: '01',
                 title: 'Ingest',
-                body: 'Drop in a whitepaper, wallet export, dashboard PDF, or trade journal. The agent writes a summary, updates token, protocol, wallet, strategy, and execution pages, and flags contradictions.',
+                body: 'Drop in sources — whitepapers, wallet exports, dashboards, token data. The agents write summaries and cross-link insights.',
               },
               {
                 step: '02',
-                title: 'Query',
-                body: 'Ask complex questions against the compiled vault. Knowledge is already synthesized, cross-linked, and citation-aware instead of being re-derived from raw chunks every time.',
+                title: 'Research',
+                body: 'Ask complex questions. Knowledge is already synthesized and citation-aware instead of re-derived from raw chunks every time.',
               },
               {
                 step: '03',
                 title: 'Lint',
-                body: 'Run health checks over the vault. Find stale theses, unsupported claims, missing token-to-protocol links, untracked wallet behavior, and unreviewed autonomous trading decisions.',
+                body: 'Run health checks. Find stale theses, unsupported claims, missing links, and unreviewed trading decisions.',
               },
             ].map((item, i) => (
               <motion.div
@@ -316,7 +332,7 @@ export default function LandingPage() {
                 viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
               >
-                <span className="text-xs font-mono text-muted-foreground/40 mb-3 block">{item.step}</span>
+                <span className="text-xs font-mono text-primary/60 mb-3 block">{item.step}</span>
                 <h3 className="font-semibold mb-2">{item.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{item.body}</p>
               </motion.div>
@@ -338,10 +354,10 @@ export default function LandingPage() {
           className="max-w-2xl mx-auto text-center"
         >
           <blockquote className="text-lg sm:text-xl leading-relaxed text-foreground/80 italic">
-            &ldquo;The hard part of autonomous trading research is not finding one more chart. It is keeping every thesis, wallet note, catalyst, execution rule, and contradiction in sync as the market moves.&rdquo;
+            &ldquo;The hard part of autonomous trading research is not finding one more chart. It is keeping every thesis, wallet note, catalyst, and contradiction in sync as the market moves.&rdquo;
           </blockquote>
-          <p className="mt-5 text-sm text-muted-foreground">
-            solana-clawd research workflow
+          <p className="mt-5 text-sm text-primary font-medium">
+            — Karpathy-style OpenClawd research workflow
           </p>
         </motion.div>
       </section>
@@ -349,7 +365,7 @@ export default function LandingPage() {
       {/* Divider */}
       <div className="max-w-5xl mx-auto border-t border-border" />
 
-      {/* CTA */}
+      {/* $CLAWD */}
       <section className="px-6 lg:px-10 py-24">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -358,24 +374,37 @@ export default function LandingPage() {
           transition={{ duration: 0.6 }}
           className="max-w-md mx-auto text-center"
         >
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">Start building your vault</h2>
+          <div className="badge-clawd mb-4 text-sm">
+            <span>$CLAWD</span>
+            <span className="text-primary/50">·</span>
+            <span>8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump</span>
+          </div>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4">Access is token-gated</h2>
           <p className="text-muted-foreground mb-8">
-            Replace scattered notes with a compounding Solana research graph for `$CLAWD`, dSolana theses, and autonomous financial agents.
+            Research access scales with $CLAWD holdings. Higher tiers unlock deeper agent research and priority compute.
           </p>
           <Link
             href="/signup"
-            className="inline-flex items-center gap-2 rounded-full bg-foreground text-background px-7 py-3 text-sm font-medium hover:opacity-90 transition-opacity"
+            className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3 text-sm font-medium hover:opacity-90 transition-opacity"
           >
-            Get started free
-            <ArrowRight className="size-3.5 opacity-60" />
+            Start with free tier
+            <ArrowRight className="size-3.5 opacity-70" />
           </Link>
         </motion.div>
       </section>
 
       {/* Footer */}
       <footer className="border-t border-border px-6 lg:px-10 py-6 flex items-center justify-between text-xs text-muted-foreground/50">
-        <span>Clawd Vault</span>
-        <span>Free &amp; open source &middot; Apache 2.0</span>
+        <span className="flex items-center gap-2">
+          <img
+            src="https://raw.githubusercontent.com/x402agent/openclawd/main/gfx/lobster.svg"
+            alt="🦞"
+            width={16}
+            height={16}
+          />
+          <span>OpenClawd AutoResearch</span>
+        </span>
+        <span>Free &middot; MIT &middot; The Hermes of Web3</span>
       </footer>
     </div>
   )
