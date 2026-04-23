@@ -26,7 +26,7 @@ terminal:
   env_file: .env               # loaded automatically
 
 # ── Personality ──────────────────────────────────────────────────────
-personality: CLAW.md           # path to CLAW.md (this file's sibling)
+personality: CLAWD.md          # path to CLAWD.md (this file's sibling)
 
 # ── Session settings ─────────────────────────────────────────────────
 session:

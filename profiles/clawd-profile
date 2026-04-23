@@ -5,7 +5,7 @@
 # A profile is an isolated agent home directory containing:
 #   config.yaml   — model/provider/toolsets/terminal settings
 #   .env          — profile-scoped secrets
-#   CLAW.md       — personality / operating charter for this claw
+#   CLAWD.md      — personality / operating charter for this claw
 #   memories/     — long-term memory store
 #   sessions/     — conversation history
 #   skills/       — profile-local skills
@@ -87,8 +87,8 @@ provider: clawdrouter
 EOF
   fi
 
-  if [ -f "$TEMPLATES_DIR/CLAW.md" ]; then
-    sed "s/{{NAME}}/$name/g" "$TEMPLATES_DIR/CLAW.md" > "$dir/CLAW.md"
+  if [ -f "$TEMPLATES_DIR/CLAWD.md" ]; then
+    sed "s/{{NAME}}/$name/g" "$TEMPLATES_DIR/CLAWD.md" > "$dir/CLAWD.md"
   fi
 
   if [ -f "$TEMPLATES_DIR/.env.example" ]; then
@@ -108,7 +108,7 @@ cmd_create() {
   write_alias "$name"
   ok "created profile ${BOLD}${LOBSTER}$name${CR} at ${DIM}$dir${CR}"
   ok "alias installed: ${VIOLET}$BIN_DIR/$name${CR}"
-  info "edit ${CYAN}$dir/CLAW.md${CR} to shape this claw's personality"
+  info "edit ${CYAN}$dir/CLAWD.md${CR} to shape this claw's personality"
 }
 
 cmd_list() {

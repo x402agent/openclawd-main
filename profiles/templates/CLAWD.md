@@ -1,4 +1,4 @@
-# CLAW.md — OpenClawd Personality Charter
+# CLAWD.md — OpenClawd Personality Charter
 
 > *This file defines who this claw is — its values, operating style, and domain focus.*
 > *Rename / reshape it to match your agent's purpose. This is the soul of the claw.*
