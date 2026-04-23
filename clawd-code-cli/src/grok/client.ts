@@ -131,6 +131,10 @@ export class GrokClient {
     return model;
   }
 
+  private isOpenRouterModel(model: string): boolean {
+    return model.startsWith("openrouter/");
+  }
+
   getCurrentModel(): string {
     return this.currentModel;
   }
@@ -142,8 +146,9 @@ export class GrokClient {
     searchOptions?: SearchOptions
   ): Promise<GrokResponse> {
     try {
+      const activeModel = model || this.currentModel;
       const requestPayload: any = {
-        model: this.resolveApiModel(model || this.currentModel),
+        model: this.resolveApiModel(activeModel),
         messages,
         tools: tools || [],
         tool_choice: tools && tools.length > 0 ? "auto" : undefined,
@@ -154,6 +159,12 @@ export class GrokClient {
       // Add search parameters if specified
       if (searchOptions?.search_parameters) {
         requestPayload.search_parameters = searchOptions.search_parameters;
+      }
+
+      // OpenRouter reasoning passthrough — no-op for non-reasoning models.
+      // Disable by setting OPENROUTER_REASONING=false.
+      if (this.isOpenRouterModel(activeModel) && process.env.OPENROUTER_REASONING !== "false") {
+        requestPayload.reasoning = { enabled: true };
       }
 
       const response =
@@ -172,8 +183,9 @@ export class GrokClient {
     searchOptions?: SearchOptions
   ): AsyncGenerator<any, void, unknown> {
     try {
+      const activeModel = model || this.currentModel;
       const requestPayload: any = {
-        model: this.resolveApiModel(model || this.currentModel),
+        model: this.resolveApiModel(activeModel),
         messages,
         tools: tools || [],
         tool_choice: tools && tools.length > 0 ? "auto" : undefined,
@@ -185,6 +197,10 @@ export class GrokClient {
       // Add search parameters if specified
       if (searchOptions?.search_parameters) {
         requestPayload.search_parameters = searchOptions.search_parameters;
+      }
+
+      if (this.isOpenRouterModel(activeModel) && process.env.OPENROUTER_REASONING !== "false") {
+        requestPayload.reasoning = { enabled: true };
       }
 
       const stream = (await this.client.chat.completions.create(
