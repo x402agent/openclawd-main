@@ -9,19 +9,21 @@
     "npm": ">=10"
   },
   "scripts": {
-    "install:all": "npm run install:agents && npm run install:router && npm run install:registrar && npm run install:cli && npm run install:hub && npm run install:wallet",
+    "install:all": "npm run install:agents && npm run install:router && npm run install:registrar && npm run install:cli && npm run install:hub && npm run install:wallet && npm run install:stack",
     "install:agents": "cd AGENTS && npm install --no-audit --no-fund",
     "install:router": "cd clawdrouter && npm install --no-audit --no-fund",
     "install:registrar": "cd api-registrar && npm install --no-audit --no-fund",
     "install:cli": "cd clawd-code-cli && npm install --no-audit --no-fund",
     "install:hub": "cd clawdhub && npm install --no-audit --no-fund",
     "install:wallet": "cd packages/clawd-wallet && npm install --no-audit --no-fund",
+    "install:stack": "cd openclawd-stack && pnpm install --no-frozen-lockfile",
     "build:catalog": "cd AGENTS && node build-catalog.cjs",
     "lint": "npm --prefix clawdrouter run lint --if-present && npm --prefix api-registrar run lint --if-present && npm --prefix clawd-code-cli run lint --if-present",
     "typecheck": "npm --prefix clawdrouter run typecheck --if-present && npm --prefix api-registrar run typecheck --if-present && npm --prefix clawd-code-cli run typecheck --if-present",
     "dev:router": "cd clawdrouter && npm run dev",
     "dev:registrar": "cd api-registrar && npm run dev",
     "dev:cli": "cd clawd-code-cli && npm run dev",
+    "dev:orchestrator": "cd openclawd-stack && pnpm dev:orchestrator",
     "doctor": "node scripts/doctor.mjs"
   },
   "repository": {
