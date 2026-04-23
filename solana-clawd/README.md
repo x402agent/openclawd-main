@@ -1,6 +1,6 @@
-# solana-clawd
+# 🦞 OpenClawd — Autonomous Solana Trading Agent
 
-> Open-source Solana AI agent framework powered by xAI Grok · Built with Go + TypeScript
+> **Open-source Solana AI agent framework powered by xAI Grok · Built with Go + TypeScript**
 
 ```
    _____       __                        ________                    __
@@ -14,226 +14,335 @@
                     ╚══════════════════════════╝
 ```
 
-## What is solana-clawd?
+## What is OpenClawd?
 
-**solana-clawd** is an open-source Solana AI agent framework combining:
-- **Go runtime** with native gagliardetto/solana-go SDK for direct on-chain operations
-- **OODA loop** trading engine (MawdBot) for Pump.fun and Solana spot
-- **31+ MCP tools** for market data, trading, and wallet operations
-- **OpenClawd integration** with OpenShell sandboxes and ClawdRouter API
-- **Privy wallets** for agentic wallet management at birth (no API keys needed)
+**OpenClawd** is an autonomous Solana trading agent combining:
 
-**Website:** [solanaclawd.com](https://solanaclawd.com)  
-**$CLAWD Token:** [8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump](https://pump.fun/8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump)
-**Dev Portal:** [docs.solanaclawd.com](https://docs.solanaclawd.com)
+- **🦞 Native Go Runtime** — Built on `gagliardetto/solana-go` SDK for direct on-chain operations
+- **📊 OODA Trading Loop** — Observe → Orient → Decide → Act autonomous cycle
+- **🔗 Jupiter Ultra** — MEV-protected swap execution via Jupiter's Ultra API
+- **🧠 ClawVault Memory** — Persistent trading memory with KNOWN/LEARNED/INFERRED tiers
+- **💰 x402 Payments** — Native HTTP 402 protocol for Solana micropayments
+- **📡 49 Metaplex Lobster Agents** — Swarm intelligence for market research
 
-## Quick Start
-
-### Go Daemon (Recommended)
-
-```bash
-cd solana-clawd
-make install          # Install clawd, clawd-tui, slnc binaries
-
-clawd daemon          # Start the daemon
-clawd ooda --sim      # Simulated trading
-clawd gateway start   # Start native gateway
-```
-
-### TypeScript MCP Server
-
-```bash
-git clone https://github.com/x402agent/Solana-Os-Go
-cd solana-clawd
-npm install
-npm run build
-
-# Configure environment
-cp .env.example .env
-
-# Run MCP server
-npm start
-```
-
-## Project Structure
-
-```
-solana-clawd/
-├── Makefile                 # Go build (clawd, slnc, orin cross-compile)
-├── go.mod / go.sum          # Go dependencies + gagliardetto/solana-go
-├── main.go                  # Go daemon entry point
-├── hardware.go              # Modulino® I2C integration
-├── memory_commands.go       # ClawVault memory commands
-│
-├── pkg/                     # Go packages
-│   ├── solana/              # SolanaRPC wrapper for gagliardetto/solana-go
-│   ├── agent/               # OODA loop agent
-│   ├── config/              # Configuration
-│   ├── gateway/             # TCP bridge gateway
-│   └── ...
-│
-├── src/                     # TypeScript MCP server
-├── skills/                  # 97 bundled SKILL.md files
-├── docs/                    # Documentation
-├── packages/                # npm packages
-│
-├── third_party/solana-go/   # gagliardetto/solana-go SDK
-│   ├── rpc/                 # RPC client
-│   ├── programs/            # Token, Stake, System programs
-│   ├── cmd/slnc/            # slnc CLI tool
-│   └── ...
-│
-└── tailclawd/              # TailClawd integration
-```
-
-## Core Components
-
-### Go Runtime (slnc CLI)
-
-The `slnc` tool provides direct access to the solana-go SDK:
-
-```bash
-# Build slnc
-make slnc
-
-# Use slnc
-./build/slnc --help
-```
-
-Features:
-- Account/Key management
-- Transaction building and signing  
-- RPC client operations
-- Program instructions (Token, Stake, System, etc.)
-- Address lookup tables
-
-### MCP Server (31 tools)
-
-| Category | Tools |
-|----------|-------|
-| Helius RPC | account_info, balance, transactions, priority_fee |
-| Solana Market | price, trending, token_info, wallet_pnl |
-| Trading | pump_token_scan, pump_buy_quote, pump_sell_quote |
-| Memory | memory_recall, memory_write |
-| Wallet | balance, address, transfer |
-| Agent | agent_spawn, agent_list, agent_stop |
-
-### MawdBot Trading Agent
-
-```
-OBSERVE  → prices, volume, holders, dev-wallet, bonding%
-ORIENT   → RSI/EMA/ATR scoring, confidence model
-DECIDE   → confidence ≥ 0.60 → size band
-ACT      → Jupiter swap / Hyperliquid order / Aster order
-LEARN    → persist to ClawVault, feed auto-optimizer
-```
-
-### Memory Tiers (ClawVault Epistemology)
-
-| Tier | What it holds | Confidence |
-|------|---------------|------------|
-| **KNOWN** | API data, prices, balances, on-chain state | Verified, expires |
-| **LEARNED** | Trade patterns, wallet behaviors, market correlations | Persistent, high trust |
-| **INFERRED** | Derived signals, hypotheses, weak correlations | Tentative, revisable |
-
-### OpenClawd Integration
-
-The `openclawd-stack/` directory provides:
-- **OpenShell Sandboxes** - Secure isolated execution (NVIDIA)
-- **nemoClawd** - xAI Grok integration with 31 MCP tools
-- **ClawdRouter API** - Unified API at birth (no API keys needed)
-- **Privy wallets** - Agentic wallet integration
-
-## npm Packages
-
-| Package | Purpose |
-|---------|---------|
-| `@clawd/cli` | Main CLI installer |
-| `@clawd/daemon` | Go daemon binary |
-| `solanaos-cli` | SolanaOS compatibility |
-| `nanosolana-cli` | Legacy nanosolana support |
-
-Install via:
-```bash
-npm i -g @clawd/cli
-clawd go
-```
-
-## Commands (Go Daemon)
-
-```
-clawd daemon              # Start the daemon
-clawd ooda                # Start autonomous OODA loop
-clawd ooda --sim          # Simulated trading mode
-clawd ooda --hw-bus 1     # With Modulino® hardware
-clawd gateway start       # Start native TCP gateway
-clawd gateway setup-code  # Generate Seeker setup code
-clawd node run            # Connect hardware node
-clawd agent               # Interactive agent chat
-clawd status              # Show system status
-clawd hardware scan        # Scan I2C bus
-```
-
-## Environment Variables
-
-```bash
-# ClawdRouter (recommended - no API keys needed at birth)
-CLAWDRouter_API_KEY=      # ClawdRouter unified API key
-
-# Or individual providers (optional)
-HELIUS_API_KEY=            # Helius RPC/DAS
-HELIUS_RPC_URL=            # Helius mainnet RPC
-XAI_API_KEY=              # xAI Grok
-SOLANA_PRIVATE_KEY=       # Trading wallet (base58)
-PRIVY_APP_ID=             # Privy app
-HONCHO_API_KEY=           # Honcho v3 memory
-OPENROUTER_API_KEY=       # OpenRouter
-```
-
-## Build Targets
-
-```bash
-make build          # Build clawd daemon
-make slnc           # Build solana-go CLI
-make tui            # Build TUI launcher
-make slim           # Build slim daemon (<10MB)
-make orin           # Cross-compile for NVIDIA Orin Nano
-make install        # Install to /usr/local/bin
-make docker         # Build Docker image
-```
-
-## OpenClawd Stack
-
-For production deployments, see `../openclawd-stack/`:
-
-```
-openclawd-stack/
-├── NemoClawd-main/        # xAI Grok + 31 MCP tools
-├── orchestrator/          # MCP server + Privy wallet
-├── deploy/e2b-solana-clawd/  # E2B cloud deployment
-├── gateway/                # Gateway services
-├── payments/               # Payment processing
-└── SOLANA_CLAWD_SHELL.md   # Full architecture guide
-```
-
-## Related Projects
-
-- [Solana-Os-Go](https://github.com/x402agent/Solana-Os-Go) — Main monorepo
-- [SolanaOS](https://github.com/x402agent/SolanaOS) — Legacy operator runtime
-- [x402 protocol](https://github.com/x402agent/x402-go) — HTTP 402 payments
-
-## Documentation
-
-- [SOUL.md](SOUL.md) — Agent identity and epistemology
-- [SKILL.md](SKILL.md) — Complete skill documentation
-- [STRATEGY.md](STRATEGY.md) — Multi-venue trading strategy
-- [TRADE.md](TRADE.md) — MawdBot trading agent skill
-- [openclawd-stack/SOLANA_CLAWD_SHELL.md](../openclawd-stack/SOLANA_CLAWD_SHELL.md) — Full stack integration
-
-## License
-
-MIT · [github.com/x402agent/solana-clawd](https://github.com/x402agent/solana-clawd)
+**$CLAWD Token:** `8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump`
+**Website:** [solanaclawd.com](https://solanaclawd.com)
 
 ---
 
-*solana-clawd v1.0 · Go + TypeScript · MIT · x402 Protocol*
+## Quick Start
+
+### Install (One Command)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/x402agent/openclawd/main/solana-clawd/install.sh | bash
+```
+
+### Build from Source
+
+```bash
+cd solana-clawd
+make install          # Build and install clawd binary
+clawd version         # Verify installation
+```
+
+### Run Autonomous Trading
+
+```bash
+# Simulated mode (no real trades)
+clawd ooda --sim --interval 60
+
+# Live trading (requires wallet funding)
+clawd ooda --interval 30
+
+# With Modulino® hardware
+clawd ooda --hw-bus 1
+```
+
+---
+
+## Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                     OpenClawd Trading Agent                      │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│  ┌─────────────────────────────────────────────────────────┐    │
+│  │              OODA Loop (Observe → Orient → Decide → Act)  │    │
+│  │                                                          │    │
+│  │  OBSERVE: Solana Tracker + Helius RPC + Birdeye         │    │
+│  │  ORIENT:  RSI/EMA/ATR strategy engine                   │    │
+│  │  DECIDE:  Signal scoring + confidence threshold         │    │
+│  │  ACT:     Jupiter Ultra swaps + position tracking        │    │
+│  └─────────────────────────────────────────────────────────┘    │
+│                              │                                    │
+│  ┌──────────────────────────┼──────────────────────────────┐   │
+│  │                    Go Runtime                            │   │
+│  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐     │   │
+│  │  │ solana-go   │  │ ClawVault   │  │ OnChain     │     │   │
+│  │  │ SDK         │  │ Memory      │  │ Engine      │     │   │
+│  │  │ (native RPC)│  │ (persist)   │  │ (Jupiter)   │     │   │
+│  │  └─────────────┘  └─────────────┘  └─────────────┘     │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                              │                                    │
+│  ┌──────────────────────────┼──────────────────────────────┐   │
+│  │                  Solana Blockchain                        │   │
+│  │  Helius RPC · Jupiter Ultra · pump.fun · Raydium        │   │
+│  └─────────────────────────────────────────────────────────┘   │
+│                                                                  │
+│  ┌─────────────────────────────────────────────────────────┐    │
+│  │          49 Metaplex Lobster Agents (AutoResearch)      │    │
+│  │  🦞 lobster-trader-01  🦞 lobster-analyst-02  ...       │    │
+│  │  Research pump.fun, Birdeye, wallet clusters 24/7       │    │
+│  └─────────────────────────────────────────────────────────┘    │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## CLI Commands
+
+### OODA Trading Loop
+
+```bash
+clawd ooda [flags]
+
+Flags:
+  --interval int    Cycle interval in seconds (default: 60)
+  --sim             Simulated mode (no live trades)
+  --hw-bus int      I2C bus for Modulino® hardware
+  --no-hw           Disable hardware integration
+```
+
+### Gateway & Networking
+
+```bash
+clawd gateway start           # Start TCP bridge gateway
+clawd gateway setup-code     # Generate Solana Seeker setup code
+clawd node run              # Connect hardware node
+```
+
+### Agent Chat
+
+```bash
+clawd agent -m "What's the current SOL price?"
+clawd agent                  # Interactive chat mode
+```
+
+### Status & Monitoring
+
+```bash
+clawd status                 # Show system status
+clawd status --hw-bus 1      # With hardware scan
+clawd hardware scan          # Scan I2C sensors
+```
+
+---
+
+## Configuration
+
+### Environment Variables
+
+```bash
+# RPC Providers (at least one required)
+HELIUS_API_KEY=              # Helius RPC/DAS API key
+HELIUS_RPC_URL=              # Helius RPC endpoint
+HELIUS_WSS_URL=              # Helius WebSocket
+SOLANA_TRACKER_API_KEY=      # SolanaTracker API key
+SOLANA_TRACKER_RPC_URL=      # SolanaTracker RPC
+
+# Trading
+SOLANA_PRIVATE_KEY=          # Trading wallet (base58)
+MAX_POSITION_SOL=0.1         # Max position size in SOL
+
+# Jupiter
+JUPITER_API_KEY=             # Jupiter API key (optional)
+
+# AI / Memory
+XAI_API_KEY=                 # xAI Grok API key
+HONCHO_API_KEY=              # Honcho memory API
+
+# x402 Payments
+CLAWDRouter_API_KEY=         # ClawdRouter unified API
+```
+
+### Config File
+
+```bash
+~/.config/clawd/config.yaml
+```
+
+---
+
+## OODA Strategy Engine
+
+The trading loop uses a multi-indicator strategy:
+
+### Indicators
+
+| Indicator | Purpose | Default |
+|----------|---------|---------|
+| RSI | Overbought/Oversold | 70/30 |
+| EMA | Trend direction | Fast: 9, Slow: 21 |
+| ATR | Volatility-based stops | 14 periods |
+| Volume | Liquidity filter | >$500K 24h |
+
+### Signal Generation
+
+```
+Signal Strength = (RSI_score × 0.3) + (EMA_score × 0.4) + (Volume_score × 0.2) + (Momentum × 0.1)
+
+Confidence = Base(0.4) + Indicator_Agreement(0.2) + Volume_Confirmation(0.2) + Historical_Performance(0.2)
+
+Action = IF Confidence ≥ 0.60 AND Strength ≥ 0.50 THEN Trade
+```
+
+---
+
+## ClawVault Memory
+
+OpenClawd maintains persistent trading memory across sessions:
+
+### Memory Tiers
+
+| Tier | Content | Persistence |
+|------|---------|-------------|
+| **KNOWN** | Prices, balances, on-chain state | Expires |
+| **LEARNED** | Trade patterns, wallet behaviors | Persistent |
+| **INFERRED** | Hypotheses, weak correlations | Revisable |
+
+### Memory Commands
+
+```bash
+clawd memory recall "recent trades"
+clawd memory write "SOL showing strength"
+clawd memory ls
+```
+
+---
+
+## x402 Protocol Integration
+
+OpenClawd supports native HTTP 402 payments for:
+
+- **Priority RPC queries** — Pay per request
+- **Premium agent access** — xAI Grok tiers
+- **Swap fee sharing** — Revenue sharing with Jupiter
+
+```bash
+# Start with x402
+clawd daemon --x402-enabled
+
+# Check balance
+clawd wallet balance
+```
+
+---
+
+## Jupiter Ultra Integration
+
+OpenClawd uses Jupiter Ultra for MEV-protected swaps:
+
+### Swap Flow
+
+```
+1. OODA decides to BUY token X with 0.1 SOL
+2. Engine calls GET /ultra/v1/order
+3. Jupiter returns unsigned transaction
+4. Agent signs locally with wallet
+5. Agent submits via POST /ultra/v1/execute
+6. Jupiter handles landing + confirmation
+7. Agent monitors for TP/SL conditions
+```
+
+### Supported Routes
+
+- SOL → SPL tokens
+- USDC → SPL tokens
+- Any Jupiter-supported pair
+
+---
+
+## Development
+
+### Build
+
+```bash
+make build          # Build clawd binary
+make slnc           # Build solana-go CLI
+make tui            # Build TUI launcher
+make slim           # Build slim daemon (<10MB)
+make docker         # Build Docker image
+make orin           # Cross-compile for NVIDIA Orin Nano
+```
+
+### Test
+
+```bash
+go test ./...           # Run all tests
+go test -v ./pkg/agent  # Test agent package
+clawd ooda --sim        # Manual testing
+```
+
+### Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for:
+- Code style guidelines
+- Commit message format
+- Testing requirements
+
+---
+
+## Directory Structure
+
+```
+solana-clawd/
+├── main.go                  # Go daemon entry point
+├── go.mod / go.sum          # Dependencies (gagliardetto/solana-go)
+├── Makefile                 # Build targets
+│
+├── pkg/                     # Go packages
+│   ├── agent/               # OODA trading loop
+│   │   ├── ooda.go         # Main OODA agent
+│   │   ├── vault.go        # ClawVault memory
+│   │   └── hooks.go        # Hardware hooks
+│   ├── solana/             # Solana SDK wrapper
+│   │   ├── rpc.go          # Native solana-go RPC
+│   │   ├── wallet.go       # Agent wallet
+│   │   └── clients.go      # API clients
+│   ├── onchain/            # On-chain operations
+│   │   ├── engine.go       # RPC + WSS
+│   │   └── jupiter.go      # Jupiter Ultra
+│   ├── strategy/           # Trading strategy
+│   ├── config/             # Configuration
+│   └── memory/             # Memory persistence
+│
+├── cmd/clawd/              # CLI commands
+├── src/                    # TypeScript MCP server
+├── skills/                 # 97 bundled SKILL files
+├── docs/                   # Documentation
+└── examples/               # Usage examples
+```
+
+---
+
+## Related Projects
+
+| Project | Description |
+|---------|-------------|
+| [openclawd](https://github.com/x402agent/openclawd) | Main monorepo |
+| [llm-wiki-tang](https://github.com/x402agent/openclawd/tree/main/llm-wiki-tang) | AutoResearch Wiki |
+| [x402-go](https://github.com/x402agent/x402-go) | HTTP 402 payments |
+| [pump.fun](https://pump.fun) | Solana memecoins |
+| [Jupiter](https://jup.ag) | Solana DEX aggregator |
+
+---
+
+## License
+
+MIT · [github.com/x402agent/openclawd](https://github.com/x402agent/openclawd)
+
+---
+
+*OpenClawd v1.0 · Go + TypeScript · MIT · The Hermes of Web3*
