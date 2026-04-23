@@ -1,5 +1,9 @@
 # 🦞 Clawd Code CLI
 
+> **Canonical OpenClawd CLI.** This is the one the monorepo's onboarding and
+> `npm run dev:cli` point to. The other `clawd-code-*` variants live under
+> [`../legacy/`](../legacy/) and are reference-only.
+
 <div align="center">
 
 **A lobster-themed AI terminal operator for coding, system ops & Solana**

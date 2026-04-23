@@ -18,7 +18,7 @@
     "@pythnetwork/hermes-client": "^2.1.0",
     "@pythnetwork/pyth-solana-receiver": "^0.13.0",
     "@solana/spl-token": "^0.3.11",
-    "@solana/web3.js": "^1.95.4",
+    "@solana/web3.js": "^1.98.0",
     "commander": "^12.1.0",
     "zod": "^3.23.8"
   },
