@@ -32,7 +32,7 @@ COPY src ./src
 COPY README.md ./README.md
 
 # Environment defaults
-ENV PORT=3000
+ENV PORT=3002
 ENV NODE_ENV=production
 
 EXPOSE 3000

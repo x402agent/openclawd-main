@@ -193,15 +193,19 @@ and the consuming service's `.env.example`.
 | --- | --- | --- |
 | 3000 | clawd-cloud-os | `clawd-cloud-os/.env.example` |
 | 3001 | OpenClawd MCP bridge | `chrome-extension/install-openclawd.sh` |
+| 3002 | MCP server (`MCP/`) | `MCP/Dockerfile`, `MCP/fly.toml` |
 | 3110 | TailClawd web UI | `tailclawd/` |
 | 7777 | pAGENT Control UI | `chrome-extension/` |
 | 8000 | llm-wiki-tang FastAPI | `llm-wiki-tang/` |
+| 8080 | Cloud Bridge (`openclawd-stack/bridge/`) | WebSocket terminal → E2B |
 | 8420 | MawdAxe miner SSE | `chrome-extension/` |
 | 8421 | Wallet API | `chrome-extension/` |
 | 8787 | OpenClawd Orchestrator | `openclawd-stack/orchestrator/` |
 | 18790 | SolanaOS Gateway WS | external (`SolanaOS`) |
 
-**Known collisions to resolve later:** `MCP/` Dockerfile defaults to 3000 (collides with `clawd-cloud-os`); `clawdhub` README mentions both 8080 and 8787 without clarifying which is which.
+The 8080 ↔ 8787 pair is the intended split inside `openclawd-stack`: the Bridge
+is the WebSocket front door (8080), the Orchestrator is the Honcho/Privy/MCP
+control plane (8787). They are not alternates.
 
 ---
 
