@@ -15,6 +15,7 @@
 
 import { homedir } from 'node:os';
 import { join } from 'node:path';
+import { readFileSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import type { ClawdRouterConfig, RoutingProfile } from './types.js';
 import { ClawdRouterProxy } from './proxy/server.js';
@@ -33,8 +34,26 @@ import { LOBSTER_BANNER, showLobsterBanner, showLobsterWelcome } from './utils/l
 
 // ── Default Configuration ───────────────────────────────────────────
 
+/**
+ * Fallback loader for provider keys stored in the clawd-code-cli's
+ * ~/.clawd/user-settings.json. Lets the daemon pick up an OPENROUTER_API_KEY
+ * set via `clawd` without requiring a shell export.
+ */
+function loadUserSettingsProviderKey(provider: string): string {
+  try {
+    const raw = readFileSync(join(homedir(), '.clawd', 'user-settings.json'), 'utf-8');
+    const parsed = JSON.parse(raw) as { providers?: Record<string, { apiKey?: string }> };
+    return parsed.providers?.[provider]?.apiKey ?? '';
+  } catch {
+    return '';
+  }
+}
+
 function getDefaultConfig(): ClawdRouterConfig {
-  const openRouterApiKey = process.env['OPENROUTER_API_KEY'] ?? process.env['CLAWDROUTER_OPENROUTER_API_KEY'] ?? '';
+  const openRouterApiKey =
+    process.env['OPENROUTER_API_KEY'] ??
+    process.env['CLAWDROUTER_OPENROUTER_API_KEY'] ??
+    loadUserSettingsProviderKey('openrouter');
   const openRouterEnabled =
     process.env['CLAWDROUTER_OPENROUTER_ENABLED'] === 'true' ||
     (process.env['CLAWDROUTER_OPENROUTER_ENABLED'] !== 'false' && openRouterApiKey.length > 0);
