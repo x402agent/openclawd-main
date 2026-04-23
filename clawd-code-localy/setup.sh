@@ -1,15 +1,19 @@
 #!/bin/bash
-# Claude Code Local — One-command setup
-# Works on any Apple Silicon Mac
+# 🦞 Clawd Code Local — One-command setup
+# Run self-improving AI coding agents on your Apple Silicon Mac
 # Usage: bash setup.sh
 
 set -e
 
 echo ""
-echo "╔══════════════════════════════════════════════════╗"
-echo "║     Claude Code Local — Setup                   ║"
-echo "║     Run AI coding agents on your Mac            ║"
-echo "╚══════════════════════════════════════════════════╝"
+echo "╔════════════════════════════════════════════════════════════╗"
+echo "║                                                            ║"
+echo "║   🦞 CLAWD CODE LOCAL 🦞                                ║"
+echo "║                                                            ║"
+echo "║   Self-Improving AI on Apple Silicon                      ║"
+echo "║   Privacy-First • No Cloud • No Fees                    ║"
+echo "║                                                            ║"
+echo "╚════════════════════════════════════════════════════════════╝"
 echo ""
 
 # Detect memory
@@ -20,7 +24,7 @@ echo ""
 
 # Check for Apple Silicon
 if [[ $(uname -m) != "arm64" ]]; then
-  echo "ERROR: This requires Apple Silicon (M1 or later)."
+  echo "ERROR: 🦞 Clawd Code Local requires Apple Silicon (M1 or later)."
   exit 1
 fi
 
@@ -71,7 +75,7 @@ if [ "$MODEL" != "qwen3.5:4b" ]; then
 fi
 
 # Set up proxy
-PROXY_DIR="$HOME/.local/claude-local-proxy"
+PROXY_DIR="$HOME/.local/clawd-local-proxy"
 mkdir -p "$PROXY_DIR"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 cp "$SCRIPT_DIR/proxy/proxy.py" "$PROXY_DIR/proxy.py"
@@ -82,18 +86,18 @@ if [ "$MODEL" != "qwen3.5:122b" ]; then
 fi
 
 # Create desktop launcher
-CLAUDE_BIN=$(which claude 2>/dev/null || echo "$HOME/.local/bin/claude")
+CLAUDE_BIN=$(which clawd 2>/dev/null || which clawd 2>/dev/null || echo "$HOME/.local/bin/clawd")
 if [ ! -f "$CLAUDE_BIN" ]; then
   echo ""
-  echo "WARNING: Claude Code not found. Install it with:"
-  echo "  npm install -g @anthropic-ai/claude-code"
+  echo "WARNING: Clawd Code not found. Install it with:"
+  echo "  bun add -g clawd-code-cli"
   echo ""
-  CLAUDE_BIN="\$HOME/.local/bin/claude"
+  CLAUDE_BIN="\$HOME/.local/bin/clawd"
 fi
 
-cat > "$HOME/Desktop/Claude Local.command" << LAUNCHER
+cat > "$HOME/Desktop/Clawd Local.command" << LAUNCHER
 #!/bin/bash
-# Claude Code — Local AI
+# 🦞 Clawd Code — Local AI
 CLAUDE_BIN="$CLAUDE_BIN"
 PROXY="$PROXY_DIR/proxy.py"
 
@@ -109,8 +113,15 @@ fi
 
 clear
 echo ""
-echo "  → Claude Code with LOCAL AI ($MODEL)"
-echo "  → Running on your Mac — no cloud, no API fees"
+echo "╔════════════════════════════════════════════════════════════╗"
+echo "║   🦞 CLAWD CODE LOCAL 🦞                                ║"
+echo "║                                                            ║"
+echo "║   → Local AI: $MODEL"
+echo "║   → Running on your Mac — no cloud, no API fees"
+echo "║   → OODA Loop Self-Improvement Active"
+echo "║                                                            ║"
+echo "║   🦞 Claws that learn locally, brains that evolve         ║"
+echo "╚════════════════════════════════════════════════════════════╝"
 echo ""
 
 ANTHROPIC_BASE_URL=http://localhost:4000 \\
@@ -118,19 +129,25 @@ ANTHROPIC_API_KEY=sk-local \\
 exec "\$CLAUDE_BIN" --model claude-sonnet-4-6
 LAUNCHER
 
-chmod +x "$HOME/Desktop/Claude Local.command"
+chmod +x "$HOME/Desktop/Clawd Local.command"
 
 echo ""
-echo "╔══════════════════════════════════════════════════╗"
-echo "║     Setup complete!                              ║"
-echo "╠══════════════════════════════════════════════════╣"
-echo "║                                                  ║"
+echo "╔════════════════════════════════════════════════════════════╗"
+echo "║     🦞 Setup Complete! 🦞                                ║"
+echo "╠════════════════════════════════════════════════════════════╣"
+echo "║                                                            ║"
 echo "║  Model: $MODEL"
 echo "║  Proxy: $PROXY_DIR/proxy.py"
-echo "║  Launcher: ~/Desktop/Claude Local.command"
-echo "║                                                  ║"
-echo "║  Double-click 'Claude Local' on your Desktop     ║"
-echo "║  to start coding with local AI.                  ║"
-echo "║                                                  ║"
-echo "╚══════════════════════════════════════════════════╝"
+echo "║  Launcher: ~/Desktop/Clawd Local.command"
+echo "║                                                            ║"
+echo "║  Features:                                                ║"
+echo "║  • OODA Loop Self-Improvement                            ║"
+echo "║  • Local Skill Storage                                    ║"
+echo "║  • Optional Solana Sync                                   ║"
+echo "║                                                            ║"
+echo "║  Double-click 'Clawd Local' on your Desktop             ║"
+echo "║  to start coding with local AI.                           ║"
+echo "║                                                            ║"
+echo "║  🦞 Claws that learn locally, brains that evolve         ║"
+echo "╚════════════════════════════════════════════════════════════╝"
 echo ""
