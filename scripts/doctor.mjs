@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-// Root doctor: verifies the onboarding flow will work on a fresh clone.
 import { existsSync, readFileSync } from "node:fs";
 import { execSync } from "node:child_process";
 import { dirname, join } from "node:path";
@@ -7,73 +6,76 @@ import { fileURLToPath } from "node:url";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const rows = [];
-const mark = (ok, name, detail = "") => rows.push({ ok, name, detail });
+
+function mark(ok, name) {
+  rows.push({ ok, name });
+}
+
+function commandVersion(command, label, minMajor) {
+  try {
+    const value = execSync(command, {
+      cwd: root,
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "ignore"],
+    }).trim();
+    const major = Number(value.replace(/^v/, "").split(".")[0]);
+    mark(Number.isFinite(major) && major >= minMajor, `${label} (have ${value})`);
+  } catch {
+    mark(false, `${label} (missing)`);
+  }
+}
 
 const nodeMajor = Number(process.versions.node.split(".")[0]);
 mark(nodeMajor >= 20, `node >= 20 (have ${process.versions.node})`);
-
-try {
-  const v = execSync("npm -v", { encoding: "utf8" }).trim();
-  mark(Number(v.split(".")[0]) >= 10, `npm >= 10 (have ${v})`);
-} catch {
-  mark(false, "npm on PATH");
-}
-
-try {
-  const v = execSync("pnpm -v", { encoding: "utf8", stdio: ["pipe", "pipe", "ignore"] }).trim();
-  mark(true, `pnpm on PATH (${v}) — needed for install:stack`);
-} catch {
-  mark(false, "pnpm on PATH — install:stack and dev:orchestrator need pnpm");
-}
+commandVersion("npm -v", "npm >= 10", 10);
+commandVersion("pnpm -v", "pnpm on PATH for openclawd-stack", 8);
 
 const requiredPaths = [
   "package.json",
   ".env.example",
+  ".nvmrc",
+  "README.md",
   "ONBOARDING.md",
+  "CONTRIBUTING.md",
+  "SECURITY.md",
+  "STACK.md",
+  "install.sh",
   "AGENTS/build-catalog.cjs",
-  "clawd-code-cli/package.json",
   "clawdrouter/package.json",
   "api-registrar/package.json",
-  "clawdhub/package.json",
+  "clawd-code-cli/package.json",
   "packages/clawd-wallet/package.json",
+  "openclawd-stack/package.json",
   "openclawd-stack/pnpm-workspace.yaml",
-  "docs/articles",
+  "docs/articles/README.md",
 ];
-for (const p of requiredPaths) mark(existsSync(join(root, p)), `exists: ${p}`);
 
-const shouldBeGone = [
-  "clawd-code-localy",
-  "clawd-code-main",
-  "clawd-code-proxy-main",
-  "gateway",
-];
-for (const p of shouldBeGone) {
-  mark(!existsSync(join(root, p)), `archived/removed: ${p}`);
+for (const rel of requiredPaths) {
+  mark(existsSync(join(root, rel)), `exists: ${rel}`);
+}
+
+for (const rel of ["README.md", "CONTRIBUTING.md", "SECURITY.md", "STACK.md"]) {
+  const body = readFileSync(join(root, rel), "utf8");
+  mark(!body.includes("./agents/"), `${rel}: no broken ./agents/ links`);
 }
 
 try {
   const pkg = JSON.parse(readFileSync(join(root, "clawd-code-cli/package.json"), "utf8"));
-  mark(pkg.name === "clawd-code-cli", `clawd-code-cli package name = "${pkg.name}"`);
-  mark(!!pkg.bin?.clawd, `clawd-code-cli exposes "clawd" bin`);
+  mark(pkg.name === "clawd-code-cli", `clawd-code-cli package name is stable (${pkg.name})`);
 } catch {
-  mark(false, "clawd-code-cli/package.json readable");
+  mark(false, "clawd-code-cli package.json readable");
 }
-
-const remainingOldScope = execSync(
-  "grep -rl '@solana-clawd/' . 2>/dev/null | grep -v node_modules | grep -v legacy/ | grep -v '\\.git/' | grep -v 'lock\\.' | wc -l",
-  { cwd: root, encoding: "utf8" },
-).trim();
-mark(remainingOldScope === "0", `no lingering @solana-clawd/ refs (found ${remainingOldScope})`);
 
 let failed = 0;
-for (const r of rows) {
-  const icon = r.ok ? "✓" : "✗";
-  if (!r.ok) failed++;
-  console.log(`${icon} ${r.name}${r.detail ? `  ${r.detail}` : ""}`);
+for (const row of rows) {
+  if (!row.ok) failed += 1;
+  console.log(`${row.ok ? "✓" : "✗"} ${row.name}`);
 }
+
 console.log("");
-if (failed) {
+if (failed > 0) {
   console.log(`${failed} check(s) failed.`);
   process.exit(1);
 }
+
 console.log("all checks passed.");

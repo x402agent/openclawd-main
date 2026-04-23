@@ -5,6 +5,15 @@
   "keywords": ["mcp", "x402", "solana", "usdc", "clawd", "agents", "agentic-payments"],
   "license": "MIT",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/x402agent/openclawd.git",
+    "directory": "packages/agents-x402-solana"
+  },
+  "homepage": "https://github.com/x402agent/openclawd/tree/main/packages/agents-x402-solana#readme",
+  "bugs": {
+    "url": "https://github.com/x402agent/openclawd/issues"
+  },
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "exports": {

@@ -4,6 +4,15 @@
   "description": "OpenClawd API Key Registrar - X Verification Flow with ClawdRouter integration",
   "type": "module",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/x402agent/openclawd.git",
+    "directory": "api-registrar"
+  },
+  "homepage": "https://github.com/x402agent/openclawd/tree/main/api-registrar#readme",
+  "bugs": {
+    "url": "https://github.com/x402agent/openclawd/issues"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",

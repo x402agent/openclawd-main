@@ -10,7 +10,6 @@ dist/
 build/
 out/
 *.tsbuildinfo
-openclawd-stack
 # IDE
 .idea/
 .vscode/
@@ -56,6 +55,8 @@ coverage/
 tmp/
 temp/
 *.tmp
+/.turbo/
+/.pnpm-store/
 
 # Secrets (never commit these)
 *.pem

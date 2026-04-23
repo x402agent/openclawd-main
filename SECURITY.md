@@ -1,51 +1,56 @@
-# Security & Public Release Notes
+# Security Policy
 
-This repository is published for the community to build on. Before you fork,
-clone, deploy, or commit, please read the following.
+OpenClawd is designed to be forked and deployed publicly. Treat repo hygiene as part of the security model.
 
-## No Secrets, No Proprietary Keys
+## Supported Branch
 
-The codebase ships **without** any real credentials. Every API key, token,
-private key, account ID, Convex deployment, Supabase project, OpenAI / Privy /
-Helius / Solana Tracker / QuickNode / BrowserBase / Pinata / Netlify / Vercel /
-Cloudflare credential, etc. has been replaced with a placeholder such as:
-
-- `<your-openai-api-key>`
-- `<your-helius-api-key>`
-- `<your-cloudflare-account-id>`
-- `YOUR-DEPLOYMENT.convex.site`
-- `sk-proj-...`
-
-If you see a real-looking secret anywhere in the tree, **please open an issue
-immediately** — we treat it as a P0.
-
-## Configure Your Own Environment
-
-1. Copy the root `.env.example` to `.env` (and any sub-project `.env.example`
-   files to `.env` / `.env.local`). Fill in your own keys.
-2. Never commit your `.env`. The `.gitignore` blocks every common location, but
-   assume the ignore file can fail and keep secrets out of the repo.
-3. For Cloudflare Workers, use `wrangler secret put <NAME>` instead of placing
-   secrets in `wrangler.toml`.
-4. For Convex / Netlify / Vercel / Supabase, set environment variables in the
-   provider dashboard — not in checked-in files.
-
-## Proprietary Tech & Branded Endpoints
-
-Openclawd is intentionally vendor-neutral. If a file references a branded URL
-or deployment (e.g. `solanaclawd.com`, `clawdrouter.com`, `solanaos.net`), it
-is being used as a default example — you can and should swap these out for
-your own infrastructure. Nothing in the code requires you to talk to a
-specific hosted service to run the stack locally or on your own cloud.
+| Branch | Supported |
+| --- | --- |
+| `main` | Yes |
 
 ## Reporting a Vulnerability
 
-If you discover a secret leak, a credential still active in git history, or a
-security vulnerability, please email the maintainers via the contact on the
-`agents/SECURITY.md` (or open a private security advisory on GitHub).
+If you find a vulnerability, a leaked secret, or a credential that appears live:
 
-## Git History
+1. Do not open a public issue.
+2. Open a private GitHub security advisory for this repository.
+3. Include impact, affected paths, reproduction steps, and any suggested mitigation.
+4. If the issue is a secret leak, rotate the credential immediately before doing anything else.
 
-This public release starts from a clean working tree. If you are cloning from a
-fork that predates the cleanup, **rotate every credential** you find in the
-history and scrub the blob with `git filter-repo` / `bfg` before re-publishing.
+## What Counts as a Security Issue
+
+- committed secrets or deploy credentials
+- wallet or signing-flow bugs
+- auth or session bypasses
+- unsafe remote code execution paths
+- MCP tool exposure without proper controls
+- payment-verification bugs in x402 or gateway flows
+
+## Secret Handling Rules
+
+- Use `.env.example` files as templates only.
+- Never commit `.env`, `.env.local`, private keys, or provider exports.
+- For hosted deployments, store secrets in provider dashboards or secret stores.
+- If a secret lands in git history, rotate it first and then scrub history with `git filter-repo` or BFG before republishing.
+
+## Public Release Checklist
+
+Run these before merging release-facing changes or publishing a fork:
+
+```bash
+npm run doctor
+npm run release:check
+```
+
+`release:check` is intended to catch:
+
+- tracked env files
+- likely committed secrets
+- broken top-level doc references
+- junk files that should not ship in a public repo
+
+## Scope and Expectations
+
+OpenClawd contains multiple subprojects and experimental areas. Not every directory is production-ready, but every public-facing path should remain safe to clone, inspect, and build without exposing real credentials.
+
+If you are unsure whether something is sensitive, assume it is and report it privately.

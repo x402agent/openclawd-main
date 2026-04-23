@@ -2,7 +2,7 @@
   "name": "openclawd",
   "version": "0.1.0",
   "private": true,
-  "description": "OpenClawd monorepo root — Solana-native AI agent stack.",
+  "description": "OpenClawd monorepo for Solana-native AI agents, payments, MCP tools, and developer surfaces.",
   "license": "MIT",
   "engines": {
     "node": ">=20",
@@ -24,10 +24,15 @@
     "dev:registrar": "cd api-registrar && npm run dev",
     "dev:cli": "cd clawd-code-cli && npm run dev",
     "dev:orchestrator": "cd openclawd-stack && pnpm dev:orchestrator",
-    "doctor": "node scripts/doctor.mjs"
+    "doctor": "node scripts/doctor.mjs",
+    "release:check": "node scripts/release-check.mjs"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/x402agent/openclawd.git"
+  },
+  "homepage": "https://github.com/x402agent/openclawd#readme",
+  "bugs": {
+    "url": "https://github.com/x402agent/openclawd/issues"
   }
 }

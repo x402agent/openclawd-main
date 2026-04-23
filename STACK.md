@@ -43,7 +43,7 @@ The shared flow is:
 ┌──────────────────────────────────────────────────────────────┐
 │ 🐾 Security (ClawdVault)                                      │
 │ hermes-vault (services/) · clawd-vault (skills/)             │
-│ vault-mcp (MCP/) · vault-agent (agents/)                     │
+│ vault-mcp (MCP/) · vault-agent (AGENTS/)                     │
 └──────────────────────────────────────────────────────────────┘
 ```
 
@@ -68,7 +68,7 @@ The shared flow is:
 | Router | [`plugin.delivery/`](./plugin.delivery/) | Paid plugin and package delivery flow |
 | Runtime | [`src/`](./src/) | Core TypeScript engine |
 | Runtime | [`solana-clawd/`](./solana-clawd/) | Go plus TypeScript Solana agent framework |
-| Runtime | [`agents/`](./agents/) | Agent catalog and deploy-oriented assets |
+| Runtime | [`AGENTS/`](./AGENTS/) | Agent catalog and deploy-oriented assets |
 | Runtime | [`MCP/`](./MCP/) | MCP servers |
 | Runtime | [`packages/`](./packages/) | Shared npm packages, including wallet components |
 | Runtime | [`openclawd-stack/`](./openclawd-stack/) | Browser and sandbox runtime stack |
@@ -86,7 +86,7 @@ The shared flow is:
 | Assets | [`npm/`](./npm/) | npm installer and packaging helpers |
 | Security | [`skills/clawd-vault/`](./skills/clawd-vault/) | Security vault skill (Hermes Vault port) |
 | Security | [`MCP/vault-mcp/`](./MCP/vault-mcp/) | MCP server for vault tools |
-| Security | [`agents/vault-agent.json`](./agents/vault-agent.json) | Vault guardian agent config |
+| Security | [`AGENTS/vault-agent.json`](./AGENTS/vault-agent.json) | Vault guardian agent config |
 | Security | [`services/hermes-vault/`](./services/hermes-vault/) | Hermes Vault Python backend (symlink) |
 | Registrar | [`api-registrar/`](./api-registrar/) | X-verified API key registration service |
 | Monetization | [`skills/wurk-integration/`](./skills/wurk-integration/) | WURK skill for job monetization |
@@ -217,12 +217,12 @@ The skills and agent system spans several directories:
 |---|---|
 | [`skills/`](./skills/) | checked-in skill bundles |
 | [`clawdhub/`](./clawdhub/) | search, install, publish, and marketplace flows |
-| [`agents/`](./agents/) | 50-agent catalog and agent metadata |
+| [`AGENTS/`](./AGENTS/) | 50-agent catalog and agent metadata |
 | [`acp_registry/`](./acp_registry/) | registry JSON for agent discovery |
 
 Primary references:
 
-- [agents/README.md](./agents/README.md)
+- [AGENTS/README.md](./AGENTS/README.md)
 - [skills/README.md](./skills/README.md)
 - [articles/AGENT_GUIDE.md](./articles/AGENT_GUIDE.md)
 - [articles/ARTICLE_SKILLS.md](./articles/ARTICLE_SKILLS.md)
@@ -295,7 +295,7 @@ Use the docs in this order:
 - Architecture article: [articles/architecture.md](./articles/architecture.md)
 - Models: [articles/MODELS.md](./articles/MODELS.md)
 - Payments: [articles/ARTICLE_PAYMENTS.md](./articles/ARTICLE_PAYMENTS.md)
-- Agents: [agents/README.md](./agents/README.md)
+- Agents: [AGENTS/README.md](./AGENTS/README.md)
 - Skills: [skills/README.md](./skills/README.md)
 - Router: [clawdrouter/README.md](./clawdrouter/README.md)
 - Wallet: [packages/clawd-wallet/README.md](./packages/clawd-wallet/README.md)

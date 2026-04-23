@@ -3,6 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/x402agent/openclawd.git",
+    "directory": "openclawd-stack"
+  },
+  "homepage": "https://github.com/x402agent/openclawd/tree/main/openclawd-stack#readme",
+  "bugs": {
+    "url": "https://github.com/x402agent/openclawd/issues"
+  },
   "workspaces": [
     "template",
     "gateway",
