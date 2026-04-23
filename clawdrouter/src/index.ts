@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * ClawdRouter — The LLM Router Built for Autonomous Solana Agents
+ * 🦞 ClawdRouter — The LLM Router Built for Autonomous Solana Agents
  *
  * Solana-native smart LLM routing with:
  * • 15-dimension request scoring (<1ms, fully local)
@@ -29,20 +29,7 @@ import { formatProfileTable } from './router/profiles.js';
 import { getTierCostBreakdown } from './router/tiers.js';
 import { scoreRequest } from './router/scorer.js';
 import { CLAWD_TOKEN_MINT } from './token/clawd-gate.js';
-
-// ── ASCII Banner ────────────────────────────────────────────────────
-
-const BANNER = `
-  ╔════════════════════════════════════════════════════════════════╗
-  ║                                                                ║
-  ║   🔀  ClawdRouter v0.1.0                                      ║
-  ║   The LLM Router Built for Autonomous Solana Agents            ║
-  ║                                                                ║
-  ║   ⚡ 15-dimension scoring  •  <1ms routing  •  55+ models      ║
-  ║   🔑 Solana wallet auth    •  💰 USDC x402  •  MIT licensed    ║
-  ║                                                                ║
-  ╚════════════════════════════════════════════════════════════════╝
-`;
+import { LOBSTER_BANNER, showLobsterBanner, showLobsterWelcome } from './utils/lobster-ascii.js';
 
 // ── Default Configuration ───────────────────────────────────────────
 
@@ -238,7 +225,7 @@ async function runEnroll(args: string[]): Promise<void> {
 // ── Spoke mode (persistent tunnel) ─────────────────────────────────
 
 async function startSpoke(): Promise<void> {
-  console.log(BANNER);
+  console.log(LOBSTER_BANNER);
   const cfg = await loadDeviceConfig();
   if (!cfg) {
     console.error('  ✗ No device config found. Run: clawdrouter enroll <url>');
@@ -474,7 +461,7 @@ function flattenHeaders(h: IncomingHttpHeaders): Record<string, string> {
 // ── Start Proxy Server ──────────────────────────────────────────────
 
 async function startServer(): Promise<void> {
-  console.log(BANNER);
+  console.log(LOBSTER_BANNER);
 
   const config = getDefaultConfig();
   config.excludedModels = await loadExcludedModels();
