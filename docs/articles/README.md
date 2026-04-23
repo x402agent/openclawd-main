@@ -87,6 +87,13 @@ This directory contains the longer-form architecture, payments, deployment, AI, 
 | `clawdrouter-agent-guide.md` | ClawdRouter agent integration |
 | `clawdrouter-cloud.md` | Cloud deployment guide |
 
+## Release Notes
+
+| Document | Description |
+|----------|-------------|
+| `RELEASE_NOTES_2026_04_23.md` | **NEW** The Lobster Evolution — Unified branding, ClawdRouter integration, 5 SOL Percolator Challenge |
+| `RELEASE_V10.md` | Release v1.0 full changelog |
+
 ## Quick Links
 
 - [Full ClawdRouter Guide](./CLAWD_ROUTER.md)
