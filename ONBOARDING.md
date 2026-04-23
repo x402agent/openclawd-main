@@ -55,39 +55,55 @@ cp .env.example .env
 ### 3. Install Dependencies
 
 ```bash
-# Full monorepo
+# Install root tooling (Node >= 20, npm >= 10)
 npm install
 
-# Or individual packages
-cd agents && npm install
-cd ../clawdrouter && npm install
-cd ../skills && npm install
+# Fan out into every Node subproject
+npm run install:all
+
+# Or install just the ones you need
+npm run install:router    # clawdrouter
+npm run install:cli       # clawd-code-cli
+npm run install:registrar # api-registrar
+npm run install:hub       # clawdhub
+npm run install:wallet    # packages/clawd-wallet
+```
+
+Check your environment before you go further:
+
+```bash
+npm run doctor
 ```
 
 ### 4. Start Developing
 
 ```bash
-# Run agents catalog build
-cd agents && node build-catalog.cjs
+# Build the 50-agent catalog
+npm run build:catalog          # runs AGENTS/build-catalog.cjs
 
 # Run ClawdRouter (LLM routing with x402 payments)
-cd ../clawdrouter && npm run dev
+npm run dev:router
 
 # Run API Registrar
-cd ../api-registrar && npm run dev
+npm run dev:registrar
+
+# Run the Clawd Code CLI
+npm run dev:cli
 ```
 
 ### 5. Try the CLI Tools
 
-OpenClawd ships with two lobster-themed CLI tools:
+OpenClawd ships one canonical CLI — [`clawd-code-cli/`](./clawd-code-cli/). Legacy
+variants (`clawd-code-main`, `clawd-code-localy`, `clawd-code-proxy-main`) have
+been archived under [`legacy/`](./legacy/).
 
 ```bash
 # Clawd Code CLI - AI-powered coding assistant
-cd clawd-code-cli && npm install && bun run dev
+npm run dev:cli
 clawd --prompt "deploy my Solana program"
 
 # ClawdRouter - LLM routing gateway
-cd clawdrouter && npm install && npm run dev
+npm run dev:router
 clawdrouter models    # List all available models
 clawdrouter doctor    # Run diagnostics
 ```
@@ -136,21 +152,25 @@ clawdrouter doctor    # Run diagnostics
 
 ## Key Directories
 
+> Directory names are **case-sensitive** on Linux/CI. Use the exact casing below.
+
 | Directory | Purpose |
 |-----------|---------|
-| `agents/` | 50 AI agent definitions (JSON) |
+| `AGENTS/` | 50 AI agent definitions (JSON) + `build-catalog.cjs` |
 | `skills/` | 90+ SKILL.md bundles |
 | `clawdrouter/` | Model routing & payment gateway |
 | `api-registrar/` | API key registration (X verification) |
+| `clawd-code-cli/` | Canonical Clawd Code CLI (others in `legacy/`) |
 | `solana-clawd/` | Go + TypeScript agent framework |
 | `MCP/` | MCP server implementations |
 | `clawdhub/` | Skills marketplace |
 | `src/` | Core TypeScript engine |
-| `packages/` | Shared npm packages |
+| `packages/` | Shared npm packages (`@openclawd/*`) |
 | `acp_registry/` | Project registry (JSON) |
-| `articles/` | Documentation |
+| `docs/articles/` | Documentation articles |
 | `services/` | Backend services |
 | `workers/` | Cloudflare Workers |
+| `legacy/` | Archived variants (do not build) |
 
 ---
 
@@ -176,7 +196,7 @@ cd my-awesome-skill
 
 **Adding a new agent:**
 ```bash
-cd agents
+cd AGENTS
 # Create my-agent.json following the schema
 # See agent-template-full.json for reference
 ```
@@ -184,18 +204,18 @@ cd agents
 **Working on a service:**
 ```bash
 cd api-registrar
-pnpm install
-pnpm dev  # Start development server
+npm install
+npm run dev  # Start development server
 ```
 
 ### 3. Test Your Changes
 
 ```bash
 # Build agents catalog
-cd agents && node build-catalog.cjs
+npm run build:catalog
 
-# Run linting
-cd .. && npm run lint
+# Run linting across all Node subprojects
+npm run lint
 
 # Type check
 npm run typecheck
@@ -319,8 +339,7 @@ Each agent is a JSON file with:
 ### Building Agents Catalog
 
 ```bash
-cd agents
-node build-catalog.cjs
+npm run build:catalog
 ```
 
 ---
@@ -362,10 +381,13 @@ python -m hermes_vault.cli scan ../../skills/my-skill
 ### Quick Validation
 
 ```bash
-# Validate agent JSONs
-cd agents && node build-catalog.cjs
+# Environment sanity check
+npm run doctor
 
-# Type check TypeScript
+# Validate agent JSONs
+npm run build:catalog
+
+# Type check TypeScript across active Node subprojects
 npm run typecheck
 
 # Run tests (if available)
@@ -377,19 +399,19 @@ npm test
 ```bash
 # API Registrar
 cd api-registrar
-pnpm install
-pnpm db:push  # Run migrations
-pnpm dev      # Start server
+npm install
+npm run db:push  # Run migrations (if script exists)
+npm run dev      # Start server
 
 # ClawdRouter
 cd clawdrouter
-pnpm install
-pnpm dev
+npm install
+npm run dev
 
 # Skills Marketplace
 cd clawdhub
-pnpm install
-pnpm dev
+npm install
+npm run dev
 ```
 
 ---
@@ -437,9 +459,9 @@ refactor(clawdrouter): simplify model scoring
 
 Once you're comfortable with the basics:
 
-1. **Explore existing agents** in `agents/`
-2. **Browse skills** in `skills/`
-3. **Read the architecture** in `articles/architecture.md`
+1. **Explore existing agents** in [`AGENTS/`](./AGENTS/)
+2. **Browse skills** in [`skills/`](./skills/)
+3. **Read the architecture** in [`docs/articles/architecture.md`](./docs/articles/architecture.md)
 4. **Join the community** on Twitter/Telegram
 5. **Pick a "good first issue"** from GitHub
 
@@ -451,10 +473,11 @@ Once you're comfortable with the basics:
 |----------|-------------|
 | [README.md](./README.md) | Project overview |
 | [STACK.md](./STACK.md) | Technical architecture |
-| [articles/](./articles/) | Deep-dive documentation |
-| [agents/README.md](./agents/README.md) | Agent development |
+| [docs/articles/](./docs/articles/) | Deep-dive documentation |
+| [AGENTS/README.md](./AGENTS/README.md) | Agent development |
 | [skills/README.md](./skills/README.md) | Skill development |
 | [CONTRIBUTING.md](./CONTRIBUTING.md) | Contribution guidelines |
+| [legacy/README.md](./legacy/README.md) | Archived `clawd-code-*` variants |
 
 ---
 
