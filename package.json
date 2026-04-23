@@ -26,6 +26,7 @@
     "dev:cli": "cd clawd-code-cli && npm run dev",
     "dev:orchestrator": "cd openclawd-stack && pnpm dev:orchestrator",
     "hooks:install": "node scripts/install-git-hooks.mjs",
+    "brand:check": "node scripts/brand-check.mjs",
     "doctor": "node scripts/doctor.mjs",
     "guard:staged": "node scripts/guard-secrets.mjs --staged",
     "guard:worktree": "node scripts/guard-secrets.mjs --worktree",

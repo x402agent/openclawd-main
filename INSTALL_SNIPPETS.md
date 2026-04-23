@@ -138,7 +138,7 @@ What it does:
 3. **Scaffolds** `~/.openclawd/.env` with Solana + model-router defaults.
 4. **Prints** next steps: pair / mint / status.
 
-> 🦞 welcome to the claw 🦞
+> 🦞 welcome to Clawd 🦞
 ```
 
 ---
@@ -177,7 +177,7 @@ Next steps
   3. Mint agent:   solana-clawd mint
   4. Status:       solana-clawd status
 
-🦞 welcome to the claw 🦞
+🦞 welcome to Clawd 🦞
 ```
 
 ---

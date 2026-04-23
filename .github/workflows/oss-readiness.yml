@@ -24,5 +24,8 @@ jobs:
       - name: Doctor
         run: npm run doctor
 
+      - name: Branding check
+        run: npm run brand:check
+
       - name: Public release checks
         run: npm run release:check

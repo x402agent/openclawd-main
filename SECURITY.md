@@ -40,6 +40,7 @@ Run these before merging release-facing changes or publishing a fork:
 
 ```bash
 npm run hooks:install
+npm run brand:check
 npm run guard:worktree
 npm run doctor
 npm run release:check

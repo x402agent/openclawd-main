@@ -75,6 +75,7 @@ Install snippets and hosted installer copy live in [INSTALL_SNIPPETS.md](./INSTA
 | Command | Purpose |
 | --- | --- |
 | `npm run hooks:install` | Installs repo-managed git hooks to block accidental secret commits |
+| `npm run brand:check` | Catches high-visibility old-brand phrases in first-party docs |
 | `npm run doctor` | Verifies the supported root bootstrap path |
 | `npm run guard:worktree` | Scans tracked and untracked worktree files for env files and common secret patterns |
 | `npm run release:check` | Public-release sanity check for docs, tracked file hygiene, and package metadata |
@@ -116,6 +117,7 @@ OpenClawd is meant to be cloned and published publicly, so the repo now ships wi
 
 ```bash
 npm run hooks:install
+npm run brand:check
 npm run guard:worktree
 npm run doctor
 npm run release:check
@@ -125,6 +127,7 @@ What these cover:
 
 - pre-commit blocks staged `.env`, `.pem`, `.key`, and common live-secret patterns
 - pre-push re-runs worktree and release hygiene checks
+- `brand:check` catches high-visibility first-party branding drift in docs
 - `doctor` verifies the supported root bootstrap path
 - `release:check` verifies public-release hygiene and metadata
 

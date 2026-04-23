@@ -23,7 +23,7 @@ openclawd/
 │   │   ├── SKILL.md            # Core vault operations
 │   │   ├── security-scanner.md # Code scanning capabilities
 │   │   └── auto-hardener.md    # Auto-hardening rules
-├── agents/
+├── AGENTS/
 │   └── vault-agent.json         # Vault guardian agent config
 ├── MCP/
 │   └── vault-mcp/              # MCP server for vault tools
@@ -101,6 +101,6 @@ ClawdVault integrates with OpenClawd through:
 ## Files Created
 
 - `skills/clawd-vault/SKILL.md` - Main vault skill
-- `agents/vault-agent.json` - Vault agent configuration
+- `AGENTS/vault-agent.json` - Vault agent configuration
 - `MCP/vault-mcp/` - MCP server package
 - `services/hermes-vault/` - Python integration (symlink or copy)
