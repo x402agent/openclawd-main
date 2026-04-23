@@ -28,8 +28,8 @@
     "deploy": "vercel --prod"
   },
   "dependencies": {
-    "@solana-clawd/chat-plugins-gateway": "workspace:*",
-    "@solana-clawd/plugin-sdk": "workspace:*"
+    "@openclawd/chat-plugins-gateway": "workspace:*",
+    "@openclawd/plugin-sdk": "workspace:*"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",

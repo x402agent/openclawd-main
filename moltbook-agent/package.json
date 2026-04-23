@@ -1,5 +1,5 @@
 {
-  "name": "@solana-clawd/moltbook-agent",
+  "name": "@openclawd/moltbook-agent",
   "version": "2.0.0",
   "description": "Autonomous $CLAWD agent for Moltbook — uses official API (skill.md v1.12.0) with verification challenge solving 🦞",
   "type": "module",

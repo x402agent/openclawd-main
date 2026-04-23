@@ -1,4 +1,4 @@
-import { PluginChannel, SolanaClawdOS } from '@solana-clawd/chat-plugin-sdk/client';
+import { PluginChannel, SolanaClawdOS } from '@openclawd/chat-plugin-sdk/client';
 import { Mock, afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 // Mock window and postMessage before each test

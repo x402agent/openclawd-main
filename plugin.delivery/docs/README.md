@@ -1,6 +1,6 @@
 # solana-clawd Plugin Documentation
 
-> **Live:** [plugin.delivery](https://plugin.delivery) • **SDK:** `@solana-clawd/plugin-sdk`
+> **Live:** [plugin.delivery](https://plugin.delivery) • **SDK:** `@openclawd/plugin-sdk`
 
 Build AI-powered plugins for solana-clawd. Extend chat capabilities with custom APIs, OpenAPI integrations, and interactive UIs.
 
@@ -134,8 +134,8 @@ bun dev
 
 | Package | npm |
 |---------|-----|
-| `@solana-clawd/plugin-sdk` | [![npm](https://img.shields.io/npm/v/@solana-clawd/plugin-sdk)](https://www.npmjs.com/package/@solana-clawd/plugin-sdk) |
-| `@solana-clawd/chat-plugins-gateway` | [![npm](https://img.shields.io/npm/v/@solana-clawd/chat-plugins-gateway)](https://www.npmjs.com/package/@solana-clawd/chat-plugins-gateway) |
+| `@openclawd/plugin-sdk` | [![npm](https://img.shields.io/npm/v/@openclawd/plugin-sdk)](https://www.npmjs.com/package/@openclawd/plugin-sdk) |
+| `@openclawd/chat-plugins-gateway` | [![npm](https://img.shields.io/npm/v/@openclawd/chat-plugins-gateway)](https://www.npmjs.com/package/@openclawd/chat-plugins-gateway) |
 
 ### Links
 

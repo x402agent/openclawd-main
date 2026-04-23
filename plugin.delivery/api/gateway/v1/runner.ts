@@ -1,4 +1,4 @@
-import { createGatewayOnNodeRuntime } from '@solana-clawd/chat-plugins-gateway';
+import { createGatewayOnNodeRuntime } from '@openclawd/chat-plugins-gateway';
 
 export default createGatewayOnNodeRuntime();
 

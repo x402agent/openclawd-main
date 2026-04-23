@@ -1,4 +1,4 @@
-import { SolanaClawdOS, usePluginSettings } from '@solana-clawd/chat-plugin-sdk/client';
+import { SolanaClawdOS, usePluginSettings } from '@openclawd/chat-plugin-sdk/client';
 import { act, renderHook } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 

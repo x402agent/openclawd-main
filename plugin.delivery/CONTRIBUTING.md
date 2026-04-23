@@ -62,8 +62,8 @@ bun install
 ```
 plugins/
 ├── packages/
-│   ├── sdk/          # @solana-clawd/plugin-sdk
-│   └── gateway/      # @solana-clawd/chat-plugins-gateway
+│   ├── sdk/          # @openclawd/plugin-sdk
+│   └── gateway/      # @openclawd/chat-plugins-gateway
 ├── templates/        # Plugin starter templates
 ├── docs/             # Documentation
 ├── public/           # Plugin index files

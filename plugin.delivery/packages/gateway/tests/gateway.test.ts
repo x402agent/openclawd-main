@@ -1,5 +1,5 @@
-import { PluginRequestPayload } from '@solana-clawd/chat-plugin-sdk';
-import { Gateway } from '@solana-clawd/chat-plugins-gateway';
+import { PluginRequestPayload } from '@openclawd/chat-plugin-sdk';
+import { Gateway } from '@openclawd/chat-plugins-gateway';
 import Ajv from 'ajv';
 // @ts-ignore
 import SwaggerClient from 'swagger-client';
@@ -44,7 +44,7 @@ describe('Gateway', () => {
         arguments: '{}',
         identifier: 'mock-weather',
         manifest: {
-          $schema: '../node_modules/@solana-clawd/chat-plugin-sdk/schema.json',
+          $schema: '../node_modules/@openclawd/chat-plugin-sdk/schema.json',
           api: [
             {
               description: 'Get weather forecast for a location',
@@ -103,7 +103,7 @@ describe('Gateway', () => {
         arguments: '{"city":"new-york"}',
         identifier: 'mock-weather',
         manifest: {
-          $schema: '../node_modules/@solana-clawd/chat-plugin-sdk/schema.json',
+          $schema: '../node_modules/@openclawd/chat-plugin-sdk/schema.json',
           api: [
             {
               description: 'Get weather for a specific city',

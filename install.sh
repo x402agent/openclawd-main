@@ -287,7 +287,7 @@ else
 fi
 
 if [ -d "$REPO_DIR/packages/agents-x402-solana" ]; then
-  ok "@solana-clawd/agents-x402 — x402 agent payments (TypeScript source, no build needed)"
+  ok "@openclawd/agents-x402 — x402 agent payments (TypeScript source, no build needed)"
 else
   warn "packages/agents-x402-solana not found in repo — skipping"
 fi
@@ -388,7 +388,7 @@ cat <<EOF
     ${GREY}├─${CR} ${MAGENTA}clawdrouter${CR}        model router    ${DIM}(\$OPENROUTER_API_KEY)${CR}
     ${GREY}├─${CR} ${MAGENTA}tailclawd${CR}          tailnet app     ${DIM}($TAILCLAWD_DIR)${CR}
     ${GREY}├─${CR} ${MAGENTA}@openclawd/wallet${CR}  wallet SDK      ${DIM}(Privy + Grok 4.20)${CR}
-    ${GREY}├─${CR} ${MAGENTA}@solana-clawd/x402${CR}  agent payments  ${DIM}(USDC x402 protocol)${CR}
+    ${GREY}├─${CR} ${MAGENTA}@openclawd/x402${CR}  agent payments  ${DIM}(USDC x402 protocol)${CR}
     ${GREY}└─${CR} ${MAGENTA}\$CLAWD${CR}             8cHz…pump      ${DIM}(solana mainnet)${CR}
 
   ${BOLD}Next steps${CR}

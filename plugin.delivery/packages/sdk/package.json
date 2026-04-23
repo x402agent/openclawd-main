@@ -1,5 +1,5 @@
 {
-  "name": "@solana-clawd/plugin-sdk",
+  "name": "@openclawd/plugin-sdk",
   "version": "1.0.0",
   "description": "solana-clawd Plugin SDK - Build plugins for solana-clawd",
   "keywords": [

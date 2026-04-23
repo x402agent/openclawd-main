@@ -18,7 +18,7 @@ Example code and demonstrations for the OpenClawd ecosystem.
 | `lobster-trader.ts` | pump.fun bonding curve math, token analysis, and trade simulation | Trading |
 | `orchestrator-client.ts` | Orchestrator API integration (agents, MCP tools, wallet, Metaplex) | Infrastructure |
 | `clawd-wallet-demo.ts` | @openclawd/wallet SDK: Privy wallet, agentic trading, Grok 4.20 Beta | Wallet |
-| `x402-payment-demo.ts` | @solana-clawd/agents-x402: agent-to-agent USDC payments on Solana | Payments |
+| `x402-payment-demo.ts` | @openclawd/agents-x402: agent-to-agent USDC payments on Solana | Payments |
 
 ### Blockchain Buddies Demo
 
@@ -92,7 +92,7 @@ Full `@openclawd/wallet` SDK walkthrough — Privy-embedded Solana wallet, agent
 npx tsx examples/x402-payment-demo.ts
 ```
 
-Full `@solana-clawd/agents-x402` payment protocol demo. Shows core client (automatic 402 → pay → retry), HTTP middleware for Hono/Express/Workers, MCP paid tool registration, slug configuration, and integration with `@openclawd/wallet` for agent-to-agent USDC settlement on Solana. Architecture: `Agent → 402 → Facilitator → Solana → Verify → Data`.
+Full `@openclawd/agents-x402` payment protocol demo. Shows core client (automatic 402 → pay → retry), HTTP middleware for Hono/Express/Workers, MCP paid tool registration, slug configuration, and integration with `@openclawd/wallet` for agent-to-agent USDC settlement on Solana. Architecture: `Agent → 402 → Facilitator → Solana → Verify → Data`.
 
 ---
 
@@ -112,7 +112,7 @@ RESEARCH_API_URL=http://localhost:8000 npx tsx examples/auto-research-client.ts
 | Resource | Path |
 |----------|------|
 | Clawd Wallet (`@openclawd/wallet`) | `packages/clawd-wallet/` |
-| x402 Payments (`@solana-clawd/agents-x402`) | `packages/agents-x402-solana/` |
+| x402 Payments (`@openclawd/agents-x402`) | `packages/agents-x402-solana/` |
 | TailClawd (Tailscale Web UI) | `tailclawd/` |
 | Moltbook Agent Template | `moltbook-agent/` |
 | AutoResearch Wiki | `llm-wiki-tang/` |

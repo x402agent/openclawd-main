@@ -51,9 +51,9 @@
     "not ie <= 10"
   ],
   "dependencies": {
-    "@solana-clawd/plugin-sdk": "workspace:*",
-    "@solana-clawd/chat-plugins-gateway": "workspace:*",
-    "@solana-clawd/ui": "latest",
+    "@openclawd/plugin-sdk": "workspace:*",
+    "@openclawd/chat-plugins-gateway": "workspace:*",
+    "@openclawd/ui": "latest",
     "antd": "^5",
     "antd-style": "^3",
     "dayjs": "^1",

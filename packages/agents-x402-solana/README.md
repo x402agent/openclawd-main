@@ -1,4 +1,4 @@
-# `@solana-clawd/agents-x402`
+# `@openclawd/agents-x402`
 
 One-line x402 Solana monetization for MCP servers, HTTP handlers, and
 agent tool calls. Settles through the Clawd multi-tenant facilitator —
@@ -12,9 +12,9 @@ on EVM chains via the Coinbase facilitator.
 ## Install
 
 ```bash
-pnpm add @solana-clawd/agents-x402
+pnpm add @openclawd/agents-x402
 # or
-npm install @solana-clawd/agents-x402
+npm install @openclawd/agents-x402
 ```
 
 MCP users also need:
@@ -33,7 +33,7 @@ pnpm add @modelcontextprotocol/sdk
 
 ```ts
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { withClawdX402 } from "@solana-clawd/agents-x402/mcp";
+import { withClawdX402 } from "@openclawd/agents-x402/mcp";
 import { z } from "zod";
 
 const server = withClawdX402(
@@ -76,7 +76,7 @@ Works with any framework that exposes request headers. Transport-neutral
 helper:
 
 ```ts
-import { x402Gate } from "@solana-clawd/agents-x402/http";
+import { x402Gate } from "@openclawd/agents-x402/http";
 
 export default {
   async fetch(req: Request): Promise<Response> {
@@ -110,7 +110,7 @@ duck-type the context object):
 ```ts
 // Hono
 import { Hono } from "hono";
-import { honoX402Gate } from "@solana-clawd/agents-x402/http";
+import { honoX402Gate } from "@openclawd/agents-x402/http";
 
 const app = new Hono();
 app.use("/premium/*", honoX402Gate({ slug: "alpha-feed" }));
@@ -120,7 +120,7 @@ app.get("/premium/:id", (c) => c.json({ alpha: true }));
 ```ts
 // Express
 import express from "express";
-import { expressX402Gate } from "@solana-clawd/agents-x402/http";
+import { expressX402Gate } from "@openclawd/agents-x402/http";
 
 const app = express();
 app.use("/premium", expressX402Gate({ slug: "alpha-feed" }));
@@ -133,7 +133,7 @@ Use the low-level client when you want manual control (e.g. to verify
 without settling, or to cache slug lookups yourself):
 
 ```ts
-import { createClawdX402Client } from "@solana-clawd/agents-x402";
+import { createClawdX402Client } from "@openclawd/agents-x402";
 
 const client = createClawdX402Client({ apiBase: "https://solanaclawd.com" });
 

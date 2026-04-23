@@ -1,6 +1,6 @@
 #!/usr/bin/env npx tsx
 /**
- * x402 Payment Demo — @solana-clawd/agents-x402 Integration
+ * x402 Payment Demo — @openclawd/agents-x402 Integration
  *
  * Demonstrates the full x402 payment protocol for agent-to-agent
  * monetization on Solana:
@@ -11,7 +11,7 @@
  *
  * Run: npx tsx examples/x402-payment-demo.ts
  *
- * Requires: @solana-clawd/agents-x402 (packages/agents-x402-solana)
+ * Requires: @openclawd/agents-x402 (packages/agents-x402-solana)
  */
 
 // ── Configuration ──────────────────────────────────────────────────
@@ -37,7 +37,7 @@ function demoCoreClient() {
 
   console.log("  The core client wraps fetch() with automatic 402 payment handling:");
   console.log(`
-    import { createClawdX402Client } from "@solana-clawd/agents-x402";
+    import { createClawdX402Client } from "@openclawd/agents-x402";
 
     const client = createClawdX402Client({
       facilitatorUrl: "${FACILITATOR_URL}",
@@ -70,7 +70,7 @@ function demoHTTPMiddleware() {
 
   console.log("  Hono / Cloudflare Workers:");
   console.log(`
-    import { http } from "@solana-clawd/agents-x402/http";
+    import { http } from "@openclawd/agents-x402/http";
     import { Hono } from "hono";
 
     const app = new Hono();
@@ -92,7 +92,7 @@ function demoHTTPMiddleware() {
 
   console.log("  Express / Node:");
   console.log(`
-    import { http } from "@solana-clawd/agents-x402/http";
+    import { http } from "@openclawd/agents-x402/http";
     import express from "express";
 
     const app = express();
@@ -122,7 +122,7 @@ function demoMCPPaidTools() {
 
   console.log("  Register paid tools on an MCP server:");
   console.log(`
-    import { mcp } from "@solana-clawd/agents-x402/mcp";
+    import { mcp } from "@openclawd/agents-x402/mcp";
     import { Server } from "@modelcontextprotocol/sdk";
 
     const server = new Server({ name: "clawd-research", version: "1.0.0" });
@@ -229,7 +229,7 @@ function demoWalletIntegration() {
 
   console.log("  Full agent-to-agent payment flow:");
   console.log(`
-    import { createClawdX402Client } from "@solana-clawd/agents-x402";
+    import { createClawdX402Client } from "@openclawd/agents-x402";
     import { AgenticWallet } from "@openclawd/wallet";
 
     // 1. Set up the agentic wallet
@@ -304,7 +304,7 @@ function demoArchitecture() {
 
 async function main() {
   console.log("╔══════════════════════════════════════════════════════════════╗");
-  console.log("║  🦞 @solana-clawd/agents-x402 — Agent Payment Protocol Demo ║");
+  console.log("║  🦞 @openclawd/agents-x402 — Agent Payment Protocol Demo ║");
   console.log("║  x402: Agent-to-Agent USDC Payments on Solana               ║");
   console.log("║  $CLAWD: 8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump      ║");
   console.log("╚══════════════════════════════════════════════════════════════╝");
@@ -318,7 +318,7 @@ async function main() {
 
   console.log("\n━━━ 📚 Resources ━━━");
   console.log("   Package:     packages/agents-x402-solana/");
-  console.log("   NPM:         @solana-clawd/agents-x402");
+  console.log("   NPM:         @openclawd/agents-x402");
   console.log("   Wallet:      packages/clawd-wallet/");
   console.log("   Facilitator: clawdrouter/");
   console.log("   Install:     curl -fsSL solanaclawd.com/install.sh | bash");

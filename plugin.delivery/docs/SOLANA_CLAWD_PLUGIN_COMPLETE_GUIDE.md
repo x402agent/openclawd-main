@@ -373,7 +373,7 @@ psql $DATABASE_URL -c "\dt"
 5. **Verify Integration:**
    ```typescript
    // Auth is automatically detected
-   import { getUserAuth } from '@solana-clawd/utils/server';
+   import { getUserAuth } from '@openclawd/utils/server';
    
    const { userId } = await getUserAuth();
    // Returns Clerk user ID when enabled
@@ -411,7 +411,7 @@ psql $DATABASE_URL -c "\dt"
 
 ```typescript
 // API Route (Backend)
-import { getUserAuth } from '@solana-clawd/utils/server';
+import { getUserAuth } from '@openclawd/utils/server';
 
 export async function GET(request: Request) {
   const { userId } = await getUserAuth();
@@ -513,7 +513,7 @@ src/tools/
 ```typescript
 // src/tools/my-plugin/manifest.ts
 
-import { BuiltinToolManifest } from '@solana-clawd/types';
+import { BuiltinToolManifest } from '@openclawd/types';
 
 export const myPluginManifest: BuiltinToolManifest = {
   identifier: 'my-plugin',
@@ -586,7 +586,7 @@ export const builtinTools: SolanaClawdBuiltinTool[] = [
 // src/features/Portal/MyPlugin/index.tsx
 
 import { memo, Suspense } from 'react';
-import type { BuiltinPortalProps } from '@solana-clawd/types';
+import type { BuiltinPortalProps } from '@openclawd/types';
 
 const MyPluginBody = memo<{ payload?: Record<string, any> }>(({ payload }) => {
   const { param1, param2 } = payload || {};
@@ -742,7 +742,7 @@ Portals render plugin output directly in the chat UI.
 import { memo, Suspense, lazy } from 'react';
 import { createStyles } from 'antd-style';
 import { Spin } from 'antd';
-import type { BuiltinPortalProps } from '@solana-clawd/types';
+import type { BuiltinPortalProps } from '@openclawd/types';
 
 const useStyles = createStyles(({ css, token }) => ({
   container: css`

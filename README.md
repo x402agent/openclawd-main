@@ -705,7 +705,7 @@ curl http://localhost:8787/api/v1/agents | jq '.'
 |---------|-----|-------------|
 | [`solana-clawd`](https://www.npmjs.com/package/solana-clawd) | `npm i -g solana-clawd` | Go + TypeScript agent framework, OODA loop trading, 31 MCP tools |
 | [`@openclawd/wallet`](https://www.npmjs.com/package/@openclawd/wallet) | `npm i @openclawd/wallet` | Privy-powered embedded Solana wallet with Grok 4.20 Beta agentic trading |
-| [`@solana-clawd/agents-x402`](./packages/agents-x402-solana/) | `import from "@solana-clawd/agents-x402"` | x402 agent-to-agent USDC payment protocol for MCP servers and HTTP APIs |
+| [`@openclawd/agents-x402`](./packages/agents-x402-solana/) | `import from "@openclawd/agents-x402"` | x402 agent-to-agent USDC payment protocol for MCP servers and HTTP APIs |
 | [`@mawdbotsonsolana/nemoclaw`](https://www.npmjs.com/package/nemoclaw) | `npm i -g @mawdbotsonsolana/nemoclaw` | xAI Grok-powered Solana trading engine with blockchain buddies |
 | `clawdhub` | `npx clawdhub publish` | Skills marketplace CLI (publish, install, search SKILL.md bundles) |
 | [`@openclawd/percolator`](./packages/percolator/) | `npm i @openclawd/percolator` | 🧪 Percolator perpetuals CLI — 30 commands for trading, liquidation, oracle management |
@@ -809,14 +809,14 @@ const { signature, explorerUrl } = await agent.agentSwap({
 
 Permission levels: `deny` (blocked) → `ask` (Grok + user) → `allow` (auto up to limits). See [`packages/clawd-wallet/`](./packages/clawd-wallet/) and [`examples/clawd-wallet-demo.ts`](./examples/clawd-wallet-demo.ts).
 
-### @solana-clawd/agents-x402 — Agent Payment Protocol
+### @openclawd/agents-x402 — Agent Payment Protocol
 
 One-line x402 monetization for MCP servers, HTTP handlers, and agent tool calls. Settles USDC through the Clawd facilitator on Solana.
 
 ```typescript
-import { createClawdX402Client } from "@solana-clawd/agents-x402";
-import { http } from "@solana-clawd/agents-x402/http";
-import { mcp } from "@solana-clawd/agents-x402/mcp";
+import { createClawdX402Client } from "@openclawd/agents-x402";
+import { http } from "@openclawd/agents-x402/http";
+import { mcp } from "@openclawd/agents-x402/mcp";
 
 // Client: call paid APIs (handles 402 → pay → retry)
 const client = createClawdX402Client({ facilitatorUrl, wallet, network: "solana-mainnet" });

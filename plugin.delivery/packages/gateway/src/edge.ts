@@ -3,7 +3,7 @@ import {
   PluginRequestPayload,
   createErrorResponse,
   getPluginSettingsFromRequest,
-} from '@solana-clawd/plugin-sdk';
+} from '@openclawd/plugin-sdk';
 
 import cors, { CorsOptions } from './cors';
 import { Gateway, GatewayErrorResponse, GatewayOptions } from './gateway';

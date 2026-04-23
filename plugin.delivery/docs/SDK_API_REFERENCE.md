@@ -1,6 +1,6 @@
 # Plugin SDK Documentation
 
-Complete API reference for the Plugin SDK (`@solana-clawd/plugin-sdk`) from **x402agent/plugin.delivery**.
+Complete API reference for the Plugin SDK (`@openclawd/plugin-sdk`) from **x402agent/plugin.delivery**.
 
 ## Table of Contents
 
@@ -18,12 +18,12 @@ Complete API reference for the Plugin SDK (`@solana-clawd/plugin-sdk`) from **x4
 
 ```bash
 # Install the SDK from x402agent/plugin.delivery
-pnpm add @solana-clawd/plugin-sdk
+pnpm add @openclawd/plugin-sdk
 
 # Or with npm/yarn/bun
-npm install @solana-clawd/plugin-sdk
-yarn add @solana-clawd/plugin-sdk
-bun add @solana-clawd/plugin-sdk
+npm install @openclawd/plugin-sdk
+yarn add @openclawd/plugin-sdk
+bun add @openclawd/plugin-sdk
 ```
 
 ---
@@ -33,7 +33,7 @@ bun add @solana-clawd/plugin-sdk
 The `SolanaClawdOS` object provides methods for plugin-to-host communication from the **x402agent/plugin.delivery** SDK. Import from the client subpath:
 
 ```typescript
-import { SolanaClawdOS } from '@solana-clawd/plugin-sdk/client';
+import { SolanaClawdOS } from '@openclawd/plugin-sdk/client';
 ```
 
 ### getPluginPayload
@@ -138,7 +138,7 @@ const { data, loading } = useWatchPluginMessage<T>();
 **Example:**
 
 ```tsx
-import { useWatchPluginMessage } from '@solana-clawd/plugin-sdk/client';
+import { useWatchPluginMessage } from '@openclawd/plugin-sdk/client';
 
 const MyPlugin = () => {
   const { data, loading } = useWatchPluginMessage<MyDataType>();
@@ -196,7 +196,7 @@ interface PluginPayload<T = any> {
 **Example:**
 
 ```tsx
-import { useOnStandalonePluginInit } from '@solana-clawd/plugin-sdk/client';
+import { useOnStandalonePluginInit } from '@openclawd/plugin-sdk/client';
 
 const StandalonePlugin = () => {
   useOnStandalonePluginInit((payload) => {
@@ -247,7 +247,7 @@ const [value, updateValue] = usePluginState<T>(key: string, initialValue: T);
 **Example:**
 
 ```tsx
-import { usePluginState } from '@solana-clawd/plugin-sdk/client';
+import { usePluginState } from '@openclawd/plugin-sdk/client';
 
 const Counter = () => {
   const [count, setCount] = usePluginState('count', 0);
@@ -299,7 +299,7 @@ Returns an array containing two elements: the current plugin settings value and 
 **Example:**
 
 ```tsx
-import { usePluginSettings } from '@solana-clawd/plugin-sdk/client';
+import { usePluginSettings } from '@openclawd/plugin-sdk/client';
 
 const SettingsPanel = () => {
   const [settings, updateSettings] = usePluginSettings({ 
@@ -346,7 +346,7 @@ const data = await fetchPluginMessage<T>();
 **Example:**
 
 ```tsx
-import { fetchPluginMessage } from '@solana-clawd/plugin-sdk/client';
+import { fetchPluginMessage } from '@openclawd/plugin-sdk/client';
 import { memo, useEffect, useState } from 'react';
 
 interface ResponseData {
@@ -397,7 +397,7 @@ The SDK provides Zod schemas for validating plugin configurations.
 Validate plugin manifest files.
 
 ```typescript
-import { pluginManifestSchema } from '@solana-clawd/plugin-sdk';
+import { pluginManifestSchema } from '@openclawd/plugin-sdk';
 
 const manifest = {
   identifier: 'my-plugin',
@@ -427,7 +427,7 @@ const result = pluginManifestSchema.parse(manifest);
 Validate plugin metadata for the index.
 
 ```typescript
-import { pluginMetaSchema } from '@solana-clawd/plugin-sdk';
+import { pluginMetaSchema } from '@openclawd/plugin-sdk';
 
 const meta = {
   author: 'MyCompany',
@@ -451,7 +451,7 @@ const result = pluginMetaSchema.parse(meta);
 Validate individual API definitions.
 
 ```typescript
-import { pluginApiSchema } from '@solana-clawd/plugin-sdk';
+import { pluginApiSchema } from '@openclawd/plugin-sdk';
 
 const api = {
   url: 'https://api.example.com/search',
@@ -475,7 +475,7 @@ const result = pluginApiSchema.parse(api);
 Use `PluginErrorType` for standardized error responses.
 
 ```typescript
-import { PluginErrorType, createErrorResponse } from '@solana-clawd/plugin-sdk';
+import { PluginErrorType, createErrorResponse } from '@openclawd/plugin-sdk';
 
 export default async (req: Request) => {
   // Method validation
@@ -539,7 +539,7 @@ export default async (req: Request) => {
 Extract plugin settings from the request headers.
 
 ```typescript
-import { getPluginSettingsFromRequest } from '@solana-clawd/plugin-sdk';
+import { getPluginSettingsFromRequest } from '@openclawd/plugin-sdk';
 
 interface MySettings {
   apiKey: string;
@@ -562,7 +562,7 @@ export default async (req: Request) => {
 Create headers with plugin settings (useful for testing).
 
 ```typescript
-import { createHeadersWithPluginSettings } from '@solana-clawd/plugin-sdk';
+import { createHeadersWithPluginSettings } from '@openclawd/plugin-sdk';
 
 const headers = createHeadersWithPluginSettings({ apiKey: 'test-key' });
 const req = new Request('https://api.example.com', { headers });
@@ -575,7 +575,7 @@ const req = new Request('https://api.example.com', { headers });
 For advanced use cases, you can use the low-level `PluginChannel` constants.
 
 ```typescript
-import { PluginChannel } from '@solana-clawd/plugin-sdk';
+import { PluginChannel } from '@openclawd/plugin-sdk';
 ```
 
 ### Initialization
@@ -622,7 +622,7 @@ import type {
   PluginApi,
   PluginPayload,
   PluginErrorType,
-} from '@solana-clawd/plugin-sdk';
+} from '@openclawd/plugin-sdk';
 ```
 
 ---

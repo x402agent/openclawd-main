@@ -1,5 +1,5 @@
 /**
- * @solana-clawd/agents-x402
+ * @openclawd/agents-x402
  *
  * Drop-in x402 monetization against the Clawd multi-tenant Solana
  * facilitator. Ships three layers:

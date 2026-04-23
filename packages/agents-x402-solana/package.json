@@ -1,5 +1,5 @@
 {
-  "name": "@solana-clawd/agents-x402",
+  "name": "@openclawd/agents-x402",
   "version": "0.1.0",
   "description": "One-line x402 Solana monetization for MCP servers, HTTP handlers, and agent tool calls. Settles through the Clawd multi-tenant facilitator.",
   "keywords": ["mcp", "x402", "solana", "usdc", "clawd", "agents", "agentic-payments"],

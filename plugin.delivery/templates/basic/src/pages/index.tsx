@@ -1,4 +1,4 @@
-import { SolanaClawdOS } from '@solana-clawd/plugin-sdk/client';
+import { SolanaClawdOS } from '@openclawd/plugin-sdk/client';
 import { memo, useEffect, useState } from 'react';
 
 import Data from '@/components/Render';

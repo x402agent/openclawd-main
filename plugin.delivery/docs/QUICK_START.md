@@ -43,7 +43,7 @@ bun install
 ```bash
 mkdir my-plugin && cd my-plugin
 bun init -y
-bun add @solana-clawd/plugin-sdk
+bun add @openclawd/plugin-sdk
 ```
 
 ---

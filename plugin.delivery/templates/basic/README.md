@@ -2,9 +2,9 @@
 
 <div align="center">
 
-<img height="120" src="https://registry.npmmirror.com/@solana-clawd/assets-emoji/1.3.0/files/assets/puzzle-piece.webp">
+<img height="120" src="https://registry.npmmirror.com/@openclawd/assets-emoji/1.3.0/files/assets/puzzle-piece.webp">
 <img height="120" src="https://gw.alipayobjects.com/zos/kitchen/qJ3l3EPsdW/split.svg">
-<img height="120" src="https://registry.npmmirror.com/@solana-clawd/assets-emoji-anim/1.0.0/files/assets/rocket.webp">
+<img height="120" src="https://registry.npmmirror.com/@openclawd/assets-emoji-anim/1.0.0/files/assets/rocket.webp">
 
 <h1>Plugin Template<br/><sup>solana-clawd Plugin</sup></h1>
 
@@ -63,9 +63,9 @@ This is the plugin template for solana-clawd plugin development
 > [!Note]\
 > Plugins provide a means to extend the [Function Calling][fc-link] capabilities of solana-clawd. They can be used to introduce new function calls, and even new ways to render message results. If you are interested in plugin development, please refer to our [📘 Plugin Development Guide](https://github.com/x402agent/solana-clawd/wiki/Plugin-Development) in the Wiki.
 >
-> - [@solana-clawd/solana-clawd-plugins][solana-clawd-plugins]: This is the plugin index for solana-clawd. It accesses index.json from this repository to display a list of available plugins for solana-clawd to the user.
-> - [@solana-clawd/plugin-sdk][chat-plugin-sdk]: The solana-clawd Plugin SDK assists you in creating exceptional chat plugins for solana-clawd.
-> - [@solana-clawd/chat-plugins-gateway][chat-plugins-gateway]: The solana-clawd Plugins Gateway is a backend service that serves as a gateway for solana-clawd plugins. We deploy this service using Vercel. The primary API POST /api/v1/runner is deployed as an Edge Function.
+> - [@openclawd/solana-clawd-plugins][solana-clawd-plugins]: This is the plugin index for solana-clawd. It accesses index.json from this repository to display a list of available plugins for solana-clawd to the user.
+> - [@openclawd/plugin-sdk][chat-plugin-sdk]: The solana-clawd Plugin SDK assists you in creating exceptional chat plugins for solana-clawd.
+> - [@openclawd/chat-plugins-gateway][chat-plugins-gateway]: The solana-clawd Plugins Gateway is a backend service that serves as a gateway for solana-clawd plugins. We deploy this service using Vercel. The primary API POST /api/v1/runner is deployed as an Edge Function.
 
 | Official Plugin                                 | Description                                                                                                                                       |
 | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |

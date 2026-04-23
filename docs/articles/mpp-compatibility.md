@@ -14,7 +14,7 @@ endpoints without modification.
 | Facilitator `/supported` | Advertises `mpp.supported = true`, `intents: ["charge"]`, method `x402-solana-exact` with the USDC mint |
 | Facilitator `/verify`, `/settle` | Now read the credential from either `X-Payment` OR `Authorization: Payment method=..., credential="..."` |
 | `workers/x402-proxy` | 402 responses set both `X-Payment-Required` (x402) AND `WWW-Authenticate: Payment method=..., challenge="..."` (MPP). 200 responses set both `X-Payment-Response` and `Payment-Receipt`. Reads either header on retry; strips both before forwarding. |
-| `@solana-clawd/agents-x402` | Core exports `buildMppChallengeHeader`, `parseMppAuthorizationHeader`, `readPaymentCredential`. HTTP gate + Hono + Express adapters set all four headers. |
+| `@openclawd/agents-x402` | Core exports `buildMppChallengeHeader`, `parseMppAuthorizationHeader`, `readPaymentCredential`. HTTP gate + Hono + Express adapters set all four headers. |
 
 ## Header map
 
@@ -49,7 +49,7 @@ change a lot of the existing x402 flow.
 | --- | --- | --- |
 | Cloudflare Agents SDK (`withX402Client`) | ✅ | Uses `X-Payment` / `X-Payment-Response` |
 | Coinbase x402 clients | ✅ | Same |
-| `@solana-clawd/agents-x402` | ✅ | Ships with dual-header support |
+| `@openclawd/agents-x402` | ✅ | Ships with dual-header support |
 | MPP-native TypeScript (`mppx`) clients | ✅ (charge intent) | Reads `WWW-Authenticate: Payment`, sends `Authorization: Payment` |
 | MPP Python (`pympp`) | ✅ (charge intent) | Same |
 | Clients expecting Stripe/Lightning methods | ❌ | Only `x402-solana-exact` is offered |
@@ -62,7 +62,7 @@ code, use:
 
 ```ts
 // Server
-import { honoX402Gate } from "@solana-clawd/agents-x402/http";
+import { honoX402Gate } from "@openclawd/agents-x402/http";
 app.use("/premium/*", honoX402Gate({ slug: "alpha-feed" }));
 // → sets X-Payment-Required + WWW-Authenticate on 402
 // → reads X-Payment OR Authorization: Payment on retry

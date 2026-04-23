@@ -3,7 +3,7 @@
 <div align="center">
 
 
-<h1>@solana-clawd/chat-plugins-gateway</h1>
+<h1>@openclawd/chat-plugins-gateway</h1>
 
 Edge-runtime plugin gateway for the **solana-clawd** ecosystem.
 
@@ -184,8 +184,8 @@ Plugins provide a means to extend the Function Calling capabilities of solana-cl
 
 - [solana-clawd-plugins][solana-clawd-plugins]: This is the plugin index for solana-clawd. It accesses index.json from this repository to display a list of available plugins for solana-clawd to the user.
 - [chat-plugin-template][chat-plugin-template]: This is the plugin template for solana-clawd plugin development.
-- [@solana-clawd/plugin-sdk][chat-plugin-sdk]: The solana-clawd Plugin SDK assists you in creating exceptional chat plugins for solana-clawd.
-- [@solana-clawd/chat-plugins-gateway][chat-plugins-gateway]: The solana-clawd Plugins Gateway is a backend service that provides a gateway for solana-clawd plugins. We deploy this service using Vercel. The primary API POST /api/v1/runner is deployed as an Edge Function.
+- [@openclawd/plugin-sdk][chat-plugin-sdk]: The solana-clawd Plugin SDK assists you in creating exceptional chat plugins for solana-clawd.
+- [@openclawd/chat-plugins-gateway][chat-plugins-gateway]: The solana-clawd Plugins Gateway is a backend service that provides a gateway for solana-clawd plugins. We deploy this service using Vercel. The primary API POST /api/v1/runner is deployed as an Edge Function.
 
 <div align="right">
 

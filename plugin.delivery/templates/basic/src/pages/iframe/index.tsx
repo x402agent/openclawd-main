@@ -1,4 +1,4 @@
-import { SolanaClawdOS } from '@solana-clawd/plugin-sdk/client';
+import { SolanaClawdOS } from '@openclawd/plugin-sdk/client';
 import { Button } from 'antd';
 import { memo, useEffect, useState } from 'react';
 import { Center } from 'react-layout-kit';

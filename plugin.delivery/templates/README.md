@@ -154,8 +154,8 @@ Then update `public/manifest.json`:
 
 ## External Resources
 
-- [@solana-clawd/plugin-sdk](https://www.npmjs.com/package/@solana-clawd/plugin-sdk) - Plugin SDK
-- [@solana-clawd/chat-plugins-gateway](https://www.npmjs.com/package/@solana-clawd/chat-plugins-gateway) - Gateway package
+- [@openclawd/plugin-sdk](https://www.npmjs.com/package/@openclawd/plugin-sdk) - Plugin SDK
+- [@openclawd/chat-plugins-gateway](https://www.npmjs.com/package/@openclawd/chat-plugins-gateway) - Gateway package
 - [CoinGecko Plugin](../src/coingecko.json) - Real-world example
 - [Plugin Development Guide](../docs/PLUGIN_DEVELOPMENT_GUIDE.md) - Full documentation
 

@@ -56,7 +56,7 @@ Expected output: The AI agent will automatically detect relevant tools and call 
 **Frontend:**
 - Next.js 15 (App Router with Route Groups)
 - React 19, TypeScript
-- Ant Design, @solana-clawd/ui, antd-style
+- Ant Design, @openclawd/ui, antd-style
 - Zustand (state management), SWR (data fetching)
 
 **Backend:**

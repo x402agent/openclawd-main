@@ -376,7 +376,7 @@ return new Response(markdown, {
 ### Frontend Implementation
 
 ```tsx
-import { useOnStandalonePluginInit, SolanaClawdChat } from '@solana-clawd/plugin-sdk/client';
+import { useOnStandalonePluginInit, SolanaClawdChat } from '@openclawd/plugin-sdk/client';
 import { useState } from 'react';
 
 export default function Calculator() {
@@ -414,7 +414,7 @@ export default function Calculator() {
 Standalone plugins use the full client SDK:
 
 ```typescript
-import { SolanaClawdChat } from '@solana-clawd/plugin-sdk/client';
+import { SolanaClawdChat } from '@openclawd/plugin-sdk/client';
 
 // Get initialization payload
 const payload = await SolanaClawdChat.getPluginPayload();

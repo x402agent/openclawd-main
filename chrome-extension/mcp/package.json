@@ -1,5 +1,5 @@
 {
-    "name": "@solana-clawd/browser-mcp",
+    "name": "@openclawd/browser-mcp",
     "private": false,
     "version": "2.0.0",
     "type": "module",

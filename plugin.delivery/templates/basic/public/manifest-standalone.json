@@ -1,5 +1,5 @@
 {
-  "$schema": "../node_modules/@solana-clawd/plugin-sdk/schema.json",
+  "$schema": "../node_modules/@openclawd/plugin-sdk/schema.json",
   "api": [
     {
       "url": "http://localhost:3400/api/clothes",

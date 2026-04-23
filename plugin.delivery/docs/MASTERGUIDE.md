@@ -43,7 +43,7 @@ An example is as follows:
 
 json
 {
-  "$schema": "../node_modules/@solana-clawd/plugin-sdk/schema.json",
+  "$schema": "../node_modules/@openclawd/plugin-sdk/schema.json",
   "api": [
     {
       "url": "http://localhost:3400/api/clothes",
@@ -465,16 +465,16 @@ json
 In this way, when solana-clawd attempts to communicate with the plugin, it will directly request the configured local gateway address to resolve cross-origin issues in network requests.
 
 Creating Local Gateway Routes
-Next, you need to create a gateway route in the local service to handle requests from solana-clawd. You can use the functions provided by the @solana-clawd/chat-plugins-gateway package to quickly create this route.
+Next, you need to create a gateway route in the local service to handle requests from solana-clawd. You can use the functions provided by the @openclawd/chat-plugins-gateway package to quickly create this route.
 
-First, ensure that you have installed the @solana-clawd/chat-plugins-gateway package. If not, you can install it using the following command:
+First, ensure that you have installed the @openclawd/chat-plugins-gateway package. If not, you can install it using the following command:
 
 sh
-pnpm install @solana-clawd/chat-plugins-gateway
+pnpm install @openclawd/chat-plugins-gateway
 Then, in your local Next.js project, create a new TypeScript file in the api directory, for example, pages/api/gateway.ts, and add the following code:
 
 ts
-import { createSolanaClawdPluginGateway } from '@solana-clawd/chat-plugins-gateway';
+import { createSolanaClawdPluginGateway } from '@openclawd/chat-plugins-gateway';
 
 export default createSolanaClawdPluginGateway();
 This code will create a gateway route to handle solana-clawd requests. The createSolanaClawdPluginGateway function will automatically handle tasks such as request forwarding, response aggregation, and security validation.
@@ -482,7 +482,7 @@ This code will create a gateway route to handle solana-clawd requests. The creat
 If you are not using Next.js but instead using Vercel API service, you can create a NodeJS serverless API in the api directory:
 
 ts
-import { createGatewayOnNodeRuntime } from '@solana-clawd/chat-plugins-gateway';
+import { createGatewayOnNodeRuntime } from '@openclawd/chat-plugins-gateway';
 
 export default createGatewayOnNodeRuntime();
 Starting the Local Service
@@ -588,7 +588,7 @@ Edge Runtime is an execution environment provided by Vercel, allowing your code 
 Here is an example of a plugin server using Edge Runtime:
 
 ts
-import { PluginErrorType, createErrorResponse } from '@solana-clawd/plugin-sdk';
+import { PluginErrorType, createErrorResponse } from '@openclawd/plugin-sdk';
 
 import { manClothes, womanClothes } from '@/data';
 import { RequestData, ResponseData } from '@/type';
@@ -671,11 +671,11 @@ Using Chat Plugin SDK
 solana-clawd provides the Chat Plugin SDK, which is a set of tools and components to help developers build plugins. For plugin types that require frontend (such as default and standalone), you need to install the SDK in your project and use it to build the frontend part of the plugin.
 
 fish
-pnpm i @solana-clawd/plugin-sdk
+pnpm i @openclawd/plugin-sdk
 or
 
 fish
-bun i @solana-clawd/plugin-sdk
+bun i @openclawd/plugin-sdk
 Developing Frontend UI and Logic
 Depending on your plugin type, you may need to develop the user interface and interaction logic. For standalone plugins, implementing the complete application logic and communication mechanism with solana-clawd is crucial.
 
@@ -695,14 +695,14 @@ Embedding UI in an Iframe
 The UI of solana-clawd plugins is essentially embedded in an iframe, which means the plugins support all types of frontend technology stacks. Whether you choose React, Vue, Angular, or other frameworks, they can be used to build your plugin UI.
 
 Support for React Technology Stack
-solana-clawd provides templates and component libraries @solana-clawd/ui specifically designed for the React technology stack, enabling developers to quickly get started and build plugin UI.
+solana-clawd provides templates and component libraries @openclawd/ui specifically designed for the React technology stack, enabling developers to quickly get started and build plugin UI.
 
 sh
-npm install @solana-clawd/ui
+npm install @openclawd/ui
 or
 
 sh
-yarn add @solana-clawd/ui
+yarn add @openclawd/ui
 Key Considerations
 It is recommended to follow the following steps and considerations to build an extension plugin that provides an excellent experience for users:
 
@@ -721,7 +721,7 @@ Obtaining Plugin Initialization Information
 When the plugin is loaded, developers may need to obtain the initialization parameters and configuration passed by solana-clawd. Using the solana-clawd Client SDK, this can be easily accomplished with the following lines of code:
 
 javascript
-import { SolanaClawdOS } from '@solana-clawd/plugin-sdk/client';
+import { SolanaClawdOS } from '@openclawd/plugin-sdk/client';
 
 // Obtain initialization information
 SolanaClawdOS.getPluginPayload().then((payload) => {
@@ -733,7 +733,7 @@ Updating Plugin Message Content
 If the plugin needs to send messages during interaction with the user, it can use the methods provided by the SDK to update the message content:
 
 javascript
-import { SolanaClawdOS } from '@solana-clawd/plugin-sdk/client';
+import { SolanaClawdOS } from '@openclawd/plugin-sdk/client';
 
 // Send message content
 SolanaClawdOS.setPluginMessage('Welcome to using our plugin!');
@@ -744,7 +744,7 @@ For the complete usage API of the solana-clawd Client SDK, please refer to: sola
 
 Plugin Manifest Schema
 Schema for the plugin manifest file
-import { pluginManifestSchema } from '@solana-clawd/plugin-sdk';
+import { pluginManifestSchema } from '@openclawd/plugin-sdk';
 NPM
 UNPKG
 BundlePhobia
@@ -755,7 +755,7 @@ Description: Defines the data schema for the plugin manifest file.
 
 Usage Example
 typescript
-import { pluginManifestSchema } from '@solana-clawd/plugin-sdk';
+import { pluginManifestSchema } from '@openclawd/plugin-sdk';
 
 const manifestData = {
   api: [
@@ -810,7 +810,7 @@ const pluginApiSchema = z.object({
 export default pluginApiSchema;
 Usage Example
 typescript
-import { pluginApiSchema } from '@solana-clawd/plugin-sdk';
+import { pluginApiSchema } from '@openclawd/plugin-sdk';
 
 const apiData = {
   description: 'API Description',
@@ -848,7 +848,7 @@ url string  URL of the plugin API
 
 pluginMetaSchema
 Schema for plugin meta data
-import { pluginMetaSchema } from '@solana-clawd/plugin-sdk';
+import { pluginMetaSchema } from '@openclawd/plugin-sdk';
 NPM
 UNPKG
 BundlePhobia
@@ -858,7 +858,7 @@ Schema for plugin metadata.
 
 Usage Example
 typescript
-import { pluginMetaSchema } from '@solana-clawd/plugin-sdk';
+import { pluginMetaSchema } from '@openclawd/plugin-sdk';
 
 const meta = {
   author: 'John Doe',
@@ -892,7 +892,7 @@ schemaVersion number  Version number of the data schema for plugin metadata
 
 getPluginSettingsFromRequest
 get plugin settings from request
-import { getPluginSettingsFromRequest } from '@solana-clawd/plugin-sdk';
+import { getPluginSettingsFromRequest } from '@openclawd/plugin-sdk';
 NPM
 UNPKG
 BundlePhobia
@@ -914,7 +914,7 @@ ts
 import {
   createHeadersWithPluginSettings,
   getPluginSettingsFromRequest,
-} from '@solana-clawd/plugin-sdk';
+} from '@openclawd/plugin-sdk';
 
 const req = new Request('https://api.example.com', {
   headers: createHeadersWithPluginSettings({ theme: 'dark' }),
@@ -930,7 +930,7 @@ If the parsing of the plugin settings string fails, it returns undefined.
 
 Plugin Error Type
 Plugin error types
-import { PluginErrorType } from '@solana-clawd/plugin-sdk';
+import { PluginErrorType } from '@openclawd/plugin-sdk';
 NPM
 UNPKG
 BundlePhobia
@@ -942,7 +942,7 @@ Usage
 Combined with createErrorResponse :
 
 ts
-import { PluginErrorType } from '@solana-clawd/plugin-sdk';
+import { PluginErrorType } from '@openclawd/plugin-sdk';
 
 export default async (req: Request) => {
   if (req.method !== 'POST') return createErrorResponse(PluginErrorType.MethodNotAllowed);
@@ -980,7 +980,7 @@ GatewayTimeout  504 Gateway Timeout
 
 SolanaClawdOS
 solana-clawd Client SDK
-import { SolanaClawdOS } from '@solana-clawd/plugin-sdk/client';
+import { SolanaClawdOS } from '@openclawd/plugin-sdk/client';
 NPM
 UNPKG
 BundlePhobia
@@ -1007,7 +1007,7 @@ state: if exist the plugin message have state, you can get it from thi
 settings: the plugin settings
 Example
 ts
-import { SolanaClawdOS } from '@solana-clawd/plugin-sdk/client';
+import { SolanaClawdOS } from '@openclawd/plugin-sdk/client';
 
 SolanaClawdOS.getPluginPayload().then((payload) => {
   console.log(payload);
@@ -1029,7 +1029,7 @@ ts
 type GetPluginMessage = <T = object>() => Promise<T>;
 Example
 ts
-import { SolanaClawdOS } from '@solana-clawd/plugin-sdk/client';
+import { SolanaClawdOS } from '@openclawd/plugin-sdk/client';
 
 SolanaClawdOS.getPluginMessage().then((message) => {
   console.log(message);
@@ -1043,7 +1043,7 @@ Parameter
 content: the plugin content to be filled in.
 Example
 ts
-import { SolanaClawdOS } from '@solana-clawd/plugin-sdk/client';
+import { SolanaClawdOS } from '@openclawd/plugin-sdk/client';
 
 SolanaClawdOS.setPluginMessage({ title: 'Hello', message: 'Welcome to my plugin' });
 getPluginState
@@ -1055,7 +1055,7 @@ Input parameter
 key: the key value of the state information to be retrieved.
 Example
 ts
-import { SolanaClawdOS } from '@solana-clawd/plugin-sdk/client';
+import { SolanaClawdOS } from '@openclawd/plugin-sdk/client';
 
 SolanaClawdOS.getPluginState('counter').then((state) => {
   console.log(state);
@@ -1070,7 +1070,7 @@ key: the key value of the state information to be updated.
 value: the value of the state information to be updated.
 Example
 ts
-import { SolanaClawdOS } from '@solana-clawd/plugin-sdk/client';
+import { SolanaClawdOS } from '@openclawd/plugin-sdk/client';
 
 SolanaClawdOS.setPluginState('counter', 5);
 getPluginSettings
@@ -1080,7 +1080,7 @@ ts
 type GetPluginSettings = <T = any>() => Promise<T>;
 Example
 ts
-import { SolanaClawdOS } from '@solana-clawd/plugin-sdk/client';
+import { SolanaClawdOS } from '@openclawd/plugin-sdk/client';
 
 SolanaClawdOS.getPluginSettings().then((state) => {
   console.log(state);
@@ -1094,13 +1094,13 @@ Input parameter
 settings: the plugin configuration information to be updated, default is partial update.
 Example
 ts
-import { SolanaClawdOS } from '@solana-clawd/plugin-sdk/client';
+import { SolanaClawdOS } from '@openclawd/plugin-sdk/client';
 
 SolanaClawdOS.setPluginSettings({ theme: 'dark', fontSize: 12 });
 
 useWatchPluginMessage
 used to listen for plugin messages sent from solana-clawd
-import { useWatchPluginMessage } from '@solana-clawd/plugin-sdk/client';
+import { useWatchPluginMessage } from '@openclawd/plugin-sdk/client';
 NPM
 UNPKG
 BundlePhobia
@@ -1113,7 +1113,7 @@ ts
 const { data, loading } = useWatchPluginMessage<T>();
 Examples
 tsx
-import { useWatchPluginMessage } from '@solana-clawd/plugin-sdk/client';
+import { useWatchPluginMessage } from '@openclawd/plugin-sdk/client';
 
 const Demo = () => {
   const { data, loading } = useWatchPluginMessage();
@@ -1140,7 +1140,7 @@ loading boolean Indicates whether the data is currently being loaded
 
 useOnStandalonePluginInit
 listen for the initialization of standalone type
-import { useOnStandalonePluginInit } from '@solana-clawd/plugin-sdk/client';
+import { useOnStandalonePluginInit } from '@openclawd/plugin-sdk/client';
 NPM
 UNPKG
 BundlePhobia
@@ -1157,7 +1157,7 @@ Type  Description A callback function that will be invoked when the plugin initi
 callback  (payload: PluginPayload<T>) => void Example
 Notes
 tsx
-import { useOnStandalonePluginInit } from '@solana-clawd/plugin-sdk/client';
+import { useOnStandalonePluginInit } from '@openclawd/plugin-sdk/client';
 
 const Demo = () => {
   useOnStandalonePluginInit((payload) => {
@@ -1185,7 +1185,7 @@ name  string  插件初始化事件的函数名称
 
 usePluginState
 Used to retrieve and update the running state of the plugin
-import { usePluginState } from '@solana-clawd/plugin-sdk/client';
+import { usePluginState } from '@openclawd/plugin-sdk/client';
 NPM
 UNPKG
 BundlePhobia
@@ -1206,7 +1206,7 @@ value T Current value of the state
 updateValue (value: T) => void  Function to update the state
 Example
 tsx
-import { usePluginState } from '@solana-clawd/plugin-sdk/client';
+import { usePluginState } from '@openclawd/plugin-sdk/client';
 
 const Demo = () => {
   const [count, setCount] = usePluginState('count', 0);
@@ -1238,7 +1238,7 @@ React Hook 文档
 
 usePluginSettings
 用于管理插件 Settings
-import { usePluginSettings } from '@solana-clawd/plugin-sdk/client';
+import { usePluginSettings } from '@openclawd/plugin-sdk/client';
 NPM
 UNPKG
 BundlePhobia
@@ -1257,7 +1257,7 @@ usePluginSettingsReturns an array containing two elements, which are the current
 
 Example
 tsx
-import { usePluginSettings } from '@solana-clawd/plugin-sdk/client';
+import { usePluginSettings } from '@openclawd/plugin-sdk/client';
 
 const Demo = () => {
   const [value, updateValue] = usePluginSettings('default value');
@@ -1289,7 +1289,7 @@ Literal:solana-clawd:plugin-ready-for-render
 Used to notify the solana-clawd host that the plugin is ready for rendering
 
 ts
-import { PluginChannel } from '@solana-clawd/plugin-sdk';
+import { PluginChannel } from '@openclawd/plugin-sdk';
 
 const channel = PluginChannel.pluginReadyForRender;
 INFO
@@ -1300,7 +1300,7 @@ Literal:solana-clawd:init-standalone-plugin
 For plugins of type standalone, notifies solana-clawd that the plugin has been initialized
 
 ts
-import { PluginChannel } from '@solana-clawd/plugin-sdk';
+import { PluginChannel } from '@openclawd/plugin-sdk';
 
 const channel = PluginChannel.initStandalonePlugin;
 Message Content Related
@@ -1309,7 +1309,7 @@ Literal:solana-clawd:fetch-plugin-messag
 Used for the plugin to initiate a message request to solana-clawd
 
 ts
-import { PluginChannel } from '@solana-clawd/plugin-sdk';
+import { PluginChannel } from '@openclawd/plugin-sdk';
 
 const channel = PluginChannel.fetchPluginMessage;
 renderPlugin
@@ -1317,7 +1317,7 @@ Literal:solana-clawd:render-plugin
 Used for the main program to send rendering instructions to the plugin.
 
 ts
-import { PluginChannel } from '@solana-clawd/plugin-sdk';
+import { PluginChannel } from '@openclawd/plugin-sdk';
 
 const channel = PluginChannel.pluginReadyForRender;
 fillStandalonePluginContent
@@ -1325,7 +1325,7 @@ Literal:solana-clawd:fill-plugin-content
 Used to send plugin content to solana-clawd when the plugin is running independently
 
 ts
-import { PluginChannel } from '@solana-clawd/plugin-sdk';
+import { PluginChannel } from '@openclawd/plugin-sdk';
 
 const channel = PluginChannel.fillStandalonePluginContent;
 Plugin Runtime Related
@@ -1334,7 +1334,7 @@ Literal:solana-clawd:fetch-plugin-state
 Used for the plugin to actively request plugin state information from solana-clawd
 
 ts
-import { PluginChannel } from '@solana-clawd/plugin-sdk';
+import { PluginChannel } from '@openclawd/plugin-sdk';
 
 const channel = PluginChannel.fetchPluginState;
 renderPluginState
@@ -1342,7 +1342,7 @@ Literal:solana-clawd:render-plugin-state
 Used for the main program to render plugin state to the plugin
 
 ts
-import { PluginChannel } from '@solana-clawd/plugin-sdk';
+import { PluginChannel } from '@openclawd/plugin-sdk';
 
 const channel = PluginChannel.renderPluginState;
 updatePluginState
@@ -1350,7 +1350,7 @@ Literal:solana-clawd:update-plugin-state
 Used for the plugin to send updated plugin state to solana-clawd
 
 ts
-import { PluginChannel } from '@solana-clawd/plugin-sdk';
+import { PluginChannel } from '@openclawd/plugin-sdk';
 
 const channel = PluginChannel.updatePluginState;
 Settings Related
@@ -1359,7 +1359,7 @@ Literal:solana-clawd:fetch-plugin-settings
 Used for the plugin to actively request plugin settings information from solana-clawd
 
 ts
-import { PluginChannel } from '@solana-clawd/plugin-sdk';
+import { PluginChannel } from '@openclawd/plugin-sdk';
 
 const channel = PluginChannel.fetchPluginSettings;
 renderPluginSettings
@@ -1367,7 +1367,7 @@ Literal:solana-clawd:render-plugin-settings
 Used for the main program to render plugin settings to the plugin
 
 ts
-import { PluginChannel } from '@solana-clawd/plugin-sdk';
+import { PluginChannel } from '@openclawd/plugin-sdk';
 
 const channel = PluginChannel.renderPluginSettings;
 updatePluginSettings
@@ -1375,6 +1375,6 @@ Literal:solana-clawd:update-plugin-settings
 Used for the plugin to send updated plugin settings to solana-clawd
 
 ts
-import { PluginChannel } from '@solana-clawd/plugin-sdk';
+import { PluginChannel } from '@openclawd/plugin-sdk';
 
 const channel = PluginChannel.updatePluginSettings;

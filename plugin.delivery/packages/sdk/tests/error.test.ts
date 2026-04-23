@@ -2,7 +2,7 @@ import {
   PluginErrorType,
   createErrorResponse,
   getPluginErrorStatus,
-} from '@solana-clawd/chat-plugin-sdk';
+} from '@openclawd/chat-plugin-sdk';
 import { describe, expect, it } from 'vitest';
 
 describe('getPluginErrorStatus', () => {

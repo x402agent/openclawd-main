@@ -3,7 +3,7 @@ import {
   createHeadersWithPluginSettings,
   getPluginSettingsFromHeaders,
   getPluginSettingsFromRequest,
-} from '@solana-clawd/chat-plugin-sdk';
+} from '@openclawd/chat-plugin-sdk';
 import { describe, expect, it } from 'vitest';
 
 describe('getPluginSettingsFromRequest', () => {

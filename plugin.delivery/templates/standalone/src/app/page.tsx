@@ -1,6 +1,6 @@
 'use client';
 
-import { SolanaClawdOS, useOnStandalonePluginInit, usePluginState } from '@solana-clawd/plugin-sdk/client';
+import { SolanaClawdOS, useOnStandalonePluginInit, usePluginState } from '@openclawd/plugin-sdk/client';
 import { Button, Card, InputNumber, Space, Typography } from 'antd';
 import { useCallback, useState } from 'react';
 

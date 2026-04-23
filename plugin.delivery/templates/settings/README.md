@@ -69,7 +69,7 @@ settings/
 ### 2. Retrieve Settings on Server
 
 ```typescript
-import { getPluginSettingsFromRequest, createErrorResponse, PluginErrorType } from '@solana-clawd/plugin-sdk';
+import { getPluginSettingsFromRequest, createErrorResponse, PluginErrorType } from '@openclawd/plugin-sdk';
 
 export default async (req: Request) => {
   const settings = getPluginSettingsFromRequest<Settings>(req);

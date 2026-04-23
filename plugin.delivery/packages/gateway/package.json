@@ -1,5 +1,5 @@
 {
-  "name": "@solana-clawd/chat-plugins-gateway",
+  "name": "@openclawd/chat-plugins-gateway",
   "version": "1.9.0",
   "description": "Edge-runtime plugin gateway for the solana-clawd ecosystem — validates agent requests, applies deny-first permissions, and forwards to plugin.delivery manifests.",
   "repository": "https://github.com/x402agent/solana-clawd",
@@ -71,7 +71,7 @@
   "dependencies": {
     "@babel/runtime": "^7",
     "@cfworker/json-schema": "^1",
-    "@solana-clawd/plugin-sdk": "workspace:*",
+    "@openclawd/plugin-sdk": "workspace:*",
     "ajv": "^8",
     "swagger-client": "^3",
     "zod": "^3"

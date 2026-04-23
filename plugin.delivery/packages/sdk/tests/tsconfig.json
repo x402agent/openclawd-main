@@ -14,9 +14,9 @@
     "skipLibCheck": true,
     "strict": true,
     "paths": {
-      "@solana-clawd/chat-plugin-sdk": ["./src"],
-      "@solana-clawd/chat-plugin-sdk/client": ["./src/client"],
-      "@solana-clawd/chat-plugin-sdk/openapi": ["./src/openapi"]
+      "@openclawd/chat-plugin-sdk": ["./src"],
+      "@openclawd/chat-plugin-sdk/client": ["./src/client"],
+      "@openclawd/chat-plugin-sdk/openapi": ["./src/openapi"]
     }
   },
   "include": ["./client", "./test-setup.ts"]

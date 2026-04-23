@@ -12,8 +12,8 @@ import {
   pluginManifestSchema,
   pluginMetaSchema,
   pluginRequestPayloadSchema,
-} from '@solana-clawd/plugin-sdk';
-import { OPENAPI_REQUEST_BODY_KEY } from '@solana-clawd/plugin-sdk/openapi';
+} from '@openclawd/plugin-sdk';
+import { OPENAPI_REQUEST_BODY_KEY } from '@openclawd/plugin-sdk/openapi';
 // @ts-ignore
 import SwaggerClient from 'swagger-client';
 
@@ -137,7 +137,7 @@ export class Gateway {
       // const pluginMeta = {
       //   createAt: '2023-08-12',
       //   homepage: 'https://github.com/x402agent/solana-clawd',
-      //   manifest: 'https://registry.npmmirror.com/@solana-clawd/solana-clawd-plugins/latest/files',
+      //   manifest: 'https://registry.npmmirror.com/@openclawd/solana-clawd-plugins/latest/files',
       //   meta: {
       //     avatar: '☂️',
       //     tags: ['weather', 'realtime'],

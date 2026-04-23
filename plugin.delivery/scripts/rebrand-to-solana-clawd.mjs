@@ -92,7 +92,7 @@ const TEXT_REPLACEMENTS = [
   [/Sperax\s*<contact@sperax\.io>/g, 'solana-clawd <contact@solanaos.net>'],
   [/contact@sperax\.io/g, 'contact@solanaos.net'],
   [/sperax\.io/g, 'solanaos.net'],
-  [/@sperax\//g, '@solana-clawd/'],
+  [/@sperax\//g, '@openclawd/'],
   [/\bSperax\b/g, 'solana-clawd'],
   [/\bsperax\b/g, 'solana-clawd'],
 ];

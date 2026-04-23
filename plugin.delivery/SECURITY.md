@@ -37,8 +37,8 @@ We take security seriously. If you discover a security vulnerability in Plugin D
 
 This policy covers:
 
-- `@solana-clawd/plugin-sdk`
-- `@solana-clawd/chat-plugins-gateway`
+- `@openclawd/plugin-sdk`
+- `@openclawd/chat-plugins-gateway`
 - plugin.delivery website
 - Official solana-clawd plugins
 

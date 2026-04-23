@@ -6,7 +6,7 @@
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/x402agent/solana-clawd)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![npm](https://img.shields.io/npm/v/@solana-clawd/plugin-sdk)](https://www.npmjs.com/package/@solana-clawd/plugin-sdk)
+[![npm](https://img.shields.io/npm/v/@openclawd/plugin-sdk)](https://www.npmjs.com/package/@openclawd/plugin-sdk)
 
 **Live:** [`plugin.delivery`](https://plugin.delivery)
 
@@ -182,7 +182,7 @@ Embed external content:
 Standalone plugins can trigger additional function calls:
 
 ```typescript
-import { SolanaClawdOS } from '@solana-clawd/plugin-sdk/client';
+import { SolanaClawdOS } from '@openclawd/plugin-sdk/client';
 
 // Trigger a new function call from your UI
 SolanaClawdOS.triggerFunctionCall({
@@ -242,9 +242,9 @@ templates/standalone/
 ### 1. Install the SDK
 
 ```bash
-bun add @solana-clawd/plugin-sdk
+bun add @openclawd/plugin-sdk
 # or
-npm install @solana-clawd/plugin-sdk
+npm install @openclawd/plugin-sdk
 ```
 
 ### 2. Create manifest.json
@@ -380,8 +380,8 @@ bun dev
 ```
 plugins/
 ├── packages/
-│   ├── sdk/              # @solana-clawd/plugin-sdk
-│   └── gateway/          # @solana-clawd/chat-plugins-gateway
+│   ├── sdk/              # @openclawd/plugin-sdk
+│   └── gateway/          # @openclawd/chat-plugins-gateway
 ├── templates/            # Starter templates
 │   ├── basic/
 │   ├── default/
@@ -404,8 +404,8 @@ plugins/
 
 | Package | Description | npm |
 |---------|-------------|-----|
-| `@solana-clawd/plugin-sdk` | Plugin SDK for building solana-clawd plugins | [![npm](https://img.shields.io/npm/v/@solana-clawd/plugin-sdk)](https://www.npmjs.com/package/@solana-clawd/plugin-sdk) |
-| `@solana-clawd/chat-plugins-gateway` | Gateway service for routing plugin calls | [![npm](https://img.shields.io/npm/v/@solana-clawd/chat-plugins-gateway)](https://www.npmjs.com/package/@solana-clawd/chat-plugins-gateway) |
+| `@openclawd/plugin-sdk` | Plugin SDK for building solana-clawd plugins | [![npm](https://img.shields.io/npm/v/@openclawd/plugin-sdk)](https://www.npmjs.com/package/@openclawd/plugin-sdk) |
+| `@openclawd/chat-plugins-gateway` | Gateway service for routing plugin calls | [![npm](https://img.shields.io/npm/v/@openclawd/chat-plugins-gateway)](https://www.npmjs.com/package/@openclawd/chat-plugins-gateway) |
 
 ### SDK Usage
 
@@ -414,10 +414,10 @@ import {
   pluginManifestSchema,
   createPluginResponse,
   PluginError 
-} from '@solana-clawd/plugin-sdk';
+} from '@openclawd/plugin-sdk';
 
 // Client-side (in standalone UI)
-import { SolanaClawdOS } from '@solana-clawd/plugin-sdk/client';
+import { SolanaClawdOS } from '@openclawd/plugin-sdk/client';
 ```
 
 ---
@@ -473,7 +473,7 @@ We welcome contributions! See [CONTRIBUTING.md](./CONTRIBUTING.md).
 | Resource | URL |
 |----------|-----|
 | 🌐 **Plugin Index** | [plugin.delivery](https://plugin.delivery) |
-| 📦 **SDK on npm** | [@solana-clawd/plugin-sdk](https://www.npmjs.com/package/@solana-clawd/plugin-sdk) |
+| 📦 **SDK on npm** | [@openclawd/plugin-sdk](https://www.npmjs.com/package/@openclawd/plugin-sdk) |
 | 🐙 **GitHub** | [github.com/x402agent/solana-clawd](https://github.com/x402agent/solana-clawd) |
 | 🐦 **Twitter/X** | [@nichxbt](https://x.com/nichxbt) |
 

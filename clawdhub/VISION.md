@@ -112,7 +112,7 @@ Every skill is a `SKILL.md` file with structured metadata:
 
 ## MCP Support
 
-OpenClawd ships with **@solana-clawd/solana-clawd-mcp**: 31 MCP tools including:
+OpenClawd ships with **@openclawd/solana-clawd-mcp**: 31 MCP tools including:
 
 **Solana Market Data:** `solana_price`, `solana_trending`, `solana_token_info`, `solana_wallet_pnl`, `solana_search`, `solana_top_traders`, `solana_wallet_tokens`
 

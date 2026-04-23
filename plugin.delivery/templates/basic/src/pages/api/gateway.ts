@@ -4,7 +4,7 @@ export const config = {
 
 export default async (req: Request) => {
   if (process.env.NODE_ENV === 'development') {
-    const { createGatewayOnEdgeRuntime } = await import('@solana-clawd/chat-plugins-gateway');
+    const { createGatewayOnEdgeRuntime } = await import('@openclawd/chat-plugins-gateway');
 
     return createGatewayOnEdgeRuntime()(req);
   }

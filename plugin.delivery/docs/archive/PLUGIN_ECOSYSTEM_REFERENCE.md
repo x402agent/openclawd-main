@@ -77,7 +77,7 @@ The solana-clawd plugin system extends AI assistant capabilities through externa
 | **Plugin Index** | Registry of available plugins | `plugin.delivery/index.json` |
 | **Plugin Manifests** | Individual plugin configurations | `plugin.delivery/openai/{id}/manifest.json` |
 | **Plugin Gateway** | Proxy for plugin requests | `plugin.delivery/api/gateway` |
-| **Plugin SDK** | Development toolkit | `@solana-clawd/plugin-sdk` |
+| **Plugin SDK** | Development toolkit | `@openclawd/plugin-sdk` |
 | **solana-clawd Client** | Consumer of plugins | solana-clawd web/desktop app |
 
 ---
@@ -453,7 +453,7 @@ interface PluginRequestPayload {
 
 ```typescript
 // Using the official gateway package
-import { createSolanaClawdChatPluginGateway } from '@solana-clawd/chat-plugins-gateway';
+import { createSolanaClawdChatPluginGateway } from '@openclawd/chat-plugins-gateway';
 
 export const config = {
   runtime: 'edge',
@@ -538,7 +538,7 @@ User settings (like API keys) are:
 
 ```typescript
 // Accessing settings in plugin
-import { getPluginSettingsFromRequest } from '@solana-clawd/plugin-sdk';
+import { getPluginSettingsFromRequest } from '@openclawd/plugin-sdk';
 
 const settings = getPluginSettingsFromRequest<{
   apiKey: string;

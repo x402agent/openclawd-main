@@ -139,7 +139,7 @@ server.listen(8080);
 ### 3. Embed Terminal
 
 ```tsx
-import { E2BTerminal } from '@solana-clawd/terminal';
+import { E2BTerminal } from '@openclawd/terminal';
 
 function TradingPage() {
   return (

@@ -2,7 +2,7 @@ import {
   PluginPayload,
   SolanaClawdOS,
   useOnStandalonePluginInit,
-} from '@solana-clawd/chat-plugin-sdk/client';
+} from '@openclawd/chat-plugin-sdk/client';
 import { renderHook } from '@testing-library/react';
 import { Mock, beforeEach, describe, expect, it, vi } from 'vitest';
 

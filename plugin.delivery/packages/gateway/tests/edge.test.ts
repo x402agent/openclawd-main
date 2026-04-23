@@ -3,9 +3,9 @@ import {
   PluginErrorType,
   PluginRequestPayload,
   createHeadersWithPluginSettings,
-} from '@solana-clawd/chat-plugin-sdk';
-import { SOLANA-CLAWD_PLUGIN_SETTINGS } from '@solana-clawd/chat-plugin-sdk/lib/request';
-import { createGatewayOnEdgeRuntime } from '@solana-clawd/chat-plugins-gateway';
+} from '@openclawd/chat-plugin-sdk';
+import { SOLANA-CLAWD_PLUGIN_SETTINGS } from '@openclawd/chat-plugin-sdk/lib/request';
+import { createGatewayOnEdgeRuntime } from '@openclawd/chat-plugins-gateway';
 // @ts-ignore
 import SwaggerClient from 'swagger-client';
 import { Mock, beforeEach, describe, expect, it, vi } from 'vitest';

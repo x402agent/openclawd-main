@@ -8,8 +8,8 @@
     "deploy": "vercel --prod"
   },
   "dependencies": {
-    "@solana-clawd/plugin-sdk": "^1.0.0",
-    "@solana-clawd/chat-plugins-gateway": "^1.0.0"
+    "@openclawd/plugin-sdk": "^1.0.0",
+    "@openclawd/chat-plugins-gateway": "^1.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

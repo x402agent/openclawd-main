@@ -8,8 +8,8 @@
     "start": "next start -p 3400"
   },
   "dependencies": {
-    "@solana-clawd/plugin-sdk": "^1.0.0",
-    "@solana-clawd/ui": "^1.0.0",
+    "@openclawd/plugin-sdk": "^1.0.0",
+    "@openclawd/ui": "^1.0.0",
     "antd": "^5.0.0",
     "next": "^14.0.0",
     "react": "^18.0.0",

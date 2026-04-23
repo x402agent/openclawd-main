@@ -2,9 +2,9 @@
 
 <div align="center">
 
-<img height="120" src="https://registry.npmmirror.com/@solana-clawd/assets-logo/1.0.0/files/assets/logo-3d.webp">
+<img height="120" src="https://registry.npmmirror.com/@openclawd/assets-logo/1.0.0/files/assets/logo-3d.webp">
 <img height="120" src="https://gw.alipayobjects.com/zos/kitchen/qJ3l3EPsdW/split.svg">
-<img height="120" src="https://registry.npmmirror.com/@solana-clawd/assets-emoji/1.3.0/files/assets/puzzle-piece.webp">
+<img height="120" src="https://registry.npmmirror.com/@openclawd/assets-emoji/1.3.0/files/assets/puzzle-piece.webp">
 
 <h1>Chat Plugin SDK</h1>
 
@@ -63,8 +63,8 @@ Plugins provide a means to extend the Function Calling capabilities of solana-cl
 
 - [solana-clawd-os-plugins][solana-clawd-os-plugins]: This is the plugin index for solana-clawd. It accesses index.json from this repository to display a list of available plugins for solana-clawd to the user.
 - [chat-plugin-template][chat-plugin-template]: This is the plugin template for solana-clawd plugin development.
-- [@solana-clawd/plugin-sdk][plugin-sdk]: The solana-clawd Plugin SDK assists you in creating exceptional chat plugins for solana-clawd.
-- [@solana-clawd/chat-plugins-gateway][chat-plugins-gateway]: The solana-clawd Plugins Gateway is a backend service that provides a gateway for solana-clawd plugins. We deploy this service using Vercel. The primary API POST /api/v1/runner is deployed as an Edge Function.
+- [@openclawd/plugin-sdk][plugin-sdk]: The solana-clawd Plugin SDK assists you in creating exceptional chat plugins for solana-clawd.
+- [@openclawd/chat-plugins-gateway][chat-plugins-gateway]: The solana-clawd Plugins Gateway is a backend service that provides a gateway for solana-clawd plugins. We deploy this service using Vercel. The primary API POST /api/v1/runner is deployed as an Edge Function.
 
 <div align="right">
 
@@ -159,8 +159,8 @@ This project is [MIT](./LICENSE) licensed.
 [github-stars-link]: https://github.com/x402agent/solana-clawd
 [github-stars-shield]: https://img.shields.io/github/stars/solana-clawd/plugin-sdk?color=ffcb47&labelColor=black&style=flat-square
 [solana-clawd-os-plugins]: https://github.com/x402agent/solana-clawd
-[npm-release-link]: https://www.npmjs.com/package/@solana-clawd/plugin-sdk
-[npm-release-shield]: https://img.shields.io/npm/v/@solana-clawd/plugin-sdk?color=369eff&labelColor=black&logo=npm&logoColor=white&style=flat-square
+[npm-release-link]: https://www.npmjs.com/package/@openclawd/plugin-sdk
+[npm-release-shield]: https://img.shields.io/npm/v/@openclawd/plugin-sdk?color=369eff&labelColor=black&logo=npm&logoColor=white&style=flat-square
 [pr-welcome-link]: https://github.com/x402agent/solana-clawd
 [pr-welcome-shield]: https://img.shields.io/badge/%F0%9F%A4%AF%20PR%20WELCOME-%E2%86%92-ffcb47?labelColor=black&style=for-the-badge
 [profile-link]: https://github.com/x402agent/solana-clawd

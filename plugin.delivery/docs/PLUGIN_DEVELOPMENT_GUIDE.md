@@ -63,7 +63,7 @@ Initialize your project:
 ```bash
 mkdir my-plugin && cd my-plugin
 pnpm init
-pnpm add @solana-clawd/plugin-sdk @solana-clawd/chat-plugins-gateway
+pnpm add @openclawd/plugin-sdk @openclawd/chat-plugins-gateway
 pnpm add -D typescript @types/node
 ```
 
@@ -71,7 +71,7 @@ Create `public/manifest.json`:
 
 ```json
 {
-  "$schema": "https://unpkg.com/@solana-clawd/plugin-sdk/schema.json",
+  "$schema": "https://unpkg.com/@openclawd/plugin-sdk/schema.json",
   "identifier": "my-plugin",
   "api": [
     {
@@ -102,7 +102,7 @@ Create `public/manifest.json`:
 Create `api/hello.ts`:
 
 ```typescript
-import { PluginErrorType, createErrorResponse } from '@solana-clawd/plugin-sdk';
+import { PluginErrorType, createErrorResponse } from '@openclawd/plugin-sdk';
 
 export const config = { runtime: 'edge' };
 
@@ -133,7 +133,7 @@ export default async (req: Request) => {
 Create `api/gateway.ts`:
 
 ```typescript
-import { createSolanaClawdChatPluginGateway } from '@solana-clawd/chat-plugins-gateway';
+import { createSolanaClawdChatPluginGateway } from '@openclawd/chat-plugins-gateway';
 
 export const config = { runtime: 'edge' };
 
@@ -213,8 +213,8 @@ Continue reading for detailed documentation on [Architecture Overview](#2-archit
 | Component | Repository | Purpose |
 |-----------|------------|---------|
 | **Plugin Index** | `x402agent/plugins` | Plugin marketplace registry |
-| **Plugin SDK** | `@solana-clawd/plugin-sdk` | Development toolkit |
-| **Plugin Gateway** | `@solana-clawd/chat-plugins-gateway` | Request proxy service |
+| **Plugin SDK** | `@openclawd/plugin-sdk` | Development toolkit |
+| **Plugin Gateway** | `@openclawd/chat-plugins-gateway` | Request proxy service |
 | **Plugin Templates** | `templates/` | Starter project templates |
 
 ### Data Flow: Function Call Mechanism
@@ -687,7 +687,7 @@ For local development, use a manifest with the gateway field:
 
 ```typescript
 // src/pages/api/your-endpoint.ts
-import { PluginErrorType, createErrorResponse } from '@solana-clawd/plugin-sdk';
+import { PluginErrorType, createErrorResponse } from '@openclawd/plugin-sdk';
 
 export const config = {
   runtime: 'edge',
@@ -734,7 +734,7 @@ async function fetchExternalData(query: string) {
 
 ```typescript
 // src/pages/api/gateway.ts
-import { createSolanaClawdChatPluginGateway } from '@solana-clawd/chat-plugins-gateway';
+import { createSolanaClawdChatPluginGateway } from '@openclawd/chat-plugins-gateway';
 
 export const config = {
   runtime: 'edge',
@@ -746,7 +746,7 @@ export default createSolanaClawdChatPluginGateway();
 ### Accessing Plugin Settings
 
 ```typescript
-import { getPluginSettingsFromRequest } from '@solana-clawd/plugin-sdk';
+import { getPluginSettingsFromRequest } from '@openclawd/plugin-sdk';
 
 export default async (req: Request) => {
   // Get user-configured settings
@@ -782,7 +782,7 @@ export default async (req: Request) => {
 
 ```tsx
 // src/pages/index.tsx
-import { fetchPluginMessage } from '@solana-clawd/plugin-sdk';
+import { fetchPluginMessage } from '@openclawd/plugin-sdk';
 import { memo, useEffect, useState } from 'react';
 
 interface PluginData {
@@ -820,7 +820,7 @@ export default PluginUI;
 ### SDK Communication Methods
 
 ```typescript
-import { SolanaClawdChat } from '@solana-clawd/plugin-sdk';
+import { SolanaClawdChat } from '@openclawd/plugin-sdk';
 
 // Get plugin payload (initialization data)
 const payload = await SolanaClawdChat.getPluginPayload();
@@ -1042,7 +1042,7 @@ window.addEventListener('message', (event) => {
 The SDK abstracts this complexity:
 
 ```typescript
-import { SolanaClawdChat } from '@solana-clawd/plugin-sdk';
+import { SolanaClawdChat } from '@openclawd/plugin-sdk';
 
 // Simplified API
 const payload = await SolanaClawdChat.getPluginPayload();
@@ -1301,8 +1301,8 @@ Translations generated for: `en-US`, `zh-CN`, `zh-TW`, `ja-JP`, `ko-KR`, `de-DE`
 
 | Resource | URL |
 |----------|-----|
-| Plugin SDK | `@solana-clawd/plugin-sdk` |
-| Plugin Gateway | `@solana-clawd/chat-plugins-gateway` |
+| Plugin SDK | `@openclawd/plugin-sdk` |
+| Plugin Gateway | `@openclawd/chat-plugins-gateway` |
 | Plugin Templates | `./templates/` (included in this repo) |
 | OpenAPI Spec | https://swagger.io/specification/ |
 | solana-clawd Docs | https://solanaos.net/docs |
@@ -1315,10 +1315,10 @@ Translations generated for: `en-US`, `zh-CN`, `zh-TW`, `ja-JP`, `ko-KR`, `de-DE`
 cp -r templates/openapi my-plugin
 
 # Install SDK
-npm install @solana-clawd/plugin-sdk
+npm install @openclawd/plugin-sdk
 
 # Install Gateway (for local dev)
-npm install @solana-clawd/chat-plugins-gateway
+npm install @openclawd/chat-plugins-gateway
 
 # Run locally
 npm run dev

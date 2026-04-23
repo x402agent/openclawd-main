@@ -1,4 +1,4 @@
-import { pluginMetaSchema } from '@solana-clawd/plugin-sdk';
+import { pluginMetaSchema } from '@openclawd/plugin-sdk';
 import { consola } from 'consola';
 import dayjs from 'dayjs';
 
