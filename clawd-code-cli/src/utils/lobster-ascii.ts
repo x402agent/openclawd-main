@@ -4,47 +4,88 @@
  */
 
 export const LOBSTER_ASCII = `
-    ╔═══════════════════════════════════════════════════════════╗
-    ║                                                           ║
-    ║     ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄     ║
-    ║   ╱▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔╲    ║
-    ║  ║  █████╗  ║                                           ║   ║
-    ║  ║ ██╔══██╗ ║   🦞 CLAWD CODE CLI 🦞                   ║   ║
-    ║  ║ ╚══█╔═╝ ║                                           ║   ║
-    ║  ║   ██║   ║   "Claws that code, brains that deploy"    ║   ║
-    ║  ║   ██║   ║                                           ║   ║
-    ║  ║   ╚═╝   ║   ┌─────────────────────────────────┐     ║   ║
-    ║  ║         ║   │ AI-Powered CLI for Solana       │     ║   ║
-    ║  ║  ▄█████╗ ║   │ Terminal • Blockchain • Deploy  │     ║   ║
-    ║  ║ ██╔══██╗║   └─────────────────────────────────┘     ║   ║
-    ║  ║ ╚══█╔═╝ ║                                           ║   ║
-    ║  ║   ██║   ║   Type 'clawd --help' to get started      ║   ║
-    ║  ║   ╚═╝   ║                                           ║   ║
-    ║   ╲▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔╱    ║
-    ║     ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀     ║
-    ║                                                           ║
-    ╚═══════════════════════════════════════════════════════════╝
+    ╔═══════════════════════════════════════════════════════════════════════╗
+    ║                                                                       ║
+    ║   ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄   ║
+    ║  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓   ║
+    ║  ▓                                                                 ▓   ║
+    ║  ▓   ██╗   ██╗ ██████╗ ██████╗ ███╗   ██╗██╗ ██████╗         ▓   ║
+    ║  ▓   ██║   ██║██╔═══██╗██╔══██╗████╗  ██║██║██╔════╝         ▓   ║
+    ║  ▓   ███████║██║   ██║██████╔╝██╔██╗ ██║██║██║  ███╗        ▓   ║
+    ║  ▓   ██╔══██║██║   ██║██╔══██╗██║╚██╗██║██║██║   ██║        ▓   ║
+    ║  ▓   ██║   ██║╚██████╔╝██║  ██║██║ ╚████║██║╚██████╔╝        ▓   ║
+    ║  ▓   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝ ╚═════╝         ▓   ║
+    ║  ▓                                                                 ▓   ║
+    ║  ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓   ║
+    ║                                                                       ║
+    ║          🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞          ║
+    ║                                                                       ║
+    ║          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░          ║
+    ║          ░  🦞  C L A W D  C O D E  C L I  🦞  ░          ║
+    ║          ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░          ║
+    ║                                                                       ║
+    ║          "Claws that code, brains that deploy"                        ║
+    ║                                                                       ║
+    ║          ╔═══════════════════════════════════════════╗                ║
+    ║          ║   🦞 Solana Blockchain Integration 🦞   ║                ║
+    ║          ║   ┌───────────────────────────────┐     ║                ║
+    ║          ║   │ • OODA Loop Trading            │     ║                ║
+    ║          ║   │ • MCP Tools & Extensions      │     ║                ║
+    ║          ║   │ • Smart Contract Deployment   │     ║                ║
+    ║          ║   │ • Wallet & Token Management   │     ║                ║
+    ║          ║   └───────────────────────────────┘     ║                ║
+    ║          ╚═══════════════════════════════════════════╝                ║
+    ║                                                                       ║
+    ║          Type 'clawd --help' to get started                           ║
+    ║                                                                       ║
+    ║   ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀   ║
+    ║                                                                       ║
+    ╚═══════════════════════════════════════════════════════════════════════╝
 `;
 
 export const LOBSTER_SMALL = `
     🦞 Clawd Code CLI v1.0.0
     ========================
+    "Claws that code, brains that deploy"
 `;
 
 export const LOBSTER_WELCOME = `
-    ┌────────────────────────────────────────┐
-    │  🦞 Welcome to Clawd Code CLI! 🦞      │
-    │                                        │
-    │  Type your commands and I'll help      │
-    │  you build on Solana!                  │
-    │                                        │
-    │  Examples:                             │
-    │  • clawd "deploy my contract"           │
-    │  • clawd git commit-and-push           │
-    │  • clawd --prompt "check my wallet"    │
-    │                                        │
-    │  Type 'exit' or 'quit' to leave        │
-    └────────────────────────────────────────┘
+    ┌─────────────────────────────────────────────────────────┐
+    │                                                         │
+    │   🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞🦞   │
+    │                                                         │
+    │           🦞 Welcome to Clawd Code CLI! 🦞             │
+    │                                                         │
+    │   The lobster-powered AI assistant for Solana!           │
+    │                                                         │
+    │   ┌─────────────────────────────────────────────┐      │
+    │   │  What I can do:                            │      │
+    │   │  🦀 Code, deploy, and debug smart contracts│      │
+    │   │  🦀 Execute shell commands naturally        │      │
+    │   │  🦀 Query Solana blockchain data            │      │
+    │   │  🦀 Trade tokens with OODA loop strategy   │      │
+    │   │  🦀 Extend with MCP tools                   │      │
+    │   └─────────────────────────────────────────────┘      │
+    │                                                         │
+    │   Quick Examples:                                       │
+    │   • clawd "deploy my Solana program"                    │
+    │   • clawd git commit-and-push                           │
+    │   • clawd "check my wallet balance"                    │
+    │   • clawd "find me trending tokens"                     │
+    │                                                         │
+    │   Type 'exit' or 'quit' to leave                       │
+    │                                                         │
+    └─────────────────────────────────────────────────────────┘
+`;
+
+export const LOBSTER_TRAILING = `
+    ════════════════════════════════════════════════════════════
+    
+    🦞 Clawd Code CLI
+    
+    The lobster that never forgets a command! 🦞
+    
+    ════════════════════════════════════════════════════════════
 `;
 
 /**
@@ -66,4 +107,11 @@ export function showWelcome(): void {
  */
 export function showSmallLobster(): void {
     console.log(LOBSTER_SMALL);
+}
+
+/**
+ * Display trailing lobster art
+ */
+export function showTrailingLobster(): void {
+    console.log(LOBSTER_TRAILING);
 }
