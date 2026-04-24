@@ -39,10 +39,10 @@ import { fail } from './cli/ui.js'
 import { readGlobalConfig } from './config.js'
 
 const program = new Command()
-  .name('nanohub')
+  .name('openclawd')
   .description(
-    `${styleTitle(`SolanaOS Hub CLI ${getCliBuildLabel()}`)}\n${styleEnvBlock(
-      'install, update, search, and publish solana-claude agent skills for SolanaOS.',
+    `${styleTitle(`OpenClawd CLI ${getCliBuildLabel()}`)}\n${styleEnvBlock(
+      'install, update, search, and publish agent skills for OpenClawd.',
     )}`,
   )
   .version(getCliVersion(), '-V, --cli-version', 'Show CLI version')

@@ -1,13 +1,11 @@
 {
-  "name": "@nanosolana/nanohub",
-  "version": "0.7.0",
-  "description": "SolanaOS Hub CLI — install, update, search, and publish solana-claude agent skills for the SolanaOS ecosystem.",
+  "name": "@openclawd/cli",
+  "version": "0.8.0",
+  "description": "OpenClawd CLI — install, update, search, and publish agent skills for the OpenClawd ecosystem.",
   "license": "MIT",
   "type": "module",
   "bin": {
-    "nanohub": "bin/clawdhub.js",
-    "nanosolana-skill": "bin/clawdhub.js",
-    "clawhub": "bin/clawdhub.js",
+    "openclawd": "bin/clawdhub.js",
     "clawdhub": "bin/clawdhub.js"
   },
   "publishConfig": {

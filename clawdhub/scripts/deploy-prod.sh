@@ -39,12 +39,12 @@ if [[ -z "${SITE_URL:-}" ]]; then
 fi
 
 DEPLOY_TARGET="${DEPLOY_TARGET:-}"
-NITRO_PRESET="${NITRO_PRESET:-netlify}"
+NITRO_PRESET="${NITRO_PRESET:-vercel}"
 
 if [[ -z "$DEPLOY_TARGET" ]]; then
   case "$NITRO_PRESET" in
-    netlify) DEPLOY_TARGET="netlify" ;;
-    node-server) DEPLOY_TARGET="railway" ;;
+    vercel) DEPLOY_TARGET="vercel" ;;
+    node-server) DEPLOY_TARGET="fly" ;;
     *) DEPLOY_TARGET="build-only" ;;
   esac
 fi
@@ -75,30 +75,30 @@ echo "==> Verifying Convex contract"
 bun run verify:convex-contract -- --prod
 
 case "$DEPLOY_TARGET" in
-  netlify)
-    echo "==> Building Netlify artifact"
-    export NITRO_PRESET=netlify
-    bun run build:netlify
+  vercel)
+    echo "==> Building Vercel artifact"
+    export NITRO_PRESET=vercel
+    bun run build:vercel
 
-    if command -v netlify >/dev/null 2>&1 && [[ -n "${NETLIFY_AUTH_TOKEN:-}" && -n "${NETLIFY_SITE_ID:-}" ]]; then
-      echo "==> Deploying frontend to Netlify"
-      netlify deploy --dir=dist --prod --site="$NETLIFY_SITE_ID" --auth="$NETLIFY_AUTH_TOKEN"
+    if command -v vercel >/dev/null 2>&1 && [[ -n "${VERCEL_TOKEN:-}" ]]; then
+      echo "==> Deploying frontend to Vercel"
+      vercel deploy --prod --token="$VERCEL_TOKEN" ${VERCEL_SCOPE:+--scope="$VERCEL_SCOPE"} ${VERCEL_PROJECT_NAME:+--name="$VERCEL_PROJECT_NAME"}
     else
-      echo "==> Netlify artifact ready in dist/"
-      echo "Set NETLIFY_AUTH_TOKEN + NETLIFY_SITE_ID and install the Netlify CLI to upload automatically."
+      echo "==> Vercel artifact ready in .vercel/output/"
+      echo "Set VERCEL_TOKEN (and optionally VERCEL_SCOPE/VERCEL_PROJECT_NAME) and install the Vercel CLI to upload automatically."
     fi
     ;;
-  railway)
-    echo "==> Building Railway artifact"
+  fly)
+    echo "==> Building Fly artifact"
     export NITRO_PRESET=node-server
-    bun run build
+    bun run build:fly
 
-    if command -v railway >/dev/null 2>&1; then
-      echo "==> Deploying frontend to Railway"
-      railway up --detach
+    if command -v flyctl >/dev/null 2>&1 && [[ -n "${FLY_API_TOKEN:-}" ]]; then
+      echo "==> Deploying frontend to Fly"
+      flyctl deploy --remote-only ${FLY_APP:+--app "$FLY_APP"}
     else
-      echo "==> Railway artifact ready in .output/"
-      echo "Install the Railway CLI and link the service to upload automatically."
+      echo "==> Fly artifact ready in .output/"
+      echo "Install flyctl, set FLY_API_TOKEN (and FLY_APP), and run 'flyctl deploy' to upload."
     fi
     ;;
   build-only)

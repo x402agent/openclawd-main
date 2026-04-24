@@ -2,8 +2,8 @@ import { readGlobalConfig, writeGlobalConfig } from '../config.js'
 import { discoverRegistryFromSite } from '../discovery.js'
 import type { GlobalOpts } from './types.js'
 
-export const DEFAULT_SITE = 'https://seeker.solanaos.net'
-export const DEFAULT_REGISTRY = 'https://seeker.solanaos.net'
+export const DEFAULT_SITE = 'https://solanaclawd.com'
+export const DEFAULT_REGISTRY = 'https://solanaclawd.com'
 const LEGACY_REGISTRY_HOSTS = new Set([
   'auth.clawdhub.com',
   'auth.clawhub.com',
@@ -11,6 +11,7 @@ const LEGACY_REGISTRY_HOSTS = new Set([
   'clawhub.ai',
   'clawhub.com',
   'hub.solanaos.net',
+  'seeker.solanaos.net',
 ])
 
 export async function resolveRegistry(opts: GlobalOpts) {
