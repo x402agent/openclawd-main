@@ -33,8 +33,103 @@
    │                                                                │
    │          ◢█◣   red shell · sharp claws · on-chain   ◢█◣        │
    ╰────────────────────────────────────────────────────────────────╯
-                          🦀  forged on Solana  🦀
+                           🦀  forged on Solana  🦀
 ```
+
+## ⛓️ Solana Attestation Service (SAS) — NEW
+
+**Formally verified skills and agents on-chain via QEDGen Lean 4 proofs and Hermès vault protocol.**
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                    Solana Attestation Service                        │
+├─────────────────────────────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐                 │
+│  │  Credential │  │   Schema    │  │ Attestation │                 │
+│  │  (Issuer)   │  │  (Structure)│  │  (Proof)    │                 │
+│  └─────────────┘  └─────────────┘  └─────────────┘                 │
+│         │                │                │                          │
+│         └────────────────┴────────────────┘                          │
+│                           │                                          │
+│    ┌─────────────────────┼─────────────────────┐                  │
+│    │                     │                     │                    │
+│    ▼                     ▼                     ▼                    │
+│ ┌──────────┐      ┌──────────┐         ┌──────────┐               │
+│ │  Skill   │      │  Agent   │         │  Vault   │               │
+│ │Attestation│     │ Identity │         │Integration│              │
+│ └──────────┘      └──────────┘         └──────────┘               │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+### Program Addresses
+
+| Component | Address |
+| --- | --- |
+| **SAS Program ID** | `22zoJMtdu4tQc2PzL74ZUT7FrwgB1Udec8DdW4yw4BdG` |
+| Token Program (Token-2022) | `TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb` |
+| Event Authority PDA | `DzSpKpST2TSyrxokMXchFz3G2yn5WEGoxzpGEUDjCX4g` |
+
+### Verification Pipeline
+
+```
+Agent → QEDGen → Lean 4 Proof → proof_hash → SAS Attestation → On-chain
+```
+
+1. Agent requests formal verification via QEDGen
+2. QEDGen generates Lean 4 proofs for skill capabilities
+3. Proof compilation produces `proof_hash`
+4. Attestation created with `proof_hash` and stored on-chain
+5. Any party can verify attestation trustlessly
+
+### Key Components
+
+| Component | Path |
+| --- | --- |
+| Attestation Program | [`solana-attestation-service-master/`](./solana-attestation-service-master/) |
+| SAS Skill | [`skills/solana-attestation-skill/`](./skills/solana-attestation-skill/) |
+| Attested Agent Template | [`AGENTS/agent-template-attested.json`](./AGENTS/agent-template-attested.json) |
+| Attested Plugin Template | [`plugin.delivery/plugin-template-attested.json`](./plugin.delivery/plugin-template-attested.json) |
+| CLI Attestation Commands | [`CLI/clawd-cli.sh`](./CLI/clawd-cli.sh) (run `./clawd-cli.sh attest:status`) |
+
+### CLI Usage
+
+```bash
+# Create skill attestation
+./CLI/clawd-cli.sh attest:skill --skill qedgen-solana --verifier QEDGenVault
+
+# Verify attestation
+./CLI/clawd-cli.sh attest:verify --address 7xK9...mP2
+
+# Create agent identity with vault
+./CLI/clawd-cli.sh attest:agent --agent my-agent --wallet A123...xyz
+
+# Initialize vault
+./CLI/clawd-cli.sh attest:vault --agent my-agent --wallet A123...xyz
+```
+
+### Agent Wallet at Birth
+
+Agents are born with vault-protected wallets via **Hermès Vault Protocol**:
+- Wallet created at agent birth
+- Initialized in Hermès vault immediately
+- Multi-signature required for vault operations
+- Emergency recovery via vault protocol
+
+```typescript
+// Agent Identity Schema
+{
+  layout: [12, 32, 12, 32, 1],  // String, Pubkey, String, Pubkey, Bool
+  field_names: [
+    "agent_id",
+    "wallet_pubkey",
+    "skill_attestation",
+    "vault_address",
+    "is_vault_initialized"
+  ]
+}
+```
+
+---
 
 > 🦞 **$CLAWD CA:** `8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump`
 > 🌐 [solanaclawd.com](https://solanaclawd.com) · 🐙 [github.com/x402agent/solana-clawd](https://github.com/x402agent/solana-clawd) · 💬 [t.me/clawdtoken](https://t.me/clawdtoken) · 🐦 [@clawddevs](https://x.com/clawddevs) · 📚 [@0rdlibrary](https://x.com/0rdlibrary)
