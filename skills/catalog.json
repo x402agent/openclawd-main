@@ -1,5 +1,13 @@
 [
   {
+    "slug": "openrouter-oauth",
+    "name": "OpenRouter OAuth",
+    "description": "Sign in with OpenRouter via OAuth PKCE — bundled at solana-clawd agent birth, produces the OPENROUTER_API_KEY in ~/.openclawd/.env. Verified skill.",
+    "category": "Auth / Birth",
+    "verified": true,
+    "bundled_at_birth": true
+  },
+  {
     "slug": "swarm-orchestrator",
     "name": "Swarm Orchestrator",
     "description": "Orchestrate multi-bot trading swarms on Pump.fun with persona-driven agents",

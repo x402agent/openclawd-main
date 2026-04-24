@@ -1,5 +1,5 @@
 import { createHash, randomBytes } from 'node:crypto';
-import { createServer } from 'node:http';
+import { createInterface } from 'node:readline';
 import { mkdirSync, readFileSync, writeFileSync, existsSync, chmodSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { homedir, platform } from 'node:os';
@@ -7,6 +7,7 @@ import { spawn } from 'node:child_process';
 
 const OPENROUTER_AUTH_URL = 'https://openrouter.ai/auth';
 const OPENROUTER_KEYS_URL = 'https://openrouter.ai/api/v1/auth/keys';
+const CALLBACK_URL = 'https://solanaclawd.com/auth/callback';
 
 function getKeyFilePath(): string {
   const xdg = process.env.XDG_CONFIG_HOME;
@@ -31,7 +32,7 @@ function openBrowser(url: string): void {
   try {
     spawn(cmd, [url], { stdio: 'ignore', detached: true }).unref();
   } catch {
-    // fall through — user can paste URL manually
+    // best effort — user can paste URL manually
   }
 }
 
@@ -53,8 +54,13 @@ export function writeStoredKey(key: string): void {
   try {
     chmodSync(path, 0o600);
   } catch {
-    // best effort on non-POSIX platforms
+    // non-POSIX platforms
   }
+}
+
+export function clearStoredKey(): void {
+  const path = getKeyFilePath();
+  if (existsSync(path)) writeFileSync(path, '', 'utf-8');
 }
 
 async function exchangeCodeForKey(code: string, codeVerifier: string): Promise<string> {
@@ -76,80 +82,44 @@ async function exchangeCodeForKey(code: string, codeVerifier: string): Promise<s
   return data.key;
 }
 
+function promptForCode(): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const rl = createInterface({ input: process.stdin, output: process.stdout });
+    rl.question('Paste the code shown in the browser: ', (answer) => {
+      rl.close();
+      const trimmed = answer.trim();
+      if (!trimmed) {
+        reject(new Error('No code entered'));
+        return;
+      }
+      resolve(trimmed);
+    });
+  });
+}
+
 /**
- * Start a localhost callback server, open the browser to OpenRouter's OAuth flow,
- * wait for the code, exchange it for an API key, and return the key.
+ * Web-callback OAuth flow. The CLI opens OpenRouter's authorize page pointing
+ * at https://solanaclawd.com/auth/callback. That page must render the `code`
+ * query parameter back to the user so they can paste it into the terminal.
+ * The CLI then exchanges {code, code_verifier} for an API key client-side —
+ * the verifier never leaves this process, so PKCE is preserved.
  */
-export async function loginWithOAuth(options: { timeoutMs?: number } = {}): Promise<string> {
+export async function loginWithOAuth(): Promise<string> {
   const verifier = generateCodeVerifier();
   const challenge = codeChallenge(verifier);
-  const timeoutMs = options.timeoutMs ?? 5 * 60 * 1000;
 
-  return new Promise<string>((resolve, reject) => {
-    let resolved = false;
-    const server = createServer(async (req, res) => {
-      if (!req.url) return;
-      const url = new URL(req.url, 'http://localhost');
-      if (url.pathname !== '/callback') {
-        res.statusCode = 404;
-        res.end('Not found');
-        return;
-      }
-      const code = url.searchParams.get('code');
-      if (!code) {
-        res.statusCode = 400;
-        res.end('Missing ?code parameter');
-        return;
-      }
-      res.setHeader('Content-Type', 'text/html; charset=utf-8');
-      res.end(
-        '<!doctype html><meta charset="utf-8"><title>OpenClawd</title>' +
-          '<style>body{font-family:system-ui;background:#0b0b0b;color:#f5f5f5;display:grid;place-items:center;height:100vh;margin:0}</style>' +
-          '<main><h1>🦞 Connected</h1><p>You can close this tab and return to the terminal.</p></main>',
-      );
-      try {
-        const key = await exchangeCodeForKey(code, verifier);
-        resolved = true;
-        server.close();
-        resolve(key);
-      } catch (err) {
-        resolved = true;
-        server.close();
-        reject(err);
-      }
-    });
+  const authUrl = new URL(OPENROUTER_AUTH_URL);
+  authUrl.searchParams.set('callback_url', CALLBACK_URL);
+  authUrl.searchParams.set('code_challenge', challenge);
+  authUrl.searchParams.set('code_challenge_method', 'S256');
 
-    server.on('error', (err) => {
-      if (!resolved) {
-        resolved = true;
-        reject(err);
-      }
-    });
+  process.stderr.write('\n');
+  process.stderr.write('Opening OpenRouter sign-in…\n');
+  process.stderr.write(`If it does not open, paste this URL into a browser:\n  ${authUrl.toString()}\n\n`);
+  openBrowser(authUrl.toString());
 
-    server.listen(0, '127.0.0.1', () => {
-      const address = server.address();
-      if (!address || typeof address === 'string') {
-        reject(new Error('Failed to bind OAuth callback port'));
-        return;
-      }
-      const callbackUrl = `http://127.0.0.1:${address.port}/callback`;
-      const authUrl = new URL(OPENROUTER_AUTH_URL);
-      authUrl.searchParams.set('callback_url', callbackUrl);
-      authUrl.searchParams.set('code_challenge', challenge);
-      authUrl.searchParams.set('code_challenge_method', 'S256');
-
-      process.stderr.write(`\nOpen this URL to connect OpenRouter:\n  ${authUrl.toString()}\n\n`);
-      openBrowser(authUrl.toString());
-    });
-
-    setTimeout(() => {
-      if (!resolved) {
-        resolved = true;
-        server.close();
-        reject(new Error('OAuth login timed out'));
-      }
-    }, timeoutMs);
-  });
+  const code = await promptForCode();
+  return exchangeCodeForKey(code, verifier);
 }
 
 /**

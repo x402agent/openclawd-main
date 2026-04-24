@@ -1,6 +1,6 @@
 # Skills Index
 
-50 agent skills for `kraken-cli`, organized by category. Covers spot and futures paper trading, live trading, and portfolio management.
+51 agent skills for `kraken-cli`, organized by category. Covers spot and futures paper trading, live trading, portfolio management, and OpenClawd-verified auth bundled at agent birth.
 
 ## Core
 
@@ -15,6 +15,14 @@ Shared runtime contract, safety rules, autonomy progression, and MCP integration
 | [kraken-rate-limits](./kraken-rate-limits/SKILL.md) | API rate limit budgets across spot and futures tiers. |
 | [kraken-order-types](./kraken-order-types/SKILL.md) | Complete reference for all spot and futures order types and modifiers. |
 | [kraken-error-recovery](./kraken-error-recovery/SKILL.md) | Handle order failures, duplicate submissions, and network errors safely. |
+
+## OpenClawd Verified — Bundled at Birth
+
+Verified (SAS-attested) skills that every solana-clawd agent receives during the birth ceremony. Not Kraken-specific, but shipped with the hub because they populate credentials the Kraken and trading skills later consume.
+
+| Skill | Description |
+|-------|-------------|
+| [openrouter-oauth](./openrouter-oauth/SKILL.md) | "Sign in with OpenRouter" via OAuth PKCE — produces the `OPENROUTER_API_KEY` written into `~/.openclawd/.env` at agent birth. No client registration, no backend. |
 
 ## Market Data
 
