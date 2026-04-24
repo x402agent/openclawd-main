@@ -1,6 +1,6 @@
 export type SiteMode = 'skills' | 'souls'
 
-const DEFAULT_NANOHUB_SITE_URL = 'https://seeker.solanaos.net'
+const DEFAULT_NANOHUB_SITE_URL = 'https://solanaclawd.com'
 const DEFAULT_ONLYCRABS_SITE_URL = 'https://souls.solanaos.net'
 const DEFAULT_ONLYCRABS_HOST = 'souls.solanaos.net'
 const LEGACY_NANOHUB_HOSTS = new Set([

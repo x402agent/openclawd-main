@@ -19,8 +19,8 @@ const outputFile = path.join(generatedDir, 'openclawdCatalog.ts')
 const repoHttpBase = 'https://github.com/x402agent/openclawd'
 const repoBranch = 'main'
 const goImportBase = 'github.com/x402agent/openclawd'
-const publicSiteUrl = 'https://seeker.solanaos.net'
-const publicSolanaOsHubUrl = `${publicSiteUrl}/solanaos`
+const publicSiteUrl = 'https://solanaclawd.com'
+const publicSolanaOsHubUrl = `${publicSiteUrl}/hub`
 const publicTroubleshootingUrl = `${publicSiteUrl}/setup/troubleshooting`
 
 const packageBlueprints = {
