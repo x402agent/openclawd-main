@@ -63,6 +63,10 @@ OpenClawd is the public monorepo behind the 🦞 Clawd ecosystem — an orchestr
 - **AutoResearch and agentic research loops** are documented in [AUTO_RESEARCH_AGENTS.md](./docs/articles/AUTO_RESEARCH_AGENTS.md).
 - **ClawdVault security posture** is described in [SECURITY_VAULT_INTEGRATION.md](./SECURITY_VAULT_INTEGRATION.md) and the [`skills/clawd-vault/`](./skills/clawd-vault/) + [`MCP/vault-mcp/`](./MCP/vault-mcp/) implementation.
 - **Agent Bus / Claw3D integration** is covered in [agent-bus.md](./docs/articles/agent-bus.md).
+- **⛓️ Solana Attestation Service (SAS)** in [`skills/solana-attestation-skill/`](./skills/solana-attestation-skill/) enables formally verified, on-chain attestations for skills via QEDGen Lean 4 proofs.
+- **Formally Verified Skills** integrate QEDGen formal verification with on-chain attestation storage using the Solana Attestation Service program.
+- **Metaplex Agent Integration** with vault-protected wallets at birth - agents mint as MPL Core NFTs with attestation metadata.
+- **Hermès Vault Protocol** - agent wallets are initialized in vault custody at birth for secure multi-signature operations.
 
 ## Quick Start
 
