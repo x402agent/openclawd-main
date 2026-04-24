@@ -43,20 +43,20 @@ afterEach(() => {
 
 describe('site helpers', () => {
   it('returns default and env configured site URLs', () => {
-    expect(getNanoHubSiteUrl()).toBe('https://seeker.solanaos.net')
-    expect(getClawHubSiteUrl()).toBe('https://seeker.solanaos.net')
+    expect(getNanoHubSiteUrl()).toBe('https://solanaclawd.com')
+    expect(getClawHubSiteUrl()).toBe('https://solanaclawd.com')
     withMetaEnv({ VITE_SITE_URL: 'https://example.com' }, () => {
       expect(getNanoHubSiteUrl()).toBe('https://example.com')
       expect(getClawHubSiteUrl()).toBe('https://example.com')
     })
     withMetaEnv({ VITE_SITE_URL: 'https://clawhub.com' }, () => {
-      expect(getNanoHubSiteUrl()).toBe('https://seeker.solanaos.net')
+      expect(getNanoHubSiteUrl()).toBe('https://solanaclawd.com')
     })
     withMetaEnv({ VITE_SITE_URL: 'https://clawdhub.com' }, () => {
-      expect(getNanoHubSiteUrl()).toBe('https://seeker.solanaos.net')
+      expect(getNanoHubSiteUrl()).toBe('https://solanaclawd.com')
     })
     withMetaEnv({ VITE_SITE_URL: 'https://auth.clawdhub.com' }, () => {
-      expect(getNanoHubSiteUrl()).toBe('https://seeker.solanaos.net')
+      expect(getNanoHubSiteUrl()).toBe('https://solanaclawd.com')
     })
   })
 
@@ -91,11 +91,11 @@ describe('site helpers', () => {
       expect(getOnlyCrabsHost()).toBe('souls.example.com')
       expect(detectSiteMode('souls.example.com')).toBe('souls')
       expect(detectSiteMode('sub.souls.example.com')).toBe('souls')
-      expect(detectSiteMode('seeker.solanaos.net')).toBe('skills')
+      expect(detectSiteMode('solanaclawd.com')).toBe('skills')
 
       expect(detectSiteModeFromUrl('https://souls.example.com/x')).toBe('souls')
       expect(detectSiteModeFromUrl('souls.example.com')).toBe('souls')
-      expect(detectSiteModeFromUrl('https://seeker.solanaos.net')).toBe('skills')
+      expect(detectSiteModeFromUrl('https://solanaclawd.com')).toBe('skills')
     })
   })
 
@@ -148,7 +148,7 @@ describe('site helpers', () => {
     expect(getSiteDescription('skills')).toContain('SolanaOS Hub')
     expect(getSiteDescription('souls')).toContain('SolanaOS Souls')
 
-    expect(getSiteUrlForMode('skills')).toBe('https://seeker.solanaos.net')
+    expect(getSiteUrlForMode('skills')).toBe('https://solanaclawd.com')
     expect(getSiteUrlForMode('souls')).toBe('https://souls.solanaos.net')
   })
 })
