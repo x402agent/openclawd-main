@@ -1,11 +1,11 @@
 export const solanaOsCatalog = {
-  "generatedAt": "2026-04-08T21:27:00.287Z",
+  "generatedAt": "2026-04-24T01:04:19.483Z",
   "repositoryUrl": "https://github.com/x402agent/SolanaOS",
   "siteUrl": "https://seeker.solanaos.net",
   "skillsHubUrl": "https://seeker.solanaos.net/solanaos",
   "troubleshootingUrl": "https://seeker.solanaos.net/setup/troubleshooting",
-  "packageCount": 59,
-  "skillCount": 89,
+  "packageCount": 60,
+  "skillCount": 94,
   "bundledMobileSkills": [
     {
       "slug": "seeker-daemon-ops",
@@ -119,7 +119,7 @@ export const solanaOsCatalog = {
       "path": "pkg/acp",
       "importPath": "github.com/x402agent/SolanaOS/pkg/acp",
       "fileCount": 3,
-      "sizeBytes": 14004,
+      "sizeBytes": 14019,
       "category": "Utilities",
       "summary": "acp package from the SolanaOS computer runtime.",
       "keyFiles": [
@@ -134,7 +134,7 @@ export const solanaOsCatalog = {
       "path": "pkg/agent",
       "importPath": "github.com/x402agent/SolanaOS/pkg/agent",
       "fileCount": 17,
-      "sizeBytes": 117855,
+      "sizeBytes": 117867,
       "category": "Core Runtime",
       "summary": "Iterative agent loop, prompts, scratchpad, tool execution, and live OODA context.",
       "keyFiles": [
@@ -163,7 +163,7 @@ export const solanaOsCatalog = {
       "path": "pkg/agentregistry",
       "importPath": "github.com/x402agent/SolanaOS/pkg/agentregistry",
       "fileCount": 3,
-      "sizeBytes": 18466,
+      "sizeBytes": 18461,
       "category": "Core Runtime",
       "summary": "On-chain agent registration, sync state, and public Seeker hub metadata wiring.",
       "keyFiles": [
@@ -178,7 +178,7 @@ export const solanaOsCatalog = {
       "path": "pkg/aster",
       "importPath": "github.com/x402agent/SolanaOS/pkg/aster",
       "fileCount": 27,
-      "sizeBytes": 1163717,
+      "sizeBytes": 1163714,
       "category": "Markets",
       "summary": "Aster market integrations, docs, and perpetuals data access.",
       "keyFiles": [
@@ -209,7 +209,7 @@ export const solanaOsCatalog = {
       "path": "pkg/autoreply",
       "importPath": "github.com/x402agent/SolanaOS/pkg/autoreply",
       "fileCount": 2,
-      "sizeBytes": 6579,
+      "sizeBytes": 6583,
       "category": "Operator Interfaces",
       "summary": "Automatic reply behaviors for chat and operator command flows.",
       "keyFiles": [
@@ -223,7 +223,7 @@ export const solanaOsCatalog = {
       "path": "pkg/bitaxe",
       "importPath": "github.com/x402agent/SolanaOS/pkg/bitaxe",
       "fileCount": 3,
-      "sizeBytes": 27960,
+      "sizeBytes": 27968,
       "category": "Hardware",
       "summary": "Bitaxe miner APIs, monitoring, and miner control primitives.",
       "keyFiles": [
@@ -251,7 +251,7 @@ export const solanaOsCatalog = {
       "path": "pkg/browseruse",
       "importPath": "github.com/x402agent/SolanaOS/pkg/browseruse",
       "fileCount": 3,
-      "sizeBytes": 27665,
+      "sizeBytes": 27662,
       "category": "Operator Interfaces",
       "summary": "Browser-use integration for agentic browser tasks and automation.",
       "keyFiles": [
@@ -279,7 +279,7 @@ export const solanaOsCatalog = {
       "path": "pkg/channels",
       "importPath": "github.com/x402agent/SolanaOS/pkg/channels",
       "fileCount": 8,
-      "sizeBytes": 69905,
+      "sizeBytes": 69915,
       "category": "Operator Interfaces",
       "summary": "Telegram, Discord, and X channel formatting and delivery logic.",
       "keyFiles": [
@@ -292,7 +292,7 @@ export const solanaOsCatalog = {
       "path": "pkg/commands",
       "importPath": "github.com/x402agent/SolanaOS/pkg/commands",
       "fileCount": 1,
-      "sizeBytes": 5428,
+      "sizeBytes": 5436,
       "category": "Core Runtime",
       "summary": "Shared command definitions and runtime invocation helpers.",
       "keyFiles": [
@@ -305,7 +305,7 @@ export const solanaOsCatalog = {
       "path": "pkg/config",
       "importPath": "github.com/x402agent/SolanaOS/pkg/config",
       "fileCount": 5,
-      "sizeBytes": 79791,
+      "sizeBytes": 79764,
       "category": "Core Runtime",
       "summary": "Global SolanaOS configuration, defaults, public site URLs, and env overrides.",
       "keyFiles": [
@@ -335,7 +335,7 @@ export const solanaOsCatalog = {
       "path": "pkg/controlapi",
       "importPath": "github.com/x402agent/SolanaOS/pkg/controlapi",
       "fileCount": 18,
-      "sizeBytes": 46674,
+      "sizeBytes": 46666,
       "category": "Gateway & API",
       "summary": "Public control API services exposed to apps, dashboards, and remote clients.",
       "keyFiles": [
@@ -363,7 +363,7 @@ export const solanaOsCatalog = {
       "path": "pkg/daemon",
       "importPath": "github.com/x402agent/SolanaOS/pkg/daemon",
       "fileCount": 19,
-      "sizeBytes": 513031,
+      "sizeBytes": 513059,
       "category": "Gateway & API",
       "summary": "The operator daemon: chat, miner commands, gateway orchestration, and runtime control.",
       "keyFiles": [
@@ -420,7 +420,7 @@ export const solanaOsCatalog = {
       "path": "pkg/e2b",
       "importPath": "github.com/x402agent/SolanaOS/pkg/e2b",
       "fileCount": 3,
-      "sizeBytes": 32500,
+      "sizeBytes": 32504,
       "category": "Automation",
       "summary": "E2B integration for isolated execution environments.",
       "keyFiles": [
@@ -448,7 +448,7 @@ export const solanaOsCatalog = {
       "path": "pkg/gateway",
       "importPath": "github.com/x402agent/SolanaOS/pkg/gateway",
       "fileCount": 14,
-      "sizeBytes": 83659,
+      "sizeBytes": 83625,
       "category": "Gateway & API",
       "summary": "Gateway transport, discovery, auth, pairing, and remote connection handling.",
       "keyFiles": [
@@ -515,7 +515,7 @@ export const solanaOsCatalog = {
       "path": "pkg/honcho",
       "importPath": "github.com/x402agent/SolanaOS/pkg/honcho",
       "fileCount": 2,
-      "sizeBytes": 29622,
+      "sizeBytes": 29616,
       "category": "Intelligence",
       "summary": "Honcho memory and social cognition integration.",
       "keyFiles": [
@@ -559,7 +559,7 @@ export const solanaOsCatalog = {
       "path": "pkg/learning",
       "importPath": "github.com/x402agent/SolanaOS/pkg/learning",
       "fileCount": 6,
-      "sizeBytes": 35688,
+      "sizeBytes": 35692,
       "category": "Intelligence",
       "summary": "Learning loops, evidence capture, and skill improvement state.",
       "keyFiles": [
@@ -577,7 +577,7 @@ export const solanaOsCatalog = {
       "path": "pkg/llm",
       "importPath": "github.com/x402agent/SolanaOS/pkg/llm",
       "fileCount": 7,
-      "sizeBytes": 81927,
+      "sizeBytes": 81947,
       "category": "Intelligence",
       "summary": "LLM clients, orchestration helpers, and model-facing runtime utilities.",
       "keyFiles": [
@@ -596,7 +596,7 @@ export const solanaOsCatalog = {
       "path": "pkg/logger",
       "importPath": "github.com/x402agent/SolanaOS/pkg/logger",
       "fileCount": 1,
-      "sizeBytes": 2385,
+      "sizeBytes": 2373,
       "category": "Utilities",
       "summary": "Structured logging helpers for SolanaOS services.",
       "keyFiles": [
@@ -622,7 +622,7 @@ export const solanaOsCatalog = {
       "path": "pkg/media",
       "importPath": "github.com/x402agent/SolanaOS/pkg/media",
       "fileCount": 2,
-      "sizeBytes": 10360,
+      "sizeBytes": 10355,
       "category": "Operator Interfaces",
       "summary": "Media parsing and attachment handling helpers.",
       "keyFiles": [
@@ -636,7 +636,7 @@ export const solanaOsCatalog = {
       "path": "pkg/memory",
       "importPath": "github.com/x402agent/SolanaOS/pkg/memory",
       "fileCount": 7,
-      "sizeBytes": 58683,
+      "sizeBytes": 58676,
       "category": "Intelligence",
       "summary": "Persistent epistemic memory engine for known, learned, and inferred state.",
       "keyFiles": [
@@ -668,7 +668,7 @@ export const solanaOsCatalog = {
       "path": "pkg/nanobot",
       "importPath": "github.com/x402agent/SolanaOS/pkg/nanobot",
       "fileCount": 5,
-      "sizeBytes": 81327,
+      "sizeBytes": 81357,
       "category": "Operator Interfaces",
       "summary": "NanoBot server and web API layers for SolanaOS bot experiences.",
       "keyFiles": [
@@ -684,7 +684,7 @@ export const solanaOsCatalog = {
       "path": "pkg/node",
       "importPath": "github.com/x402agent/SolanaOS/pkg/node",
       "fileCount": 3,
-      "sizeBytes": 21687,
+      "sizeBytes": 21674,
       "category": "Gateway & API",
       "summary": "Node bridge logic used by the mobile/desktop runtime surfaces.",
       "keyFiles": [
@@ -699,7 +699,7 @@ export const solanaOsCatalog = {
       "path": "pkg/onchain",
       "importPath": "github.com/x402agent/SolanaOS/pkg/onchain",
       "fileCount": 6,
-      "sizeBytes": 53074,
+      "sizeBytes": 53335,
       "category": "Markets",
       "summary": "On-chain engine and registry-facing Solana execution primitives.",
       "keyFiles": [
@@ -713,11 +713,28 @@ export const solanaOsCatalog = {
       "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/onchain"
     },
     {
+      "name": "percolator",
+      "path": "pkg/percolator",
+      "importPath": "github.com/x402agent/SolanaOS/pkg/percolator",
+      "fileCount": 5,
+      "sizeBytes": 64384,
+      "category": "Utilities",
+      "summary": "percolator package from the SolanaOS computer runtime.",
+      "keyFiles": [
+        "cli.go",
+        "engine.go",
+        "main.go",
+        "ooda.go",
+        "vault.go"
+      ],
+      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/percolator"
+    },
+    {
       "name": "pinata",
       "path": "pkg/pinata",
       "importPath": "github.com/x402agent/SolanaOS/pkg/pinata",
       "fileCount": 5,
-      "sizeBytes": 49574,
+      "sizeBytes": 49591,
       "category": "Utilities",
       "summary": "pinata package from the SolanaOS computer runtime.",
       "keyFiles": [
@@ -734,7 +751,7 @@ export const solanaOsCatalog = {
       "path": "pkg/providers",
       "importPath": "github.com/x402agent/SolanaOS/pkg/providers",
       "fileCount": 1,
-      "sizeBytes": 6052,
+      "sizeBytes": 6053,
       "category": "Intelligence",
       "summary": "Model provider abstractions for OpenAI, OpenRouter, and other backends.",
       "keyFiles": [
@@ -761,7 +778,7 @@ export const solanaOsCatalog = {
       "path": "pkg/research",
       "importPath": "github.com/x402agent/SolanaOS/pkg/research",
       "fileCount": 2,
-      "sizeBytes": 18935,
+      "sizeBytes": 18947,
       "category": "Intelligence",
       "summary": "Research trajectory capture and research-ready data tooling.",
       "keyFiles": [
@@ -801,7 +818,7 @@ export const solanaOsCatalog = {
       "path": "pkg/seeker",
       "importPath": "github.com/x402agent/SolanaOS/pkg/seeker",
       "fileCount": 4,
-      "sizeBytes": 24999,
+      "sizeBytes": 25032,
       "category": "Seeker & Mobile",
       "summary": "Solana Seeker bridge, mobile integration, and Seeker-specific runtime hooks.",
       "keyFiles": [
@@ -831,7 +848,7 @@ export const solanaOsCatalog = {
       "path": "pkg/skills",
       "importPath": "github.com/x402agent/SolanaOS/pkg/skills",
       "fileCount": 2,
-      "sizeBytes": 24947,
+      "sizeBytes": 24924,
       "category": "Operator Interfaces",
       "summary": "Skill loading, indexing, and install-time package discovery.",
       "keyFiles": [
@@ -845,7 +862,7 @@ export const solanaOsCatalog = {
       "path": "pkg/solana",
       "importPath": "github.com/x402agent/SolanaOS/pkg/solana",
       "fileCount": 15,
-      "sizeBytes": 239640,
+      "sizeBytes": 251522,
       "category": "Markets",
       "summary": "Solana clients, wallets, trackers, Jupiter, RPC, and market data plumbing.",
       "keyFiles": [
@@ -898,7 +915,7 @@ export const solanaOsCatalog = {
       "path": "pkg/storage",
       "importPath": "github.com/x402agent/SolanaOS/pkg/storage",
       "fileCount": 1,
-      "sizeBytes": 4002,
+      "sizeBytes": 4006,
       "category": "Core Runtime",
       "summary": "Storage backends and persistence helpers.",
       "keyFiles": [
@@ -937,7 +954,7 @@ export const solanaOsCatalog = {
       "path": "pkg/tamagochi",
       "importPath": "github.com/x402agent/SolanaOS/pkg/tamagochi",
       "fileCount": 1,
-      "sizeBytes": 12485,
+      "sizeBytes": 12484,
       "category": "Hardware",
       "summary": "TamaGOchi miner companion logic and pet state.",
       "keyFiles": [
@@ -989,7 +1006,7 @@ export const solanaOsCatalog = {
       "path": "pkg/voice",
       "importPath": "github.com/x402agent/SolanaOS/pkg/voice",
       "fileCount": 3,
-      "sizeBytes": 12713,
+      "sizeBytes": 12717,
       "category": "Seeker & Mobile",
       "summary": "Voice capture, wake flow, realtime voice, and TTS integration.",
       "keyFiles": [
@@ -1004,7 +1021,7 @@ export const solanaOsCatalog = {
       "path": "pkg/x402",
       "importPath": "github.com/x402agent/SolanaOS/pkg/x402",
       "fileCount": 1,
-      "sizeBytes": 17148,
+      "sizeBytes": 17145,
       "category": "Markets",
       "summary": "x402 payment, monetization, and facilitator integration.",
       "keyFiles": [
@@ -1127,6 +1144,20 @@ export const solanaOsCatalog = {
       }
     },
     {
+      "name": "browser_base",
+      "path": "skills/browser_base",
+      "fileCount": 43,
+      "sizeBytes": 370572,
+      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/browser_base",
+      "downloadUrl": "https://seeker.solanaos.net/downloads/skills/browser_base.zip",
+      "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-browser_base",
+      "install": {
+        "npm": "npx @nanosolana/nanohub@latest install browser_base",
+        "pnpm": "pnpm dlx @nanosolana/nanohub@latest install browser_base",
+        "bun": "bunx @nanosolana/nanohub@latest install browser_base"
+      }
+    },
+    {
       "name": "camsnap",
       "path": "skills/camsnap",
       "fileCount": 1,
@@ -1155,17 +1186,31 @@ export const solanaOsCatalog = {
       }
     },
     {
-      "name": "clawhub",
-      "path": "skills/clawhub",
+      "name": "clawd-vault",
+      "path": "skills/clawd-vault",
+      "fileCount": 2,
+      "sizeBytes": 7178,
+      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/clawd-vault",
+      "downloadUrl": "https://seeker.solanaos.net/downloads/skills/clawd-vault.zip",
+      "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-clawd-vault",
+      "install": {
+        "npm": "npx @nanosolana/nanohub@latest install clawd-vault",
+        "pnpm": "pnpm dlx @nanosolana/nanohub@latest install clawd-vault",
+        "bun": "bunx @nanosolana/nanohub@latest install clawd-vault"
+      }
+    },
+    {
+      "name": "clawdhub",
+      "path": "skills/clawdhub",
       "fileCount": 1,
       "sizeBytes": 1613,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/clawhub",
-      "downloadUrl": "https://seeker.solanaos.net/downloads/skills/clawhub.zip",
-      "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-clawhub",
+      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/clawdhub",
+      "downloadUrl": "https://seeker.solanaos.net/downloads/skills/clawdhub.zip",
+      "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-clawdhub",
       "install": {
-        "npm": "npx @nanosolana/nanohub@latest install clawhub",
-        "pnpm": "pnpm dlx @nanosolana/nanohub@latest install clawhub",
-        "bun": "bunx @nanosolana/nanohub@latest install clawhub"
+        "npm": "npx @nanosolana/nanohub@latest install clawdhub",
+        "pnpm": "pnpm dlx @nanosolana/nanohub@latest install clawdhub",
+        "bun": "bunx @nanosolana/nanohub@latest install clawdhub"
       }
     },
     {
@@ -1505,17 +1550,17 @@ export const solanaOsCatalog = {
       }
     },
     {
-      "name": "openclaw-claude-code-skill-main",
-      "path": "skills/openclaw-claude-code-skill-main",
+      "name": "openclawd-codeskill",
+      "path": "skills/openclawd-codeskill",
       "fileCount": 21,
       "sizeBytes": 119776,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/openclaw-claude-code-skill-main",
-      "downloadUrl": "https://seeker.solanaos.net/downloads/skills/openclaw-claude-code-skill-main.zip",
-      "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-openclaw-claude-code-skill-main",
+      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/openclawd-codeskill",
+      "downloadUrl": "https://seeker.solanaos.net/downloads/skills/openclawd-codeskill.zip",
+      "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-openclawd-codeskill",
       "install": {
-        "npm": "npx @nanosolana/nanohub@latest install openclaw-claude-code-skill-main",
-        "pnpm": "pnpm dlx @nanosolana/nanohub@latest install openclaw-claude-code-skill-main",
-        "bun": "bunx @nanosolana/nanohub@latest install openclaw-claude-code-skill-main"
+        "npm": "npx @nanosolana/nanohub@latest install openclawd-codeskill",
+        "pnpm": "pnpm dlx @nanosolana/nanohub@latest install openclawd-codeskill",
+        "bun": "bunx @nanosolana/nanohub@latest install openclawd-codeskill"
       }
     },
     {
@@ -1586,6 +1631,20 @@ export const solanaOsCatalog = {
         "npm": "npx @nanosolana/nanohub@latest install peekaboo",
         "pnpm": "pnpm dlx @nanosolana/nanohub@latest install peekaboo",
         "bun": "bunx @nanosolana/nanohub@latest install peekaboo"
+      }
+    },
+    {
+      "name": "percolator",
+      "path": "skills/percolator",
+      "fileCount": 2,
+      "sizeBytes": 16678,
+      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/percolator",
+      "downloadUrl": "https://seeker.solanaos.net/downloads/skills/percolator.zip",
+      "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-percolator",
+      "install": {
+        "npm": "npx @nanosolana/nanohub@latest install percolator",
+        "pnpm": "pnpm dlx @nanosolana/nanohub@latest install percolator",
+        "bun": "bunx @nanosolana/nanohub@latest install percolator"
       }
     },
     {
@@ -1913,8 +1972,8 @@ export const solanaOsCatalog = {
     {
       "name": "pumpfun-token-scanner",
       "path": "skills/pumpfun-token-scanner",
-      "fileCount": 11,
-      "sizeBytes": 87223,
+      "fileCount": 10,
+      "sizeBytes": 83284,
       "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/pumpfun-token-scanner",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/pumpfun-token-scanner.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-pumpfun-token-scanner",
@@ -2020,6 +2079,20 @@ export const solanaOsCatalog = {
         "npm": "npx @nanosolana/nanohub@latest install slack",
         "pnpm": "pnpm dlx @nanosolana/nanohub@latest install slack",
         "bun": "bunx @nanosolana/nanohub@latest install slack"
+      }
+    },
+    {
+      "name": "solana-attestation-skill",
+      "path": "skills/solana-attestation-skill",
+      "fileCount": 1,
+      "sizeBytes": 12653,
+      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/solana-attestation-skill",
+      "downloadUrl": "https://seeker.solanaos.net/downloads/skills/solana-attestation-skill.zip",
+      "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-solana-attestation-skill",
+      "install": {
+        "npm": "npx @nanosolana/nanohub@latest install solana-attestation-skill",
+        "pnpm": "pnpm dlx @nanosolana/nanohub@latest install solana-attestation-skill",
+        "bun": "bunx @nanosolana/nanohub@latest install solana-attestation-skill"
       }
     },
     {
@@ -2244,6 +2317,20 @@ export const solanaOsCatalog = {
         "npm": "npx @nanosolana/nanohub@latest install weather",
         "pnpm": "pnpm dlx @nanosolana/nanohub@latest install weather",
         "bun": "bunx @nanosolana/nanohub@latest install weather"
+      }
+    },
+    {
+      "name": "wurk-integration",
+      "path": "skills/wurk-integration",
+      "fileCount": 1,
+      "sizeBytes": 6524,
+      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/wurk-integration",
+      "downloadUrl": "https://seeker.solanaos.net/downloads/skills/wurk-integration.zip",
+      "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-wurk-integration",
+      "install": {
+        "npm": "npx @nanosolana/nanohub@latest install wurk-integration",
+        "pnpm": "pnpm dlx @nanosolana/nanohub@latest install wurk-integration",
+        "bun": "bunx @nanosolana/nanohub@latest install wurk-integration"
       }
     },
     {

@@ -55,7 +55,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "/api/:path*"
+      "destination": "https://frugal-caribou-165.convex.cloud/api/:path*"
     },
     {
       "source": "/convex/:path*",

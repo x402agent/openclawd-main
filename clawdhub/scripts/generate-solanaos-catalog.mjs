@@ -7,8 +7,12 @@ const scriptFile = fileURLToPath(import.meta.url)
 const scriptDir = path.dirname(scriptFile)
 const hubRoot = path.resolve(scriptDir, '..')
 const repoRoot = path.resolve(hubRoot, '..')
-const pkgRoot = path.join(repoRoot, 'pkg')
-const skillsRoot = path.join(repoRoot, 'skills')
+const solanaClawdRoot = path.join(repoRoot, 'solana-clawd')
+const pkgRoot = await firstExistingDirectory([path.join(repoRoot, 'pkg'), path.join(solanaClawdRoot, 'pkg')], 'pkg')
+const skillsRoot = await firstExistingDirectory(
+  [path.join(repoRoot, 'skills'), path.join(solanaClawdRoot, 'skills')],
+  'skills',
+)
 const generatedDir = path.join(hubRoot, 'src', 'lib', 'generated')
 const publicDownloadsDir = path.join(hubRoot, 'public', 'downloads', 'skills')
 const outputFile = path.join(generatedDir, 'solanaosCatalog.ts')
@@ -150,6 +154,19 @@ const installCommands = {
   npm: (slug) => `npx @nanosolana/nanohub@latest install ${slug}`,
   pnpm: (slug) => `pnpm dlx @nanosolana/nanohub@latest install ${slug}`,
   bun: (slug) => `bunx @nanosolana/nanohub@latest install ${slug}`,
+}
+
+async function firstExistingDirectory(candidates, label) {
+  for (const candidate of candidates) {
+    try {
+      const stats = await fs.stat(candidate)
+      if (stats.isDirectory()) return candidate
+    } catch (error) {
+      if (error?.code !== 'ENOENT') throw error
+    }
+  }
+
+  throw new Error(`Could not find ${label} directory. Tried: ${candidates.join(', ')}`)
 }
 
 async function main() {
