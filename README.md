@@ -36,6 +36,63 @@
                            🦀  forged on Solana  🦀
 ```
 
+## 🆕 Latest (2026-04-24)
+
+**Rebrand: SolanaOS → OpenClawd.** The hub, catalog, CLI, and public domain have been unified under the OpenClawd brand. The public site moved to [`solanaclawd.com`](https://solanaclawd.com).
+
+### What shipped
+
+- **`@openclawdsolana/cli@0.8.0`** — hub CLI (install, update, search, publish agent skills). Renamed from `@nanosolana/nanohub`; bins `openclawd` + `clawdhub` (legacy alias). Source at [clawdhub/packages/clawdhub](clawdhub/packages/clawdhub). `DEFAULT_SITE`/`DEFAULT_REGISTRY` now point at `solanaclawd.com`.
+- **`@openclawdsolana/clawd-code-cli@0.1.0`** — Clawd Code CLI (ink + OpenAI SDK) packaged for publish. Source/dist at [clawd-code-cli](clawd-code-cli); ships `dist/`, README, LICENSE only.
+- **`@openclawdsolana/clawd-tui@0.1.0`** — OpenClawd agent TUI, greenfield scaffold built on [`@openrouter/agent`](https://npmjs.com/package/@openrouter/agent) with the full default tool belt (file_read/write/edit, glob, grep, list_dir, shell) plus OpenRouter server tools (web_search, datetime). CLAWD ASCII banner, `block` input style, `grouped` tool display, session persistence, slash commands (`/model`, `/new`, `/help`). Source at [clawd-tui](clawd-tui).
+
+### OpenRouter OAuth (PKCE)
+
+The TUI supports two OAuth flows so users never have to paste an API key:
+
+| Flag | Flow |
+| --- | --- |
+| *(default)* | Opens `https://solanaclawd.com/auth/callback` — user copies the code shown on that page and pastes into the terminal. Code verifier stays in the CLI, so PKCE is preserved. |
+| `--local-callback` | Loopback HTTP server on `127.0.0.1:<port>` — captures the code automatically. Useful when the web callback isn't reachable or not yet allowlisted by OpenRouter. |
+| `--login` | Force re-login (ignores cached key at `~/.config/openclawd/openrouter-key`). |
+
+Web-callback UI lives at [clawdhub/src/routes/auth/callback.tsx](clawdhub/src/routes/auth/callback.tsx) — if the URL has `?code=`, renders a copy-button card; otherwise falls back to the Phantom `ConnectBox`.
+
+### Catalog + routing
+
+- Catalog generator renamed: `bun run generate:openclawd-catalog` → emits [clawdhub/src/lib/generated/openclawdCatalog.ts](clawdhub/src/lib/generated/openclawdCatalog.ts) (60 packages, 94 skills).
+- Hub route moved: `/solanaos` → [`/hub`](clawdhub/src/routes/hub.tsx). New [`/gateway`](clawdhub/src/routes/gateway.tsx) top-level stub linking to `/setup/gateway`.
+- `publicSiteUrl`, `skillsHubUrl`, and all default URL helpers now resolve to `https://solanaclawd.com`. Covered by 9 passing tests in [clawdhub/src/lib/site.test.ts](clawdhub/src/lib/site.test.ts).
+
+### Deploy targets
+
+[clawdhub/scripts/deploy-prod.sh](clawdhub/scripts/deploy-prod.sh) dropped Netlify/Railway cases in favor of:
+
+| Target | Preset | Required env |
+| --- | --- | --- |
+| **Vercel** | `NITRO_PRESET=vercel` via `bun run build:vercel` | `VERCEL_TOKEN` (+ optional `VERCEL_SCOPE`, `VERCEL_PROJECT_NAME`) |
+| **Fly** | `NITRO_PRESET=node-server` via `bun run build:fly` | `FLY_API_TOKEN` (+ optional `FLY_APP`) |
+| **Convex** | `bun run convex:deploy` | `CONVEX_DEPLOY_KEY`, `CONVEX_SITE_URL`, `VITE_CONVEX_URL` |
+
+Convex prod deploy is live at [`https://frugal-caribou-165.convex.cloud`](https://frugal-caribou-165.convex.cloud) — contract verification passes (360 identifiers match).
+
+### Publishing
+
+Under the `@openclawdsolana` npm org:
+
+```bash
+# Hub CLI
+cd clawdhub/packages/clawdhub && npm publish --access=public
+
+# Clawd Code CLI (existing ink-based)
+cd clawd-code-cli && npm publish --access=public
+
+# OpenRouter-native TUI (new)
+cd clawd-tui && npm publish --access=public
+```
+
+---
+
 ## ⛓️ Solana Attestation Service (SAS) — NEW
 
 **Formally verified skills and agents on-chain via QEDGen Lean 4 proofs and Hermès vault protocol.**
