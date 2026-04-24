@@ -135,6 +135,11 @@ Install snippets and hosted installer copy live in [INSTALL_SNIPPETS.md](./INSTA
 | Workers | [`workers/`](./workers/) | Trading bot, install worker, wallet worker, email worker, more |
 | MCP servers | [`MCP/`](./MCP/) | Shared MCP server implementations including vault and WURK |
 | Browser extension | [`chrome-extension/`](./chrome-extension/) | pAGENT browser surface and control bridge |
+| Solana Attestation Service | [`solana-attestation-service-master/`](./solana-attestation-service-master/) | On-chain attestation program with Pinocchio framework |
+| Formal Verification | [`skills/solana-formal-verification/`](./skills/solana-formal-verification/) | QEDGen Lean 4 proof generation for Solana programs |
+| Attested Skills | [`skills/solana-attestation-skill/`](./skills/solana-attestation-skill/) | SAS integration for formally verified skill attestations |
+| Attested Agents | [`AGENTS/agent-template-attested.json`](./AGENTS/agent-template-attested.json) | Agent template with on-chain attestation and vault integration |
+| Attested Plugins | [`plugin.delivery/plugin-template-attested.json`](./plugin.delivery/plugin-template-attested.json) | Plugin template with SAS verification |
 
 ## Docs by Theme
 
