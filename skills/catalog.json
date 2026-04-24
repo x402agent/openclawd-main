@@ -568,5 +568,11 @@
     "name": "Model Usage",
     "description": "Track and optimize AI model usage",
     "category": "AI / Agents"
+  },
+  {
+    "slug": "solana-attestation-skill",
+    "name": "Solana Attestation Skill",
+    "description": "Formally verified skill attestation service on Solana - creates onchain attestations for skills verified via QEDGen, integrates with Metaplex agents, and manages agent wallet vault integration",
+    "category": "Solana / Blockchain"
   }
 ]

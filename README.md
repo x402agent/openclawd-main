@@ -152,6 +152,91 @@ Install snippets and hosted installer copy live in [INSTALL_SNIPPETS.md](./INSTA
 | Research and memory | [AUTO_RESEARCH_AGENTS.md](./docs/articles/AUTO_RESEARCH_AGENTS.md), [agent-bus.md](./docs/articles/agent-bus.md) |
 | Security | [SECURITY.md](./SECURITY.md), [SECURITY_VAULT_INTEGRATION.md](./SECURITY_VAULT_INTEGRATION.md), [permissions-sandboxing.md](./docs/articles/permissions-sandboxing.md) |
 
+## ⛓️ Solana Attestation Service
+
+The Solana Attestation Service (SAS) enables formally verified, on-chain attestations for skills and agents through integration with QEDGen Lean 4 proofs and the Hermès vault protocol.
+
+### Architecture Overview
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                    Solana Attestation Service                        │
+├─────────────────────────────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐                 │
+│  │  Credential │  │   Schema    │  │ Attestation │                 │
+│  │  (Issuer)   │  │  (Structure)│  │  (Proof)    │                 │
+│  └─────────────┘  └─────────────┘  └─────────────┘                 │
+│         │                │                │                          │
+│         └────────────────┴────────────────┘                          │
+│                           │                                          │
+│    ┌─────────────────────┼─────────────────────┐                  │
+│    │                     │                     │                    │
+│    ▼                     ▼                     ▼                    │
+│ ┌──────────┐      ┌──────────┐         ┌──────────┐               │
+│ │  Skill   │      │  Agent   │         │  Vault   │               │
+│ │Attestation│     │ Identity │         │Integration│              │
+│ └──────────┘      └──────────┘         └──────────┘               │
+└─────────────────────────────────────────────────────────────────────┘
+```
+
+### Program Addresses
+
+| Component | Address |
+| --- | --- |
+| SAS Program ID | `22zoJMtdu4tQc2PzL74ZUT7FrwgB1Udec8DdW4yw4BdG` |
+| Token Program (Token-2022) | `TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb` |
+| Event Authority PDA | `DzSpKpST2TSyrxokMXchFz3G2yn5WEGoxzpGEUDjCX4g` |
+
+### Skill Attestation Schema
+
+```typescript
+{
+  layout: [12, 32, 12, 8, 1],  // String, Pubkey, String, U64, Bool
+  field_names: [
+    "skill_id",
+    "verifier_pubkey",
+    "proof_hash",
+    "verification_timestamp",
+    "is_formally_verified"
+  ]
+}
+```
+
+### Agent Identity Schema
+
+```typescript
+{
+  layout: [12, 32, 12, 32, 1],  // String, Pubkey, String, Pubkey, Bool
+  field_names: [
+    "agent_id",
+    "wallet_pubkey",
+    "skill_attestation",
+    "vault_address",
+    "is_vault_initialized"
+  ]
+}
+```
+
+### Verification Pipeline
+
+1. Agent requests formal verification via QEDGen
+2. QEDGen generates Lean 4 proofs for skill capabilities
+3. Proof compilation produces `proof_hash`
+4. Agent creates attestation with `proof_hash`
+5. Attestation stored on-chain via SAS program
+6. Attestation verified by any party trustlessly
+
+### Key Components
+
+| Component | Path | Description |
+| --- | --- | --- |
+| Attestation Program | [`solana-attestation-service-master/`](./solana-attestation-service-master/) | Pinocchio-based Solana program for on-chain attestations |
+| Cereal Macro | [`solana-attestation-service-master/cereal_macro/`](./solana-attestation-service-master/cereal_macro/) | Procedural macro for schema serialization |
+| Core Types | [`solana-attestation-service-master/core/`](./solana-attestation-service-master/core/) | Shared types and schema definitions |
+| SAS Skill | [`skills/solana-attestation-skill/`](./skills/solana-attestation-skill/) | Agent skill for attestation operations |
+| Attested Agent Template | [`AGENTS/agent-template-attested.json`](./AGENTS/agent-template-attested.json) | Agent template with vault and attestation |
+| Attested Plugin Template | [`plugin.delivery/plugin-template-attested.json`](./plugin.delivery/plugin-template-attested.json) | Plugin template with SAS verification |
+
 ## Security Guardrails
 
 OpenClawd is meant to be cloned and published publicly, so the repo now ships with built-in guardrails:
