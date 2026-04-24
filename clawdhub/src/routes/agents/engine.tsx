@@ -262,7 +262,7 @@ function OverviewTab() {
             </p>
           </div>
           <div className="solanaos-home-cta-actions">
-            <Link to="/solanaos" className="btn btn-primary">SolanaOS Catalog</Link>
+            <Link to="/hub" className="btn btn-primary">SolanaOS Catalog</Link>
             <Link to="/tracker" className="btn">Live Charts</Link>
           </div>
         </div>

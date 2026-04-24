@@ -37,7 +37,7 @@ const BOOT_LINES = [
   { text: 'Initializing runtime...', delay: 400, color: '#888' },
   { text: '├─ Go binary loaded (9.2 MB)', delay: 800, color: '#00d4ff' },
   { text: '├─ Wallet: connected', delay: 1100, color: '#14f195' },
-  { text: '├─ Gateway API: seeker.solanaos.net', delay: 1400, color: '#00d4ff' },
+  { text: '├─ Gateway API: solanaclawd.com', delay: 1400, color: '#00d4ff' },
   { text: '├─ Telegram: @solanaos_bot', delay: 1700, color: '#00d4ff' },
   { text: '├─ OODA loop: armed', delay: 2000, color: '#ffc800' },
   { text: '├─ Honcho v3 memory: online', delay: 2300, color: '#14f195' },
@@ -262,7 +262,7 @@ function LaunchPage() {
       <footer className="launch-footer">
         <p>SolanaOS · Built by SolanaOS Labs · Powered by Go · Built on Solana</p>
         <p>
-          <a href="https://seeker.solanaos.net">Hub</a> · <a href="https://souls.solanaos.net">Souls</a> · <a href="https://github.com/x402agent/SolanaOS">GitHub</a>
+          <a href="https://solanaclawd.com">Hub</a> · <a href="https://souls.solanaos.net">Souls</a> · <a href="https://github.com/x402agent/SolanaOS">GitHub</a>
         </p>
       </footer>
     </div>

@@ -542,7 +542,7 @@ function StrategyBuilder() {
       '',
       '---',
       '',
-      '*Generated with the SolanaOS Strategy Builder — [seeker.solanaos.net/strategy](https://seeker.solanaos.net/strategy)*',
+      '*Generated with the SolanaOS Strategy Builder — [solanaclawd.com/strategy](https://solanaclawd.com/strategy)*',
     ]
 
     return lines.join('\n')

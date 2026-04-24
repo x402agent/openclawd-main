@@ -1,7 +1,7 @@
 export const PUBLIC_PATHS = new Set([
   '/',
   '/launch',
-  '/solanaos',
+  '/hub',
   '/mobile',
   '/auth/callback',
   '/pair',

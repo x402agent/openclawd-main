@@ -3,11 +3,11 @@ import { useMemo, useState } from 'react'
 import { InstallSwitcher } from '../components/InstallSwitcher'
 import { openClawdCatalog } from '../lib/generated/openclawdCatalog'
 
-export const Route = createFileRoute('/solanaos')({
-  component: SolanaOsRoute,
+export const Route = createFileRoute('/hub')({
+  component: HubRoute,
 })
 
-function SolanaOsRoute() {
+function HubRoute() {
   const [query, setQuery] = useState('')
   const normalizedQuery = query.trim().toLowerCase()
 

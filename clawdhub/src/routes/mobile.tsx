@@ -246,7 +246,7 @@ function SolanaOsMobileRoute() {
               <Link to="/pair" className="btn btn-primary">
                 Pair Seeker
               </Link>
-              <Link to="/solanaos" className="btn">
+              <Link to="/hub" className="btn">
                 Runtime Catalog
               </Link>
               <a
@@ -354,7 +354,7 @@ function SolanaOsMobileRoute() {
                   </Link>
                 )}
                 {activeTabId === 'dex' && (
-                  <Link to="/solanaos" className="btn btn-primary">
+                  <Link to="/hub" className="btn btn-primary">
                     Explore Runtime Catalog
                   </Link>
                 )}
