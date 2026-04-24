@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useMemo, useState } from 'react'
 import { InstallSwitcher } from '../components/InstallSwitcher'
-import { solanaOsCatalog } from '../lib/generated/solanaosCatalog'
+import { openClawdCatalog } from '../lib/generated/openclawdCatalog'
 
 export const Route = createFileRoute('/solanaos')({
   component: SolanaOsRoute,
@@ -12,15 +12,15 @@ function SolanaOsRoute() {
   const normalizedQuery = query.trim().toLowerCase()
 
   const filteredPackages = useMemo(() => {
-    if (!normalizedQuery) return solanaOsCatalog.packages
-    return solanaOsCatalog.packages.filter((entry) =>
+    if (!normalizedQuery) return openClawdCatalog.packages
+    return openClawdCatalog.packages.filter((entry) =>
       `${entry.name} ${entry.path} ${entry.category} ${entry.summary} ${entry.keyFiles.join(' ')}`.toLowerCase().includes(normalizedQuery),
     )
   }, [normalizedQuery])
 
   const filteredSkills = useMemo(() => {
-    if (!normalizedQuery) return solanaOsCatalog.skills
-    return solanaOsCatalog.skills.filter((entry) =>
+    if (!normalizedQuery) return openClawdCatalog.skills
+    return openClawdCatalog.skills.filter((entry) =>
       `${entry.name} ${entry.path}`.toLowerCase().includes(normalizedQuery),
     )
   }, [normalizedQuery])
@@ -30,7 +30,7 @@ function SolanaOsRoute() {
       <section className="hero">
         <div className="hero-inner">
           <div className="hero-copy fade-up" data-delay="1">
-            <span className="hero-badge">{solanaOsCatalog.siteUrl} / SolanaOS</span>
+            <span className="hero-badge">{openClawdCatalog.siteUrl} / SolanaOS</span>
             <h1 className="hero-title">The SolanaOS computer system catalog for Seeker, gateway, agent, and on-chain runtime modules.</h1>
             <p className="hero-subtitle">
               Browse the full Go runtime surface from <code>pkg/</code>, inspect the public
@@ -48,7 +48,7 @@ function SolanaOsRoute() {
               <a href="#solanaos-packages" className="btn">
                 Explore packages
               </a>
-              <a href={solanaOsCatalog.troubleshootingUrl} className="btn">
+              <a href={openClawdCatalog.troubleshootingUrl} className="btn">
                 Troubleshooting
               </a>
             </div>
@@ -57,15 +57,15 @@ function SolanaOsRoute() {
             <div className="catalog-stats-grid">
               <div className="card">
                 <div className="stat">Runtime packages</div>
-                <strong>{solanaOsCatalog.packageCount}</strong>
+                <strong>{openClawdCatalog.packageCount}</strong>
               </div>
               <div className="card">
                 <div className="stat">Downloadable skills</div>
-                <strong>{solanaOsCatalog.skillCount}</strong>
+                <strong>{openClawdCatalog.skillCount}</strong>
               </div>
               <div className="card">
                 <div className="stat">Backend surface</div>
-                <strong>{solanaOsCatalog.backend.entries.length} files</strong>
+                <strong>{openClawdCatalog.backend.entries.length} files</strong>
               </div>
             </div>
             <div className="hero-install" style={{ marginTop: 18 }}>
@@ -157,10 +157,10 @@ function SolanaOsRoute() {
         <h2 className="section-title">Bundled mobile starter pack</h2>
         <p className="section-subtitle">
           The Android Seeker build now ships with a curated SolanaOS mobile skill pack and always
-          points back to <code>{solanaOsCatalog.skillsHubUrl}</code> for the full catalog.
+          points back to <code>{openClawdCatalog.skillsHubUrl}</code> for the full catalog.
         </p>
         <div className="grid">
-          {solanaOsCatalog.bundledMobileSkills.map((entry) => (
+          {openClawdCatalog.bundledMobileSkills.map((entry) => (
             <article key={entry.slug} className="card solanaos-feature-card">
               <div className="catalog-card-top">
                 <h3 className="skill-card-title">{entry.title}</h3>
@@ -170,7 +170,7 @@ function SolanaOsRoute() {
                 {entry.summary}
               </p>
               <div className="catalog-link-row">
-                <a href={`${solanaOsCatalog.skillsHubUrl}#skill-${entry.slug}`}>Open on hub</a>
+                <a href={`${openClawdCatalog.skillsHubUrl}#skill-${entry.slug}`}>Open on hub</a>
               </div>
             </article>
           ))}
@@ -187,7 +187,7 @@ function SolanaOsRoute() {
           </p>
         </header>
         <div className="grid">
-          {solanaOsCatalog.featuredSections.map((section) => (
+          {openClawdCatalog.featuredSections.map((section) => (
             <article key={section.title} className="card solanaos-feature-card">
               <div className="catalog-card-top">
                 <h3 className="skill-card-title">{section.title}</h3>
@@ -396,10 +396,10 @@ function SolanaOsRoute() {
         </p>
         <div className="card" style={{ gap: 16 }}>
           <p className="stat" style={{ margin: 0 }}>
-            {solanaOsCatalog.backend.summary}
+            {openClawdCatalog.backend.summary}
           </p>
           <div className="grid">
-            {solanaOsCatalog.backend.entries.map((entry) => (
+            {openClawdCatalog.backend.entries.map((entry) => (
               <article key={entry.path} className="card catalog-card">
                 <h3 className="skill-card-title">{entry.name}</h3>
                 <code className="catalog-path">{entry.path}</code>

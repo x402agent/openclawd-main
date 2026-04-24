@@ -1,6 +1,6 @@
-export const solanaOsCatalog = {
-  "generatedAt": "2026-04-24T01:20:43.099Z",
-  "repositoryUrl": "https://github.com/x402agent/SolanaOS",
+export const openClawdCatalog = {
+  "generatedAt": "2026-04-24T01:27:16.237Z",
+  "repositoryUrl": "https://github.com/x402agent/openclawd",
   "siteUrl": "https://seeker.solanaos.net",
   "skillsHubUrl": "https://seeker.solanaos.net/solanaos",
   "troubleshootingUrl": "https://seeker.solanaos.net/setup/troubleshooting",
@@ -15,7 +15,7 @@ export const solanaOsCatalog = {
     {
       "slug": "session-logs",
       "title": "Session Logs",
-      "summary": "Recover historical context from local SolanaOS session logs."
+      "summary": "Recover historical context from local OpenClawd session logs."
     },
     {
       "slug": "solana-research-brief",
@@ -51,7 +51,7 @@ export const solanaOsCatalog = {
   "featuredSections": [
     {
       "title": "Core Runtime",
-      "summary": "The main SolanaOS computer loop: agent state, config, sessions, storage, and orchestration.",
+      "summary": "The main OpenClawd computer loop: agent state, config, sessions, storage, and orchestration.",
       "packages": [
         "agent",
         "agentregistry",
@@ -77,7 +77,7 @@ export const solanaOsCatalog = {
     },
     {
       "title": "Seeker & Mobile",
-      "summary": "Phone-native packages for Seeker bridge, mobile voice, and the on-device SolanaOS experience.",
+      "summary": "Phone-native packages for Seeker bridge, mobile voice, and the on-device OpenClawd experience.",
       "packages": [
         "seeker",
         "voice",
@@ -117,22 +117,22 @@ export const solanaOsCatalog = {
     {
       "name": "acp",
       "path": "pkg/acp",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/acp",
+      "importPath": "github.com/x402agent/openclawd/pkg/acp",
       "fileCount": 3,
       "sizeBytes": 14019,
       "category": "Utilities",
-      "summary": "acp package from the SolanaOS computer runtime.",
+      "summary": "acp package from the OpenClawd computer runtime.",
       "keyFiles": [
         "compressor.go",
         "redact.go",
         "server.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/acp"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/acp"
     },
     {
       "name": "agent",
       "path": "pkg/agent",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/agent",
+      "importPath": "github.com/x402agent/openclawd/pkg/agent",
       "fileCount": 17,
       "sizeBytes": 117867,
       "category": "Core Runtime",
@@ -156,12 +156,12 @@ export const solanaOsCatalog = {
         "title_generator.go",
         "toolexec.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/agent"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/agent"
     },
     {
       "name": "agentregistry",
       "path": "pkg/agentregistry",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/agentregistry",
+      "importPath": "github.com/x402agent/openclawd/pkg/agentregistry",
       "fileCount": 3,
       "sizeBytes": 18461,
       "category": "Core Runtime",
@@ -171,12 +171,12 @@ export const solanaOsCatalog = {
         "service.go",
         "state.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/agentregistry"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/agentregistry"
     },
     {
       "name": "aster",
       "path": "pkg/aster",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/aster",
+      "importPath": "github.com/x402agent/openclawd/pkg/aster",
       "fileCount": 27,
       "sizeBytes": 1163714,
       "category": "Markets",
@@ -189,12 +189,12 @@ export const solanaOsCatalog = {
         "trader.go",
         "types.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/aster"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/aster"
     },
     {
       "name": "auth",
       "path": "pkg/auth",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/auth",
+      "importPath": "github.com/x402agent/openclawd/pkg/auth",
       "fileCount": 1,
       "sizeBytes": 1926,
       "category": "Operator Interfaces",
@@ -202,12 +202,12 @@ export const solanaOsCatalog = {
       "keyFiles": [
         "auth.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/auth"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/auth"
     },
     {
       "name": "autoreply",
       "path": "pkg/autoreply",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/autoreply",
+      "importPath": "github.com/x402agent/openclawd/pkg/autoreply",
       "fileCount": 2,
       "sizeBytes": 6583,
       "category": "Operator Interfaces",
@@ -216,12 +216,12 @@ export const solanaOsCatalog = {
         "autoreply_test.go",
         "autoreply.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/autoreply"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/autoreply"
     },
     {
       "name": "bitaxe",
       "path": "pkg/bitaxe",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/bitaxe",
+      "importPath": "github.com/x402agent/openclawd/pkg/bitaxe",
       "fileCount": 3,
       "sizeBytes": 27968,
       "category": "Hardware",
@@ -231,25 +231,25 @@ export const solanaOsCatalog = {
         "client.go",
         "pet.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/bitaxe"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/bitaxe"
     },
     {
       "name": "blockchain",
       "path": "pkg/blockchain",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/blockchain",
+      "importPath": "github.com/x402agent/openclawd/pkg/blockchain",
       "fileCount": 1,
       "sizeBytes": 27913,
       "category": "Utilities",
-      "summary": "blockchain package from the SolanaOS computer runtime.",
+      "summary": "blockchain package from the OpenClawd computer runtime.",
       "keyFiles": [
         "queries.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/blockchain"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/blockchain"
     },
     {
       "name": "browseruse",
       "path": "pkg/browseruse",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/browseruse",
+      "importPath": "github.com/x402agent/openclawd/pkg/browseruse",
       "fileCount": 3,
       "sizeBytes": 27662,
       "category": "Operator Interfaces",
@@ -259,12 +259,12 @@ export const solanaOsCatalog = {
         "browseruse.go",
         "providers.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/browseruse"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/browseruse"
     },
     {
       "name": "bus",
       "path": "pkg/bus",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/bus",
+      "importPath": "github.com/x402agent/openclawd/pkg/bus",
       "fileCount": 1,
       "sizeBytes": 4541,
       "category": "Core Runtime",
@@ -272,12 +272,12 @@ export const solanaOsCatalog = {
       "keyFiles": [
         "bus.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/bus"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/bus"
     },
     {
       "name": "channels",
       "path": "pkg/channels",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/channels",
+      "importPath": "github.com/x402agent/openclawd/pkg/channels",
       "fileCount": 8,
       "sizeBytes": 69915,
       "category": "Operator Interfaces",
@@ -285,12 +285,12 @@ export const solanaOsCatalog = {
       "keyFiles": [
         "channels.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/channels"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/channels"
     },
     {
       "name": "commands",
       "path": "pkg/commands",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/commands",
+      "importPath": "github.com/x402agent/openclawd/pkg/commands",
       "fileCount": 1,
       "sizeBytes": 5436,
       "category": "Core Runtime",
@@ -298,16 +298,16 @@ export const solanaOsCatalog = {
       "keyFiles": [
         "commands.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/commands"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/commands"
     },
     {
       "name": "config",
       "path": "pkg/config",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/config",
+      "importPath": "github.com/x402agent/openclawd/pkg/config",
       "fileCount": 5,
       "sizeBytes": 79764,
       "category": "Core Runtime",
-      "summary": "Global SolanaOS configuration, defaults, public site URLs, and env overrides.",
+      "summary": "Global OpenClawd configuration, defaults, public site URLs, and env overrides.",
       "keyFiles": [
         "config_test.go",
         "config.go",
@@ -315,12 +315,12 @@ export const solanaOsCatalog = {
         "site.go",
         "version.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/config"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/config"
     },
     {
       "name": "constants",
       "path": "pkg/constants",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/constants",
+      "importPath": "github.com/x402agent/openclawd/pkg/constants",
       "fileCount": 1,
       "sizeBytes": 1068,
       "category": "Core Runtime",
@@ -328,12 +328,12 @@ export const solanaOsCatalog = {
       "keyFiles": [
         "constants.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/constants"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/constants"
     },
     {
       "name": "controlapi",
       "path": "pkg/controlapi",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/controlapi",
+      "importPath": "github.com/x402agent/openclawd/pkg/controlapi",
       "fileCount": 18,
       "sizeBytes": 46666,
       "category": "Gateway & API",
@@ -342,12 +342,12 @@ export const solanaOsCatalog = {
         "router_test.go",
         "router.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/controlapi"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/controlapi"
     },
     {
       "name": "cron",
       "path": "pkg/cron",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/cron",
+      "importPath": "github.com/x402agent/openclawd/pkg/cron",
       "fileCount": 2,
       "sizeBytes": 2014,
       "category": "Automation",
@@ -356,12 +356,12 @@ export const solanaOsCatalog = {
         "cron.go",
         "schedule.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/cron"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/cron"
     },
     {
       "name": "daemon",
       "path": "pkg/daemon",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/daemon",
+      "importPath": "github.com/x402agent/openclawd/pkg/daemon",
       "fileCount": 19,
       "sizeBytes": 513059,
       "category": "Gateway & API",
@@ -387,12 +387,12 @@ export const solanaOsCatalog = {
         "twitter_gateway.go",
         "x_commands.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/daemon"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/daemon"
     },
     {
       "name": "delegation",
       "path": "pkg/delegation",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/delegation",
+      "importPath": "github.com/x402agent/openclawd/pkg/delegation",
       "fileCount": 1,
       "sizeBytes": 7029,
       "category": "Automation",
@@ -400,12 +400,12 @@ export const solanaOsCatalog = {
       "keyFiles": [
         "delegation.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/delegation"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/delegation"
     },
     {
       "name": "devices",
       "path": "pkg/devices",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/devices",
+      "importPath": "github.com/x402agent/openclawd/pkg/devices",
       "fileCount": 1,
       "sizeBytes": 3226,
       "category": "Hardware",
@@ -413,12 +413,12 @@ export const solanaOsCatalog = {
       "keyFiles": [
         "devices.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/devices"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/devices"
     },
     {
       "name": "e2b",
       "path": "pkg/e2b",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/e2b",
+      "importPath": "github.com/x402agent/openclawd/pkg/e2b",
       "fileCount": 3,
       "sizeBytes": 32504,
       "category": "Automation",
@@ -428,12 +428,12 @@ export const solanaOsCatalog = {
         "client.go",
         "desktop.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/e2b"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/e2b"
     },
     {
       "name": "fileutil",
       "path": "pkg/fileutil",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/fileutil",
+      "importPath": "github.com/x402agent/openclawd/pkg/fileutil",
       "fileCount": 1,
       "sizeBytes": 1657,
       "category": "Utilities",
@@ -441,12 +441,12 @@ export const solanaOsCatalog = {
       "keyFiles": [
         "fileutil.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/fileutil"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/fileutil"
     },
     {
       "name": "gateway",
       "path": "pkg/gateway",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/gateway",
+      "importPath": "github.com/x402agent/openclawd/pkg/gateway",
       "fileCount": 14,
       "sizeBytes": 83625,
       "category": "Gateway & API",
@@ -467,12 +467,12 @@ export const solanaOsCatalog = {
         "tailscale.go",
         "ws.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/gateway"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/gateway"
     },
     {
       "name": "hardware",
       "path": "pkg/hardware",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/hardware",
+      "importPath": "github.com/x402agent/openclawd/pkg/hardware",
       "fileCount": 2,
       "sizeBytes": 35648,
       "category": "Hardware",
@@ -481,12 +481,12 @@ export const solanaOsCatalog = {
         "adapter.go",
         "modulino.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/hardware"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/hardware"
     },
     {
       "name": "health",
       "path": "pkg/health",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/health",
+      "importPath": "github.com/x402agent/openclawd/pkg/health",
       "fileCount": 2,
       "sizeBytes": 3328,
       "category": "Gateway & API",
@@ -495,12 +495,12 @@ export const solanaOsCatalog = {
         "health.go",
         "summary.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/health"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/health"
     },
     {
       "name": "heartbeat",
       "path": "pkg/heartbeat",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/heartbeat",
+      "importPath": "github.com/x402agent/openclawd/pkg/heartbeat",
       "fileCount": 1,
       "sizeBytes": 1738,
       "category": "Automation",
@@ -508,12 +508,12 @@ export const solanaOsCatalog = {
       "keyFiles": [
         "heartbeat.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/heartbeat"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/heartbeat"
     },
     {
       "name": "honcho",
       "path": "pkg/honcho",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/honcho",
+      "importPath": "github.com/x402agent/openclawd/pkg/honcho",
       "fileCount": 2,
       "sizeBytes": 29616,
       "category": "Intelligence",
@@ -522,12 +522,12 @@ export const solanaOsCatalog = {
         "client_test.go",
         "client.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/honcho"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/honcho"
     },
     {
       "name": "hyperliquid",
       "path": "pkg/hyperliquid",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/hyperliquid",
+      "importPath": "github.com/x402agent/openclawd/pkg/hyperliquid",
       "fileCount": 5,
       "sizeBytes": 36022,
       "category": "Markets",
@@ -539,12 +539,12 @@ export const solanaOsCatalog = {
         "types.go",
         "ws.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/hyperliquid"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/hyperliquid"
     },
     {
       "name": "identity",
       "path": "pkg/identity",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/identity",
+      "importPath": "github.com/x402agent/openclawd/pkg/identity",
       "fileCount": 1,
       "sizeBytes": 1478,
       "category": "Gateway & API",
@@ -552,12 +552,12 @@ export const solanaOsCatalog = {
       "keyFiles": [
         "identity.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/identity"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/identity"
     },
     {
       "name": "learning",
       "path": "pkg/learning",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/learning",
+      "importPath": "github.com/x402agent/openclawd/pkg/learning",
       "fileCount": 6,
       "sizeBytes": 35692,
       "category": "Intelligence",
@@ -570,12 +570,12 @@ export const solanaOsCatalog = {
         "user_model.go",
         "util.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/learning"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/learning"
     },
     {
       "name": "llm",
       "path": "pkg/llm",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/llm",
+      "importPath": "github.com/x402agent/openclawd/pkg/llm",
       "fileCount": 7,
       "sizeBytes": 81947,
       "category": "Intelligence",
@@ -589,25 +589,25 @@ export const solanaOsCatalog = {
         "xai_test.go",
         "xai.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/llm"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/llm"
     },
     {
       "name": "logger",
       "path": "pkg/logger",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/logger",
+      "importPath": "github.com/x402agent/openclawd/pkg/logger",
       "fileCount": 1,
       "sizeBytes": 2373,
       "category": "Utilities",
-      "summary": "Structured logging helpers for SolanaOS services.",
+      "summary": "Structured logging helpers for OpenClawd services.",
       "keyFiles": [
         "logger.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/logger"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/logger"
     },
     {
       "name": "mcp",
       "path": "pkg/mcp",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/mcp",
+      "importPath": "github.com/x402agent/openclawd/pkg/mcp",
       "fileCount": 1,
       "sizeBytes": 2528,
       "category": "Operator Interfaces",
@@ -615,12 +615,12 @@ export const solanaOsCatalog = {
       "keyFiles": [
         "mcp.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/mcp"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/mcp"
     },
     {
       "name": "media",
       "path": "pkg/media",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/media",
+      "importPath": "github.com/x402agent/openclawd/pkg/media",
       "fileCount": 2,
       "sizeBytes": 10355,
       "category": "Operator Interfaces",
@@ -629,12 +629,12 @@ export const solanaOsCatalog = {
         "media.go",
         "pdf.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/media"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/media"
     },
     {
       "name": "memory",
       "path": "pkg/memory",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/memory",
+      "importPath": "github.com/x402agent/openclawd/pkg/memory",
       "fileCount": 7,
       "sizeBytes": 58676,
       "category": "Intelligence",
@@ -648,12 +648,12 @@ export const solanaOsCatalog = {
         "types.go",
         "vault.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/memory"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/memory"
     },
     {
       "name": "migrate",
       "path": "pkg/migrate",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/migrate",
+      "importPath": "github.com/x402agent/openclawd/pkg/migrate",
       "fileCount": 1,
       "sizeBytes": 2052,
       "category": "Utilities",
@@ -661,28 +661,28 @@ export const solanaOsCatalog = {
       "keyFiles": [
         "migrate.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/migrate"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/migrate"
     },
     {
       "name": "nanobot",
       "path": "pkg/nanobot",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/nanobot",
+      "importPath": "github.com/x402agent/openclawd/pkg/nanobot",
       "fileCount": 5,
       "sizeBytes": 81357,
       "category": "Operator Interfaces",
-      "summary": "NanoBot server and web API layers for SolanaOS bot experiences.",
+      "summary": "NanoBot server and web API layers for OpenClawd bot experiences.",
       "keyFiles": [
         "auth.go",
         "das_api.go",
         "server.go",
         "wallet_api.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/nanobot"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/nanobot"
     },
     {
       "name": "node",
       "path": "pkg/node",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/node",
+      "importPath": "github.com/x402agent/openclawd/pkg/node",
       "fileCount": 3,
       "sizeBytes": 21674,
       "category": "Gateway & API",
@@ -692,12 +692,12 @@ export const solanaOsCatalog = {
         "mdns.go",
         "state.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/node"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/node"
     },
     {
       "name": "onchain",
       "path": "pkg/onchain",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/onchain",
+      "importPath": "github.com/x402agent/openclawd/pkg/onchain",
       "fileCount": 6,
       "sizeBytes": 53335,
       "category": "Markets",
@@ -710,16 +710,16 @@ export const solanaOsCatalog = {
         "registry_mainnet.go",
         "registry.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/onchain"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/onchain"
     },
     {
       "name": "percolator",
       "path": "pkg/percolator",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/percolator",
+      "importPath": "github.com/x402agent/openclawd/pkg/percolator",
       "fileCount": 5,
       "sizeBytes": 64384,
       "category": "Utilities",
-      "summary": "percolator package from the SolanaOS computer runtime.",
+      "summary": "percolator package from the OpenClawd computer runtime.",
       "keyFiles": [
         "cli.go",
         "engine.go",
@@ -727,16 +727,16 @@ export const solanaOsCatalog = {
         "ooda.go",
         "vault.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/percolator"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/percolator"
     },
     {
       "name": "pinata",
       "path": "pkg/pinata",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/pinata",
+      "importPath": "github.com/x402agent/openclawd/pkg/pinata",
       "fileCount": 5,
       "sizeBytes": 49591,
       "category": "Utilities",
-      "summary": "pinata package from the SolanaOS computer runtime.",
+      "summary": "pinata package from the OpenClawd computer runtime.",
       "keyFiles": [
         "client.go",
         "deploy.go",
@@ -744,12 +744,12 @@ export const solanaOsCatalog = {
         "hub.go",
         "mesh.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/pinata"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/pinata"
     },
     {
       "name": "providers",
       "path": "pkg/providers",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/providers",
+      "importPath": "github.com/x402agent/openclawd/pkg/providers",
       "fileCount": 1,
       "sizeBytes": 6053,
       "category": "Intelligence",
@@ -757,12 +757,12 @@ export const solanaOsCatalog = {
       "keyFiles": [
         "providers.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/providers"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/providers"
     },
     {
       "name": "pumplaunch",
       "path": "pkg/pumplaunch",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/pumplaunch",
+      "importPath": "github.com/x402agent/openclawd/pkg/pumplaunch",
       "fileCount": 2,
       "sizeBytes": 6003,
       "category": "Markets",
@@ -771,12 +771,12 @@ export const solanaOsCatalog = {
         "service.go",
         "state.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/pumplaunch"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/pumplaunch"
     },
     {
       "name": "research",
       "path": "pkg/research",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/research",
+      "importPath": "github.com/x402agent/openclawd/pkg/research",
       "fileCount": 2,
       "sizeBytes": 18947,
       "category": "Intelligence",
@@ -785,12 +785,12 @@ export const solanaOsCatalog = {
         "research.go",
         "trajectories.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/research"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/research"
     },
     {
       "name": "routing",
       "path": "pkg/routing",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/routing",
+      "importPath": "github.com/x402agent/openclawd/pkg/routing",
       "fileCount": 1,
       "sizeBytes": 3493,
       "category": "Core Runtime",
@@ -798,12 +798,12 @@ export const solanaOsCatalog = {
       "keyFiles": [
         "routing.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/routing"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/routing"
     },
     {
       "name": "runtimeenv",
       "path": "pkg/runtimeenv",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/runtimeenv",
+      "importPath": "github.com/x402agent/openclawd/pkg/runtimeenv",
       "fileCount": 1,
       "sizeBytes": 4110,
       "category": "Core Runtime",
@@ -811,12 +811,12 @@ export const solanaOsCatalog = {
       "keyFiles": [
         "runtimeenv.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/runtimeenv"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/runtimeenv"
     },
     {
       "name": "seeker",
       "path": "pkg/seeker",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/seeker",
+      "importPath": "github.com/x402agent/openclawd/pkg/seeker",
       "fileCount": 4,
       "sizeBytes": 25032,
       "category": "Seeker & Mobile",
@@ -827,12 +827,12 @@ export const solanaOsCatalog = {
         "deploy.go",
         "ipfs.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/seeker"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/seeker"
     },
     {
       "name": "session",
       "path": "pkg/session",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/session",
+      "importPath": "github.com/x402agent/openclawd/pkg/session",
       "fileCount": 2,
       "sizeBytes": 3712,
       "category": "Core Runtime",
@@ -841,12 +841,12 @@ export const solanaOsCatalog = {
         "session.go",
         "types.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/session"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/session"
     },
     {
       "name": "skills",
       "path": "pkg/skills",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/skills",
+      "importPath": "github.com/x402agent/openclawd/pkg/skills",
       "fileCount": 2,
       "sizeBytes": 24924,
       "category": "Operator Interfaces",
@@ -855,12 +855,12 @@ export const solanaOsCatalog = {
         "manager.go",
         "skills.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/skills"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/skills"
     },
     {
       "name": "solana",
       "path": "pkg/solana",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/solana",
+      "importPath": "github.com/x402agent/openclawd/pkg/solana",
       "fileCount": 15,
       "sizeBytes": 251522,
       "category": "Markets",
@@ -882,12 +882,12 @@ export const solanaOsCatalog = {
         "tx.go",
         "wallet.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/solana"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/solana"
     },
     {
       "name": "state",
       "path": "pkg/state",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/state",
+      "importPath": "github.com/x402agent/openclawd/pkg/state",
       "fileCount": 1,
       "sizeBytes": 1562,
       "category": "Core Runtime",
@@ -895,25 +895,25 @@ export const solanaOsCatalog = {
       "keyFiles": [
         "state.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/state"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/state"
     },
     {
       "name": "steel",
       "path": "pkg/steel",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/steel",
+      "importPath": "github.com/x402agent/openclawd/pkg/steel",
       "fileCount": 1,
       "sizeBytes": 9422,
       "category": "Utilities",
-      "summary": "steel package from the SolanaOS computer runtime.",
+      "summary": "steel package from the OpenClawd computer runtime.",
       "keyFiles": [
         "client.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/steel"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/steel"
     },
     {
       "name": "storage",
       "path": "pkg/storage",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/storage",
+      "importPath": "github.com/x402agent/openclawd/pkg/storage",
       "fileCount": 1,
       "sizeBytes": 4006,
       "category": "Core Runtime",
@@ -921,12 +921,12 @@ export const solanaOsCatalog = {
       "keyFiles": [
         "supabase.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/storage"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/storage"
     },
     {
       "name": "strategy",
       "path": "pkg/strategy",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/strategy",
+      "importPath": "github.com/x402agent/openclawd/pkg/strategy",
       "fileCount": 1,
       "sizeBytes": 10922,
       "category": "Markets",
@@ -934,25 +934,25 @@ export const solanaOsCatalog = {
       "keyFiles": [
         "strategy.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/strategy"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/strategy"
     },
     {
       "name": "tailscale",
       "path": "pkg/tailscale",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/tailscale",
+      "importPath": "github.com/x402agent/openclawd/pkg/tailscale",
       "fileCount": 1,
       "sizeBytes": 4081,
       "category": "Utilities",
-      "summary": "tailscale package from the SolanaOS computer runtime.",
+      "summary": "tailscale package from the OpenClawd computer runtime.",
       "keyFiles": [
         "mesh.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/tailscale"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/tailscale"
     },
     {
       "name": "tamagochi",
       "path": "pkg/tamagochi",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/tamagochi",
+      "importPath": "github.com/x402agent/openclawd/pkg/tamagochi",
       "fileCount": 1,
       "sizeBytes": 12484,
       "category": "Hardware",
@@ -960,12 +960,12 @@ export const solanaOsCatalog = {
       "keyFiles": [
         "tamagochi.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/tamagochi"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/tamagochi"
     },
     {
       "name": "tools",
       "path": "pkg/tools",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/tools",
+      "importPath": "github.com/x402agent/openclawd/pkg/tools",
       "fileCount": 1,
       "sizeBytes": 6691,
       "category": "Intelligence",
@@ -973,25 +973,25 @@ export const solanaOsCatalog = {
       "keyFiles": [
         "tools.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/tools"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/tools"
     },
     {
       "name": "trading",
       "path": "pkg/trading",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/trading",
+      "importPath": "github.com/x402agent/openclawd/pkg/trading",
       "fileCount": 1,
       "sizeBytes": 17050,
       "category": "Utilities",
-      "summary": "trading package from the SolanaOS computer runtime.",
+      "summary": "trading package from the OpenClawd computer runtime.",
       "keyFiles": [
         "engine.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/trading"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/trading"
     },
     {
       "name": "utils",
       "path": "pkg/utils",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/utils",
+      "importPath": "github.com/x402agent/openclawd/pkg/utils",
       "fileCount": 1,
       "sizeBytes": 2392,
       "category": "Utilities",
@@ -999,12 +999,12 @@ export const solanaOsCatalog = {
       "keyFiles": [
         "utils.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/utils"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/utils"
     },
     {
       "name": "voice",
       "path": "pkg/voice",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/voice",
+      "importPath": "github.com/x402agent/openclawd/pkg/voice",
       "fileCount": 3,
       "sizeBytes": 12717,
       "category": "Seeker & Mobile",
@@ -1014,12 +1014,12 @@ export const solanaOsCatalog = {
         "twilio.go",
         "voice.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/voice"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/voice"
     },
     {
       "name": "x402",
       "path": "pkg/x402",
-      "importPath": "github.com/x402agent/SolanaOS/pkg/x402",
+      "importPath": "github.com/x402agent/openclawd/pkg/x402",
       "fileCount": 1,
       "sizeBytes": 17145,
       "category": "Markets",
@@ -1027,7 +1027,7 @@ export const solanaOsCatalog = {
       "keyFiles": [
         "x402.go"
       ],
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/pkg/x402"
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/pkg/x402"
     }
   ],
   "skills": [
@@ -1036,7 +1036,7 @@ export const solanaOsCatalog = {
       "path": "skills/1password",
       "fileCount": 3,
       "sizeBytes": 4340,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/1password",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/1password",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/1password.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-1password",
       "install": {
@@ -1050,7 +1050,7 @@ export const solanaOsCatalog = {
       "path": "skills/apple-notes",
       "fileCount": 1,
       "sizeBytes": 2090,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/apple-notes",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/apple-notes",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/apple-notes.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-apple-notes",
       "install": {
@@ -1064,7 +1064,7 @@ export const solanaOsCatalog = {
       "path": "skills/apple-reminders",
       "fileCount": 1,
       "sizeBytes": 3127,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/apple-reminders",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/apple-reminders",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/apple-reminders.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-apple-reminders",
       "install": {
@@ -1078,7 +1078,7 @@ export const solanaOsCatalog = {
       "path": "skills/bear-notes",
       "fileCount": 1,
       "sizeBytes": 2662,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/bear-notes",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/bear-notes",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/bear-notes.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-bear-notes",
       "install": {
@@ -1092,7 +1092,7 @@ export const solanaOsCatalog = {
       "path": "skills/blogwatcher",
       "fileCount": 1,
       "sizeBytes": 1415,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/blogwatcher",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/blogwatcher",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/blogwatcher.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-blogwatcher",
       "install": {
@@ -1106,7 +1106,7 @@ export const solanaOsCatalog = {
       "path": "skills/blucli",
       "fileCount": 1,
       "sizeBytes": 1020,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/blucli",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/blucli",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/blucli.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-blucli",
       "install": {
@@ -1120,7 +1120,7 @@ export const solanaOsCatalog = {
       "path": "skills/bluebubbles",
       "fileCount": 1,
       "sizeBytes": 4880,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/bluebubbles",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/bluebubbles",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/bluebubbles.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-bluebubbles",
       "install": {
@@ -1134,7 +1134,7 @@ export const solanaOsCatalog = {
       "path": "skills/browse",
       "fileCount": 1,
       "sizeBytes": 9685,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/browse",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/browse",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/browse.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-browse",
       "install": {
@@ -1148,7 +1148,7 @@ export const solanaOsCatalog = {
       "path": "skills/browser_base",
       "fileCount": 43,
       "sizeBytes": 370572,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/browser_base",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/browser_base",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/browser_base.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-browser_base",
       "install": {
@@ -1162,7 +1162,7 @@ export const solanaOsCatalog = {
       "path": "skills/camsnap",
       "fileCount": 1,
       "sizeBytes": 1089,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/camsnap",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/camsnap",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/camsnap.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-camsnap",
       "install": {
@@ -1176,7 +1176,7 @@ export const solanaOsCatalog = {
       "path": "skills/canvas",
       "fileCount": 1,
       "sizeBytes": 5505,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/canvas",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/canvas",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/canvas.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-canvas",
       "install": {
@@ -1190,7 +1190,7 @@ export const solanaOsCatalog = {
       "path": "skills/clawd-vault",
       "fileCount": 2,
       "sizeBytes": 7178,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/clawd-vault",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/clawd-vault",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/clawd-vault.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-clawd-vault",
       "install": {
@@ -1204,7 +1204,7 @@ export const solanaOsCatalog = {
       "path": "skills/clawdhub",
       "fileCount": 1,
       "sizeBytes": 1613,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/clawdhub",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/clawdhub",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/clawdhub.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-clawdhub",
       "install": {
@@ -1218,7 +1218,7 @@ export const solanaOsCatalog = {
       "path": "skills/coding-agent",
       "fileCount": 1,
       "sizeBytes": 12928,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/coding-agent",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/coding-agent",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/coding-agent.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-coding-agent",
       "install": {
@@ -1232,7 +1232,7 @@ export const solanaOsCatalog = {
       "path": "skills/cua",
       "fileCount": 1,
       "sizeBytes": 14745,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/cua",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/cua",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/cua.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-cua",
       "install": {
@@ -1246,7 +1246,7 @@ export const solanaOsCatalog = {
       "path": "skills/discord",
       "fileCount": 1,
       "sizeBytes": 3446,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/discord",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/discord",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/discord.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-discord",
       "install": {
@@ -1260,7 +1260,7 @@ export const solanaOsCatalog = {
       "path": "skills/e2b",
       "fileCount": 1,
       "sizeBytes": 10660,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/e2b",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/e2b",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/e2b.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-e2b",
       "install": {
@@ -1274,7 +1274,7 @@ export const solanaOsCatalog = {
       "path": "skills/eightctl",
       "fileCount": 1,
       "sizeBytes": 1094,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/eightctl",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/eightctl",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/eightctl.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-eightctl",
       "install": {
@@ -1288,7 +1288,7 @@ export const solanaOsCatalog = {
       "path": "skills/gateway-node-ops",
       "fileCount": 1,
       "sizeBytes": 2171,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/gateway-node-ops",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/gateway-node-ops",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/gateway-node-ops.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-gateway-node-ops",
       "install": {
@@ -1302,7 +1302,7 @@ export const solanaOsCatalog = {
       "path": "skills/gemini",
       "fileCount": 1,
       "sizeBytes": 934,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/gemini",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/gemini",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/gemini.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-gemini",
       "install": {
@@ -1316,7 +1316,7 @@ export const solanaOsCatalog = {
       "path": "skills/gh-issues",
       "fileCount": 1,
       "sizeBytes": 34293,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/gh-issues",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/gh-issues",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/gh-issues.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-gh-issues",
       "install": {
@@ -1330,7 +1330,7 @@ export const solanaOsCatalog = {
       "path": "skills/gifgrep",
       "fileCount": 1,
       "sizeBytes": 2185,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/gifgrep",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/gifgrep",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/gifgrep.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-gifgrep",
       "install": {
@@ -1344,7 +1344,7 @@ export const solanaOsCatalog = {
       "path": "skills/github",
       "fileCount": 1,
       "sizeBytes": 4125,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/github",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/github",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/github.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-github",
       "install": {
@@ -1358,7 +1358,7 @@ export const solanaOsCatalog = {
       "path": "skills/gog",
       "fileCount": 1,
       "sizeBytes": 4572,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/gog",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/gog",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/gog.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-gog",
       "install": {
@@ -1372,7 +1372,7 @@ export const solanaOsCatalog = {
       "path": "skills/goplaces",
       "fileCount": 1,
       "sizeBytes": 1538,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/goplaces",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/goplaces",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/goplaces.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-goplaces",
       "install": {
@@ -1386,7 +1386,7 @@ export const solanaOsCatalog = {
       "path": "skills/healthcheck",
       "fileCount": 1,
       "sizeBytes": 10538,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/healthcheck",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/healthcheck",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/healthcheck.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-healthcheck",
       "install": {
@@ -1400,7 +1400,7 @@ export const solanaOsCatalog = {
       "path": "skills/himalaya",
       "fileCount": 3,
       "sizeBytes": 12499,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/himalaya",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/himalaya",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/himalaya.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-himalaya",
       "install": {
@@ -1414,7 +1414,7 @@ export const solanaOsCatalog = {
       "path": "skills/imsg",
       "fileCount": 1,
       "sizeBytes": 2977,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/imsg",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/imsg",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/imsg.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-imsg",
       "install": {
@@ -1428,7 +1428,7 @@ export const solanaOsCatalog = {
       "path": "skills/mcporter",
       "fileCount": 1,
       "sizeBytes": 1674,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/mcporter",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/mcporter",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/mcporter.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-mcporter",
       "install": {
@@ -1442,7 +1442,7 @@ export const solanaOsCatalog = {
       "path": "skills/model-usage",
       "fileCount": 4,
       "sizeBytes": 15447,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/model-usage",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/model-usage",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/model-usage.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-model-usage",
       "install": {
@@ -1456,7 +1456,7 @@ export const solanaOsCatalog = {
       "path": "skills/nano-banana-pro",
       "fileCount": 3,
       "sizeBytes": 10869,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/nano-banana-pro",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/nano-banana-pro",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/nano-banana-pro.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-nano-banana-pro",
       "install": {
@@ -1470,7 +1470,7 @@ export const solanaOsCatalog = {
       "path": "skills/nano-pdf",
       "fileCount": 1,
       "sizeBytes": 954,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/nano-pdf",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/nano-pdf",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/nano-pdf.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-nano-pdf",
       "install": {
@@ -1484,7 +1484,7 @@ export const solanaOsCatalog = {
       "path": "skills/notion",
       "fileCount": 1,
       "sizeBytes": 5381,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/notion",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/notion",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/notion.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-notion",
       "install": {
@@ -1498,7 +1498,7 @@ export const solanaOsCatalog = {
       "path": "skills/obsidian",
       "fileCount": 1,
       "sizeBytes": 2531,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/obsidian",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/obsidian",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/obsidian.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-obsidian",
       "install": {
@@ -1512,7 +1512,7 @@ export const solanaOsCatalog = {
       "path": "skills/openai-image-gen",
       "fileCount": 3,
       "sizeBytes": 19331,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/openai-image-gen",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/openai-image-gen",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/openai-image-gen.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-openai-image-gen",
       "install": {
@@ -1526,7 +1526,7 @@ export const solanaOsCatalog = {
       "path": "skills/openai-whisper",
       "fileCount": 1,
       "sizeBytes": 912,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/openai-whisper",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/openai-whisper",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/openai-whisper.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-openai-whisper",
       "install": {
@@ -1540,7 +1540,7 @@ export const solanaOsCatalog = {
       "path": "skills/openai-whisper-api",
       "fileCount": 2,
       "sizeBytes": 2635,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/openai-whisper-api",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/openai-whisper-api",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/openai-whisper-api.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-openai-whisper-api",
       "install": {
@@ -1554,7 +1554,7 @@ export const solanaOsCatalog = {
       "path": "skills/openclawd-codeskill",
       "fileCount": 21,
       "sizeBytes": 119776,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/openclawd-codeskill",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/openclawd-codeskill",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/openclawd-codeskill.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-openclawd-codeskill",
       "install": {
@@ -1568,7 +1568,7 @@ export const solanaOsCatalog = {
       "path": "skills/openhue",
       "fileCount": 1,
       "sizeBytes": 2460,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/openhue",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/openhue",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/openhue.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-openhue",
       "install": {
@@ -1582,7 +1582,7 @@ export const solanaOsCatalog = {
       "path": "skills/oracle",
       "fileCount": 1,
       "sizeBytes": 5073,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/oracle",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/oracle",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/oracle.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-oracle",
       "install": {
@@ -1596,7 +1596,7 @@ export const solanaOsCatalog = {
       "path": "skills/ordercli",
       "fileCount": 1,
       "sizeBytes": 2389,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/ordercli",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/ordercli",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/ordercli.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-ordercli",
       "install": {
@@ -1610,7 +1610,7 @@ export const solanaOsCatalog = {
       "path": "skills/pdf-to-markdown",
       "fileCount": 1,
       "sizeBytes": 6521,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/pdf-to-markdown",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/pdf-to-markdown",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/pdf-to-markdown.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-pdf-to-markdown",
       "install": {
@@ -1624,7 +1624,7 @@ export const solanaOsCatalog = {
       "path": "skills/peekaboo",
       "fileCount": 1,
       "sizeBytes": 5970,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/peekaboo",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/peekaboo",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/peekaboo.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-peekaboo",
       "install": {
@@ -1638,7 +1638,7 @@ export const solanaOsCatalog = {
       "path": "skills/percolator",
       "fileCount": 2,
       "sizeBytes": 16678,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/percolator",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/percolator",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/percolator.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-percolator",
       "install": {
@@ -1652,7 +1652,7 @@ export const solanaOsCatalog = {
       "path": "skills/pump-admin-ops",
       "fileCount": 1,
       "sizeBytes": 2743,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/pump-admin-ops",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/pump-admin-ops",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/pump-admin-ops.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-pump-admin-ops",
       "install": {
@@ -1666,7 +1666,7 @@ export const solanaOsCatalog = {
       "path": "skills/pump-ai-agents",
       "fileCount": 1,
       "sizeBytes": 3272,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/pump-ai-agents",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/pump-ai-agents",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/pump-ai-agents.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-pump-ai-agents",
       "install": {
@@ -1680,7 +1680,7 @@ export const solanaOsCatalog = {
       "path": "skills/pump-bonding-curve",
       "fileCount": 1,
       "sizeBytes": 4936,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/pump-bonding-curve",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/pump-bonding-curve",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/pump-bonding-curve.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-pump-bonding-curve",
       "install": {
@@ -1694,7 +1694,7 @@ export const solanaOsCatalog = {
       "path": "skills/pump-build-release",
       "fileCount": 1,
       "sizeBytes": 2504,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/pump-build-release",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/pump-build-release",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/pump-build-release.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-pump-build-release",
       "install": {
@@ -1708,7 +1708,7 @@ export const solanaOsCatalog = {
       "path": "skills/pump-claims-readonly",
       "fileCount": 1,
       "sizeBytes": 8245,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/pump-claims-readonly",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/pump-claims-readonly",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/pump-claims-readonly.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-pump-claims-readonly",
       "install": {
@@ -1722,7 +1722,7 @@ export const solanaOsCatalog = {
       "path": "skills/pump-fee-sharing",
       "fileCount": 1,
       "sizeBytes": 3561,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/pump-fee-sharing",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/pump-fee-sharing",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/pump-fee-sharing.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-pump-fee-sharing",
       "install": {
@@ -1736,7 +1736,7 @@ export const solanaOsCatalog = {
       "path": "skills/pump-fee-system",
       "fileCount": 1,
       "sizeBytes": 3253,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/pump-fee-system",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/pump-fee-system",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/pump-fee-system.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-pump-fee-system",
       "install": {
@@ -1750,7 +1750,7 @@ export const solanaOsCatalog = {
       "path": "skills/pump-mcp-server",
       "fileCount": 1,
       "sizeBytes": 3175,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/pump-mcp-server",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/pump-mcp-server",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/pump-mcp-server.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-pump-mcp-server",
       "install": {
@@ -1764,7 +1764,7 @@ export const solanaOsCatalog = {
       "path": "skills/pump-rust-vanity",
       "fileCount": 1,
       "sizeBytes": 4029,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/pump-rust-vanity",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/pump-rust-vanity",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/pump-rust-vanity.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-pump-rust-vanity",
       "install": {
@@ -1778,7 +1778,7 @@ export const solanaOsCatalog = {
       "path": "skills/pump-sdk-core",
       "fileCount": 1,
       "sizeBytes": 4131,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/pump-sdk-core",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/pump-sdk-core",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/pump-sdk-core.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-pump-sdk-core",
       "install": {
@@ -1792,7 +1792,7 @@ export const solanaOsCatalog = {
       "path": "skills/pump-security",
       "fileCount": 1,
       "sizeBytes": 3580,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/pump-security",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/pump-security",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/pump-security.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-pump-security",
       "install": {
@@ -1806,7 +1806,7 @@ export const solanaOsCatalog = {
       "path": "skills/pump-shell-scripts",
       "fileCount": 1,
       "sizeBytes": 2861,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/pump-shell-scripts",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/pump-shell-scripts",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/pump-shell-scripts.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-pump-shell-scripts",
       "install": {
@@ -1820,7 +1820,7 @@ export const solanaOsCatalog = {
       "path": "skills/pump-solana-architecture",
       "fileCount": 1,
       "sizeBytes": 4071,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/pump-solana-architecture",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/pump-solana-architecture",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/pump-solana-architecture.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-pump-solana-architecture",
       "install": {
@@ -1834,7 +1834,7 @@ export const solanaOsCatalog = {
       "path": "skills/pump-solana-dev",
       "fileCount": 1,
       "sizeBytes": 3666,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/pump-solana-dev",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/pump-solana-dev",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/pump-solana-dev.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-pump-solana-dev",
       "install": {
@@ -1848,7 +1848,7 @@ export const solanaOsCatalog = {
       "path": "skills/pump-solana-wallet",
       "fileCount": 1,
       "sizeBytes": 3047,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/pump-solana-wallet",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/pump-solana-wallet",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/pump-solana-wallet.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-pump-solana-wallet",
       "install": {
@@ -1862,7 +1862,7 @@ export const solanaOsCatalog = {
       "path": "skills/pump-testing",
       "fileCount": 1,
       "sizeBytes": 2839,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/pump-testing",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/pump-testing",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/pump-testing.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-pump-testing",
       "install": {
@@ -1876,7 +1876,7 @@ export const solanaOsCatalog = {
       "path": "skills/pump-token-incentives",
       "fileCount": 1,
       "sizeBytes": 3153,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/pump-token-incentives",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/pump-token-incentives",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/pump-token-incentives.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-pump-token-incentives",
       "install": {
@@ -1890,7 +1890,7 @@ export const solanaOsCatalog = {
       "path": "skills/pump-token-lifecycle",
       "fileCount": 1,
       "sizeBytes": 4758,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/pump-token-lifecycle",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/pump-token-lifecycle",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/pump-token-lifecycle.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-pump-token-lifecycle",
       "install": {
@@ -1904,7 +1904,7 @@ export const solanaOsCatalog = {
       "path": "skills/pump-ts-vanity",
       "fileCount": 1,
       "sizeBytes": 2969,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/pump-ts-vanity",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/pump-ts-vanity",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/pump-ts-vanity.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-pump-ts-vanity",
       "install": {
@@ -1918,7 +1918,7 @@ export const solanaOsCatalog = {
       "path": "skills/pump-website",
       "fileCount": 1,
       "sizeBytes": 3522,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/pump-website",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/pump-website",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/pump-website.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-pump-website",
       "install": {
@@ -1932,7 +1932,7 @@ export const solanaOsCatalog = {
       "path": "skills/pumpfun-analytics",
       "fileCount": 1,
       "sizeBytes": 3232,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/pumpfun-analytics",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/pumpfun-analytics",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/pumpfun-analytics.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-pumpfun-analytics",
       "install": {
@@ -1946,7 +1946,7 @@ export const solanaOsCatalog = {
       "path": "skills/pumpfun-fees",
       "fileCount": 1,
       "sizeBytes": 2466,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/pumpfun-fees",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/pumpfun-fees",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/pumpfun-fees.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-pumpfun-fees",
       "install": {
@@ -1960,7 +1960,7 @@ export const solanaOsCatalog = {
       "path": "skills/pumpfun-launcher",
       "fileCount": 1,
       "sizeBytes": 2537,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/pumpfun-launcher",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/pumpfun-launcher",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/pumpfun-launcher.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-pumpfun-launcher",
       "install": {
@@ -1974,7 +1974,7 @@ export const solanaOsCatalog = {
       "path": "skills/pumpfun-token-scanner",
       "fileCount": 10,
       "sizeBytes": 83284,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/pumpfun-token-scanner",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/pumpfun-token-scanner",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/pumpfun-token-scanner.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-pumpfun-token-scanner",
       "install": {
@@ -1988,7 +1988,7 @@ export const solanaOsCatalog = {
       "path": "skills/pumpfun-trading",
       "fileCount": 1,
       "sizeBytes": 2659,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/pumpfun-trading",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/pumpfun-trading",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/pumpfun-trading.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-pumpfun-trading",
       "install": {
@@ -2002,7 +2002,7 @@ export const solanaOsCatalog = {
       "path": "skills/sag",
       "fileCount": 1,
       "sizeBytes": 2297,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/sag",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/sag",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/sag.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-sag",
       "install": {
@@ -2016,7 +2016,7 @@ export const solanaOsCatalog = {
       "path": "skills/seeker-daemon-ops",
       "fileCount": 1,
       "sizeBytes": 866,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/seeker-daemon-ops",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/seeker-daemon-ops",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/seeker-daemon-ops.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-seeker-daemon-ops",
       "install": {
@@ -2030,7 +2030,7 @@ export const solanaOsCatalog = {
       "path": "skills/session-logs",
       "fileCount": 1,
       "sizeBytes": 3429,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/session-logs",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/session-logs",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/session-logs.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-session-logs",
       "install": {
@@ -2044,7 +2044,7 @@ export const solanaOsCatalog = {
       "path": "skills/sherpa-onnx-tts",
       "fileCount": 2,
       "sizeBytes": 8212,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/sherpa-onnx-tts",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/sherpa-onnx-tts",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/sherpa-onnx-tts.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-sherpa-onnx-tts",
       "install": {
@@ -2058,7 +2058,7 @@ export const solanaOsCatalog = {
       "path": "skills/skill-creator",
       "fileCount": 7,
       "sizeBytes": 61486,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/skill-creator",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/skill-creator",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/skill-creator.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-skill-creator",
       "install": {
@@ -2072,7 +2072,7 @@ export const solanaOsCatalog = {
       "path": "skills/slack",
       "fileCount": 1,
       "sizeBytes": 2501,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/slack",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/slack",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/slack.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-slack",
       "install": {
@@ -2086,7 +2086,7 @@ export const solanaOsCatalog = {
       "path": "skills/solana-attestation-skill",
       "fileCount": 1,
       "sizeBytes": 12653,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/solana-attestation-skill",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/solana-attestation-skill",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/solana-attestation-skill.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-solana-attestation-skill",
       "install": {
@@ -2100,7 +2100,7 @@ export const solanaOsCatalog = {
       "path": "skills/solana-dev-skill-main",
       "fileCount": 14,
       "sizeBytes": 64146,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/solana-dev-skill-main",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/solana-dev-skill-main",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/solana-dev-skill-main.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-solana-dev-skill-main",
       "install": {
@@ -2114,7 +2114,7 @@ export const solanaOsCatalog = {
       "path": "skills/solana-formal-verification",
       "fileCount": 119,
       "sizeBytes": 8021275,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/solana-formal-verification",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/solana-formal-verification",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/solana-formal-verification.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-solana-formal-verification",
       "install": {
@@ -2128,7 +2128,7 @@ export const solanaOsCatalog = {
       "path": "skills/solana-research-brief",
       "fileCount": 1,
       "sizeBytes": 814,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/solana-research-brief",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/solana-research-brief",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/solana-research-brief.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-solana-research-brief",
       "install": {
@@ -2142,7 +2142,7 @@ export const solanaOsCatalog = {
       "path": "skills/solanaos",
       "fileCount": 1,
       "sizeBytes": 6231,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/solanaos",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/solanaos",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/solanaos.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-solanaos",
       "install": {
@@ -2156,7 +2156,7 @@ export const solanaOsCatalog = {
       "path": "skills/songsee",
       "fileCount": 1,
       "sizeBytes": 1314,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/songsee",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/songsee",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/songsee.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-songsee",
       "install": {
@@ -2170,7 +2170,7 @@ export const solanaOsCatalog = {
       "path": "skills/sonoscli",
       "fileCount": 1,
       "sizeBytes": 2455,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/sonoscli",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/sonoscli",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/sonoscli.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-sonoscli",
       "install": {
@@ -2184,7 +2184,7 @@ export const solanaOsCatalog = {
       "path": "skills/spotify-player",
       "fileCount": 1,
       "sizeBytes": 1686,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/spotify-player",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/spotify-player",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/spotify-player.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-spotify-player",
       "install": {
@@ -2198,7 +2198,7 @@ export const solanaOsCatalog = {
       "path": "skills/summarize",
       "fileCount": 1,
       "sizeBytes": 2232,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/summarize",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/summarize",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/summarize.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-summarize",
       "install": {
@@ -2212,7 +2212,7 @@ export const solanaOsCatalog = {
       "path": "skills/swarm-orchestrator",
       "fileCount": 1,
       "sizeBytes": 3629,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/swarm-orchestrator",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/swarm-orchestrator",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/swarm-orchestrator.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-swarm-orchestrator",
       "install": {
@@ -2226,7 +2226,7 @@ export const solanaOsCatalog = {
       "path": "skills/things-mac",
       "fileCount": 1,
       "sizeBytes": 3555,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/things-mac",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/things-mac",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/things-mac.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-things-mac",
       "install": {
@@ -2240,7 +2240,7 @@ export const solanaOsCatalog = {
       "path": "skills/tmux",
       "fileCount": 3,
       "sizeBytes": 8599,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/tmux",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/tmux",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/tmux.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-tmux",
       "install": {
@@ -2254,7 +2254,7 @@ export const solanaOsCatalog = {
       "path": "skills/trello",
       "fileCount": 1,
       "sizeBytes": 2687,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/trello",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/trello",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/trello.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-trello",
       "install": {
@@ -2268,7 +2268,7 @@ export const solanaOsCatalog = {
       "path": "skills/video-frames",
       "fileCount": 2,
       "sizeBytes": 2308,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/video-frames",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/video-frames",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/video-frames.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-video-frames",
       "install": {
@@ -2282,7 +2282,7 @@ export const solanaOsCatalog = {
       "path": "skills/voice-call",
       "fileCount": 1,
       "sizeBytes": 1159,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/voice-call",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/voice-call",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/voice-call.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-voice-call",
       "install": {
@@ -2296,7 +2296,7 @@ export const solanaOsCatalog = {
       "path": "skills/wacli",
       "fileCount": 1,
       "sizeBytes": 2385,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/wacli",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/wacli",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/wacli.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-wacli",
       "install": {
@@ -2310,7 +2310,7 @@ export const solanaOsCatalog = {
       "path": "skills/weather",
       "fileCount": 1,
       "sizeBytes": 2287,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/weather",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/weather",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/weather.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-weather",
       "install": {
@@ -2324,7 +2324,7 @@ export const solanaOsCatalog = {
       "path": "skills/wurk-integration",
       "fileCount": 1,
       "sizeBytes": 6524,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/wurk-integration",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/wurk-integration",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/wurk-integration.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-wurk-integration",
       "install": {
@@ -2338,7 +2338,7 @@ export const solanaOsCatalog = {
       "path": "skills/xurl",
       "fileCount": 1,
       "sizeBytes": 14720,
-      "sourceUrl": "https://github.com/x402agent/SolanaOS/tree/main/skills/xurl",
+      "sourceUrl": "https://github.com/x402agent/openclawd/tree/main/skills/xurl",
       "downloadUrl": "https://seeker.solanaos.net/downloads/skills/xurl.zip",
       "catalogUrl": "https://seeker.solanaos.net/solanaos#skill-xurl",
       "install": {
@@ -2350,24 +2350,24 @@ export const solanaOsCatalog = {
   ],
   "backend": {
     "recommended": true,
-    "summary": "Use web/backend as the public SolanaOS control/API layer. Keep the backend .env private and expose only the built service, not raw secrets.",
+    "summary": "Use web/backend as the public OpenClawd control/API layer. Keep the backend .env private and expose only the built service, not raw secrets.",
     "entries": [
       {
         "name": "main.go",
         "path": "web/backend/main.go",
-        "sourceUrl": "https://github.com/x402agent/SolanaOS/blob/main/web/backend/main.go",
+        "sourceUrl": "https://github.com/x402agent/openclawd/blob/main/web/backend/main.go",
         "role": "HTTP server and dashboard bootstrap"
       },
       {
         "name": "gateway_access.go",
         "path": "web/backend/gateway_access.go",
-        "sourceUrl": "https://github.com/x402agent/SolanaOS/blob/main/web/backend/gateway_access.go",
+        "sourceUrl": "https://github.com/x402agent/openclawd/blob/main/web/backend/gateway_access.go",
         "role": "Gateway auth and access wiring"
       },
       {
         "name": "Dockerfile",
         "path": "web/backend/Dockerfile",
-        "sourceUrl": "https://github.com/x402agent/SolanaOS/blob/main/web/backend/Dockerfile",
+        "sourceUrl": "https://github.com/x402agent/openclawd/blob/main/web/backend/Dockerfile",
         "role": "Container entrypoint for deploys"
       }
     ]

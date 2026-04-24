@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { AddressType, usePhantom } from '@phantom/react-sdk'
 import { CheckCircle, Hexagon, Loader2, Package, Rocket, Shield, XCircle } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { solanaOsCatalog } from '../../lib/generated/solanaosCatalog'
+import { openClawdCatalog } from '../../lib/generated/openclawdCatalog'
 import { PublicKey, VersionedTransaction } from '@solana/web3.js'
 import { createUmi } from '@metaplex-foundation/umi-bundle-defaults'
 import {
@@ -28,7 +28,7 @@ export const Route = createFileRoute('/setup/mint-skills')({
 // Types
 // ---------------------------------------------------------------------------
 
-type SkillEntry = (typeof solanaOsCatalog.skills)[number]
+type SkillEntry = (typeof openClawdCatalog.skills)[number]
 
 type MintStatus = 'idle' | 'uploading' | 'minting' | 'registering' | 'done' | 'error'
 
@@ -210,7 +210,7 @@ function MintSkillsPage() {
       const collectionSigner = generateSigner(umi)
       await createCollection(umi, {
         collection: collectionSigner,
-        name: 'SolanaOS Skills',
+        name: 'OpenClawd Skills',
         uri: `${METADATA_BASE}/collection`,
       }).sendAndConfirm(umi)
 
@@ -264,7 +264,7 @@ function MintSkillsPage() {
         const result = await createAsset(umi, {
           asset: assetSigner,
           collection,
-          name: `SolanaOS: ${name}`,
+          name: `OpenClawd: ${name}`,
           uri: `${METADATA_BASE}/${encodeURIComponent(name)}`,
         }).sendAndConfirm(umi)
 
@@ -332,7 +332,7 @@ function MintSkillsPage() {
     setBatchMinting(true)
     batchAbortRef.current = false
 
-    for (const skill of solanaOsCatalog.skills) {
+    for (const skill of openClawdCatalog.skills) {
       if (batchAbortRef.current) break
       const existing = mintStates[skill.name]
       if (existing?.status === 'done') continue
@@ -348,7 +348,7 @@ function MintSkillsPage() {
   }, [])
 
   // ------- Stats -------
-  const totalSkills = solanaOsCatalog.skills.length
+  const totalSkills = openClawdCatalog.skills.length
   const mintedCount = Object.values(mintStates).filter((s) => s.status === 'done').length
   const errorCount = Object.values(mintStates).filter((s) => s.status === 'error').length
 
@@ -362,7 +362,7 @@ function MintSkillsPage() {
           </span>
           <h1 className="section-title">Mint Skills as NFTs</h1>
           <p className="hero-subtitle">
-            Mint each SolanaOS skill as a Metaplex Core NFT on Solana mainnet
+            Mint each OpenClawd skill as a Metaplex Core NFT on Solana mainnet
             and register it in the 8004 Trustless Agent Registry.
             Your connected wallet pays for each Metaplex mint (~0.003 SOL).
           </p>
@@ -524,7 +524,7 @@ function MintSkillsPage() {
               paddingRight: 8,
             }}
           >
-            {solanaOsCatalog.skills.map((skill) => {
+            {openClawdCatalog.skills.map((skill) => {
               const state = mintStates[skill.name]
               return (
                 <SkillRow

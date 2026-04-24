@@ -15,10 +15,10 @@ const skillsRoot = await firstExistingDirectory(
 )
 const generatedDir = path.join(hubRoot, 'src', 'lib', 'generated')
 const publicDownloadsDir = path.join(hubRoot, 'public', 'downloads', 'skills')
-const outputFile = path.join(generatedDir, 'solanaosCatalog.ts')
-const repoHttpBase = 'https://github.com/x402agent/SolanaOS'
+const outputFile = path.join(generatedDir, 'openclawdCatalog.ts')
+const repoHttpBase = 'https://github.com/x402agent/openclawd'
 const repoBranch = 'main'
-const goImportBase = 'github.com/x402agent/SolanaOS'
+const goImportBase = 'github.com/x402agent/openclawd'
 const publicSiteUrl = 'https://seeker.solanaos.net'
 const publicSolanaOsHubUrl = `${publicSiteUrl}/solanaos`
 const publicTroubleshootingUrl = `${publicSiteUrl}/setup/troubleshooting`
@@ -34,7 +34,7 @@ const packageBlueprints = {
   bus: { category: 'Core Runtime', summary: 'Internal event bus used across daemon, node, and operator flows.' },
   channels: { category: 'Operator Interfaces', summary: 'Telegram, Discord, and X channel formatting and delivery logic.' },
   commands: { category: 'Core Runtime', summary: 'Shared command definitions and runtime invocation helpers.' },
-  config: { category: 'Core Runtime', summary: 'Global SolanaOS configuration, defaults, public site URLs, and env overrides.' },
+  config: { category: 'Core Runtime', summary: 'Global OpenClawd configuration, defaults, public site URLs, and env overrides.' },
   constants: { category: 'Core Runtime', summary: 'Shared constants for runtime-wide behavior and naming.' },
   controlapi: { category: 'Gateway & API', summary: 'Public control API services exposed to apps, dashboards, and remote clients.' },
   cron: { category: 'Automation', summary: 'Scheduled job execution support for recurring runtime tasks.' },
@@ -52,12 +52,12 @@ const packageBlueprints = {
   identity: { category: 'Gateway & API', summary: 'Identity primitives for device, gateway, and agent ownership.' },
   learning: { category: 'Intelligence', summary: 'Learning loops, evidence capture, and skill improvement state.' },
   llm: { category: 'Intelligence', summary: 'LLM clients, orchestration helpers, and model-facing runtime utilities.' },
-  logger: { category: 'Utilities', summary: 'Structured logging helpers for SolanaOS services.' },
+  logger: { category: 'Utilities', summary: 'Structured logging helpers for OpenClawd services.' },
   mcp: { category: 'Operator Interfaces', summary: 'Model Context Protocol glue for exposing runtime tools.' },
   media: { category: 'Operator Interfaces', summary: 'Media parsing and attachment handling helpers.' },
   memory: { category: 'Intelligence', summary: 'Persistent epistemic memory engine for known, learned, and inferred state.' },
   migrate: { category: 'Utilities', summary: 'Migration helpers for runtime state and storage evolution.' },
-  nanobot: { category: 'Operator Interfaces', summary: 'NanoBot server and web API layers for SolanaOS bot experiences.' },
+  nanobot: { category: 'Operator Interfaces', summary: 'NanoBot server and web API layers for OpenClawd bot experiences.' },
   node: { category: 'Gateway & API', summary: 'Node bridge logic used by the mobile/desktop runtime surfaces.' },
   onchain: { category: 'Markets', summary: 'On-chain engine and registry-facing Solana execution primitives.' },
   providers: { category: 'Intelligence', summary: 'Model provider abstractions for OpenAI, OpenRouter, and other backends.' },
@@ -82,7 +82,7 @@ const packageBlueprints = {
 const featuredSections = [
   {
     title: 'Core Runtime',
-    summary: 'The main SolanaOS computer loop: agent state, config, sessions, storage, and orchestration.',
+    summary: 'The main OpenClawd computer loop: agent state, config, sessions, storage, and orchestration.',
     packages: ['agent', 'agentregistry', 'config', 'daemon', 'routing', 'runtimeenv', 'session', 'state', 'storage'],
   },
   {
@@ -92,7 +92,7 @@ const featuredSections = [
   },
   {
     title: 'Seeker & Mobile',
-    summary: 'Phone-native packages for Seeker bridge, mobile voice, and the on-device SolanaOS experience.',
+    summary: 'Phone-native packages for Seeker bridge, mobile voice, and the on-device OpenClawd experience.',
     packages: ['seeker', 'voice', 'channels', 'nanobot'],
   },
   {
@@ -116,7 +116,7 @@ const bundledMobileSkills = [
   {
     slug: 'session-logs',
     title: 'Session Logs',
-    summary: 'Recover historical context from local SolanaOS session logs.',
+    summary: 'Recover historical context from local OpenClawd session logs.',
   },
   {
     slug: 'solana-research-brief',
@@ -183,7 +183,7 @@ async function main() {
     const stats = await collectTreeStats(abs)
     const blueprint = packageBlueprints[name] ?? {
       category: 'Utilities',
-      summary: `${name} package from the SolanaOS computer runtime.`,
+      summary: `${name} package from the OpenClawd computer runtime.`,
     }
     const keyFiles = await listDirectFiles(abs)
     packages.push({
@@ -224,7 +224,7 @@ async function main() {
   const backend = {
     recommended: true,
     summary:
-      'Use web/backend as the public SolanaOS control/API layer. Keep the backend .env private and expose only the built service, not raw secrets.',
+      'Use web/backend as the public OpenClawd control/API layer. Keep the backend .env private and expose only the built service, not raw secrets.',
     entries: [
       {
         name: 'main.go',
@@ -247,7 +247,7 @@ async function main() {
     ],
   }
 
-  const output = `export const solanaOsCatalog = ${JSON.stringify(
+  const output = `export const openClawdCatalog = ${JSON.stringify(
     {
       generatedAt: new Date().toISOString(),
       repositoryUrl: repoHttpBase,
@@ -267,7 +267,7 @@ async function main() {
   )} as const\n`
 
   await fs.writeFile(outputFile, output, 'utf8')
-  console.log(`Generated SolanaOS catalog with ${packages.length} packages and ${skills.length} skills.`)
+  console.log(`Generated OpenClawd catalog with ${packages.length} packages and ${skills.length} skills.`)
 }
 
 async function listDirectories(root) {

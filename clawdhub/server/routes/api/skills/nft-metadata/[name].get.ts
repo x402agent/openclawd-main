@@ -1,16 +1,16 @@
 import { defineEventHandler, createError, setHeader } from 'h3'
-import { solanaOsCatalog } from '../../../../../src/lib/generated/solanaosCatalog'
+import { openClawdCatalog } from '../../../../../src/lib/generated/openclawdCatalog'
 
-type CatalogSkill = (typeof solanaOsCatalog.skills)[number]
+type CatalogSkill = (typeof openClawdCatalog.skills)[number]
 
 const COLLECTION_IMAGE = 'https://solanaos.net/og.png'
 const SITE_URL = 'https://solanaos.net'
 
 function buildSkillMetadata(skill: CatalogSkill) {
   return {
-    name: `SolanaOS: ${skill.name}`,
+    name: `OpenClawd: ${skill.name}`,
     symbol: 'SKILL',
-    description: `${skill.name} — an AI agent skill from the SolanaOS ecosystem. Install with: ${skill.install.bun}`,
+    description: `${skill.name} — an AI agent skill from the OpenClawd ecosystem. Install with: ${skill.install.bun}`,
     image: COLLECTION_IMAGE,
     external_url: skill.catalogUrl,
     attributes: [
@@ -35,7 +35,7 @@ export default defineEventHandler((event) => {
     throw createError({ statusCode: 400, message: 'Missing skill name' })
   }
 
-  const skill = solanaOsCatalog.skills.find(
+  const skill = openClawdCatalog.skills.find(
     (s) => s.name.toLowerCase() === name.toLowerCase(),
   )
   if (!skill) {

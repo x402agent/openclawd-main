@@ -1,5 +1,5 @@
 import { defineEventHandler, setHeader } from 'h3'
-import { solanaOsCatalog } from '../../../../../src/lib/generated/solanaosCatalog'
+import { openClawdCatalog } from '../../../../../src/lib/generated/openclawdCatalog'
 
 export default defineEventHandler((event) => {
   setHeader(event, 'Content-Type', 'application/json')
@@ -7,15 +7,15 @@ export default defineEventHandler((event) => {
   setHeader(event, 'Access-Control-Allow-Origin', '*')
 
   return {
-    name: 'SolanaOS Skills',
+    name: 'OpenClawd Skills',
     symbol: 'SKILLS',
-    description: `${solanaOsCatalog.skillCount} AI agent skills from the SolanaOS ecosystem. Each NFT represents an installable skill for SolanaOS-compatible agents.`,
+    description: `${openClawdCatalog.skillCount} AI agent skills from the OpenClawd ecosystem. Each NFT represents an installable skill for OpenClawd-compatible agents.`,
     image: 'https://solanaos.net/og.png',
-    external_url: solanaOsCatalog.skillsHubUrl,
+    external_url: openClawdCatalog.skillsHubUrl,
     attributes: [
-      { trait_type: 'Total Skills', value: String(solanaOsCatalog.skillCount) },
-      { trait_type: 'Total Packages', value: String(solanaOsCatalog.packageCount) },
-      { trait_type: 'Repository', value: solanaOsCatalog.repositoryUrl },
+      { trait_type: 'Total Skills', value: String(openClawdCatalog.skillCount) },
+      { trait_type: 'Total Packages', value: String(openClawdCatalog.packageCount) },
+      { trait_type: 'Repository', value: openClawdCatalog.repositoryUrl },
     ],
   }
 })
