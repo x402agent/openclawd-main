@@ -1,5 +1,5 @@
 {
-  "name": "@openclawd/cli",
+  "name": "@openclawdsolana/cli",
   "version": "0.8.0",
   "description": "OpenClawd CLI — install, update, search, and publish agent skills for the OpenClawd ecosystem.",
   "license": "MIT",
