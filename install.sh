@@ -312,6 +312,10 @@ HELIUS_API_KEY=
 HELIUS_RPC_URL=
 
 # ── Model router (clawdrouter) ──────────────────────
+# Leave OPENROUTER_API_KEY blank to let agents populate it at birth via the
+# verified openrouter-oauth skill (OAuth PKCE, no client registration, no
+# backend). See kraken-cli-main/skills/openrouter-oauth/SKILL.md — the skill
+# runs during the solana-clawd birth ceremony and patches this line in place.
 OPENROUTER_API_KEY=
 CLAWDROUTER_DEFAULT_REASONING=xai/grok-4.20-beta
 CLAWDROUTER_DEFAULT_LONGCTX=moonshot/kimi-k2.6
@@ -401,10 +405,11 @@ cat <<EOF
     ${CYAN}3.${CR} Launch node:    ${VIOLET}cd $TAILCLAWD_DIR && npm run dev${CR}
     ${CYAN}4.${CR} Expose it:      ${VIOLET}tailscale serve --bg --https=443 http://127.0.0.1:3110${CR}
     ${CYAN}5.${CR} Pair device:    ${VIOLET}solana-clawd pair <CODE>${CR}
-    ${CYAN}6.${CR} Mint agent:     ${VIOLET}solana-clawd mint${CR}
-    ${CYAN}7.${CR} Status:         ${VIOLET}solana-clawd status${CR}
-    ${CYAN}8.${CR} Try examples:   ${VIOLET}cd \$REPO_DIR && npx tsx examples/lobster-trader.ts${CR}
-    ${CYAN}9.${CR} Wallet demo:    ${VIOLET}cd \$REPO_DIR && npx tsx examples/clawd-wallet-demo.ts${CR}
+    ${CYAN}6.${CR} Sign in (OAuth):${VIOLET}open pairing URL → "Sign in with OpenRouter"${CR} ${DIM}(populates \$OPENROUTER_API_KEY)${CR}
+    ${CYAN}7.${CR} Mint agent:     ${VIOLET}solana-clawd mint${CR}
+    ${CYAN}8.${CR} Status:         ${VIOLET}solana-clawd status${CR}
+    ${CYAN}9.${CR} Try examples:   ${VIOLET}cd \$REPO_DIR && npx tsx examples/lobster-trader.ts${CR}
+    ${CYAN}10.${CR} Wallet demo:   ${VIOLET}cd \$REPO_DIR && npx tsx examples/clawd-wallet-demo.ts${CR}
 
 EOF
 

@@ -30,6 +30,15 @@
       "enabled": true,
       "priority": "required",
       "path": "skills/solana-formal-verification"
+    },
+    {
+      "name": "openrouter-oauth",
+      "enabled": true,
+      "priority": "bundled-at-birth",
+      "path": "skills/openrouter-oauth",
+      "verified": true,
+      "provides": ["OPENROUTER_API_KEY"],
+      "description": "OAuth PKCE sign-in with OpenRouter. Populates ~/.openclawd/.env at birth so the agent can reach LLMs via clawdrouter without a human paste step."
     }
   ],
   "capabilities": {
@@ -55,6 +64,13 @@
       "wallet_custody": true,
       "vault_initialization_at_birth": true,
       "multi_sig_required": true
+    },
+    "inference": {
+      "openrouter_oauth_at_birth": true,
+      "pkce_flow": true,
+      "populates_env_var": "OPENROUTER_API_KEY",
+      "no_client_registration": true,
+      "no_backend_required": true
     },
     "security": {
       "formal_verification": true,
