@@ -422,10 +422,11 @@ async function fetchJsonFormViaCurl(url: string, args: FormRequestArgs) {
   try {
     const formArgs: string[] = []
     for (const [key, value] of args.form.entries()) {
-      if (value instanceof Blob) {
-        const filename = typeof (value as File).name === 'string' ? (value as File).name : 'file'
+      const entry = value as unknown
+      if (entry instanceof Blob) {
+        const filename = typeof (entry as File).name === 'string' ? (entry as File).name : 'file'
         const filePath = join(tempDir, filename)
-        const bytes = new Uint8Array(await value.arrayBuffer())
+        const bytes = new Uint8Array(await entry.arrayBuffer())
         await writeFile(filePath, bytes)
         formArgs.push('-F', `${key}=@${filePath};filename=${filename}`)
       } else {
