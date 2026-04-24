@@ -162,6 +162,7 @@ OpenClawd is the public monorepo behind the 🦞 Clawd ecosystem — an orchestr
 - **Formally Verified Skills** integrate QEDGen formal verification with on-chain attestation storage using the Solana Attestation Service program.
 - **Metaplex Agent Integration** with vault-protected wallets at birth - agents mint as MPL Core NFTs with attestation metadata.
 - **Hermès Vault Protocol** - agent wallets are initialized in vault custody at birth for secure multi-signature operations.
+- **Sign in with OpenRouter at birth** via the verified [`openrouter-oauth`](./skills/openrouter-oauth/SKILL.md) skill — OAuth PKCE flow (no client registration, no backend, no secrets) populates `OPENROUTER_API_KEY` in `~/.openclawd/.env` during the solana-clawd birth ceremony so buddies reach LLMs through ClawdRouter without a paste step.
 
 ## Quick Start
 
@@ -235,6 +236,35 @@ Install snippets and hosted installer copy live in [INSTALL_SNIPPETS.md](./INSTA
 | Attested Skills | [`skills/solana-attestation-skill/`](./skills/solana-attestation-skill/) | SAS integration for formally verified skill attestations |
 | Attested Agents | [`AGENTS/agent-template-attested.json`](./AGENTS/agent-template-attested.json) | Agent template with on-chain attestation and vault integration |
 | Attested Plugins | [`plugin.delivery/plugin-template-attested.json`](./plugin.delivery/plugin-template-attested.json) | Plugin template with SAS verification |
+| Verified Skills Hub | [`kraken-cli-main/skills/`](./kraken-cli-main/skills/) | 51-skill hub including the SAS-verified `openrouter-oauth` bundled at agent birth |
+| OpenRouter OAuth Skill | [`skills/openrouter-oauth/`](./skills/openrouter-oauth/) · [`kraken-cli-main/skills/openrouter-oauth/`](./kraken-cli-main/skills/openrouter-oauth/) | PKCE sign-in that writes `OPENROUTER_API_KEY` into `~/.openclawd/.env` during birth |
+
+## Verified Skills — Bundled at Agent Birth
+
+Every solana-clawd agent receives a set of SAS-attested skills during the birth ceremony in addition to its wallet and vault initialization. These skills are declared in [`AGENTS/agent-template-attested.json`](./AGENTS/agent-template-attested.json) under `skills[]` with `priority: "bundled-at-birth"`, mirrored into [`kraken-cli-main/skills/`](./kraken-cli-main/skills/) (the verified hub) and [`skills/`](./skills/) (the main catalog), and surfaced through the bootstrap in [`install.sh`](./install.sh).
+
+| Skill | Provides | Path |
+| --- | --- | --- |
+| [`openrouter-oauth`](./skills/openrouter-oauth/SKILL.md) | `OPENROUTER_API_KEY` via OAuth PKCE — no client registration, no backend | [`skills/openrouter-oauth/`](./skills/openrouter-oauth/) · [hub copy](./kraken-cli-main/skills/openrouter-oauth/) |
+
+Birth flow including the OAuth step:
+
+```
+solana-clawd birth
+   ├─ wallet generated + Hermès vault initialized
+   ├─ SAS attestation minted (skill + identity)
+   ├─ "Sign in with OpenRouter" button (openrouter-oauth skill)
+   │     └─ PKCE handshake → sk-or-... key
+   │     └─ tailclawd PATCH /api/openclawd/env → ~/.openclawd/.env
+   └─ agent online; can now call LLMs through ClawdRouter
+```
+
+To add a new skill to the at-birth bundle:
+
+1. Author the `SKILL.md` in [`kraken-cli-main/skills/<name>/`](./kraken-cli-main/skills/) with `metadata.openclaw.verified: true` and `metadata.openclaw.bundled_at_birth: true`.
+2. Mirror to [`skills/<name>/`](./skills/) and add an entry to [`skills/catalog.json`](./skills/catalog.json) with `verified: true, bundled_at_birth: true`.
+3. Append the skill to the `skills[]` array in [`AGENTS/agent-template-attested.json`](./AGENTS/agent-template-attested.json) with `priority: "bundled-at-birth"` and a `provides: [...]` list for the env vars it populates.
+4. Update [`kraken-cli-main/skills/INDEX.md`](./kraken-cli-main/skills/INDEX.md) under "OpenClawd Verified — Bundled at Birth".
 
 ## Docs by Theme
 

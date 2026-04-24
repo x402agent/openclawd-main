@@ -23,6 +23,10 @@ function formatTokens(n: number): string {
 }
 
 async function main() {
+  const argv = process.argv.slice(2);
+  const oauthMode: 'web' | 'local' = argv.includes('--local-callback') ? 'local' : 'web';
+  const forceLogin = argv.includes('--login');
+
   let config;
   try {
     config = loadConfig();
@@ -32,13 +36,15 @@ async function main() {
     process.exit(1);
   }
 
-  if (!config.apiKey) {
+  if (forceLogin || !config.apiKey) {
     try {
-      config.apiKey = await resolveApiKey();
+      config.apiKey = await resolveApiKey({ mode: oauthMode, forceLogin });
     } catch (err: unknown) {
       const e = err as { message: string };
       console.error(`${RED}OpenRouter login failed: ${e.message}${RESET}`);
-      console.error(`${DIM}Set OPENROUTER_API_KEY in .env or run \`clawd login\` to retry.${RESET}`);
+      console.error(
+        `${DIM}Try \`clawd --login\` to retry, or \`clawd --login --local-callback\` to use the localhost flow.${RESET}`,
+      );
       process.exit(1);
     }
   }
