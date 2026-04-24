@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WurkRouteImport } from './routes/wurk'
 import { Route as WalletRouteImport } from './routes/wallet'
 import { Route as UploadRouteImport } from './routes/upload'
 import { Route as TrackerRouteImport } from './routes/tracker'
@@ -61,6 +62,11 @@ import { Route as AgentsEngineRouteImport } from './routes/agents/engine'
 import { Route as AgentsAgentRefRouteImport } from './routes/agents/$agentRef'
 import { Route as OwnerSlugRouteImport } from './routes/$owner/$slug'
 
+const WurkRoute = WurkRouteImport.update({
+  id: '/wurk',
+  path: '/wurk',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WalletRoute = WalletRouteImport.update({
   id: '/wallet',
   path: '/wallet',
@@ -351,6 +357,7 @@ export interface FileRoutesByFullPath {
   '/tracker': typeof TrackerRoute
   '/upload': typeof UploadRoute
   '/wallet': typeof WalletRoute
+  '/wurk': typeof WurkRoute
   '/$owner/$slug': typeof OwnerSlugRoute
   '/agents/$agentRef': typeof AgentsAgentRefRoute
   '/agents/engine': typeof AgentsEngineRoute
@@ -404,6 +411,7 @@ export interface FileRoutesByTo {
   '/tracker': typeof TrackerRoute
   '/upload': typeof UploadRoute
   '/wallet': typeof WalletRoute
+  '/wurk': typeof WurkRoute
   '/$owner/$slug': typeof OwnerSlugRoute
   '/agents/$agentRef': typeof AgentsAgentRefRoute
   '/agents/engine': typeof AgentsEngineRoute
@@ -458,6 +466,7 @@ export interface FileRoutesById {
   '/tracker': typeof TrackerRoute
   '/upload': typeof UploadRoute
   '/wallet': typeof WalletRoute
+  '/wurk': typeof WurkRoute
   '/$owner/$slug': typeof OwnerSlugRoute
   '/agents/$agentRef': typeof AgentsAgentRefRoute
   '/agents/engine': typeof AgentsEngineRoute
@@ -513,6 +522,7 @@ export interface FileRouteTypes {
     | '/tracker'
     | '/upload'
     | '/wallet'
+    | '/wurk'
     | '/$owner/$slug'
     | '/agents/$agentRef'
     | '/agents/engine'
@@ -566,6 +576,7 @@ export interface FileRouteTypes {
     | '/tracker'
     | '/upload'
     | '/wallet'
+    | '/wurk'
     | '/$owner/$slug'
     | '/agents/$agentRef'
     | '/agents/engine'
@@ -619,6 +630,7 @@ export interface FileRouteTypes {
     | '/tracker'
     | '/upload'
     | '/wallet'
+    | '/wurk'
     | '/$owner/$slug'
     | '/agents/$agentRef'
     | '/agents/engine'
@@ -673,6 +685,7 @@ export interface RootRouteChildren {
   TrackerRoute: typeof TrackerRoute
   UploadRoute: typeof UploadRoute
   WalletRoute: typeof WalletRoute
+  WurkRoute: typeof WurkRoute
   OwnerSlugRoute: typeof OwnerSlugRoute
   AgentsAgentRefRoute: typeof AgentsAgentRefRoute
   AgentsEngineRoute: typeof AgentsEngineRoute
@@ -695,6 +708,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/wurk': {
+      id: '/wurk'
+      path: '/wurk'
+      fullPath: '/wurk'
+      preLoaderRoute: typeof WurkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/wallet': {
       id: '/wallet'
       path: '/wallet'
@@ -1089,6 +1109,7 @@ const rootRouteChildren: RootRouteChildren = {
   TrackerRoute: TrackerRoute,
   UploadRoute: UploadRoute,
   WalletRoute: WalletRoute,
+  WurkRoute: WurkRoute,
   OwnerSlugRoute: OwnerSlugRoute,
   AgentsAgentRefRoute: AgentsAgentRefRoute,
   AgentsEngineRoute: AgentsEngineRoute,
