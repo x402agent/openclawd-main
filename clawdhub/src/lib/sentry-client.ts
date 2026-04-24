@@ -2,7 +2,6 @@
 // Should be imported in AppProviders.tsx before the app renders
 
 import * as Sentry from "@sentry/browser";
-import { BrowserTracing } from "@sentry/browser";
 
 let initialized = false;
 
@@ -34,7 +33,7 @@ export function initSentryClient() {
 	Sentry.init({
 		dsn,
 		environment,
-		integrations: [new BrowserTracing()],
+		integrations: [Sentry.browserTracingIntegration()],
 		tracesSampleRate: Number(
 			import.meta?.env?.VITE_SENTRY_TRACES_SAMPLE_RATE ?? "0.1",
 		),

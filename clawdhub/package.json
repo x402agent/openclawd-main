@@ -81,6 +81,7 @@
     "solanaos-hub-schema": "workspace:*",
     "tailwind-merge": "^3.4.0",
     "tailwindcss": "^4.1.18",
+    "unstorage": "2.0.0-alpha.3",
     "vite-tsconfig-paths": "^6.0.5",
     "yaml": "^2.8.2"
   },

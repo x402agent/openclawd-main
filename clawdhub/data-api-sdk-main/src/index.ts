@@ -23,3 +23,6 @@ export * from './interfaces';
 
 // Export all interfaces
 export * from './event-processor';
+
+// Export attestation types and utilities
+export * from './attestation';
