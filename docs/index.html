@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenClawd — Claws that code, brains that deploy</title>
+<meta name="description" content="OpenClawd is a red-shelled, Solana-native AI agent stack: routing, orchestration, x402/AP2 payment rails, MCP servers, browser automation, and local or hosted inference.">
+<meta property="og:title" content="OpenClawd — Solana-native AI agent stack">
+<meta property="og:description" content="Routing, orchestration, payments, skills, MCP, browser automation, and local or hosted inference.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://solanaclawd.com">
+<link rel="canonical" href="https://solanaclawd.com/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A6%9E%3C/text%3E%3C/svg%3E">
+<style>
+  *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --bg-2: #0f0f17;
+    --panel: #111118;
+    --panel-2: #16161f;
+    --border: #1e1e2e;
+    --border-2: #2a2a3a;
+    --magenta: #c678dd;
+    --cyan: #56b6c2;
+    --lobster: #e06c75;
+    --lobster-2: #ff6b6b;
+    --neon: #98c379;
+    --solana: #14f195;
+    --amber: #e5c07b;
+    --dim: #5c6370;
+    --text: #abb2bf;
+    --white: #e5e5e5;
+    --hot: #ff3b30;
+    --warm: #ff6b35;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', 'Consolas', monospace;
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.04) 2px, rgba(0,0,0,0.04) 4px);
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  a { color: var(--lobster); text-decoration: none; }
+  a:hover { color: var(--lobster-2); text-decoration: underline; }
+  code { font-family: inherit; color: var(--amber); }
+
+  /* nav */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+  }
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    color: var(--white);
+  }
+  .brand-emoji { font-size: 1.3rem; }
+  .nav-links {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    font-size: 0.88rem;
+  }
+  .nav-links a {
+    color: var(--dim);
+    transition: color 0.15s;
+  }
+  .nav-links a:hover { color: var(--white); text-decoration: none; }
+
+  /* hero */
+  .hero {
+    text-align: center;
+    padding: 96px 20px 64px;
+    position: relative;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(224,108,117,0.18) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 30%, rgba(20,241,149,0.08) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero-emoji {
+    font-size: 4rem;
+    line-height: 1;
+    margin-bottom: 12px;
+    filter: drop-shadow(0 0 20px rgba(224,108,117,0.5));
+  }
+  .hero h1 {
+    font-size: clamp(2.4rem, 6vw, 4.4rem);
+    color: var(--white);
+    margin-bottom: 8px;
+    letter-spacing: -1.5px;
+    font-weight: 800;
+  }
+  .hero h1 .accent { color: var(--lobster); }
+  .tagline {
+    color: var(--magenta);
+    font-style: italic;
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+  }
+  .subtitle {
+    color: var(--text);
+    font-size: 1rem;
+    margin-bottom: 32px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+  }
+
+  .hero-badges {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    border: 1px solid var(--border-2);
+    background: var(--panel);
+    color: var(--text);
+  }
+  .badge-solana { color: var(--solana); border-color: rgba(20,241,149,0.35); }
+  .badge-mcp    { color: var(--magenta); border-color: rgba(198,120,221,0.35); }
+  .badge-mit    { color: var(--hot); border-color: rgba(255,59,48,0.35); }
+  .badge-node   { color: var(--cyan); border-color: rgba(86,182,194,0.35); }
+
+  .cta-row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.92rem;
+    text-decoration: none;
+    border: 1px solid var(--border-2);
+    background: var(--panel);
+    color: var(--white);
+    transition: transform 0.12s, border-color 0.12s, background 0.12s;
+  }
+  .btn:hover { text-decoration: none; transform: translateY(-1px); border-color: var(--lobster); }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--hot), var(--warm));
+    border-color: var(--hot);
+    color: #fff;
+  }
+  .btn-primary:hover { color: #fff; border-color: var(--lobster-2); }
+
+  /* container */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  section {
+    padding: 56px 0;
+    border-top: 1px solid var(--border);
+  }
+  section h2 {
+    color: var(--white);
+    font-size: 1.7rem;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+  }
+  section h2::before {
+    content: '## ';
+    color: var(--lobster);
+    font-weight: 700;
+  }
+  .section-lead {
+    color: var(--dim);
+    margin-bottom: 28px;
+    max-width: 760px;
+  }
+
+  /* terminal block */
+  .terminal {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 12px 0 24px;
+  }
+  .terminal-header {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    background: rgba(255,255,255,0.03);
+    border-bottom: 1px solid var(--border);
+    gap: 8px;
+  }
+  .dot { width: 11px; height: 11px; border-radius: 50%; }
+  .dot-r { background: #ff5f56; }
+  .dot-y { background: #ffbd2e; }
+  .dot-g { background: #27c93f; }
+  .terminal-title {
+    margin-left: 10px;
+    color: var(--dim);
+    font-size: 0.78rem;
+  }
+  .terminal-body {
+    padding: 18px 22px;
+    overflow-x: auto;
+    font-size: 0.86rem;
+    line-height: 1.7;
+    white-space: pre;
+  }
+  .t-cmd     { color: var(--cyan); }
+  .t-ok      { color: var(--neon); }
+  .t-warn    { color: var(--amber); }
+  .t-lob     { color: var(--lobster); }
+  .t-dim     { color: var(--dim); }
+  .t-mag     { color: var(--magenta); }
+  .t-w       { color: var(--white); }
+
+  /* feature grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: transform 0.15s, border-color 0.15s;
+  }
+  .card:hover { transform: translateY(-2px); border-color: var(--border-2); }
+  .card h3 {
+    color: var(--white);
+    font-size: 1rem;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card h3 .ico { font-size: 1.1rem; }
+  .card p { font-size: 0.88rem; line-height: 1.65; color: var(--text); }
+  .card .path {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 0.78rem;
+    color: var(--neon);
+    background: rgba(152,195,121,0.08);
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+
+  /* table */
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--panel);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+  th, td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  th {
+    color: var(--magenta);
+    font-weight: 600;
+    background: rgba(255,255,255,0.02);
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  tr:last-child td { border-bottom: none; }
+  td code { color: var(--amber); font-size: 0.85rem; }
+
+  /* token stripe */
+  .token {
+    background: linear-gradient(135deg, rgba(255,59,48,0.08), rgba(255,107,53,0.08));
+    border: 1px solid rgba(255,59,48,0.3);
+    border-radius: 16px;
+    padding: 28px;
+    margin: 12px 0;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 24px;
+    align-items: center;
+  }
+  .token-emoji { font-size: 3rem; }
+  .token-info h3 { color: var(--white); font-size: 1.2rem; margin-bottom: 4px; }
+  .token-info p { color: var(--dim); font-size: 0.85rem; margin-bottom: 8px; }
+  .token-ca {
+    font-size: 0.78rem;
+    color: var(--amber);
+    word-break: break-all;
+    user-select: all;
+  }
+  .token-cta { display: flex; flex-direction: column; gap: 8px; }
+  @media (max-width: 720px) {
+    .token { grid-template-columns: 1fr; text-align: center; }
+    .token-cta { flex-direction: row; justify-content: center; }
+  }
+
+  /* footer */
+  footer {
+    margin-top: 56px;
+    border-top: 1px solid var(--border);
+    padding: 32px 20px;
+    text-align: center;
+    color: var(--dim);
+    font-size: 0.85rem;
+  }
+  .footer-links {
+    display: flex;
+    gap: 18px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .footer-links a { color: var(--text); }
+  .footer-bottom { color: var(--dim); }
+
+  /* utilities */
+  .mono-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: rgba(198,120,221,0.12);
+    color: var(--magenta);
+    font-size: 0.78rem;
+    margin-left: 6px;
+    border: 1px solid rgba(198,120,221,0.25);
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">
+      <span class="brand-emoji">🦞</span>
+      <span>OpenClawd</span>
+    </a>
+    <div class="nav-links">
+      <a href="#what-ships">What ships</a>
+      <a href="#capabilities">Capabilities</a>
+      <a href="#quickstart">Quick start</a>
+      <a href="#sas">Attestation</a>
+      <a href="#token">$CLAWD</a>
+      <a href="https://github.com/x402agent/openclawd">GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-emoji">🦞</div>
+  <h1>Open<span class="accent">Clawd</span></h1>
+  <p class="tagline">"Claws that code, brains that deploy."</p>
+  <p class="subtitle">
+    A red-shelled, Solana-native AI agent stack — routing, orchestration, payments, skills,
+    MCP, browser automation, and local or hosted inference. Fork one repo and ship
+    chain-native AI products.
+  </p>
+
+  <div class="hero-badges">
+    <span class="badge badge-mit">License: MIT</span>
+    <span class="badge badge-node">Node 20+</span>
+    <span class="badge badge-solana">Solana native</span>
+    <span class="badge badge-mcp">MCP compatible</span>
+  </div>
+
+  <div class="cta-row">
+    <a class="btn btn-primary" href="https://github.com/x402agent/openclawd">★ Star on GitHub</a>
+    <a class="btn" href="#quickstart">Quick start →</a>
+    <a class="btn" href="https://jup.ag/swap/SOL-8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump">Buy $CLAWD on Jupiter</a>
+  </div>
+</header>
+
+<div class="container">
+
+  <section id="what-ships">
+    <h2>What ships</h2>
+    <p class="section-lead">
+      OpenClawd is the public monorepo behind the Clawd ecosystem — an orchestrator, model
+      router, wallet tooling, x402/AP2 payment rails, MCP servers, browser surfaces, package
+      libraries, edge workers, and a large checked-in skill and agent catalog.
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <h3><span class="ico">🖥️</span> Surfaces</h3>
+        <p>Browser agent surface, terminal UI, cloud OS, and companion apps.</p>
+        <span class="path">chrome-extension/ · tailclawd/ · clawd-cloud-os/ · Apps/</span>
+      </div>
+      <div class="card">
+        <h3><span class="ico">⚙️</span> Runtime</h3>
+        <p>Orchestration, gateway, wallets, MCP runtime, and the Solana agent framework.</p>
+        <span class="path">openclawd-stack/ · src/ · solana-clawd/</span>
+      </div>
+      <div class="card">
+        <h3><span class="ico">💸</span> Routing &amp; payments</h3>
+        <p>Model routing, x402 rails, workers, settlement, and support services.</p>
+        <span class="path">clawdrouter/ · workers/ · services/ · x402/</span>
+      </div>
+      <div class="card">
+        <h3><span class="ico">🤖</span> Agents &amp; skills</h3>
+        <p>50+ agent catalog, skills marketplace, registry, and publishing flows.</p>
+        <span class="path">AGENTS/ · skills/ · clawdhub/ · acp_registry/</span>
+      </div>
+      <div class="card">
+        <h3><span class="ico">📦</span> Packages</h3>
+        <p>Shared SDKs, MCP servers, protocol references, wallet and payment libraries.</p>
+        <span class="path">packages/ · MCP/ · API/</span>
+      </div>
+      <div class="card">
+        <h3><span class="ico">📚</span> Docs &amp; onboarding</h3>
+        <p>Product docs, architecture, ops, and integration guides.</p>
+        <span class="path">docs/articles/ · ONBOARDING · STACK · INTEGRATION_STRATEGY</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="capabilities">
+    <h2>Flagship capabilities</h2>
+    <p class="section-lead">
+      The pieces that make OpenClawd more than the sum of its directories.
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <h3>🦞 OpenClawd Orchestrator</h3>
+        <p>Ties together wallets, Honcho memory, E2B sandboxes, MCP tools, and monetized runtime services.</p>
+      </div>
+      <div class="card">
+        <h3>🛣️ ClawdRouter</h3>
+        <p>Routes across cloud and local models, supports hosted and local AI lanes, and sits on the payment-aware edge of the stack.</p>
+      </div>
+      <div class="card">
+        <h3>🌐 Browser automation &amp; pAGENT</h3>
+        <p>Wallet-aware browser-native operator surface for tool use and task automation, shipped as a Chrome extension.</p>
+      </div>
+      <div class="card">
+        <h3>💳 Payments as a primitive</h3>
+        <p>x402, MPP, AP2, and A2A flows are first-class; agents can charge, pay, and settle on Solana.</p>
+      </div>
+      <div class="card">
+        <h3>🔐 ClawdVault</h3>
+        <p>Hermès Vault Protocol gives every agent a vault-protected wallet at birth. Multi-sig &amp; emergency recovery built in.</p>
+      </div>
+      <div class="card">
+        <h3>🧪 Formally verified skills</h3>
+        <p>QEDGen Lean 4 proofs compile to <code>proof_hash</code> and land on-chain via the Solana Attestation Service.</p>
+      </div>
+      <div class="card">
+        <h3>🔑 Sign in with OpenRouter</h3>
+        <p>OAuth PKCE flow — no client registration, no backend, no secrets. Drops <code>OPENROUTER_API_KEY</code> into <code>~/.openclawd/.env</code> at agent birth.</p>
+      </div>
+      <div class="card">
+        <h3>🧠 AutoResearch loops</h3>
+        <p>Agentic research and memory primitives wired through the agent bus and Claw3D integrations.</p>
+      </div>
+      <div class="card">
+        <h3>🏠 Local AI lanes</h3>
+        <p>Routed and tunneled inference for self-hosted models, with documented fallback and arbitration paths.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="quickstart">
+    <h2>Quick start</h2>
+    <p class="section-lead">
+      Clone the repo, copy env, install the repo-managed git hooks, and boot the orchestrator.
+    </p>
+
+    <div class="terminal">
+      <div class="terminal-header">
+        <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+        <span class="terminal-title">~/openclawd — bash</span>
+      </div>
+      <div class="terminal-body"><span class="t-dim"># 1. clone &amp; configure</span>
+<span class="t-cmd">$</span> git clone https://github.com/x402agent/openclawd.git
+<span class="t-cmd">$</span> cd openclawd
+<span class="t-cmd">$</span> cp .env.example .env
+
+<span class="t-dim"># 2. install repo hooks &amp; verify the machine</span>
+<span class="t-cmd">$</span> npm run hooks:install
+<span class="t-cmd">$</span> npm run doctor
+<span class="t-ok">✓</span> all checks passed.
+
+<span class="t-dim"># 3. install repo entry points &amp; build the catalog</span>
+<span class="t-cmd">$</span> npm run install:all
+<span class="t-cmd">$</span> npm run build:catalog
+
+<span class="t-dim"># 4. start the orchestrator</span>
+<span class="t-cmd">$</span> npm run dev:orchestrator
+<span class="t-lob">🦞 OpenClawd</span> <span class="t-dim">orchestrator listening on</span> <span class="t-ok">http://127.0.0.1:3000</span></div>
+    </div>
+
+    <p class="section-lead" style="margin-top:24px;">Or use the bootstrap installer:</p>
+    <div class="terminal">
+      <div class="terminal-header">
+        <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+        <span class="terminal-title">install.sh</span>
+      </div>
+      <div class="terminal-body"><span class="t-cmd">$</span> bash ./install.sh</div>
+    </div>
+
+    <h3 style="color:var(--white);margin:24px 0 12px;font-size:1rem;">Minimum toolchain</h3>
+    <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));">
+      <div class="card"><h3>Node</h3><p>20+</p></div>
+      <div class="card"><h3>npm</h3><p>10+</p></div>
+      <div class="card"><h3>pnpm</h3><p>on PATH</p></div>
+      <div class="card"><h3>Git</h3><p>any recent</p></div>
+    </div>
+  </section>
+
+  <section id="commands">
+    <h2>Core developer commands</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Command</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td><code>npm run hooks:install</code></td><td>Install repo-managed git hooks to block accidental secret commits</td></tr>
+          <tr><td><code>npm run brand:check</code></td><td>Catch high-visibility old-brand phrases in first-party docs</td></tr>
+          <tr><td><code>npm run doctor</code></td><td>Verify the supported root bootstrap path</td></tr>
+          <tr><td><code>npm run guard:worktree</code></td><td>Scan tracked and untracked files for env/secret patterns</td></tr>
+          <tr><td><code>npm run release:check</code></td><td>Public-release sanity check for docs, hygiene, and metadata</td></tr>
+          <tr><td><code>npm run build:catalog</code></td><td>Rebuild the checked-in agent catalog</td></tr>
+          <tr><td><code>npm run dev:orchestrator</code></td><td>Start the runtime orchestrator from <code>openclawd-stack/</code></td></tr>
+          <tr><td><code>npm run dev:router</code></td><td>Start ClawdRouter</td></tr>
+          <tr><td><code>npm run dev:registrar</code></td><td>Start the API registrar</td></tr>
+          <tr><td><code>npm run dev:cli</code></td><td>Start the canonical Clawd CLI surface</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="sas">
+    <h2>⛓️ Solana Attestation Service</h2>
+    <p class="section-lead">
+      Formally verified skills and agents — on-chain, trustlessly. Agents request QEDGen
+      Lean 4 proofs, the proof hash lands as an SAS attestation, and any party can verify
+      without a trusted intermediary.
+    </p>
+
+    <div class="terminal">
+      <div class="terminal-header">
+        <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+        <span class="terminal-title">verification pipeline</span>
+      </div>
+      <div class="terminal-body"><span class="t-mag">Agent</span> <span class="t-dim">→</span> <span class="t-mag">QEDGen</span> <span class="t-dim">→</span> <span class="t-mag">Lean 4 Proof</span> <span class="t-dim">→</span> <span class="t-warn">proof_hash</span> <span class="t-dim">→</span> <span class="t-lob">SAS Attestation</span> <span class="t-dim">→</span> <span class="t-ok">On-chain</span></div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Component</th><th>Address</th></tr></thead>
+        <tbody>
+          <tr><td>SAS Program ID</td><td><code>22zoJMtdu4tQc2PzL74ZUT7FrwgB1Udec8DdW4yw4BdG</code></td></tr>
+          <tr><td>Token Program (Token-2022)</td><td><code>TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb</code></td></tr>
+          <tr><td>Event Authority PDA</td><td><code>DzSpKpST2TSyrxokMXchFz3G2yn5WEGoxzpGEUDjCX4g</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="color:var(--white);margin:24px 0 8px;font-size:1rem;">CLI usage</h3>
+    <div class="terminal">
+      <div class="terminal-header">
+        <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+        <span class="terminal-title">clawd-cli.sh</span>
+      </div>
+      <div class="terminal-body"><span class="t-dim"># create skill attestation</span>
+<span class="t-cmd">$</span> ./CLI/clawd-cli.sh attest:skill <span class="t-warn">--skill</span> qedgen-solana <span class="t-warn">--verifier</span> QEDGenVault
+
+<span class="t-dim"># verify on-chain</span>
+<span class="t-cmd">$</span> ./CLI/clawd-cli.sh attest:verify <span class="t-warn">--address</span> 7xK9...mP2
+
+<span class="t-dim"># spawn agent identity with vault</span>
+<span class="t-cmd">$</span> ./CLI/clawd-cli.sh attest:agent <span class="t-warn">--agent</span> my-agent <span class="t-warn">--wallet</span> A123...xyz</div>
+    </div>
+  </section>
+
+  <section id="security">
+    <h2>Security guardrails</h2>
+    <p class="section-lead">
+      OpenClawd is meant to be cloned and forked publicly, so the repo ships built-in guardrails.
+    </p>
+    <div class="grid">
+      <div class="card">
+        <h3>🪝 Pre-commit / pre-push hooks</h3>
+        <p>Block staged <code>.env</code>, <code>.pem</code>, <code>.key</code>, and live-secret patterns. Rerun worktree + release hygiene before push.</p>
+      </div>
+      <div class="card">
+        <h3>🔍 Brand &amp; doctor checks</h3>
+        <p>Catch first-party branding drift in docs and verify the supported root bootstrap path.</p>
+      </div>
+      <div class="card">
+        <h3>📋 Release check</h3>
+        <p>Validates public-release hygiene, package metadata, and required docs before tagging.</p>
+      </div>
+      <div class="card">
+        <h3>🔐 ClawdVault integration</h3>
+        <p>Vault-protected wallets at agent birth via the Hermès vault protocol. See <a href="https://github.com/x402agent/openclawd/blob/main/SECURITY_VAULT_INTEGRATION.md">SECURITY_VAULT_INTEGRATION.md</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="token">
+    <h2>$CLAWD token</h2>
+    <p class="section-lead">
+      OpenClawd centers a Solana SPL token used across holder gating, pricing, wallet-aware
+      surfaces, and docs.
+    </p>
+    <div class="token">
+      <div class="token-emoji">🦞</div>
+      <div class="token-info">
+        <h3>$CLAWD <span class="mono-badge">SPL · Solana</span></h3>
+        <p>Symbol <code>$CLAWD</code> · standard SPL Token</p>
+        <div class="token-ca">8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump</div>
+      </div>
+      <div class="token-cta">
+        <a class="btn btn-primary" href="https://jup.ag/swap/SOL-8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump">Buy on Jupiter</a>
+        <a class="btn" href="https://dexscreener.com/solana/8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump">DexScreener</a>
+        <a class="btn" href="https://pump.fun/coin/8cHzQHUS2s2h8TzCmfqPKYiM4dSt4roa3n7MyRLApump">pump.fun</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="community">
+    <h2>Community</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>🌐 Website</h3>
+        <p><a href="https://solanaclawd.com">solanaclawd.com</a></p>
+      </div>
+      <div class="card">
+        <h3>🐙 GitHub</h3>
+        <p><a href="https://github.com/x402agent/openclawd">x402agent/openclawd</a></p>
+      </div>
+      <div class="card">
+        <h3>🤖 Agent hub</h3>
+        <p><a href="https://hub.solanaclawd.com">hub.solanaclawd.com</a></p>
+      </div>
+      <div class="card">
+        <h3>🐦 X / Twitter</h3>
+        <p><a href="https://x.com/clawddevs">@clawddevs</a> · <a href="https://x.com/0rdlibrary">@0rdlibrary</a></p>
+      </div>
+      <div class="card">
+        <h3>💬 Telegram</h3>
+        <p><a href="https://t.me/clawdtoken">t.me/clawdtoken</a></p>
+      </div>
+      <div class="card">
+        <h3>📜 License</h3>
+        <p>MIT — see <a href="https://github.com/x402agent/openclawd/blob/main/LICENSE.md">LICENSE.md</a>.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="https://github.com/x402agent/openclawd">GitHub</a>
+    <a href="https://solanaclawd.com">Website</a>
+    <a href="https://t.me/clawdtoken">Telegram</a>
+    <a href="https://x.com/clawddevs">X</a>
+    <a href="https://github.com/x402agent/openclawd/blob/main/SECURITY.md">Security</a>
+    <a href="https://github.com/x402agent/openclawd/blob/main/CONTRIBUTING.md">Contributing</a>
+  </div>
+  <div class="footer-bottom">
+    🦞 forged on Solana · MIT licensed · made for the open agent economy
+  </div>
+</footer>
+
+</body>
+</html>

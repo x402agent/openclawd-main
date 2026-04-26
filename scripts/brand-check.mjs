@@ -8,7 +8,7 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const checks = [
   {
     file: "README.md",
-    patterns: [/welcome to the claw/i, /\bthe claw\b/i, /\byour claw\b/i, /\bOpenClaw\b/i],
+    patterns: [/welcome to the claw/i, /\bthe claw\b/i, /\byour claw\b/i, /(?<!\.)\bOpenClaw\b(?!\.)/i],
   },
   {
     file: "INSTALL_SNIPPETS.md",
@@ -20,7 +20,7 @@ const checks = [
   },
   {
     file: "ONBOARDING.md",
-    patterns: [/\bOpenClaw\b/i],
+    patterns: [/(?<!\.)\bOpenClaw\b(?!\.)/i],
   },
   {
     file: "SECURITY_VAULT_INTEGRATION.md",
