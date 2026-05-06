@@ -36,7 +36,32 @@
                            🦀  forged on Solana  🦀
 ```
 
-## 🆕 Latest (2026-04-24)
+## 🆕 Latest (2026-04-26)
+
+**Open source release prep.** All four release-prep guardrails (`doctor`, `brand:check`, `release:check`, `guard:worktree`) now pass green on a clean checkout, the public landing page ships in-repo, and CI is wired to enforce hygiene on every PR.
+
+### What shipped
+
+- **One-page static site at [`docs/index.html`](./docs/index.html)** — self-contained, terminal-themed landing distilled from this README. Hero, "what ships" grid, flagship capabilities, quick start with a working terminal block, developer commands table, Solana Attestation Service section, security guardrails, `$CLAWD` token panel, community + footer. No external assets, mobile-responsive, ready for GitHub Pages or `solanaclawd.com`.
+- **`AGENTS/` directory restored** — the on-disk catalog had drifted to a lowercase path, breaking the `release:check` guard against lowercase agent-folder links and the `npm run build:catalog` script (`cd AGENTS && node build-catalog.cjs`). Renamed back to `AGENTS/` to match every reference in [README.md](./README.md), [STACK.md](./STACK.md), and [CONTRIBUTING.md](./CONTRIBUTING.md).
+- **`clawd-code-cli/` contents restored** — the directory had been reduced to an empty submodule reference, breaking `npm run install:cli` and the doctor's `clawd-code-cli/package.json` check. Full source/dist tree restored from git history (71 files).
+- **`brand-check` regex tightened** — `(?<!\.)\bOpenClaw\b(?!\.)` so the literal metadata field name `metadata.openclaw.verified` no longer trips the rebrand check, while standalone uses of the legacy seven-letter form (no trailing `d`) still fail. See [scripts/brand-check.mjs](./scripts/brand-check.mjs).
+- **CI hardened** — [`.github/workflows/oss-readiness.yml`](./.github/workflows/oss-readiness.yml) now enables `corepack` so `pnpm` is on PATH for the doctor's tooling check (the GitHub-hosted runner image's pnpm isn't visible after `setup-node@v4` provisions a fresh Node 20). Also added `npm run guard:worktree` to the workflow so CI matches the local guardrail set.
+
+### Release-prep checks
+
+```bash
+npm run doctor          # node/npm/pnpm versions, required paths, package.json sanity
+npm run brand:check     # high-visibility branding drift in first-party docs
+npm run release:check   # forbidden tracked files, secret patterns, package metadata
+npm run guard:worktree  # worktree-wide secret scan (tracked + untracked)
+```
+
+All four exit `0` on a clean checkout of the release branch.
+
+---
+
+## 🆕 Previous (2026-04-24)
 
 **Rebrand: SolanaOS → OpenClawd.** The hub, catalog, CLI, and public domain have been unified under the OpenClawd brand. The public site moved to [`solanaclawd.com`](https://solanaclawd.com).
 

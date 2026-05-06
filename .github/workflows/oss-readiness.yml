@@ -21,11 +21,20 @@ jobs:
         with:
           node-version-file: .nvmrc
 
+      - name: Enable corepack (provides pnpm on PATH)
+        run: |
+          corepack enable
+          corepack prepare pnpm@latest --activate
+          pnpm -v
+
       - name: Doctor
         run: npm run doctor
 
       - name: Branding check
         run: npm run brand:check
+
+      - name: Worktree secret guard
+        run: npm run guard:worktree
 
       - name: Public release checks
         run: npm run release:check
