@@ -1,0 +1,38 @@
+name: ✨ Feature request
+description: Propose a new feature, agent, skill, or integration
+title: "[feature] "
+labels: ["enhancement"]
+body:
+  - type: input
+    id: area
+    attributes:
+      label: Area of the stack
+      description: clawdrouter, solana-clawd, skills, agents, payments, surfaces, ...
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      description: Describe the user / agent / operator pain point.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Sketch the API, command, route, or skill bundle. Include `SKILL.md`-style hints if relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - label: I'm willing to contribute a PR
+        - label: This is Solana-mainnet specific
+        - label: This involves x402 / MPP / AP2 / A2A payments

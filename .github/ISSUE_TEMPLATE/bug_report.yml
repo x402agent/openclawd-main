@@ -1,0 +1,58 @@
+name: 🐞 Bug report
+description: Report a reproducible bug in OpenClawd
+title: "[bug] "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a bug report. Please redact any
+        secrets (API keys, private keys, mnemonics) before posting.
+  - type: input
+    id: package
+    attributes:
+      label: Package / area
+      description: Which part of the stack? (clawdrouter, solana-clawd, @openclawd/wallet, tailclawd, ...)
+      placeholder: clawdrouter
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version / commit
+      description: npm version, commit SHA, or branch you reproduced on.
+      placeholder: solana-clawd 0.x.y / commit abc1234
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: Minimal, copy-pasteable steps. Include relevant env vars (with values redacted).
+      placeholder: |
+        1. clone repo
+        2. cp .env.example .env (set OPENROUTER_API_KEY)
+        3. cd clawdrouter && npm run dev
+        4. curl ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior / logs
+      description: Paste error output. Wrap in code fences. Redact secrets.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: OS / runtime
+      placeholder: macOS 14.5, Node 20.11
+    validations:
+      required: true

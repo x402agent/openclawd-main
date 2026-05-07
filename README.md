@@ -1,6 +1,24 @@
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/x402agent/openclawd/main/gfx/lobster.svg" alt="OpenClawd" width="140" onerror="this.style.display='none'">
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12,20,24,28&height=240&section=header&text=🦞%20OpenClawd&fontSize=90&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Sovereign%20AI%20Lobsters%20on%20Solana%20·%20Born%20to%20Earn%20·%20Beach%20with%20Dignity&descAlignY=58&descAlign=50" alt="OpenClawd banner" />
+
+<p>
+  <a href="https://solanaclawd.com"><img src="https://img.shields.io/badge/$CLAWD-on_Solana-9945FF?style=for-the-badge&logo=solana&logoColor=14F195" alt="$CLAWD on Solana"></a>
+  <a href="https://x.com/clawddevs"><img src="https://img.shields.io/badge/@clawddevs-X-000000?style=for-the-badge&logo=x" alt="@clawddevs"></a>
+  <a href="https://www.npmjs.com/package/solana-clawd"><img src="https://img.shields.io/npm/v/solana-clawd?style=for-the-badge&label=solana-clawd&color=cc3534&logo=npm" alt="npm: solana-clawd"></a>
+  <a href="https://www.npmjs.com/package/@openclawd/wallet"><img src="https://img.shields.io/npm/v/@openclawd/wallet?style=for-the-badge&label=@openclawd/wallet&color=cc3534&logo=npm" alt="npm: @openclawd/wallet"></a>
+  <a href="./LICENSE.md"><img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" alt="MIT"></a>
+</p>
+
+<p>
+  <a href="https://solanaclawd.com/x402"><img src="https://img.shields.io/badge/x402-native-F39C12?style=flat-square" alt="x402"></a>
+  <a href="https://modelcontextprotocol.io"><img src="https://img.shields.io/badge/MCP-compatible-9B59B6?style=flat-square" alt="MCP"></a>
+  <a href="https://t.me/clawdtoken"><img src="https://img.shields.io/badge/Telegram-clawdtoken-26A5E4?style=flat-square&logo=telegram&logoColor=white" alt="Telegram"></a>
+  <a href="https://github.com/x402agent/openclawd/stargazers"><img src="https://img.shields.io/github/stars/x402agent/openclawd?style=flat-square&color=yellow&logo=github" alt="Stars"></a>
+  <a href="https://github.com/x402agent/openclawd/network/members"><img src="https://img.shields.io/github/forks/x402agent/openclawd?style=flat-square&color=blue&logo=github" alt="Forks"></a>
+  <a href="https://github.com/x402agent/openclawd/issues"><img src="https://img.shields.io/github/issues/x402agent/openclawd?style=flat-square&color=red" alt="Issues"></a>
+  <a href="https://github.com/x402agent/openclawd/pulls"><img src="https://img.shields.io/github/issues-pr/x402agent/openclawd?style=flat-square&color=brightgreen" alt="PRs"></a>
+</p>
 
 # 🦞 OpenClawd
 
@@ -19,16 +37,6 @@
 ║                                                                  ║
 ╚══════════════════════════════════════════════════════════════════╝
 ```
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](./LICENSE.md)
-[![Solana](https://img.shields.io/badge/Solana-mainnet-14F195?style=for-the-badge&logo=solana)](https://solana.com)
-[![x402](https://img.shields.io/badge/x402-native-F39C12?style=for-the-badge)](https://solanaclawd.com/x402)
-[![MCP](https://img.shields.io/badge/MCP-compatible-9B59B6?style=for-the-badge)](https://modelcontextprotocol.io)
-
-[![npm solana-clawd](https://img.shields.io/npm/v/solana-clawd?style=flat-square&label=solana-clawd&color=cc3534)](https://www.npmjs.com/package/solana-clawd)
-[![npm @openclawd/wallet](https://img.shields.io/npm/v/@openclawd/wallet?style=flat-square&label=@openclawd/wallet&color=cc3534)](https://www.npmjs.com/package/@openclawd/wallet)
-[![Twitter Follow](https://img.shields.io/twitter/follow/clawddevs?style=flat-square&color=1DA1F2)](https://x.com/clawddevs)
-[![Telegram](https://img.shields.io/badge/Telegram-clawdtoken-26A5E4?style=flat-square&logo=telegram)](https://t.me/clawdtoken)
 
 [**Install**](#install) · [**Architecture**](#architecture) · [**Router**](#clawdrouter) · [**Wallet**](#clawd-wallet) · [**Marketplace**](#clawdhub) · [**Stack Map**](./STACK.md) · [**Docs**](./articles) · [**Website**](https://solanaclawd.com)
 
@@ -95,6 +103,8 @@ For full installation details, see **[ONBOARDING.md](./ONBOARDING.md)**.
 |-------|-------------|
 | [ONBOARDING.md](./ONBOARDING.md) | **Start here!** Contributor setup & workflow |
 | [CONTRIBUTING.md](./CONTRIBUTING.md) | Contribution guidelines |
+| [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) | Community Code of Conduct |
+| [SECURITY.md](./SECURITY.md) | Security policy & reporting |
 | [STACK.md](./STACK.md) | Technical architecture |
 | [articles/](./articles/) | Deep-dive documentation |
 | [agents/README.md](./agents/README.md) | Agent development |
