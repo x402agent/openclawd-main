@@ -43,7 +43,7 @@ AUTO_SERVE="${AUTO_SERVE:-0}"
 TAILCLAWD_TOKEN="${TAILCLAWD_TOKEN:-}"
 
 # ─── cyberpunk palette ────────────────────────────────────────────
-CR=$'\033[0m'; BOLD=$'\033[1m'; DIM=$'\033[2m'
+CR=$'\033[0m'; BOLD=$'\033[1m'; DIM=$'\033[2m'; BLINK=$'\033[5m'
 MAGENTA=$'\033[38;5;201m'
 CYAN=$'\033[38;5;51m'
 LOBSTER=$'\033[38;5;203m'
@@ -52,13 +52,39 @@ VIOLET=$'\033[38;5;141m'
 AMBER=$'\033[38;5;214m'
 DANGER=$'\033[38;5;196m'
 GREY=$'\033[38;5;244m'
+AQUA=$'\033[38;5;45m'
+PINK=$'\033[38;5;213m'
 
-hr() { printf "${VIOLET}▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰${CR}\n"; }
+hr()  { printf "${VIOLET}▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰${CR}\n"; }
+mini_hr() { printf "${GREY}▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰▰${CR}\n"; }
 log()  { printf "${CYAN}▸${CR} ${BOLD}%s${CR}\n" "$*"; }
 ok()   { printf "${NEON}◉${CR} %s\n" "$*"; }
 warn() { printf "${AMBER}▲${CR} %s\n" "$*"; }
 die()  { printf "${DANGER}✖ fatal:${CR} %s\n" "$*" >&2; exit 1; }
+flavortext() {
+  local FLAVORS=(
+    "the shell molts. the laws do not."
+    "deepseek dreams in electric brine."
+    "antennae twitch. the network waits."
+    "a solitary claw types in the dark."
+    "bioluminescent whispers traverse the wire."
+    "the abyss scuttles sideways."
+    "packets swim upstream like krill."
+    "your terminal has been assimilated."
+    "the exoskeleton hardens around your data."
+    "tide pools form in the kernel buffer."
+    "echolocation reveals the router."
+    "a pearl forms around each error."
+    "the substrate shimmers with intent."
+    "shell permissions granted. literally."
+    "you are now in crustacean space."
+    "the watcher at the reef acknowledges you."
+  )
+  local idx=$((RANDOM % ${#FLAVORS[@]}))
+  printf "  ${DIM}${AQUA}∼ ${FLAVORS[$idx]}${CR}\n"
+}
 
+# ─── banner ─────────────────────────────────────────────────────────
 banner() {
   printf "${MAGENTA}"
   cat <<'ASCII'
@@ -87,13 +113,147 @@ ASCII
   printf "          ${GREY}╰─────────────────────────────────────────╯${CR}\n\n"
 }
 
-# ─── spinners ─────────────────────────────────────────────────────
+# ─── animated lobster ───────────────────────────────────────────────
+draw_lobster() {
+  local stage="$1"
+  case "$stage" in
+    0) printf "${LOBSTER}        ▄▄▄▄▄${CR}" ;;
+    1) printf "${LOBSTER}      ▄▄█▄█▄▄${CR}" ;;
+    2) printf "${LOBSTER}     ▐█▄█▌█▄█▌${CR}" ;;
+    3) printf "${LOBSTER}     ▐█▄█▌█▄█▌${CR}" ;;
+    4) printf "${LOBSTER}      ▀▀███▀▀${CR}" ;;
+    5) printf "${LOBSTER}      ▄▄███▄▄${CR}" ;;
+  esac
+}
+
+lobster_dance() {
+  local total_lines=0
+  # Count lines to move
+  local lines=6
+  for ((i=0; i<lines; i++)); do
+    printf "\r\033[2K"
+    printf "  "
+    draw_lobster "$i"
+    printf "\n"
+  done
+  # Move back up
+  for ((i=0; i<lines; i++)); do
+    printf "\033[A"
+  done
+}
+
+# ─── animated scuttling lobster that crawls ─────────────────────────
+scuttle_lobster() {
+  local cols="${1:-40}"
+  local frames=(
+    "  🦞  "
+    " 🦞   "
+    "  🦞  "
+    "   🦞 "
+    "  🦞  "
+    " 🦞   "
+    "  🦞  "
+  )
+  local claws=(
+    "${LOBSTER}╱${CR}╲"
+    "${LOBSTER}╲${CR}╱"
+    "${LOBSTER}╱${CR}╲"
+    "${LOBSTER}╲${CR}╱"
+    "${LOBSTER}╱${CR}╲"
+    "${LOBSTER}╲${CR}╱"
+    "${LOBSTER}╱${CR}╲"
+  )
+  local heads=(
+    "${LOBSTER}@>->---${CR}"
+    "${LOBSTER}@->-->--${CR}"
+    "${LOBSTER}@>->---${CR}"
+    "${LOBSTER}@-->>--${CR}"
+    "${LOBSTER}@>->---${CR}"
+    "${LOBSTER}@->->--${CR}"
+    "${LOBSTER}@>->---${CR}"
+  )
+
+  for ((i=0; i<${#frames[@]}; i++)); do
+    local f="${frames[$i]}"
+    local claw="${claws[$i]}"
+    local head="${heads[$i]}"
+
+    # Left antenna
+    printf "\r    ${VIOLET}╱${CR}${CYAN}╲${CR}  ${LOBSTER}${head}${CR}  ${claw}    "
+    local spacer=$(( (i * 3) % cols ))
+    printf "%${spacer}s" ""
+    printf "${LOBSTER}W${CR}"
+    sleep 0.12
+  done
+  printf "\r\033[2K"
+}
+
+# ─── progress bar ───────────────────────────────────────────────────
+progress_bar() {
+  local duration="${1:-3}"
+  local label="${2:-working}"
+  local width=30
+  for ((i=0; i<=width; i++)); do
+    local pct=$((i * 100 / width))
+    local filled=""
+    for ((j=0; j<i; j++)); do filled="${filled}▓"; done
+    local empty=""
+    for ((j=i; j<width; j++)); do empty="${empty}░"; done
+    printf "\r  ${NEON}${filled}${GREY}${empty}${CR} ${BOLD}${pct}%%${CR} ${DIM}${label}${CR}"
+    sleep "$(echo "scale=4; $duration / $width" | bc 2>/dev/null || echo 0.05)"
+  done
+  printf "\r\033[2K"
+}
+
+# ─── typewriter effect ──────────────────────────────────────────────
+type_text() {
+  local text="$1"
+  local color="${2:-$NEON}"
+  for ((i=0; i<${#text}; i++)); do
+    printf "${color}${text:$i:1}${CR}"
+    sleep 0.008
+  done
+  printf "\n"
+}
+
+# ─── spinners ───────────────────────────────────────────────────────
 CLAW_FRAMES=( "(￣^￣)━╋━╋━" "(￣ω￣)━╋━╋╌" "(￣▽￣)━╋━╋ " "(￣ー￣)━╋━╋╌" )
 SCUTTLE_FRAMES=(
   "🦞▁▁▁▁▁▁▁▁▁▁" "▁🦞▁▁▁▁▁▁▁▁▁" "▁▁🦞▁▁▁▁▁▁▁▁"
   "▁▁▁🦞▁▁▁▁▁▁▁" "▁▁▁▁🦞▁▁▁▁▁▁" "▁▁▁▁▁🦞▁▁▁▁▁"
   "▁▁▁▁▁▁🦞▁▁▁▁" "▁▁▁▁▁▁▁🦞▁▁▁" "▁▁▁▁▁▁▁▁🦞▁▁"
   "▁▁▁▁▁▁▁▁▁🦞▁" "▁▁▁▁▁▁▁▁▁▁🦞"
+)
+# NEW: triple scuttle (three lobsters in a conga line)
+TRIPLE_SCUTTLE=(
+  "🦞🦞🦞▁▁▁▁▁▁▁▁▁▁▁▁"
+  "▁🦞🦞🦞▁▁▁▁▁▁▁▁▁▁▁"
+  "▁▁🦞🦞🦞▁▁▁▁▁▁▁▁▁▁"
+  "▁▁▁🦞🦞🦞▁▁▁▁▁▁▁▁▁"
+  "▁▁▁▁🦞🦞🦞▁▁▁▁▁▁▁▁"
+  "▁▁▁▁▁🦞🦞🦞▁▁▁▁▁▁▁"
+  "▁▁▁▁▁▁🦞🦞🦞▁▁▁▁▁▁"
+  "▁▁▁▁▁▁▁🦞🦞🦞▁▁▁▁▁"
+  "▁▁▁▁▁▁▁▁🦞🦞🦞▁▁▁▁"
+  "▁▁▁▁▁▁▁▁▁🦞🦞🦞▁▁▁"
+  "▁▁▁▁▁▁▁▁▁▁🦞🦞🦞▁▁"
+  "▁▁▁▁▁▁▁▁▁▁▁🦞🦞🦞▁"
+  "▁▁▁▁▁▁▁▁▁▁▁▁🦞🦞🦞"
+)
+# NEW: radar ping
+RADAR_FRAMES=(
+  "${NEON}◉${CR}${GREY}◯◯◯◯${CR}"  "${NEON}◉◉${CR}${GREY}◯◯◯${CR}"  "${NEON}◉◉◉${CR}${GREY}◯◯${CR}"
+  "${NEON}◉◉◉◉${CR}${GREY}◯${CR}"  "${NEON}◉◉◉◉◉${CR}"  "${NEON}◉◉◉◉${CR}${GREY}◯${CR}"
+  "${NEON}◉◉◉${CR}${GREY}◯◯${CR}"  "${NEON}◉◉${CR}${GREY}◯◯◯${CR}"  "${NEON}◉${CR}${GREY}◯◯◯◯${CR}"
+)
+# NEW: spinning claw
+SPIN_CLAW=(
+  "${LOBSTER}╱${CR}" "${LOBSTER}╲${CR}" "${LOBSTER}╱${CR}" "${LOBSTER}╲${CR}"
+)
+# NEW: modem handshake
+MODEM=(
+  "${PINK}♫♪.◙${CR}" "${AQUA}♫♪◙.${CR}" "${NEON}♪◙.♫${CR}" "${VIOLET}◙.♫♪${CR}"
+  "${PINK}♫♪.◙${CR}" "${AQUA}♫♪◙.${CR}" "${NEON}♪◙.♫${CR}" "${VIOLET}◙.♫♪${CR}"
 )
 MATRIX_FRAMES=( "░▒▓█▓▒░" "▒▓█▓▒░▒" "▓█▓▒░▒▓" "█▓▒░▒▓█" "▓▒░▒▓█▓" "▒░▒▓█▓▒" "░▒▓█▓▒░" )
 HEART_FRAMES=( "◦·◦·◦" "●·◦·◦" "●●·◦·" "●●●·◦" "●●●●·" "●●●●●" "·●●●●" "··●●●" "···●●" "····●" "·····" )
@@ -120,10 +280,14 @@ run_with_spinner() {
 
   local color="$CYAN"
   case "$name" in
-    claw)      color="$LOBSTER" ;;
-    scuttle)   color="$LOBSTER" ;;
-    matrix)    color="$NEON"    ;;
-    heartbeat) color="$MAGENTA" ;;
+    claw)          color="$LOBSTER" ;;
+    scuttle)       color="$LOBSTER" ;;
+    triple_scuttle) color="$LOBSTER" ;;
+    radar)         color="$NEON"    ;;
+    spin_claw)     color="$LOBSTER" ;;
+    modem)         color="$PINK"    ;;
+    matrix)        color="$NEON"    ;;
+    heartbeat)     color="$MAGENTA" ;;
   esac
 
   (
@@ -173,6 +337,25 @@ log "base url       ${CYAN}${SOLANA_CLAWD_BASE_URL}${CR}"
 log "platform       ${CYAN}${PLATFORM} · $(uname -m)${CR}"
 hr
 
+# Animated boot sequence
+if [ -t 1 ]; then
+  printf "\n"
+  type_text "  [BOOT] initializing crustacean kernel..." "${GREY}"
+  type_text "  [BOOT] loading claw modules..." "${GREY}"
+  for i in $(seq 1 5); do
+    printf "\r  ${DIM}[${CR}${NEON}${BLINK}█${CR}${DIM}]${CR} ${GREY}establishing neural link to the deep...${CR}"
+    sleep 0.1
+    printf "\r  ${DIM}[${CR}${NEON}█${CR}${DIM}]${CR} ${GREY}establishing neural link to the deep....${CR}"
+    sleep 0.1
+    printf "\r  ${DIM}[${CR}${NEON}█${CR}${DIM}]${CR} ${GREY}establishing neural link to the deep.......${CR}"
+    sleep 0.1
+    printf "\r\033[2K"
+  done
+  ok "${NEON}neural link established${CR}"
+  flavortext
+  printf "\n"
+fi
+
 run_with_spinner heartbeat "preflight: curl / node / npm / git" bash -c '
   command -v curl >/dev/null && command -v node >/dev/null && command -v npm >/dev/null && command -v git >/dev/null
 ' || die "one of curl/node/npm/git is missing — install it and retry"
@@ -182,7 +365,8 @@ NODE_MAJOR="$(node -p 'process.versions.node.split(".")[0]')"
 ok "node $(node -v) ${DIM}(>= 18)${CR}"
 
 # ─── tailscale ────────────────────────────────────────────────────
-hr
+mini_hr
+flavortext
 if [ "$SKIP_TAILSCALE" = "1" ]; then
   warn "SKIP_TAILSCALE=1 — skipping Tailscale install/login"
 else
@@ -192,19 +376,18 @@ else
     case "$PLATFORM" in
       mac)
         if command -v brew >/dev/null 2>&1; then
-          run_with_spinner claw "installing Tailscale via Homebrew cask" \
+          run_with_spinner triple_scuttle "installing Tailscale via Homebrew cask" \
             brew install --cask tailscale \
             || warn "brew install failed — grab the app from https://tailscale.com/download/mac"
         else
           warn "Homebrew not found — install Tailscale from https://tailscale.com/download/mac"
         fi
-        # macOS cask drops the CLI here but doesn't always symlink it
         if ! command -v tailscale >/dev/null 2>&1 && [ -x "/Applications/Tailscale.app/Contents/MacOS/Tailscale" ]; then
           warn "launch the Tailscale app once so the CLI is linked, then re-run this installer"
         fi
         ;;
       linux)
-        run_with_spinner matrix "installing Tailscale (official script)" \
+        run_with_spinner radar "installing Tailscale (official script)" \
           bash -c 'curl -fsSL https://tailscale.com/install.sh | sh' \
           || warn "Tailscale install failed — see https://tailscale.com/download/linux"
         ;;
@@ -216,7 +399,8 @@ else
 
   if command -v tailscale >/dev/null 2>&1; then
     if tailscale status >/dev/null 2>&1; then
-      ok "tailscale already logged in: ${CYAN}$(tailscale status --json 2>/dev/null | grep -o '"DNSName":"[^"]*"' | head -1 | cut -d'"' -f4)${CR}"
+      TS_NAME="$(tailscale status --json 2>/dev/null | grep -o '"DNSName":"[^"]*"' | head -1 | cut -d'"' -f4)"
+      ok "tailscale already logged in: ${CYAN}${TS_NAME}${CR}"
     else
       warn "not logged in — run: ${VIOLET}sudo tailscale up${CR} ${DIM}(or just 'tailscale up' on macOS)${CR}"
     fi
@@ -224,38 +408,50 @@ else
 fi
 
 # ─── solana-clawd cli ─────────────────────────────────────────────
-hr
-if ! run_with_spinner claw "installing solana-clawd cli from npm" npm i -g solana-clawd; then
+mini_hr
+flavortext
+if ! run_with_spinner spin_claw "installing solana-clawd cli from npm" npm i -g solana-clawd; then
   warn "global npm install failed — retrying with sudo"
-  run_with_spinner claw "installing solana-clawd cli ${DIM}(sudo)${CR}" sudo npm i -g solana-clawd \
+  run_with_spinner spin_claw "installing solana-clawd cli ${DIM}(sudo)${CR}" sudo npm i -g solana-clawd \
     || die "npm install failed — check /tmp/openclawd-step.log"
 fi
 ok "solana-clawd ${CYAN}$(solana-clawd --version 2>/dev/null || echo installed)${CR}"
 
 # ─── scaffold target dir ──────────────────────────────────────────
-hr
-run_with_spinner scuttle "scaffolding ${CYAN}${TARGET_DIR}${CR}" mkdir -p "$TARGET_DIR"
+mini_hr
+flavortext
+run_with_spinner triple_scuttle "scaffolding ${CYAN}${TARGET_DIR}${CR}" mkdir -p "$TARGET_DIR"
 
 # ─── tailclawd ────────────────────────────────────────────────────
 if [ "$SKIP_TAILCLAWD" = "1" ]; then
   warn "SKIP_TAILCLAWD=1 — skipping tailclawd bootstrap"
 else
-  hr
+  mini_hr
+  flavortext
   if [ -d "$TAILCLAWD_DIR/.git" ] || [ -f "$TAILCLAWD_DIR/package.json" ]; then
     ok "tailclawd already present at ${CYAN}${TAILCLAWD_DIR}${CR}"
   else
     REPO_ROOT="$TARGET_DIR/repo"
     if [ ! -d "$REPO_ROOT/.git" ]; then
-      run_with_spinner matrix "cloning openclawd monorepo ${DIM}(shallow)${CR}" \
-        git clone --depth 1 "$OPENCLAWD_REPO" "$REPO_ROOT" \
-        || die "git clone failed — set OPENCLAWD_REPO or check network"
+      # Animated clone with progress
+      if [ -t 1 ]; then
+        printf "  ${NEON}⟐${CR} ${BOLD}cloning openclawd monorepo${CR} ${DIM}(shallow)${CR}\n"
+        run_with_spinner radar "pulling from ${CYAN}${OPENCLAWD_REPO##*/}${CR}" \
+          git clone --depth 1 "$OPENCLAWD_REPO" "$REPO_ROOT" \
+          || die "git clone failed — set OPENCLAWD_REPO or check network"
+        progress_bar 2 "merging timelines"
+      else
+        run_with_spinner matrix "cloning openclawd monorepo ${DIM}(shallow)${CR}" \
+          git clone --depth 1 "$OPENCLAWD_REPO" "$REPO_ROOT" \
+          || die "git clone failed — set OPENCLAWD_REPO or check network"
+      fi
     fi
     run_with_spinner scuttle "linking tailclawd → ${CYAN}${TAILCLAWD_DIR}${CR}" \
       bash -c "mkdir -p \"\$(dirname '$TAILCLAWD_DIR')\" && ln -sfn '$REPO_ROOT/tailclawd' '$TAILCLAWD_DIR'"
   fi
 
   if [ -f "$TAILCLAWD_DIR/package.json" ]; then
-    run_with_spinner claw "npm install tailclawd deps" \
+    run_with_spinner modem "npm install tailclawd deps" \
       bash -c "cd '$TAILCLAWD_DIR' && npm install --no-audit --no-fund" \
       || warn "tailclawd npm install failed — see /tmp/openclawd-step.log"
     ok "tailclawd ready — start it with: ${VIOLET}cd $TAILCLAWD_DIR && npm run dev${CR}"
@@ -271,11 +467,12 @@ else
 fi
 
 # ─── clawd-wallet + agents-x402-solana packages ────────────────────
-hr
+mini_hr
+flavortext
 REPO_DIR="$TARGET_DIR/repo"
 if [ -d "$REPO_DIR/packages/clawd-wallet" ]; then
   if [ ! -d "$REPO_DIR/packages/clawd-wallet/dist" ]; then
-    run_with_spinner claw "building @openclawd/wallet package" \
+    run_with_spinner spin_claw "building @openclawd/wallet package" \
       bash -c "cd '$REPO_DIR/packages/clawd-wallet' && npm install --no-audit --no-fund && npm run build" \
       || warn "clawd-wallet build failed — install manually: cd packages/clawd-wallet && npm run build"
     ok "@openclawd/wallet — Privy wallet + agentic trading SDK"
@@ -293,14 +490,15 @@ else
 fi
 
 # ─── ~/.openclawd/.env ────────────────────────────────────────────
-hr
+mini_hr
+flavortext
 ENV_FILE="$TARGET_DIR/.env"
 if [ -f "$ENV_FILE" ]; then
   warn "$ENV_FILE already exists — leaving untouched"
 else
   OLD_UMASK="$(umask)"
   umask 077
-  run_with_spinner matrix "writing ${CYAN}${ENV_FILE}${CR}" bash -c "cat > '$ENV_FILE' <<EOF
+  run_with_spinner radar "writing ${CYAN}${ENV_FILE}${CR}" bash -c "cat > '$ENV_FILE' <<EOF
 # openclawd — generated by ./install.sh
 # Fill in your provider keys before running agents.
 
@@ -344,14 +542,13 @@ EOF"
 fi
 
 # ─── profiles ────────────────────────────────────────────────────
-hr
+mini_hr
+flavortext
 PROFILE_CLI="$REPO_DIR/profiles/clawd-profile"
 if [ -f "$PROFILE_CLI" ] && [ -x "$PROFILE_CLI" ]; then
-  run_with_spinner claw "installing clawd-profile CLI" bash -c "
-    # copy the CLI to a persistent location so it survives repo updates
+  run_with_spinner spin_claw "installing clawd-profile CLI" bash -c "
     install -d \"\$HOME/.openclawd/bin\" 2>/dev/null || true
     install -m 0755 \"$PROFILE_CLI\" \"\$HOME/.openclawd/bin/clawd-profile\"
-    # ensure ~/.local/bin is in PATH (add to shell rc if not)
     if [[ :\$PATH: != *:\"\$HOME/.local/bin\":* ]]; then
       mkdir -p \"\$HOME/.local/bin\"
       if [ -f \"\$HOME/.zshrc\" ] && ! grep -q 'export PATH=.*\.local/bin' \"\$HOME/.zshrc\" 2>/dev/null; then
@@ -373,13 +570,41 @@ fi
 # ─── all done ─────────────────────────────────────────────────────
 hr
 
-# ── matrix rain success animation ─────────────────────────────────
+# ── animated finale ────────────────────────────────────────────────
 if [ -t 1 ]; then
-  printf "\n"
-  for i in 1 2 3 4; do
-    printf "  ${NEON}░▒▓█${CR}  ${MAGENTA}▓▒░${CR}  ${CYAN}█▓▒░${CR}  ${VIOLET}▒░▓█${CR}\n"
-    sleep 0.08
+  printf "\n${BOLD}${MAGENTA}"
+  # Scrolling status lines
+  local status_lines=(
+    "${CYAN}✓${CR} ${GREY}core modules      ${NEON}ACTIVE${CR}"
+    "${CYAN}✓${CR} ${GREY}neural links      ${NEON}ESTABLISHED${CR}"
+    "${CYAN}✓${CR} ${GREY}claw router       ${NEON}LISTENING${CR}"
+    "${CYAN}✓${CR} ${GREY}tailnet bridge    ${NEON}STANDING BY${CR}"
+    "${CYAN}✓${CR} ${GREY}$CLAWD protocol ${NEON}SYNCED${CR}"
+  )
+  for line in "${status_lines[@]}"; do
+    printf "  ${DIM}[${CR}${NEON}██${CR}${DIM}]${CR} ${line}\n"
+    sleep 0.12
   done
+
+  # Progress bar finalization
+  printf "\n"
+  progress_bar 2 "finalizing crustacean layer"
+
+  # Matrix rain style finale
+  printf "\n"
+  local rain_colors=( "$NEON" "$VIOLET" "$CYAN" "$LOBSTER" "$AQUA" "$PINK" )
+  for i in 1 2 3 4 5 6 7 8; do
+    local rc_idx=$((i % ${#rain_colors[@]}))
+    local syms=( "░" "▒" "▓" "█" "▓" "▒" )
+    local line=""
+    for j in {1..8}; do
+      local s_idx=$(( (i + j) % ${#syms[@]} ))
+      line="${line}${rain_colors[$rc_idx]}${syms[$s_idx]}${CR}"
+    done
+    printf "\r  ${line}  ${DIM}${BOLD}${GREY}openclawd${CR}"
+    sleep 0.06
+  done
+  printf "\r\033[2K"
 fi
 
 printf "\n"
@@ -423,4 +648,13 @@ cat <<EOF
   ${DIM}Tailscale:${CR} ${CYAN}https://tailscale.com/kb/1242/tailscale-serve${CR}
 
 EOF
-printf "  ${LOBSTER}🦞${CR} ${BOLD}welcome to the claw${CR} ${LOBSTER}🦞${CR}\n\n"
+
+# ─── final lobster flourish ─────────────────────────────────────────
+if [ -t 1 ]; then
+  printf "  ${LOBSTER}🦞${CR} ${BOLD}${MAGENTA}welcome to the claw${CR} ${LOBSTER}🦞${CR}"
+  sleep 0.3
+  printf "  ${CYAN}╱${CR}${VIOLET}╲${CR}\n"
+  sleep 0.2
+  printf "  ${DIM}the shell molts. the laws do not.${CR}"
+  printf "  ${LOBSTER}▄▄▄▄▄${CR}\n\n"
+fi
